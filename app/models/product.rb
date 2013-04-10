@@ -1,5 +1,5 @@
 class Product < ActiveRecord::Base
-  attr_accessible :title, :description, :price, :status, :category_ids, :image
+  attr_accessible :title, :description, :price, :status, :category_ids, :image, :store_id
   has_and_belongs_to_many :categories
 
   has_attached_file :image, styles: { retail: "500x500",

@@ -1,7 +1,11 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :current_cart, :get_flag
+  helper_method :current_cart, :get_flag, :current_store
   before_filter :get_locale
+
+  def current_store
+    @current_store ||= Store.find(params[:store_path])
+  end
 
   def require_admin
     if current_user == false

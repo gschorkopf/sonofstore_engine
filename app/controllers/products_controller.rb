@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   def index
-    @products = Search.filter_products(params)
+    @products = current_store.products
     @categories = Category.all
   end
 
