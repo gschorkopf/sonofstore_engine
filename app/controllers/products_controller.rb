@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   def index
     @products = current_store.products
-    @categories = Category.all
+    @categories = current_store.categories
   end
 
   def show

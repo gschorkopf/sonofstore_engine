@@ -10,7 +10,7 @@
           <% unless @categories.nil? %>
               <% @categories.each do |category| %>
                   <li>
-                    <%=link_to category.title, products_path(category_id: category.id) %>
+                    <%=link_to category.title, store_category_path(current_store, category.id) %>
                   </li>
               <% end %>
           <% end %>

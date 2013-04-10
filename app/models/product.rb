@@ -13,14 +13,23 @@ class Product < ActiveRecord::Base
                               secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
                               }
 
-  validates :title, presence: :true,
-                    uniqueness: { case_sensitive: false }
+  validates :title, presence: :true
+  validate :unique_product_name_in_store
   validates :description, presence: :true
+
   validates :status, presence: :true,
                      inclusion: { in: %w(active retired) }
   validates :price, presence: :true,
                     format: { with: /^\d+??(?:\.\d{0,2})?$/ },
                     numericality: { greater_than: 0 }
+
+  def unique_product_name_in_store
+    store = Store.find_by_id(store_id)
+    if store.products.find_by_title(title)
+      errors.add(:title,"This store can have only one product with this name")
+    end
+  end
+  # CASE SENSITIVITY AINT HERE
 
   def toggle_status
     if status == 'active'
