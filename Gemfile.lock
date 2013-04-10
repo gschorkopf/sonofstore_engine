@@ -46,6 +46,7 @@ GEM
     bootstrap-sass (2.3.1.0)
       sass (~> 3.2)
     builder (3.0.4)
+    cancan (1.6.9)
     cane (2.5.2)
       parallel
     capybara (1.1.2)
@@ -268,6 +269,7 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk
   bootstrap-sass
+  cancan
   cane
   capybara
   coffee-rails (~> 3.2.1)
@@ -283,7 +285,7 @@ DEPENDENCIES
   rails (= 3.2.13)
   rake
   reek
-  resque
+  resque (~> 1.24.0)
   rspec-rails
   sass-rails (~> 3.2.3)
   simple_form

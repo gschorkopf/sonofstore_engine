@@ -1,8 +1,3 @@
-User.create(full_name: "Franklin Webber", email: "demoXX+franklin@jumpstartlab.com", password: "password")
-User.create(full_name: "Jeff", email: "demoXX+jeff@jumpstartlab.com", password: "password", display_name: "j3")
-User.create(full_name: "Steve Klabnik", email: "demoXX+steve@jumpstartlab.com", password: "password", display_name: "SkrilleX", admin: true)
-
-
 Store.create(name: 'Best Sunglasses', path: 'best-sunglasses', description: 'Buy our Sunglasses')
 Store.create(name: 'Cool Sunglasses', path: 'cool-sunglasses', description: 'Buy our COOL Sunglasses')
 
@@ -20,3 +15,14 @@ n = 1
   Product.create(title: "Product #{n}", description: "Great product", price: 500, status: 'active', store_id: 2, category_ids: [4])
   n += 1
 end
+
+user1 = User.create(full_name: "Franklin Webber", email: "demoXX+franklin@jumpstartlab.com", password: "password")
+user2 = User.create(full_name: "Jeff", email: "demoXX+jeff@jumpstartlab.com", password: "password", display_name: "j3")
+user3 = User.create(full_name: "Steve Klabnik", email: "demoXX+steve@jumpstartlab.com", password: "password", display_name: "SkrilleX")
+user4 = User.create(full_name: "Katrina", email: "demoXX+katrina@jumpstartlab.com", password: "password", display_name: "Norway")
+
+user3.platform_admin = true
+user3.save
+
+UserRole.create(user_id: user1.id, role: "store_admin")
+UserRole.create(user_id: user2.id, role: "stocker")

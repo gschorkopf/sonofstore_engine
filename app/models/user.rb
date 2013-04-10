@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
   attr_accessible :display_name, :email, :full_name,
-                  :admin, :password, :password_confirmation
+                  :password, :password_confirmation
 
   validates_confirmation_of :password,
                             message: "passwords did not match", if: :password
@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   validates :display_name, length: { in: 2..32 }, allow_blank: :true
 
   has_many :orders
+
+  has_one :user_role
 
   def default_values
     self.admin = false

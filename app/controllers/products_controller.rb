@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+
   def index
     @products = current_store.products
     @categories = current_store.categories

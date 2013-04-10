@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   def require_admin
     if current_user == false
       not_authenticated
-    elsif current_user.admin == true
+    elsif current_user && (current_user.platform_admin? || current_user.user_role.role == "store_admin" || current_user.user_role.role == "stocker")
       true
     else
       redirect_to login_path,
@@ -41,5 +41,10 @@ class ApplicationController < ActionController::Base
     when 'ca' then 'ca'
     else 'us'
     end
+  end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = "Access denied."
+    redirect_to root_path
   end
 end
