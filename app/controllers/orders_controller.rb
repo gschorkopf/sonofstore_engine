@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
                                      token: params[:stripeToken])
     if @order.valid?
       session[:cart] = current_cart.destroy
-      Mailer.order_confirmation(current_user, @order).deliver
+      Resque.enqueue(OrderMailer, current_user.id, @order.id)
       redirect_to account_order_path(@order),
         :notice => "Order submitted!"
     else
@@ -34,7 +34,7 @@ class OrdersController < ApplicationController
                                      token: params[:stripeToken])
     if @order.valid?
       session[:cart] = current_cart.destroy
-      Mailer.order_confirmation(current_user, @order).deliver
+      Resque.enqueue(OrderMailer, current_user.id, @order.id)
       redirect_to account_order_path(@order),
         :notice => "Order submitted!"
     else
