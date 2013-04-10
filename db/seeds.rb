@@ -21,6 +21,10 @@ user2 = User.create(full_name: "Jeff", email: "demoXX+jeff@jumpstartlab.com", pa
 user3 = User.create(full_name: "Steve Klabnik", email: "demoXX+steve@jumpstartlab.com", password: "password", display_name: "SkrilleX")
 user4 = User.create(full_name: "Katrina", email: "demoXX+katrina@jumpstartlab.com", password: "password", display_name: "Norway")
 
+user1.user_role.role = "store_admin"
+user1.save
+user2.user_role.role = "stocker"
+user2.save
 user3.platform_admin = true
 user3.save
 
