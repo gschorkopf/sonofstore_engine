@@ -1,6 +1,6 @@
 class Admin::ProductsController < ApplicationController
   load_and_authorize_resource
-  # before_filter :require_admin
+  before_filter :require_admin
 
   def index
     @products = Product.order('created_at DESC').all

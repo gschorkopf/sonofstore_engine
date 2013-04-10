@@ -2,8 +2,8 @@ user1 = User.create(full_name: "Franklin Webber", email: "demoXX+franklin@jumpst
 user2 = User.create(full_name: "Jeff", email: "demoXX+jeff@jumpstartlab.com", password: "password", display_name: "j3")
 user3 = User.create(full_name: "Steve Klabnik", email: "demoXX+steve@jumpstartlab.com", password: "password", display_name: "SkrilleX")
 
-UserRole.create(user_id = user1.id, role = "store_admin")
-UserRole.create(user_id = user2.id, role = "stocker")
+UserRole.create(user_id: user1.id, role: "store_admin")
+UserRole.create(user_id: user2.id, role: "stocker")
 
 #file = File.open('./public/images/creatures/stickers/bobby-02.png')
 product1 = Product.create(title: "Bobby", description: "Marcy's triplet brother. He's kind of smelly.", price: 14.19, status: 'active')
