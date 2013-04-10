@@ -1,4 +1,5 @@
 class UserRole < ActiveRecord::Base
+  attr_accessible :user_id, :role
   has_one :users
   #has_many :stores
 

@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def require_admin
     if current_user == false
       not_authenticated
-    elsif current_user && (current_user.user_role.role == "store_admin" || current_user.user_role.role == "stocker")
+    elsif current_user && (current_user.platform_admin? || current_user.user_role.role == "store_admin" || current_user.user_role.role == "stocker")
       true
     else
       redirect_to login_path,
