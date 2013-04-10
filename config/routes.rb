@@ -1,5 +1,5 @@
 StoreEngine::Application.routes.draw do
-  root to: 'products#index'
+  root to: 'stores#index'
 
   get "/code" => redirect("http://github.com/raphweiner/store_engine")
   get "/logout" => "sessions#destroy", :as => "logout"
@@ -8,15 +8,14 @@ StoreEngine::Application.routes.draw do
 
   get "/account" => redirect("/account/profile")
   get "/account/profile" => "users#show"
+  # user#show should direct to /profile
   get "/account/orders" => "orders#index"
   get "/account/orders/:id" => "orders#show", :as => "account_order"
   post "/buy_now" => "orders#buy_now", :as => 'buy_now'
   put "/i18n" => "i18n#update"
 
   resources :sessions, only: [ :new, :create, :destroy ]
-  resources :products, only: [ :index, :show ] do
-    resources :ratings
-  end
+  resources :products, only: [ :index, :show ]
 
   resource :cart, only: [ :update, :show, :destroy ] do
     member do
@@ -41,6 +40,15 @@ StoreEngine::Application.routes.draw do
 
     resources :orders, only: [ :show, :update ]
     resources :order_items, only: [ :update, :destroy]
-    resources :categories, except: [ :show ]
+    resources :categories, except: [ :index, :show ]
+  end
+
+  resources :stores, except: [ :index ]
+  get "/stores" => redirect('/')  
+
+  scope "/:store_path", as: 'store' do
+    get '/' => "products#index", as: 'home'
+    resources :products, only: [ :show ]
+    resources :categories, only: [ :index, :show ]
   end
 end

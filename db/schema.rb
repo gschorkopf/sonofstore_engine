@@ -11,13 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130402201518) do
+ActiveRecord::Schema.define(:version => 20130410211511) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "store_id"
   end
+
+  add_index "categories", ["store_id"], :name => "index_categories_on_store_id"
 
   create_table "categories_products", :force => true do |t|
     t.integer "category_id"
@@ -58,7 +61,10 @@ ActiveRecord::Schema.define(:version => 20130402201518) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.integer  "store_id"
   end
+
+  add_index "products", ["store_id"], :name => "index_products_on_store_id"
 
   create_table "ratings", :force => true do |t|
     t.integer  "product_id"
@@ -77,6 +83,14 @@ ActiveRecord::Schema.define(:version => 20130402201518) do
     t.string   "status"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
+  end
+
+  create_table "stores", :force => true do |t|
+    t.string   "name"
+    t.string   "path"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "users", :force => true do |t|
