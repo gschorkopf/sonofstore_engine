@@ -3,16 +3,16 @@ class ApplicationController < ActionController::Base
   helper_method :current_cart, :get_flag
   before_filter :get_locale
 
-  def require_admin
-    if current_user == false
-      not_authenticated
-    elsif current_user.admin == true
-      true
-    else
-      redirect_to login_path,
-      :alert => "Only system administrators may access this page"
-    end
-  end
+  # def require_admin
+  #   if current_user == false
+  #     not_authenticated
+  #   elsif current_user.user_role.role == "store_admin" || current_user.user_role.role == "stocker"
+  #     true
+  #   else
+  #     redirect_to login_path,
+  #     :alert => "Only system administrators may access this page"
+  #   end
+  # end
 
   def not_authenticated
     redirect_to login_path, :alert => "First login to access this page."
@@ -37,5 +37,10 @@ class ApplicationController < ActionController::Base
     when 'ca' then 'ca'
     else 'us'
     end
+  end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = "Access denied."
+    redirect_to root_path
   end
 end

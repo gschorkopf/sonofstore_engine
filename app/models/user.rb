@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
 
   has_many :orders
 
+  has_one :user_role
+
   def default_values
     self.admin = false
   end

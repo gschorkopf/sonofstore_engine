@@ -12,7 +12,8 @@ gem 'paperclip'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'pg'
 gem 'aws-sdk'
-gem 'resque'
+gem 'resque', "~>1.24.0"
+gem 'cancan'
 
 group :production do
   gem 'pg'
