@@ -24,6 +24,9 @@ class StoresController < ApplicationController
                       store_id: @store.id )
       ur.role = 'store_admin'
       ur.save
+
+      Resque.enqueue(StoreCreateMailer, current_user.id, @store.id)
+      
       redirect_to @store, notice: 'Store is currently pending.'
     else
       render action: "new"
