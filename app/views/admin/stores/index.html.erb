@@ -1,8 +1,8 @@
 <div class="admin-order-show">
   <%#= render partial: 'shared/admin_navigation', locals: { active: false } %>
 
-  <div class="span12">
-    <h1>Stores!</h1>
+  <div class="span11">
+    <h2>Pending Stores</h2>
 
     <table class="table table-striped">
       <thead>
@@ -11,32 +11,20 @@
         <th>URL ID</th>
         <th>Description</th>
         <th>Status</th>
-        <th>Active</th>
         <th>Admin</th>
       </thead>
 
       <tbody>
-      <% @stores.each do |store| %>
+      <% @pending_stores.each do |store| %>
         <tr>
           <td><%= store.id %></td>
           <td><%= store.name %></td>
           <td><%= store.path %></td>
-          <td><%= store.description[0...32] %></td>
-
-          <% if store.pending? %>
-            <td>
-              <%= link_to "Approve", choose_approval_status_on_admin_store_path(:id => store.id, :status => 'approved'), :class => 'btn btn-mini', :method => "put" %>
-              or 
-
-              <%= link_to "Decline", choose_approval_status_on_admin_store_path(:id => store.id, :status => 'declined'), :class => 'btn btn-mini', :method => "put" %>
-          <% else %>
-            <td><%= store.approval_status.capitalize %></td>
-          <% end %>
-
-          <td> 
-            <%= store.active_to_s %> <%= link_to "Change status?", toggle_active_admin_store_path(store), method: :put %>
+          <td><%= store.description[0...31] %></td>
+          <td>
+            <%= link_to "Approve", choose_approval_status_on_admin_store_path(:id => store.id, :status => 'approved'), :class => 'btn btn-mini', :method => "put" %> or 
+            <%= link_to "Decline", choose_approval_status_on_admin_store_path(:id => store.id, :status => 'declined'), :class => 'btn btn-mini', :method => "put" %>
           </td>
-
           <td><%= link_to "Admin", admin_store_path(store) %></td>
         </tr>
       <% end %>
@@ -48,4 +36,43 @@
     </table>
 
   </div>
+
+  <div class="span11">
+    <h2>Approved Stores</h2>
+
+    <table class="table table-striped">
+      <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>URL ID</th>
+        <th>Description</th>
+        <th>Active</th>
+        <th>Admin</th>
+      </thead>
+
+      <tbody>
+      <% @approved_stores.each do |store| %>
+        <tr>
+          <td><%= store.id %></td>
+          <td><%= store.name %></td>
+          <td><%= store.path %></td>
+          <td><%= store.description[0...31] %></td>
+          <td>
+            <%= store.active_to_s %> <%= link_to "Change status?", toggle_active_admin_store_path(store), method: :put %>
+          </td>
+          <td><%= link_to "Admin", admin_store_path(store) %></td>
+        </tr>
+      <% end %>
+      </tbody>
+
+      <tfoot>
+      </tfoot>
+
+    </table>
+
+  </div>
+
+
+
+
 </div>
