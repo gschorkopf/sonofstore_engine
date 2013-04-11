@@ -9,7 +9,7 @@ class CreditCardsController < ApplicationController
     @credit_card = CreditCard.new(params[:credit_card])
 
     if @credit_card.save
-      redirect_to root_url
+      redirect_to user_orders_path(current_user)
     else
       render "new"
     end

@@ -1,0 +1,12 @@
+<%= simple_form_for [current_user, @credit_card], html: {multipart: true} do |f| %>
+
+  <%= f.input :number, input_html: { placeholder: '' } %>
+  <%= f.input :expiration_month, input_html: { placeholder: '' } %>
+  <%= f.input :expiration_year, input_html: { placeholder: '' } %>
+  <%= f.input :security_code, input_html: { placeholder: '' } %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+
+  <%= f.button :submit, t('submit'), class:'btn btn-custom-lighten' %>
+<% end %>
+
+<%# button_to t("checkout"), user_orders_path(current_user), method: :post %>

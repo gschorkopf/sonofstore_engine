@@ -8,10 +8,8 @@ class ShippingAddressesController < ApplicationController
   def create
     @shipping_address = ShippingAddress.new(params[:shipping_address])
 
-    @shipping_address.user_id = current_user
-
     if @shipping_address.save
-      redirect_to root_url
+      redirect_to new_user_billing_addresses_path(current_user)
     else
       render "new"
     end

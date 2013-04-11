@@ -9,7 +9,7 @@ class BillingAddressesController < ApplicationController
     @billing_address = BillingAddress.new(params[:billing_address])
 
     if @billing_address.save
-      redirect_to root_url
+      redirect_to new_user_credit_cards_path(current_user)
     else
       render "new"
     end

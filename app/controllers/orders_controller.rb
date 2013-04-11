@@ -2,7 +2,8 @@ class OrdersController < ApplicationController
   before_filter :require_login
 
   def index
-    @orders = Search.filter_user_orders(current_user.id, params)
+    @orders = Order.find_all_by_user_id(current_user)
+    # @orders = Search.filter_user_orders(current_user.id, params)
   end
 
   def show
