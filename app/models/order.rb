@@ -28,10 +28,10 @@ class Order < ActiveRecord::Base
                                quantity: cart_item.quantity)
     end
 
-    payment = Payment.new_with_charge(token: params[:token],
-                                      price: order.total,
-                                      email: params[:user].email,
-                                      order: order)
+    # payment = Payment.new_with_charge(token: params[:token],
+    #                                   price: order.total,
+    #                                   email: params[:user].email,
+    #                                   order: order)
     order
   end
 
