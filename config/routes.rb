@@ -42,6 +42,7 @@ StoreEngine::Application.routes.draw do
     resources :stores do
       member do
         put :choose_approval_status, :as => "choose_approval_status_on"
+        put :toggle_active
       end
     end 
     resources :orders, only: [ :show, :update ]

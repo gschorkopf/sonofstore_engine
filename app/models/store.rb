@@ -1,5 +1,5 @@
 class Store < ActiveRecord::Base
-  attr_accessible :description, :name, :path
+  attr_accessible :description, :name, :path, :active
   has_many :categories
   has_many :products
 
@@ -13,9 +13,17 @@ class Store < ActiveRecord::Base
   def self.find(path)
     find_by_path(path)
   end
+
+  def active?
+    active == true
+  end
   
-  def to_s
-    name
+  def active_to_s
+    if active?
+      "Enabled"
+    else
+      "Disabled"
+    end
   end
 
   def pending?
@@ -23,10 +31,10 @@ class Store < ActiveRecord::Base
   end
 
   def toggle_active
-    if status == 'enabled'
-      update_attributes(status: 'retired')
-    elsif status == 'disabled'
-      update_attributes(status: 'active')
+    if active?
+      update_attributes(active: false)
+    else
+      update_attributes(active: true)
     end
   end
 end

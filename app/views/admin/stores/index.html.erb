@@ -11,7 +11,7 @@
         <th>URL ID</th>
         <th>Description</th>
         <th>Status</th>
-        <th>Active?</th>
+        <th>Active</th>
         <th>Admin</th>
       </thead>
 
@@ -25,17 +25,19 @@
 
           <% if store.pending? %>
             <td>
-              <%#= link_to "Accept", admin_store_path(store, status: 'approved'), method: :put %> 
               <%= link_to "Approve", choose_approval_status_on_admin_store_path(:id => store.id, :status => 'approved'), :class => 'btn btn-mini', :method => "put" %>
               or 
 
               <%= link_to "Decline", choose_approval_status_on_admin_store_path(:id => store.id, :status => 'declined'), :class => 'btn btn-mini', :method => "put" %>
           <% else %>
-            <td><%= store.approval_status %></td>
+            <td><%= store.approval_status.capitalize %></td>
           <% end %>
 
-          <td>Active part</td>
-          <td>admin</td>
+          <td> 
+            <%= store.active_to_s %> <%= link_to "Change status?", toggle_active_admin_store_path(store), method: :put %>
+          </td>
+
+          <td><%= link_to "Admin", admin_store_path(store) %></td>
         </tr>
       <% end %>
       </tbody>
