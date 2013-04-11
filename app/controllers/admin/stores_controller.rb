@@ -21,8 +21,7 @@ class Admin::StoresController < ApplicationController
     store.approval_status = params[:status]
     store.save
 
-    Mailer.store_decision_confirmation(store).deliver
-    # Resque.enqueue(StoreDecisionMailer, store.id)
+    Resque.enqueue(StoreDecisionMailer, store.id)
 
     redirect_to admin_stores_path,
       :notice => "#{store.name} has been #{store.approval_status}"

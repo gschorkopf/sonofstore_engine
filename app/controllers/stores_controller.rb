@@ -25,8 +25,7 @@ class StoresController < ApplicationController
       ur.role = 'store_admin'
       ur.save
 
-      Mailer.store_creation_confirmation(current_user, @store).deliver
-      # Resque.enqueue(StoreCreateMailer, current_user.id, @store.id)
+      Resque.enqueue(StoreCreateMailer, current_user.id, @store.id)
       
       redirect_to @store, notice: 'Store is currently pending.'
     else
