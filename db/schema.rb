@@ -13,16 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20130410230431) do
 
-  create_table "billing_addresses", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "street"
-    t.string   "city"
-    t.string   "state"
-    t.string   "zipcode"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "categories", :force => true do |t|
     t.string   "title"
     t.datetime "created_at", :null => false
@@ -93,16 +83,6 @@ ActiveRecord::Schema.define(:version => 20130410230431) do
     t.string   "status"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
-  end
-
-  create_table "shipping_addresses", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "street"
-    t.string   "city"
-    t.string   "state"
-    t.string   "zipcode"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "stores", :force => true do |t|
