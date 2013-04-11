@@ -1,6 +1,7 @@
 <h2>Please review your order information</h2>
 
-Your current cart:
+<h4>Your current cart:</h4><br/>
+<% if current_cart.items.any?{|item| item.quantity.to_i > 0} %>
 <table class="table table-striped">
   <thead>
     <th></th>
@@ -12,6 +13,7 @@ Your current cart:
     <%= render partial: 'carts/cart_item' %>
   </tbody>
 </table>
+<% end %>
 
   Shipping information:
 <ul>
@@ -37,4 +39,8 @@ Credit card information:
   <li><%= @user.credit_card.security_code%></li>
 </ul><br/>
 
-<%= button_to "Submit Order", user_orders_path(current_user), method: :post %>
+<% if current_cart.items.any?{|item| item.quantity.to_i > 0} %>
+  <%= button_to "Submit Order", user_orders_path(current_user), method: :post %>
+<% else %>
+  <h3>Nothing in your cart.  Go shopping!</h3>
+<% end %>

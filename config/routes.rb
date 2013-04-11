@@ -15,15 +15,6 @@ StoreEngine::Application.routes.draw do
 
   # get "/account/orders/:id" => "orders#show", :as => "account_order"
 
-
-
-
-
-
-
-
-
-
   post "/buy_now" => "orders#buy_now", :as => 'buy_now'
   put "/i18n" => "i18n#update"
 
@@ -60,7 +51,7 @@ StoreEngine::Application.routes.draw do
         put :choose_approval_status, :as => "choose_approval_status_on"
         put :toggle_active
       end
-    end 
+    end
     resources :orders, only: [ :show, :update ]
     resources :order_items, only: [ :update, :destroy]
     resources :categories, except: [ :index, :show ]
