@@ -1,1 +1,49 @@
-HIYOUREANADMIN!
+<div class="admin-order-show">
+  <%#= render partial: 'shared/admin_navigation', locals: { active: false } %>
+
+  <div class="span12">
+    <h1>Stores!</h1>
+
+    <table class="table table-striped">
+      <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>URL ID</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Active?</th>
+        <th>Admin</th>
+      </thead>
+
+      <tbody>
+      <% @stores.each do |store| %>
+        <tr>
+          <td><%= store.id %></td>
+          <td><%= store.name %></td>
+          <td><%= store.path %></td>
+          <td><%= store.description[0...32] %></td>
+
+          <% if store.pending? %>
+            <td>
+              <%#= link_to "Accept", admin_store_path(store, status: 'approved'), method: :put %> 
+              <%= link_to "Approve", choose_approval_status_on_admin_store_path(:id => store.id, :status => 'approved'), :class => 'btn btn-mini', :method => "put" %>
+              or 
+
+              <%= link_to "Decline", choose_approval_status_on_admin_store_path(:id => store.id, :status => 'declined'), :class => 'btn btn-mini', :method => "put" %>
+          <% else %>
+            <td><%= store.approval_status %></td>
+          <% end %>
+
+          <td>Active part</td>
+          <td>admin</td>
+        </tr>
+      <% end %>
+      </tbody>
+
+      <tfoot>
+      </tfoot>
+
+    </table>
+
+  </div>
+</div>

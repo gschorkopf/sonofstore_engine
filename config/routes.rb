@@ -28,6 +28,7 @@ StoreEngine::Application.routes.draw do
   end
 
   namespace :admin do
+  # KEEP IN MIND "ADMIN" IN THIS CONTEXT MEANS PLATFORM ADMIN
     root to: redirect("/admin/dashboard")
     get :dashboard, to: "orders#index", as: 'dashboard'
     get :search, to: "orders#index", as: 'search'
@@ -37,12 +38,17 @@ StoreEngine::Application.routes.draw do
         post :toggle_status
       end
     end
-    
-    resources :stores, only: :index
+
+    resources :stores do
+      member do
+        put :choose_approval_status, :as => "choose_approval_status_on"
+      end
+    end 
     resources :orders, only: [ :show, :update ]
     resources :order_items, only: [ :update, :destroy]
     resources :categories, except: [ :index, :show ]
   end
+
 
   resources :stores, except: [ :index ]
   get "/stores" => redirect('/')  

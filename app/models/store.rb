@@ -18,4 +18,15 @@ class Store < ActiveRecord::Base
     name
   end
 
+  def pending?
+    approval_status == 'pending'
+  end
+
+  def toggle_active
+    if status == 'enabled'
+      update_attributes(status: 'retired')
+    elsif status == 'disabled'
+      update_attributes(status: 'active')
+    end
+  end
 end
