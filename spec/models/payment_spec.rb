@@ -1,5 +1,4 @@
 # require 'spec_helper'
-
 # describe Payment do
 #   context '.charge' do
 #     it 'changes order status to paid' do
