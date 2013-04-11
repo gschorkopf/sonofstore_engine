@@ -7,11 +7,6 @@ class CartsController < ApplicationController
 
   def update
     session[:cart] = current_cart.update(params[:carts])
-    # current_cart.session.delete_if {|key, value| value == 0}
-    #current_cart.items.reject!{|cart_item| cart_item.quantity.to_i == 0}
-    # session[:cart] = current_cart.update(current_cart.items.reject do |cart_item|
-    #   cart_item.quantity == 0
-    # end)
     redirect_to(:back)
   end
 

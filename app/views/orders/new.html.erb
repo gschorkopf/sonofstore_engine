@@ -1,7 +1,8 @@
 <h2>Please review your order information</h2>
 
-<h4>Your current cart:</h4><br/>
-<% if current_cart.items.any?{|item| item.quantity.to_i > 0} %>
+<h4>Your current cart:</h4>
+<% if current_cart.empty? == false %>
+<br/>
 <table class="table table-striped">
   <thead>
     <th></th>
@@ -13,9 +14,12 @@
     <%= render partial: 'carts/cart_item' %>
   </tbody>
 </table>
+<% else %>
+  Empty
 <% end %>
+<br/><br/>
 
-  Shipping information:
+  <h4>Shipping information:</h4>
 <ul>
   <li><%= @user.shipping_address.street_address %></li>
   <li><%= @user.shipping_address.city %></li>
@@ -23,7 +27,7 @@
   <li><%= @user.shipping_address.state %></li>
 </ul><br/>
 
-Billing information:
+<h4>Billing information:</h4>
 <ul>
   <li><%= @user.billing_address.street_address %></li>
   <li><%= @user.billing_address.city %></li>
@@ -31,7 +35,7 @@ Billing information:
   <li><%= @user.billing_address.state %></li>
 </ul><br/>
 
-Credit card information:
+<h4>Credit card information:</h4>
 <ul>
   <li><%= @user.credit_card.number %></li>
   <li><%= @user.credit_card.expiration_month%></li>
@@ -39,8 +43,8 @@ Credit card information:
   <li><%= @user.credit_card.security_code%></li>
 </ul><br/>
 
-<% if current_cart.items.any?{|item| item.quantity.to_i > 0} %>
-  <%= button_to "Submit Order", user_orders_path(current_user), method: :post %>
-<% else %>
+<% if current_cart.empty? %>
   <h3>Nothing in your cart.  Go shopping!</h3>
+<% else %>
+  <%= button_to "Submit Order", user_orders_path(current_user), method: :post %>
 <% end %>
