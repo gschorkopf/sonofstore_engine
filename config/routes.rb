@@ -37,7 +37,8 @@ StoreEngine::Application.routes.draw do
         post :toggle_status
       end
     end
-
+    
+    resources :stores, only: :index
     resources :orders, only: [ :show, :update ]
     resources :order_items, only: [ :update, :destroy]
     resources :categories, except: [ :index, :show ]
