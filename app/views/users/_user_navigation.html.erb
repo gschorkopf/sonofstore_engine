@@ -4,8 +4,11 @@
     <li class="<%= active == :stores ? 'active' : '' %>">
       <%= link_to 'Manage Stores', profile_path %>
     </li>
-    <li class="<%= active == :account_details ? 'active' : '' %>">
-      <%= link_to 'Edit Profile', profile_path %>
+    <li class="<%= active == :account_info ? 'active' : '' %>">
+      <%= link_to 'Edit Account Information', profile_path %>
+    </li>
+    <li class="<%= active == :personal_info ? 'active' : '' %>">
+      <%= link_to 'Edit Personal Information', profile_path %>
     </li>
     <li class="<%= active == :orders ? 'active' : '' %>">
       <%= link_to t('order.history'), profile_path %>

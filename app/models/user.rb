@@ -16,6 +16,12 @@ class User < ActiveRecord::Base
   has_many :user_roles
   has_many :stores, through: :user_roles
 
+  has_one :shipping_address
+
+  has_one :billing_address
+
+  has_one :credit_card
+
   def default_values
     self.admin = false
   end
