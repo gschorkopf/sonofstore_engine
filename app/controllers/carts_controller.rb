@@ -7,6 +7,9 @@ class CartsController < ApplicationController
 
   def update
     session[:cart] = current_cart.update(params[:carts])
+    # session[:cart] = current_cart.update(current_cart.items.reject do |cart_item|
+    #   cart_item.quantity == 0
+    # end)
     redirect_to(:back)
   end
 

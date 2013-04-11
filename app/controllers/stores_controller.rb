@@ -1,7 +1,7 @@
 class StoresController < ApplicationController
   
   def index
-    @stores = Store.all
+    @stores = Store.order('name ASC').where(approval_status: 'approved')
   end
 
   def show
@@ -20,7 +20,11 @@ class StoresController < ApplicationController
     @store = Store.new(params[:store])
 
     if @store.save
-      redirect_to @store, notice: 'Store was successfully created.'
+      ur = UserRole.create(user_id: current_user.id,
+                      store_id: @store.id )
+      ur.role = 'store_admin'
+      ur.save
+      redirect_to @store, notice: 'Store is currently pending.'
     else
       render action: "new"
     end
@@ -38,6 +42,6 @@ class StoresController < ApplicationController
   def destroy
     @store = Store.find(params[:id])
     @store.destroy
-    redirect_to stores_url
-    end
+    redirect_to admin_stores_path, :notice => 'Store successfully deleted'
+  end
 end

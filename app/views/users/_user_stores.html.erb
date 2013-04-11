@@ -1,0 +1,11 @@
+ <%= link_to "Create a New Store", new_store_path %>
+<br>
+<h3>Created Stores</h3>
+
+ <ul>
+  <% @stores.each do |store| %>
+
+    <li><%= store %> is <%= store.approval_status %></li>
+   
+  <% end %>
+ </ul>

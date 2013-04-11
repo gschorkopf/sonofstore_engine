@@ -18,6 +18,18 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def require_platform_admin
+    if current_user == false
+      not_authenticated
+    elsif current_user.platform_admin?
+      true
+    else
+      redirect_to root_path,
+      :alert => "Only system administrators may access this page"
+      return
+    end
+  end
+
   def not_authenticated
     redirect_to login_path, :alert => "First login to access this page."
   end

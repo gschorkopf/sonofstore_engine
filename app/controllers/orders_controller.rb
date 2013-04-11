@@ -1,8 +1,14 @@
 class OrdersController < ApplicationController
   before_filter :require_login
 
+  def new
+    @user = current_user
+    @cart = current_cart
+  end
+
   def index
-    @orders = Search.filter_user_orders(current_user.id, params)
+    @orders = Order.find_all_by_user_id(current_user)
+    # @orders = Search.filter_user_orders(current_user.id, params)
   end
 
   def show
@@ -40,7 +46,7 @@ class OrdersController < ApplicationController
 
     if @order.save
       session[:cart] = {}
-      redirect_to account_order_path(@order), :notice => "Successfully created order!"
+      redirect_to user_orders_path(@order), :notice => "Successfully created order!"
     else
       redirect_to cart_path, :notice => "Checkout failed."
     end

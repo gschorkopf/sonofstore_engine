@@ -1,0 +1,46 @@
+<h2>Please review your order information</h2>
+
+<h4>Your current cart:</h4><br/>
+<% if current_cart.items.any?{|item| item.quantity.to_i > 0} %>
+<table class="table table-striped">
+  <thead>
+    <th></th>
+    <th><%= t('product.self') %></th>
+    <th><%= t('product.price') %></th>
+    <th><%= t('product.quantity') %></th>
+  </thead>
+  <tbody>
+    <%= render partial: 'carts/cart_item' %>
+  </tbody>
+</table>
+<% end %>
+
+  Shipping information:
+<ul>
+  <li><%= @user.shipping_address.street_address %></li>
+  <li><%= @user.shipping_address.city %></li>
+  <li><%= @user.shipping_address.zip %></li>
+  <li><%= @user.shipping_address.state %></li>
+</ul><br/>
+
+Billing information:
+<ul>
+  <li><%= @user.billing_address.street_address %></li>
+  <li><%= @user.billing_address.city %></li>
+  <li><%= @user.billing_address.zip %></li>
+  <li><%= @user.billing_address.state %></li>
+</ul><br/>
+
+Credit card information:
+<ul>
+  <li><%= @user.credit_card.number %></li>
+  <li><%= @user.credit_card.expiration_month%></li>
+  <li><%= @user.credit_card.expiration_year%></li>
+  <li><%= @user.credit_card.security_code%></li>
+</ul><br/>
+
+<% if current_cart.items.any?{|item| item.quantity.to_i > 0} %>
+  <%= button_to "Submit Order", user_orders_path(current_user), method: :post %>
+<% else %>
+  <h3>Nothing in your cart.  Go shopping!</h3>
+<% end %>

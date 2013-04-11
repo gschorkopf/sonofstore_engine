@@ -1,17 +1,61 @@
 <div class="user-index">
-  <%= render partial: 'user_navigation', :locals => { active: :account_details } %>
+  <%= render partial: 'user_navigation', :locals => { active: :stores } %>
 
   <div class="span8">
-    <h1><%= t('account.edit')%></h1>
-    <hr>
-    <%= simple_form_for @user do |f| %>
-        <%= f.input :full_name, input_html: { placeholder: t('placeholder.user.fullname') } %>
-        <%= f.input :email, input_html: { placeholder: t('placeholder.user.email') } %>
-        <%= f.input :display_name, input_html: { placeholder: t('placeholder.user.displayname') } %>
-        <%= f.input :password %>
-        <%= f.input :password_confirmation %>
-        <%= f.hidden_field :admin, value: false %>
-        <%= f.submit t('account.update'), class: 'btn btn-custom-lighten' %>
-    <% end %>
+    <div id="manage_stores">
+      <h1>Manage Stores</h1>
+      <hr>
+      <%= render partial: 'user_stores' %>
+    </div>
+
+    <div id="edit_profile">
+      <h1>Edit Account Information</h1>
+      <hr>
+      <%= simple_form_for @user do |f| %>
+          <%= f.input :full_name, input_html: { placeholder: t('placeholder.user.fullname') } %>
+          <%= f.input :email, input_html: { placeholder: t('placeholder.user.email') } %>
+          <%= f.input :display_name, input_html: { placeholder: t('placeholder.user.displayname') } %>
+          <%= f.input :password %>
+          <%= f.input :password_confirmation %>
+          <%= f.hidden_field :admin, value: false %>
+          <%= f.submit t('account.update'), class: 'btn btn-custom-lighten' %>
+      <% end %>
+    </div>
+
+  <h3>Shipping Address:</h3>
+  <% if @user.shipping_address != nil %>
+    <%= @user.shipping_address.street_address %><br/>
+    <%= @user.shipping_address.city %><br/>
+    <%= @user.shipping_address.zip %><br/>
+    <%= @user.shipping_address.state %><br/>
+    <%= button_to "Edit", edit_user_shipping_addresses_path(current_user), method: :get %>
+  <% else %>
+    No address currently on file.<br/><br/>
+    <%= button_to "Add Shipping Address", new_user_shipping_addresses_path(current_user), method: :get %>
+  <% end %>
+
+    <h3>Billing Address:</h3>
+  <% if @user.billing_address != nil %>
+    <%= @user.billing_address.street_address %><br/>
+    <%= @user.billing_address.city %><br/>
+    <%= @user.billing_address.zip %><br/>
+    <%= @user.billing_address.state %><br/>
+    <%= button_to "Edit", edit_user_billing_addresses_path(current_user), method: :get %>
+  <% else %>
+    No address currently on file.<br/><br/>
+    <%= button_to "Add Billing Address", new_user_billing_addresses_path(current_user), method: :get %>
+  <% end %>
+
+    <h3>Credit Card Information:</h3>
+  <% if @user.credit_card != nil %>
+    <%= @user.credit_card.number %><br/>
+    <%= @user.credit_card.security_code %><br/>
+    <%= @user.credit_card.expiration_month %><br/>
+    <%= @user.credit_card.expiration_year %><br/>
+    <%= button_to "Edit", edit_user_credit_cards_path(current_user), method: :get %>
+  <% else %>
+    No credit card currently on file.<br/><br/>
+    <%= button_to "Add Credit Card", new_user_credit_cards_path(current_user), method: :get %>
+  <% end %>
   </div>
 </div>

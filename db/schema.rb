@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130411024752) do
+ActiveRecord::Schema.define(:version => 20130411174414) do
 
   create_table "billing_addresses", :force => true do |t|
     t.string   "street_address"
@@ -127,8 +127,10 @@ ActiveRecord::Schema.define(:version => 20130411024752) do
     t.string   "name"
     t.string   "path"
     t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.string   "approval_status", :default => "pending"
+    t.boolean  "active",          :default => false
   end
 
   create_table "user_roles", :force => true do |t|
@@ -136,6 +138,7 @@ ActiveRecord::Schema.define(:version => 20130411024752) do
     t.string   "role"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "store_id"
   end
 
   add_index "user_roles", ["user_id"], :name => "index_user_roles_on_user_id"
