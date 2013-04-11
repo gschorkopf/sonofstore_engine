@@ -11,7 +11,6 @@
         <th>URL ID</th>
         <th>Description</th>
         <th>Status</th>
-        <th>Admin</th>
       </thead>
 
       <tbody>
@@ -25,7 +24,6 @@
             <%= link_to "Approve", choose_approval_status_on_admin_store_path(:id => store.id, :status => 'approved'), :class => 'btn btn-mini', :method => "put" %> or 
             <%= link_to "Decline", choose_approval_status_on_admin_store_path(:id => store.id, :status => 'declined'), :class => 'btn btn-mini', :method => "put" %>
           </td>
-          <td><%= link_to "Admin", admin_store_path(store) %></td>
         </tr>
       <% end %>
       </tbody>

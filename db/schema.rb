@@ -149,11 +149,11 @@ ActiveRecord::Schema.define(:version => 20130411174414) do
     t.string   "display_name"
     t.string   "crypted_password"
     t.string   "salt"
-    t.datetime "created_at",                                      :null => false
-    t.datetime "updated_at",                                      :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
-    t.boolean  "platform_admin",               :default => false
+    t.boolean  "platform_admin"
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
