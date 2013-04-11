@@ -19,6 +19,7 @@ class Admin::StoresController < ApplicationController
   def choose_approval_status
     store = Store.find_by_id(params[:id])
     store.approval_status = params[:status]
+    store.active = true if store.approved?
     store.save
 
     Resque.enqueue(StoreDecisionMailer, store.id)
