@@ -3,6 +3,9 @@ class Store < ActiveRecord::Base
   has_many :categories
   has_many :products
 
+  has_many :user_roles
+  has_many :users, through: :user_roles
+
   validates :name, :uniqueness => { :case_sensitive => false }, :presence => true
   validates :path, :uniqueness => { :case_sensitive => false }, :presence => true
   validates :description, :presence => true
@@ -23,6 +26,10 @@ class Store < ActiveRecord::Base
     approval_status == 'approved'
   end
   
+  def to_s
+    name
+  end
+
   def active_to_s
     if active?
       "Enabled"

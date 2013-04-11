@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     if current_user.present?
       @user = User.find(current_user.id)
       @orders = @user.orders
-      @stores = [1,2,3]
+      @stores = @user.stores
     else
       redirect_to login_path, alert: 'Please log in!'
     end

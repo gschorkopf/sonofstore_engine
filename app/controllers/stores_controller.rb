@@ -20,6 +20,10 @@ class StoresController < ApplicationController
     @store = Store.new(params[:store])
 
     if @store.save
+      ur = UserRole.create(user_id: current_user.id,
+                      store_id: @store.id )
+      ur.role = 'store_admin'
+      ur.save
       redirect_to @store, notice: 'Store is currently pending.'
     else
       render action: "new"

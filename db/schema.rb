@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130411024921) do
+ActiveRecord::Schema.define(:version => 20130411174414) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(:version => 20130411024921) do
     t.string   "role"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "store_id"
   end
 
   add_index "user_roles", ["user_id"], :name => "index_user_roles_on_user_id"

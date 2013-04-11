@@ -20,6 +20,7 @@ class Admin::StoresController < ApplicationController
     store = Store.find_by_id(params[:id])
     store.approval_status = params[:status]
     store.save
+
     redirect_to admin_stores_path,
       :notice => "#{store.name} has been #{store.approval_status}"
   end

@@ -13,7 +13,8 @@ class User < ActiveRecord::Base
 
   has_many :orders
 
-  has_one :user_role
+  has_many :user_roles
+  has_many :stores, through: :user_roles
 
   def default_values
     self.admin = false
