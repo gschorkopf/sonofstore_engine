@@ -1,0 +1,12 @@
+<%= simple_form_for [current_user, @shipping_address], html: {multipart: true} do |f| %>
+
+  <%= f.input :street_address, input_html: { placeholder: t('123 Main Street Apt #1') } %>
+  <%= f.input :city, input_html: { placeholder: t('Denver') } %>
+  <%= f.input :zip, input_html: { placeholder: t('80203') } %>
+  <%= f.input :state, input_html: { placeholder: t('Colorado') } %>
+  <%#= f.collection_select :state, STATE_ABBREVIATIONS %>
+
+  <%= f.button :submit, t('submit'), class:'btn btn-custom-lighten' %>
+<% end %>
+
+

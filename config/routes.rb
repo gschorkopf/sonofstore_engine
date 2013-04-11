@@ -25,6 +25,9 @@ StoreEngine::Application.routes.draw do
 
   resources :users, only: [ :new, :create, :update ] do
     resources :orders, except: [ :show ]
+    resource :shipping_addresses, except: [ :index ]
+    resource :billing_addresses, except: [ :index ]
+    resource :credit_cards, except: [ :index ]
   end
 
   namespace :admin do
@@ -44,7 +47,7 @@ StoreEngine::Application.routes.draw do
   end
 
   resources :stores, except: [ :index ]
-  get "/stores" => redirect('/')  
+  get "/stores" => redirect('/')
 
   scope "/:store_path", as: 'store' do
     get '/' => "products#index", as: 'home'

@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130410230431) do
+ActiveRecord::Schema.define(:version => 20130411024752) do
+
+  create_table "billing_addresses", :force => true do |t|
+    t.string   "street_address"
+    t.string   "city"
+    t.string   "zip"
+    t.string   "state"
+    t.integer  "user_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "billing_addresses", ["user_id"], :name => "index_billing_addresses_on_user_id"
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -26,6 +38,18 @@ ActiveRecord::Schema.define(:version => 20130410230431) do
     t.integer "category_id"
     t.integer "product_id"
   end
+
+  create_table "credit_cards", :force => true do |t|
+    t.string   "number"
+    t.string   "security_code"
+    t.integer  "expiration_month"
+    t.integer  "expiration_year"
+    t.integer  "user_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "credit_cards", ["user_id"], :name => "index_credit_cards_on_user_id"
 
   create_table "order_items", :force => true do |t|
     t.integer  "order_id"
@@ -46,8 +70,10 @@ ActiveRecord::Schema.define(:version => 20130410230431) do
     t.string   "status"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "store_id"
   end
 
+  add_index "orders", ["store_id"], :name => "index_orders_on_store_id"
   add_index "orders", ["user_id"], :name => "index_orders_on_user_id"
 
   create_table "products", :force => true do |t|
@@ -84,6 +110,18 @@ ActiveRecord::Schema.define(:version => 20130410230431) do
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
   end
+
+  create_table "shipping_addresses", :force => true do |t|
+    t.string   "street_address"
+    t.string   "city"
+    t.string   "zip"
+    t.string   "state"
+    t.integer  "user_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "shipping_addresses", ["user_id"], :name => "index_shipping_addresses_on_user_id"
 
   create_table "stores", :force => true do |t|
     t.string   "name"
