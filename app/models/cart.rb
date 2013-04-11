@@ -25,7 +25,11 @@ class Cart
   def update(carts_param)
     if id = carts_param[:product_id]
       quantity = carts_param[:quantity]
+      if quantity == 0
+        remove_item(remove_item_param)
+      else
       session[id] = quantity || (session[id].to_i + 1).to_s
+      end
     end
     session
   end

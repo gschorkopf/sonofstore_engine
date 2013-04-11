@@ -3,6 +3,7 @@ class OrdersController < ApplicationController
 
   def new
     @user = current_user
+    @cart = current_cart
   end
 
   def index
@@ -45,7 +46,7 @@ class OrdersController < ApplicationController
 
     if @order.save
       session[:cart] = {}
-      redirect_to account_order_path(@order), :notice => "Successfully created order!"
+      redirect_to user_orders_path(@order), :notice => "Successfully created order!"
     else
       redirect_to cart_path, :notice => "Checkout failed."
     end
