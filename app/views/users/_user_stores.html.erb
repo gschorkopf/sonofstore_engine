@@ -1,0 +1,9 @@
+ <%= link_to "Create a New Store", new_store_path %>
+
+ <ul>
+  <% @stores.each do |store| %>
+   
+    <li><%= store %></li>
+   
+  <% end %>
+ </ul>

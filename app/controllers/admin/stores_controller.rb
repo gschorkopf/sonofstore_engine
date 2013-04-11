@@ -2,8 +2,8 @@ class Admin::StoresController < ApplicationController
   before_filter :require_platform_admin
 
   def index
-    @pending_stores = Store.order('id ASC').where(approval_status: 'pending')
-    @approved_stores = Store.order('id ASC').where(approval_status: 'approved')
+    @pending_stores = Store.order('name ASC').where(approval_status: 'pending')
+    @approved_stores = Store.order('name ASC').where(approval_status: 'approved')
   end
 
   def update
@@ -24,7 +24,7 @@ class Admin::StoresController < ApplicationController
       :notice => "#{store.name} has been #{store.approval_status}"
   end
 
-   def toggle_active
+  def toggle_active
     @store = Store.find(params[:id])
     if @store.toggle_active
       redirect_to admin_stores_path,

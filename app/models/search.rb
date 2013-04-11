@@ -6,4 +6,7 @@ module Search
       Product.find_all_by_status('active')
     end
   end
+
+  def self.filter_user_orders(user_id, params = {})
+  end
 end

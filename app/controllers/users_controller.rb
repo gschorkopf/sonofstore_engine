@@ -29,8 +29,9 @@ class UsersController < ApplicationController
     if current_user.present?
       @user = User.find(current_user.id)
       @orders = @user.orders
+      @stores = [1,2,3]
     else
-      redirect_to root_url
+      redirect_to login_path, alert: 'Please log in!'
     end
   end
 end

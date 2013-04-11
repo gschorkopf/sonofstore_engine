@@ -3,8 +3,9 @@ class Store < ActiveRecord::Base
   has_many :categories
   has_many :products
 
-  validates :name, :uniqueness => { :case_sensitive => false }
-  validates :path, :uniqueness => { :case_sensitive => false }
+  validates :name, :uniqueness => { :case_sensitive => false }, :presence => true
+  validates :path, :uniqueness => { :case_sensitive => false }, :presence => true
+  validates :description, :presence => true
   
   def to_param
     path
@@ -16,6 +17,10 @@ class Store < ActiveRecord::Base
 
   def active?
     active == true
+  end
+
+  def approved?
+    approval_status == 'approved'
   end
   
   def active_to_s

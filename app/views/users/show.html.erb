@@ -1,17 +1,25 @@
 <div class="user-index">
-  <%= render partial: 'user_navigation', :locals => { active: :account_details } %>
+  <%= render partial: 'user_navigation', :locals => { active: :stores } %>
 
   <div class="span8">
-    <h1><%= t('account.edit')%></h1>
-    <hr>
-    <%= simple_form_for @user do |f| %>
-        <%= f.input :full_name, input_html: { placeholder: t('placeholder.user.fullname') } %>
-        <%= f.input :email, input_html: { placeholder: t('placeholder.user.email') } %>
-        <%= f.input :display_name, input_html: { placeholder: t('placeholder.user.displayname') } %>
-        <%= f.input :password %>
-        <%= f.input :password_confirmation %>
-        <%= f.hidden_field :admin, value: false %>
-        <%= f.submit t('account.update'), class: 'btn btn-custom-lighten' %>
-    <% end %>
+    <div id="manage_stores">
+      <h1>Manage Stores</h1>
+      <hr>
+      <%= render partial: 'user_stores' %>
+    </div>
+
+    <div id="edit_profile">
+      <h1>Edit Profile</h1>
+      <hr>
+      <%= simple_form_for @user do |f| %>
+          <%= f.input :full_name, input_html: { placeholder: t('placeholder.user.fullname') } %>
+          <%= f.input :email, input_html: { placeholder: t('placeholder.user.email') } %>
+          <%= f.input :display_name, input_html: { placeholder: t('placeholder.user.displayname') } %>
+          <%= f.input :password %>
+          <%= f.input :password_confirmation %>
+          <%= f.hidden_field :admin, value: false %>
+          <%= f.submit t('account.update'), class: 'btn btn-custom-lighten' %>
+      <% end %>
+    </div>
   </div>
 </div>

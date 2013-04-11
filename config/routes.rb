@@ -1,16 +1,29 @@
 StoreEngine::Application.routes.draw do
   root to: 'stores#index'
+  #change this!
 
   get "/code" => redirect("http://github.com/gschorkopf/sonofstore_engine")
   get "/logout" => "sessions#destroy", :as => "logout"
   get "/login" => "sessions#new", :as => "login"
   get "/signup" => "users#new", :as => "signup"
 
-  get "/account" => redirect("/account/profile")
-  get "/account/profile" => "users#show"
+  get "/account" => redirect("/profile")
+  get "/profile" => "users#show"
   # user#show should direct to /profile
-  get "/account/orders" => "orders#index"
-  get "/account/orders/:id" => "orders#show", :as => "account_order"
+  # get "/account/orders" => "orders#index"
+  # THIS COULD BE JUST PROFILE/ORDERS. LETS REVISIT
+
+  # get "/account/orders/:id" => "orders#show", :as => "account_order"
+
+
+
+
+
+
+
+
+
+
   post "/buy_now" => "orders#buy_now", :as => 'buy_now'
   put "/i18n" => "i18n#update"
 
@@ -39,7 +52,7 @@ StoreEngine::Application.routes.draw do
       end
     end
 
-    resources :stores do
+    resources :stores, except: [:new] do
       member do
         put :choose_approval_status, :as => "choose_approval_status_on"
         put :toggle_active
@@ -52,7 +65,6 @@ StoreEngine::Application.routes.draw do
 
 
   resources :stores, except: [ :index ]
-  get "/stores" => redirect('/')  
 
   scope "/:store_path", as: 'store' do
     get '/' => "products#index", as: 'home'
