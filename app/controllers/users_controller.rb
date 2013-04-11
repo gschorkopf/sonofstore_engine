@@ -9,7 +9,8 @@ class UsersController < ApplicationController
     if @user.save
       Resque.enqueue(IntroMailer, @user.id)
       auto_login(@user)
-      redirect_to root_url, :notice => "Welcome, #{@user.full_name}"
+      #redirect_to root_url, :notice => "Welcome, #{@user.full_name}"
+      redirect_to session[:return_to] || root_path, notice: 'Logged in!'
     else
       render :action => 'new'
     end

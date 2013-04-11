@@ -17,7 +17,9 @@
 <%end%>
 
 
-<% if current_user %>
+<% if current_user && current_user.shipping_address && current_user.billing_address && current_user.credit_card %>
+  <%= button_to ("checkout"), new_user_order_path(current_user), method: :get %>
+<% elsif current_user %>
   <%= button_to t("checkout"), new_user_shipping_addresses_path(current_user), method: :get %>
 <% else %>
   <%= button_to t('checkout'), login_path, class: 'btn btn-custom-lighten', method: :get %>

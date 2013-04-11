@@ -1,4 +1,4 @@
-<%= simple_form_for [current_user, @credit_card], html: {multipart: true} do |f| %>
+<%= simple_form_for [current_user, @credit_card], url: user_credit_cards_path, html: {multipart: true} do |f| %>
 
   <%= f.input :number, input_html: { placeholder: '' } %>
   <%= f.input :expiration_month, input_html: { placeholder: '' } %>

@@ -1,0 +1,40 @@
+<h2>Please review your order information</h2>
+
+Your current cart:
+<table class="table table-striped">
+  <thead>
+    <th></th>
+    <th><%= t('product.self') %></th>
+    <th><%= t('product.price') %></th>
+    <th><%= t('product.quantity') %></th>
+  </thead>
+  <tbody>
+    <%= render partial: 'carts/cart_item' %>
+  </tbody>
+</table>
+
+  Shipping information:
+<ul>
+  <li><%= @user.shipping_address.street_address %></li>
+  <li><%= @user.shipping_address.city %></li>
+  <li><%= @user.shipping_address.zip %></li>
+  <li><%= @user.shipping_address.state %></li>
+</ul><br/>
+
+Billing information:
+<ul>
+  <li><%= @user.billing_address.street_address %></li>
+  <li><%= @user.billing_address.city %></li>
+  <li><%= @user.billing_address.zip %></li>
+  <li><%= @user.billing_address.state %></li>
+</ul><br/>
+
+Credit card information:
+<ul>
+  <li><%= @user.credit_card.number %></li>
+  <li><%= @user.credit_card.expiration_month%></li>
+  <li><%= @user.credit_card.expiration_year%></li>
+  <li><%= @user.credit_card.security_code%></li>
+</ul><br/>
+
+<%= button_to "Submit Order", user_orders_path(current_user), method: :post %>

@@ -1,4 +1,4 @@
-<%= simple_form_for [current_user, @billing_address], html: {multipart: true} do |f| %>
+<%= simple_form_for [current_user, @billing_address], url: user_billing_addresses_path, html: {multipart: true} do |f| %>
 
   <%= f.input :street_address, input_html: { placeholder: '123 Main Street Apt #1' } %>
   <%= f.input :city, input_html: { placeholder: 'Denver' } %>

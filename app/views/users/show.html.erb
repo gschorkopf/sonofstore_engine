@@ -13,5 +13,26 @@
         <%= f.hidden_field :admin, value: false %>
         <%= f.submit t('account.update'), class: 'btn btn-custom-lighten' %>
     <% end %>
+    <br/>
+    <h3>Shipping Address:</h3>
+    <%= @user.shipping_address.street_address %><br/>
+    <%= @user.shipping_address.city %><br/>
+    <%= @user.shipping_address.zip %><br/>
+    <%= @user.shipping_address.state %><br/>
+    <%= button_to "Edit", edit_user_shipping_addresses_path(current_user), method: :get %>
+
+    <h3>Billing Address:</h3>
+    <%= @user.billing_address.street_address %><br/>
+    <%= @user.billing_address.city %><br/>
+    <%= @user.billing_address.zip %><br/>
+    <%= @user.billing_address.state %><br/>
+    <%= button_to "Edit", edit_user_billing_addresses_path(current_user), method: :get %>
+
+    <h3>Credit Card Information:</h3>
+    <%= @user.credit_card.number %><br/>
+    <%= @user.credit_card.security_code %><br/>
+    <%= @user.credit_card.expiration_month %><br/>
+    <%= @user.credit_card.expiration_year %><br/>
+    <%= button_to "Edit", edit_user_credit_cards_path(current_user), method: :get %>
   </div>
 </div>
