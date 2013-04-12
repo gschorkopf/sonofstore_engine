@@ -3,6 +3,20 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def new_guest
+    @user = User.new
+  end
+
+  def guest_create
+    @user = User.create_guest(params[:user])
+
+    if @user.save
+      redirect_to new_user_shipping_addresses_path(@user)
+    else
+      render :action => 'new_guest'
+    end
+  end
+
   def create
     @user = User.new(params[:user])
 

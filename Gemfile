@@ -14,6 +14,7 @@ gem 'pg'
 gem 'aws-sdk'
 gem 'resque', "~>1.24.0"
 gem 'cancan'
+gem 'random_password_generator'
 
 group :production do
   gem 'pg'

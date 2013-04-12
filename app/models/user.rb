@@ -25,4 +25,10 @@ class User < ActiveRecord::Base
   def default_values
     self.admin = false
   end
+
+  def self.create_guest(params)
+    password = RandomPasswordGenerator.generate
+    user = User.create(full_name: params[:full_name], email: params[:email],
+                       password: password, password_confirmation: password)
+  end
 end

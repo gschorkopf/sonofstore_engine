@@ -6,6 +6,8 @@ StoreEngine::Application.routes.draw do
   get "/logout" => "sessions#destroy", :as => "logout"
   get "/login" => "sessions#new", :as => "login"
   get "/signup" => "users#new", :as => "signup"
+  get "/guest" => "users#new_guest", :as => "guest"
+  post "/createguest" => "users#guest_create", :as => "createguest"
 
   get "/account" => redirect("/profile")
   get "/profile" => "users#show"

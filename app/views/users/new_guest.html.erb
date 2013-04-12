@@ -1,0 +1,7 @@
+<h3>Guest information</h3>
+
+<%= simple_form_for @user, :url => url_for(:action => 'guest_create', :controller => 'users'), :method => 'post' do |f| %>
+    <%= f.input :full_name, input_html: { placeholder: t('placeholder.user.fullname') } %>
+    <%= f.input :email, input_html: { placeholder: t('placeholder.user.email') } %>
+    <%= f.button :submit, t('submit') %>
+<% end %>
