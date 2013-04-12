@@ -25,4 +25,8 @@ class User < ActiveRecord::Base
   def default_values
     self.admin = false
   end
+
+  def to_s
+    full_name
+  end
 end
