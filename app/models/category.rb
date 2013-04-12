@@ -7,7 +7,13 @@ class Category < ActiveRecord::Base
 
 
   def unique_category_name_in_store
+    puts "%%%%%%%%%% #{store_id.inspect}"
     store = Store.find_by_id(store_id)
+
+    puts "$$$$$$$$$$$$$$$"
+    puts "Store is #{store.inspect}"
+    puts "Store Categories are #{store.categories.inspect}"
+
     if store.categories.find_by_title(title)
       errors.add(:title,"This store can have only one category with this name")
     end

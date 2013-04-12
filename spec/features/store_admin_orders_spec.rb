@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe "admin dashboard" do
   before(:each) do
-      FactoryGirl.create(:admin)
+      FactoryGirl.create(:store_admin)
       visit login_path
-      fill_in 'sessions_email', with: 'logan@gmail.com'
+      fill_in 'sessions_email', with: 'teeny@tiny.com'
       fill_in 'sessions_password', with: 'password'
       click_button 'Login'
 

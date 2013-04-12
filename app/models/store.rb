@@ -9,7 +9,7 @@ class Store < ActiveRecord::Base
   validates :name, :uniqueness => { :case_sensitive => false }, :presence => true
   validates :path, :uniqueness => { :case_sensitive => false }, :presence => true
   validates :description, :presence => true
-  
+
   def to_param
     path
   end
