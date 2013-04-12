@@ -1,4 +1,8 @@
 <div class="product-index">
+  <section>
+    <h2><%= current_store %></h2>
+  </section>
+
   <section class="row">
       <div class="btn-group span1" id="homepage-category-dropdown">
         <a class="btn btn-custom-lighten dropdown-toggle" data-toggle="dropdown" href="#">
@@ -6,13 +10,13 @@
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-          <li><a href="/">Show All</a></li>
+          <li><%=link_to "Show All", store_home_path %></li>
           <% unless @categories.nil? %>
-              <% @categories.each do |category| %>
-                  <li>
-                    <%=link_to category.title, store_category_path(current_store, category.id) %>
-                  </li>
-              <% end %>
+            <% @categories.each do |category| %>
+              <li>
+                <%=link_to category.title, store_category_path(current_store, category.id) %>
+              </li>
+            <% end %>
           <% end %>
         </ul>
       </div>

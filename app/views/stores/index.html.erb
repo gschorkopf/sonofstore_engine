@@ -1,4 +1,4 @@
-<h1>Listing stores</h1>
+<h1>Featured Stores</h1>
 
 <table class="table table-striped">
   <tr>
@@ -13,7 +13,7 @@
     <td><%= store.name %></td>
     <td><%= store.path %></td>
     <td><%= store.description %></td>
-    <td><%= link_to 'Show', store %></td>
+    <td><%= link_to 'Show', store_home_path(store) %></td>
   </tr>
 <% end %>
 </table>
