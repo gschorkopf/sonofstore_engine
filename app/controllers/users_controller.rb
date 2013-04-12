@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @user = User.create_guest(params[:user])
 
     if @user.save
-      redirect_to new_user_shipping_addresses_path(@user)
+      redirect_to new_user_shipping_addresses_path(@user.id)
     else
       render :action => 'new_guest'
     end
