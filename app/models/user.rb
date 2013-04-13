@@ -31,9 +31,9 @@ class User < ActiveRecord::Base
   end
 
   def role_for_store?(role, store)
-    selected_store = self.stores.where(id: store.id)
+    selected_store = self.stores.where(id: store.id).first
 
-    if !selected_store.empty?
+    if selected_store
       selected_user_roles = self.user_roles.where(store_id: selected_store.id)
       selected_user_roles.any? {|ur| ur.role == role }
     else
