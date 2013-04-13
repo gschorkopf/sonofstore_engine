@@ -1,5 +1,6 @@
 class Product < ActiveRecord::Base
-  attr_accessible :title, :description, :price, :status, :category_ids, :image, :store_id
+  attr_accessible :title, :description, :price,
+                  :status, :category_ids, :image, :store_id
 
   belongs_to :store
 
@@ -17,7 +18,7 @@ class Product < ActiveRecord::Base
                               }
 
   validates :title, presence: :true
-  validate :unique_product_name_in_store
+  validate :unique_product_title_in_store
   validates :description, presence: :true
 
   validates :status, presence: :true,
@@ -26,20 +27,9 @@ class Product < ActiveRecord::Base
                     format: { with: /^\d+??(?:\.\d{0,2})?$/ },
                     numericality: { greater_than: 0 }
 
-  # def unique_product_name_in_store
-  #   store = Store.find_by_id(store_id)
-  #   if store.products.find_by_title(title)
-  #     errors.add(:title,"This store can have only one product with this name")
-  #   end
-  # end
 
-
-  # CASE SENSITIVITY AINT HERE
-
-
-  def unique_product_name_in_store
-    existing_product = store.products.find_by_title(title)
-    if existing_product && existing_product.id != id
+  def unique_product_title_in_store
+    if !store.products.where("title ILIKE ?", "%#{title}%").empty?
       errors.add(:title,"This store can have only one product with this name")
     end
   end

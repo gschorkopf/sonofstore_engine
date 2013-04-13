@@ -5,14 +5,11 @@ class Category < ActiveRecord::Base
   belongs_to :store
 
   validates :title, presence: true
-  validate :unique_category_name_in_store
+  validate :unique_category_title_in_store
 
-
-  def unique_category_name_in_store
-    existing_category = store.categories.find_by_title(title)
-    if existing_category && existing_category.id != id
+  def unique_category_title_in_store
+    if !store.categories.where("title ILIKE ?", "%#{title}%").empty?
       errors.add(:title,"This store can have only one category with this name")
     end
   end
-  # CASE SENSITIVITY AINT HERE
 end

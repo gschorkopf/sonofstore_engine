@@ -6,12 +6,34 @@ class Store < ActiveRecord::Base
   has_many :user_roles
   has_many :users, through: :user_roles
 
-  validates :name, :uniqueness => { :case_sensitive => false }, :presence => true
-  validates :path, :uniqueness => { :case_sensitive => false }, :presence => true
+  validate :unique_name_among_approved_stores
+  validate :unique_path_among_approved_stores
+  validates :name, :presence => true
+  validates :path, :presence => true
   validates :description, :presence => true
 
   def to_param
     path
+  end
+
+  def unique_name_among_approved_stores
+    if Store.exists_with_name?(name)
+      errors.add(:name, "already exists")
+    end
+  end
+
+  def unique_path_among_approved_stores
+    if Store.exists_with_path?(path)
+      errors.add(:path, "already exists")
+    end
+  end
+
+  def self.exists_with_name?(name)
+    !Store.approved.where("name ILIKE ?", "%#{name}%").empty?
+  end
+
+  def self.exists_with_path?(path)
+    !Store.approved.where("path ILIKE ?", "%#{path}%").empty?
   end
 
   def self.find(path)
@@ -20,6 +42,10 @@ class Store < ActiveRecord::Base
 
   def active?
     active == true
+  end
+
+  def self.approved
+    where(:approval_status => 'approved')
   end
 
   def approved?

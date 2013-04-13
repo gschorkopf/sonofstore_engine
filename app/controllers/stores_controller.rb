@@ -1,5 +1,4 @@
 class StoresController < ApplicationController
-  
   def index
     @stores = Store.order('name ASC').where(approval_status: 'approved')
   end
@@ -26,8 +25,10 @@ class StoresController < ApplicationController
       ur.save
 
       Resque.enqueue(StoreCreateMailer, current_user.id, @store.id)
+      # redirect_to @store, notice: 'Store is currently pending.'
+      redirect_to profile_path,
+          notice: "Thanks for your submission! #{@store} is currently pending."
 
-      redirect_to @store, notice: 'Store is currently pending.'
     else
       render action: "new"
     end
