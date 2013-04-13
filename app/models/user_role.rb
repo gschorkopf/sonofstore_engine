@@ -9,8 +9,4 @@ class UserRole < ActiveRecord::Base
   def role_symbols
     [role.to_sym]
   end
-
-  def role?(role)
-    self.role == role.to_s
-  end
 end
