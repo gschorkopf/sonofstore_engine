@@ -29,4 +29,15 @@ class User < ActiveRecord::Base
   def to_s
     full_name
   end
+
+  def role_for_store?(role, store)
+    selected_store = self.stores.where(id: store.id)
+
+    if !selected_store.empty?
+      selected_user_roles = self.user_roles.where(store_id: selected_store.id)
+      selected_user_roles.any? {|ur| ur.role == role }
+    else
+      false
+    end
+  end
 end
