@@ -46,6 +46,7 @@ class OrdersController < ApplicationController
 
     if @order.save
       session[:cart] = {}
+      Resque.enqueue(OrderMailer, current_user.id, @order.id)
       redirect_to user_orders_path(@order), :notice => "Successfully created order!"
     else
       redirect_to cart_path, :notice => "Checkout failed."
