@@ -1,5 +1,5 @@
 class Admin::ProductsController < ApplicationController
-  load_and_authorize_resource
+  # load_and_authorize_resource
   before_filter :require_admin
 
   def index
@@ -13,7 +13,7 @@ class Admin::ProductsController < ApplicationController
   def create
     @product = Product.new(params[:product])
     if @product.save
-      redirect_to admin_products_path,
+      redirect_to store_admin_products_path,
         :notice => "Successfully created product."
     else
       render :action => 'new', :notice  => "Product creation failed."
@@ -27,7 +27,7 @@ class Admin::ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
     if @product.update_attributes(params[:product])
-      redirect_to admin_products_path,
+      redirect_to store_admin_products_path,
         :notice  => "Successfully updated product."
     else
       render :action => 'edit', :notice  => "Update failed."
@@ -44,7 +44,7 @@ class Admin::ProductsController < ApplicationController
   def toggle_status
     @product = Product.find(params[:id])
     if @product.toggle_status
-      redirect_to admin_products_path,
+      redirect_to store_admin_products_path,
         :notice  => "Product status successfully set to '#{@product.status}'."
     else
       head 400
