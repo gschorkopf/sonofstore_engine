@@ -3,15 +3,17 @@ class Admin::ProductsController < ApplicationController
   before_filter :require_admin
 
   def index
-    @products = Product.order('created_at DESC').all
+    @products = Product.order('title ASC').all
   end
 
   def new
+    @store = current_store
     @product = Product.new
   end
 
   def create
-    @product = Product.new(params[:product])
+    @store = current_store
+    @product = Product.new(params[:product], store_id: @store.id)
     if @product.save
       redirect_to store_admin_products_path,
         :notice => "Successfully created product."
@@ -21,10 +23,12 @@ class Admin::ProductsController < ApplicationController
   end
 
   def edit
+    @store = current_store
     @product = Product.find(params[:id])
   end
 
   def update
+    @store = current_store
     @product = Product.find(params[:id])
     if @product.update_attributes(params[:product])
       redirect_to store_admin_products_path,
@@ -35,13 +39,15 @@ class Admin::ProductsController < ApplicationController
   end
 
   def destroy
+    @store = current_store
     @product = Product.find(params[:id])
     @product.destroy
-    redirect_to admin_products_url,
+    redirect_to store_admin_products_path,
       :notice => "Successfully destroyed product."
   end
 
   def toggle_status
+    @store = current_store
     @product = Product.find(params[:id])
     if @product.toggle_status
       redirect_to store_admin_products_path,

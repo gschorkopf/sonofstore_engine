@@ -14,9 +14,9 @@ class Product < ActiveRecord::Base
                               }
 
   validates :title, presence: :true
-  validate :unique_product_title_in_store
+  validate :unique_product_title_in_store, on: :create
   validates :description, presence: :true
-
+  validates :store_id, presence: :true
   validates :status, presence: :true,
                      inclusion: { in: %w(active retired) }
   validates :price, presence: :true,

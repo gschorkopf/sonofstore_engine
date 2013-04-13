@@ -3,7 +3,7 @@ class Category < ActiveRecord::Base
   has_and_belongs_to_many :products
 
   validates :title, presence: true
-  validate :unique_category_title_in_store
+  validate :unique_category_title_in_store, on: :create
 
   def unique_category_title_in_store
     store = Store.find_by_id(store_id)

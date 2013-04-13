@@ -11,29 +11,29 @@
                locals: { product: product } %>
   </td>
   <td>
-    <div class="btn-group">
+    <!-- <div class="btn-group">
       <button class="btn dropdown-toggle" data-toggle="dropdown"><%= t('model.modify') %><span class="caret"></span>
       </button>
-      <ul class="dropdown-menu">
-        <li>
+      <ul class="dropdown-menu"> -->
+        
           <%= link_to t('crud.edit'),
                       edit_store_admin_product_path(current_store, product) %>
-        </li>
-        <li class="divider">
-        </li>
-        <li>
+        
+        <!-- <li class="divider"> -->
+        
+        
           <%= link_to activate_or_retire_translation(product.status),
                       toggle_status_store_admin_product_path(current_store, product, 'retire'),
                       method: :post %>
-        </li>
+        
 
-        <li>
+        
           <%= link_to t('crud.delete'),
                       store_admin_product_path(current_store, product),
                       confirm: t('confirm'),
                       method: :delete %>
-        </li>
-      </ul>
-    </div>
+        
+      <!-- </ul>
+    </div> -->
   </td>
 </tr>
