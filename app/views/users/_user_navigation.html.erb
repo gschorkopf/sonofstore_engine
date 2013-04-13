@@ -1,6 +1,6 @@
 <div class="span3">
   <ul class="nav nav-list">
-    <li class="nav-header"><%= t('account.self') %></li>
+    <li class="nav-header"><%= current_user %>'s Account</li>
     <li class="<%= active == :stores ? 'active' : '' %>">
       <%= link_to 'Manage Stores', profile_path %>
     </li>

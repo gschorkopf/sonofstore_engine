@@ -10,11 +10,11 @@ class ApplicationController < ActionController::Base
   def require_admin
     if current_user == false
       not_authenticated
-    elsif current_user && (current_user.platform_admin? || current_user.user_role.role == "store_admin" || current_user.user_role.role == "stocker")
+    elsif current_user.platform_admin? || current_user.role_for_store?('store_admin', current_store)
       true
     else
       redirect_to login_path,
-      :alert => "Only system administrators may access this page"
+        :alert => "Only store administrators may access this page"
     end
   end
 

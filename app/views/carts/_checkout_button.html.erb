@@ -16,7 +16,6 @@
 <% end %>
 <%end%>
 
-
 <% if current_user && current_user.shipping_address && current_user.billing_address && current_user.credit_card %>
   <%= button_to ("checkout"), new_user_order_path(current_user), method: :get %>
 <% elsif current_user %>
