@@ -13,5 +13,5 @@ class CreditCard < ActiveRecord::Base
     :maximum => 4, message: "Please submit in four digit format - example: 2013" },
     :numericality => true
 
-  belongs_to :user
+  belongs_to :customer
 end

@@ -11,19 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130411174414) do
+ActiveRecord::Schema.define(:version => 20130413212332) do
 
   create_table "billing_addresses", :force => true do |t|
     t.string   "street_address"
     t.string   "city"
     t.string   "zip"
     t.string   "state"
-    t.integer  "user_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "customer_id"
   end
 
-  add_index "billing_addresses", ["user_id"], :name => "index_billing_addresses_on_user_id"
+  add_index "billing_addresses", ["customer_id"], :name => "index_billing_addresses_on_customer_id"
 
   create_table "categories", :force => true do |t|
     t.string   "title"
@@ -44,12 +44,20 @@ ActiveRecord::Schema.define(:version => 20130411174414) do
     t.string   "security_code"
     t.integer  "expiration_month"
     t.integer  "expiration_year"
-    t.integer  "user_id"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.integer  "customer_id"
   end
 
-  add_index "credit_cards", ["user_id"], :name => "index_credit_cards_on_user_id"
+  add_index "credit_cards", ["customer_id"], :name => "index_credit_cards_on_customer_id"
+
+  create_table "customers", :force => true do |t|
+    t.string  "email"
+    t.string  "full_name"
+    t.integer "shipping_address_id"
+    t.integer "billing_address_id"
+    t.integer "credit_card_id"
+  end
 
   create_table "order_items", :force => true do |t|
     t.integer  "order_id"
@@ -92,36 +100,17 @@ ActiveRecord::Schema.define(:version => 20130411174414) do
 
   add_index "products", ["store_id"], :name => "index_products_on_store_id"
 
-  create_table "ratings", :force => true do |t|
-    t.integer  "product_id"
-    t.integer  "user_id"
-    t.string   "title"
-    t.text     "body"
-    t.integer  "stars",      :default => 0
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-  end
-
-  create_table "sales", :force => true do |t|
-    t.integer  "foreign_key"
-    t.integer  "percent_off", :default => 1
-    t.string   "group"
-    t.string   "status"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
-  end
-
   create_table "shipping_addresses", :force => true do |t|
     t.string   "street_address"
     t.string   "city"
     t.string   "zip"
     t.string   "state"
-    t.integer  "user_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "customer_id"
   end
 
-  add_index "shipping_addresses", ["user_id"], :name => "index_shipping_addresses_on_user_id"
+  add_index "shipping_addresses", ["customer_id"], :name => "index_shipping_addresses_on_customer_id"
 
   create_table "stores", :force => true do |t|
     t.string   "name"
@@ -144,8 +133,6 @@ ActiveRecord::Schema.define(:version => 20130411174414) do
   add_index "user_roles", ["user_id"], :name => "index_user_roles_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "email"
-    t.string   "full_name"
     t.string   "display_name"
     t.string   "crypted_password"
     t.string   "salt"
@@ -154,8 +141,10 @@ ActiveRecord::Schema.define(:version => 20130411174414) do
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
     t.boolean  "platform_admin"
+    t.integer  "customer_id"
   end
 
+  add_index "users", ["customer_id"], :name => "index_users_on_customer_id"
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
 
 end

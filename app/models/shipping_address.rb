@@ -5,5 +5,5 @@ class ShippingAddress < ActiveRecord::Base
 
   validates :zip, :length => {:minimum => 5, :maximum => 5}, :numericality => true
 
-  belongs_to :user
+  belongs_to :customer
 end
