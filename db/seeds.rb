@@ -1,20 +1,54 @@
-Store.create(name: 'Best Sunglasses', path: 'best-sunglasses', description: 'Buy our Sunglasses')
-Store.create(name: 'Cool Sunglasses', path: 'cool-sunglasses', description: 'Buy our COOL Sunglasses')
+stores = [
+  Store.create(name: 'Best Sunglasses', path: 'best-sunglasses', description: 'Buy our Sunglasses'),
+  Store.create(name: 'Cool Sunglasses', path: 'cool-sunglasses', description: 'Buy our COOL Sunglasses'),
+  Store.create(name: "Speedy Bikes", path: "speedy-bikes", description: "Put the fun between your legs!"),
+  Store.create(name: "Cool Runnings", path: "cool-runnings", description: "You'll come back tomorrow and the next day and the next day and the next day."),
+  Store.create(name: "Banana Hut", path: "banana-hut", description: "There's money in the hut!"),
+  Store.create(name: "Florist-Gump", path: "florist-gump", description: "Life's not like a box of chocolates here.  What you see is what you get!"),
+  Store.create(name: "World of Woolcraft", path: "world-of-woolcraft", description: "Knitting's no joke"),
+  Store.create(name: "Frank's Monsterporium", path: "monsterporium", description: "Monster?  Maybe.  Cuddly?  Definitely."),
+  Store.create(name: "Katrina's Refactorium", path: "refactorium", description: "Crazy code?  Yeah, we can work with it."),
+  Store.create(name: "Jeff's Developer Warehouse", path: "developer-warehouse", description: "Tons of crazy kids... who work for free!")
+]
 
-Category.create(title: "Wayfarers", store_id: 1)
-Category.create(title: "Raybans", store_id: 1)
-Category.create(title: "Serengetis", store_id: 2)
-Category.create(title: "Raybans", store_id: 2)
-
-n = 1
-50.times do
-  Product.create(title: "Product #{n}", description: "Great product", price: 500, status: 'active', store_id: 1, category_ids: [1])
-  Product.create(title: "Product #{n}", description: "Great product", price: 500, status: 'active', store_id: 2, category_ids: [3])
-  n += 1
-  Product.create(title: "Product #{n}", description: "Great product", price: 500, status: 'active', store_id: 1, category_ids: [2])
-  Product.create(title: "Product #{n}", description: "Great product", price: 500, status: 'active', store_id: 2, category_ids: [4])
-  n += 1
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 1)
 end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 2)
+end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 3)
+end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 4)
+end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 5)
+end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 6)
+end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 7)
+end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 8)
+end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 9)
+end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 10)
+end
+
+
+1000.times do
+  Product.create(title: Faker::Address.street_name.split[0], description: "#{Faker::Company.bs} " + "#{Faker::Company.bs}", price: rand(1..5000), status: 'active', store_id: rand(1..10), category_ids: rand(1..90))
+end
+
+Product.create(title: "Schwinn 10 Speed", description: "This bike will really knock your socks off!  Not one, not two, but TEN SPEEDS!", price: 125.99, status: 'active', store_id: 3, category_ids: [5, 6])
+Product.create(title: "Hello Kitty Lunchbox", description: "I belong in Hello Kitty Hell", price: 10.78, status: "active", store_id: 1, category_ids: [1])
 
 user1 = User.create(full_name: "Franklin Webber", email: "demoXX+franklin@jumpstartlab.com", password: "password")
 user2 = User.create(full_name: "Jeff", email: "demoXX+jeff@jumpstartlab.com", password: "password", display_name: "j3")
