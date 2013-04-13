@@ -3,7 +3,8 @@ class Admin::ProductsController < ApplicationController
   before_filter :require_admin
 
   def index
-    @products = Product.order('title ASC').all
+    @store = current_store
+    @products = @store.products.order('title ASC').all
   end
 
   def new

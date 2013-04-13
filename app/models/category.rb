@@ -4,6 +4,8 @@ class Category < ActiveRecord::Base
 
   validates :title, presence: true
   validate :unique_category_title_in_store, on: :create
+  validate :unique_category_title_in_store, on: :update
+  validate :unique_category_title_in_store, on: :toggle_status
 
   def unique_category_title_in_store
     store = Store.find_by_id(store_id)

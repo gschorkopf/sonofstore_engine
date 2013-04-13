@@ -15,6 +15,8 @@ class Product < ActiveRecord::Base
 
   validates :title, presence: :true
   validate :unique_product_title_in_store, on: :create
+  validate :unique_product_title_in_store, on: :update
+  validate :unique_product_title_in_store, on: :toggle_status
   validates :description, presence: :true
   validates :store_id, presence: :true
   validates :status, presence: :true,
