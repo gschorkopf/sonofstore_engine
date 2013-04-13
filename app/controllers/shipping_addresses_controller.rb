@@ -9,7 +9,11 @@ class ShippingAddressesController < ApplicationController
     @shipping_address = ShippingAddress.new(params[:shipping_address])
 
     if @shipping_address.save
-      redirect_to new_user_billing_addresses_path(current_user)
+      if session[:return_to] == profile_url(current_user)
+        redirect_to profile_path(current_user)
+      else
+        redirect_to new_user_billing_addresses_path(current_user)
+      end
     else
       render "new"
     end
@@ -26,7 +30,7 @@ class ShippingAddressesController < ApplicationController
   def update
     @shipping_address = ShippingAddress.find_by_user_id(params[:user_id])
     if @shipping_address.update_attributes(params[:shipping_address])
-      redirect_to account_profile_path,
+      redirect_to profile_path,
         :notice  => "Successfully updated shipping address."
     else
       render :action => 'edit', :notice  => "Update failed."
