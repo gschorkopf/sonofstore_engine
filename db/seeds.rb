@@ -55,13 +55,19 @@ user2 = User.create(full_name: "Jeff", email: "demoXX+jeff@jumpstartlab.com", pa
 user3 = User.create(full_name: "Steve Klabnik", email: "demoXX+steve@jumpstartlab.com", password: "password", display_name: "SkrilleX")
 user4 = User.create(full_name: "Katrina", email: "demoXX+katrina@jumpstartlab.com", password: "password", display_name: "Norway")
 
-ur1 = UserRole.new
-ur1.user_id = 1
-ur1.role = "store_admin"
-ur1.save
 ur2 = UserRole.new
 ur2.user_id = 2
 ur2.role = "stocker"
 ur2.save
 user3.platform_admin = true
 user3.save
+
+n = 1
+10.times do
+ur4 = UserRole.new
+ur4.user_id = 4
+ur4.role = "store_admin"
+ur4.store_id = n
+ur4.save
+n += 1
+end
