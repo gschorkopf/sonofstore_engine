@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
-  attr_accessible :display_name, :password, :password_confirmation
+  attr_accessible :display_name, :password, :password_confirmation, :customer_id
 
   validates_confirmation_of :password,
                             message: "passwords did not match", if: :password

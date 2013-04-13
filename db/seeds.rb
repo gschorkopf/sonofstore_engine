@@ -50,10 +50,16 @@ end
 Product.create(title: "Schwinn 10 Speed", description: "This bike will really knock your socks off!  Not one, not two, but TEN SPEEDS!", price: 125.99, status: 'active', store_id: 3, category_ids: [5, 6])
 Product.create(title: "Hello Kitty Lunchbox", description: "I belong in Hello Kitty Hell", price: 10.78, status: "active", store_id: 1, category_ids: [1])
 
-user1 = User.create(full_name: "Franklin Webber", email: "demoXX+franklin@jumpstartlab.com", password: "password")
-user2 = User.create(full_name: "Jeff", email: "demoXX+jeff@jumpstartlab.com", password: "password", display_name: "j3")
-user3 = User.create(full_name: "Steve Klabnik", email: "demoXX+steve@jumpstartlab.com", password: "password", display_name: "SkrilleX")
-user4 = User.create(full_name: "Katrina", email: "demoXX+katrina@jumpstartlab.com", password: "password", display_name: "Norway")
+
+customer1 = Customer.create(full_name: "Franklin Webber", email: "demoXX+franklin@jumpstartlab.com")
+customer2 = Customer.create(full_name: "Jeff", email: "demoXX+jeff@jumpstartlab.com")
+customer3 = Customer.create(full_name: "Steve Klabnik", email: "demoXX+steve@jumpstartlab.com")
+customer4 = Customer.create(full_name: "Katrina", email: "demoXX+katrina@jumpstartlab.com")
+
+user1 = User.create(password: "password", customer_id: customer1.id)
+user2 = User.create(password: "password", display_name: "j3", customer_id: customer2.id)
+user3 = User.create(password: "password", display_name: "SkrilleX", customer_id: customer3.id)
+user4 = User.create(password: "password", display_name: "Norway", customer_id: customer4.id)
 
 ur2 = UserRole.new
 ur2.user_id = 2
