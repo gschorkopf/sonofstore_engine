@@ -27,7 +27,7 @@ class StoresController < ApplicationController
 
       Resque.enqueue(StoreCreateMailer, current_user.id, @store.id)
       
-      redirect_to @store, notice: 'Store is currently pending.'
+      redirect_to profile_path, notice: "Thanks for your submission! #{@store} is currently pending."
     else
       render action: "new"
     end
