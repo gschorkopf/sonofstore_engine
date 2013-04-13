@@ -41,8 +41,9 @@ describe "admin dashboard" do
 
     context "within an individual order" do
       before(:each) do
+        @store = FactoryGirl.create(:store)
         @order = FactoryGirl.create(:order, user: @user)
-        @product = FactoryGirl.create(:product)
+        @product = FactoryGirl.create(:product, store_id: @store.id)
         @order_item = FactoryGirl.create(:order_item, order: @order, product: @product)
         visit admin_order_path(@order)
       end

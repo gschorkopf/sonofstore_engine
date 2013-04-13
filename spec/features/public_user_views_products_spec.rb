@@ -4,7 +4,8 @@ feature "Public User Views Products" do
 
   context "the root page" do
     before(:each) do
-      @product = FactoryGirl.create(:product)
+      @store = FactoryGirl.create(:store)
+      @product = FactoryGirl.create(:product, store_id: @store.id)
       visit root_path
     end
 
@@ -15,7 +16,8 @@ feature "Public User Views Products" do
 
   context "the product page" do
     before(:each) do
-      @product = FactoryGirl.create(:product)
+      @store = FactoryGirl.create(:store)
+      @product = FactoryGirl.create(:product, store_id: @store.id)
       visit product_path(@product)
     end
 

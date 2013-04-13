@@ -37,38 +37,40 @@ describe 'the admin products view', type: :feature do
     expect(page).to have_content("can't be blank")
   end
 
-  it 'edits a product correctly' do
-    product = FactoryGirl.create(:product)
-    visit edit_admin_product_path(product)
-    fill_in "Title", with: "whateveryouwant"
-    click_button "Submit"
-    expect(current_path).to eq admin_products_path
-  end
+  context 'editing, destroying, and retiring/activating products' do
+    before(:each) do
+      @store = FactoryGirl.create(:store)
+      @product = FactoryGirl.create(:product, store_id: @store.id)
+    end
 
-  it 'edits a product with incorrect info' do
-    product = FactoryGirl.create(:product)
-    visit edit_admin_product_path(product)
-    fill_in "Title", with: ""
-    click_button "Submit"
-    expect(page).to have_content("can't be blank")
-  end
+    it 'edits a product correctly' do
+      visit edit_admin_product_path(@product)
+      fill_in "Title", with: "whateveryouwant"
+      click_button "Submit"
+      expect(current_path).to eq admin_products_path
+    end
 
-  it 'can destroy an existing product' do
-    product = FactoryGirl.create(:product)
-    page.driver.submit :delete, admin_product_path(product), {}
-    expect(Product.all).to eq []
-  end
+    it 'edits a product with incorrect info' do
+      visit edit_admin_product_path(@product)
+      fill_in "Title", with: ""
+      click_button "Submit"
+      expect(page).to have_content("can't be blank")
+    end
 
-  it 'can retire an active product' do
-    product = FactoryGirl.create(:product)
-    page.driver.post toggle_status_admin_product_path(product)
-    expect(product.status).to eq 'active'
-  end
+    it 'can destroy an existing product' do
+      page.driver.submit :delete, admin_product_path(@product), {}
+      expect(Product.all).to eq []
+    end
 
-  it 'can activate a retired product' do
-    product = FactoryGirl.create(:product)
-    page.driver.post toggle_status_admin_product_path(product)
-    expect(product.status).to eq 'active'
+    it 'can retire an active product' do
+      page.driver.post toggle_status_admin_product_path(@product)
+      expect(@product.status).to eq 'active'
+    end
+
+    it 'can activate a retired product' do
+      page.driver.post toggle_status_admin_product_path(@product)
+      expect(@product.status).to eq 'active'
+    end
   end
 end
 

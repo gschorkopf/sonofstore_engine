@@ -7,6 +7,7 @@ FactoryGirl.define do
   end
 
   factory :category do
+    #can i assign store id in here?
     title 'Dark Matter'
   end
 
@@ -23,7 +24,9 @@ FactoryGirl.define do
   end
 
   factory :product do
-    categories { [FactoryGirl.build(:category)] }
+   #is there a way i can assign store_id in here? it would be nice
+    #as well as categories?
+    # categories { [FactoryGirl.build(:category)] }
     title 'Itchy Sweater'
     description 'Hurts so good'
     price 12.99

@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
     if current_user.id == order.user_id
       @order = Order.find(params[:id])
     else
-      redirect_to account_orders_path
+      redirect_to user_orders_path
     end
   end
 

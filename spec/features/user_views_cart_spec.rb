@@ -10,7 +10,8 @@ describe 'the user cart view' do
 
   context 'when there are items in the cart' do
     before(:each) do
-      @product = FactoryGirl.create(:product)
+      @store = FactoryGirl.create(:store)
+      @product = FactoryGirl.create(:product, store_id: @store.id)
       visit product_path(@product)
       click_button 'Add to Cart'
       visit cart_path
@@ -39,7 +40,7 @@ describe 'the user cart view' do
 
     context 'the user wants to remove one item from the cart' do
       it 'removes one item' do
-        product2 = FactoryGirl.create(:product, title: 'coolthings')
+        product2 = FactoryGirl.create(:product, store_id: @store.id, title: 'coolthings')
         visit product_path(product2)
         click_button "Add to Cart"
         visit cart_path

@@ -25,7 +25,7 @@ class Store < ActiveRecord::Base
   def approved?
     approval_status == 'approved'
   end
-  
+
   def to_s
     name
   end

@@ -26,13 +26,23 @@ class Product < ActiveRecord::Base
                     format: { with: /^\d+??(?:\.\d{0,2})?$/ },
                     numericality: { greater_than: 0 }
 
+  # def unique_product_name_in_store
+  #   store = Store.find_by_id(store_id)
+  #   if store.products.find_by_title(title)
+  #     errors.add(:title,"This store can have only one product with this name")
+  #   end
+  # end
+
+
+  # CASE SENSITIVITY AINT HERE
+
+
   def unique_product_name_in_store
-    store = Store.find_by_id(store_id)
-    if store.products.find_by_title(title)
+    existing_product = store.products.find_by_title(title)
+    if existing_product && existing_product.id != id
       errors.add(:title,"This store can have only one product with this name")
     end
   end
-  # CASE SENSITIVITY AINT HERE
 
   def toggle_status
     if status == 'active'
