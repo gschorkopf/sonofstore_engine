@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.find_all_by_user_id(current_user)
+    @orders = Order.find_all_by_customer_id(current_user.customer_id)
   end
 
   def show
@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
     if current_user.id == order.user_id
       @order = Order.find(params[:id])
     else
-      redirect_to account_orders_path
+      redirect_to customer_orders_path
     end
   end
 
@@ -34,7 +34,7 @@ class OrdersController < ApplicationController
       # Resque.enqueue(OrderMailer, current_user.id, @order.id)
       session[:cart] = {}
       Resque.enqueue(OrderMailer, current_user.id, @order.id)
-      redirect_to user_orders_path(@order), :notice => "Successfully created order!"
+      redirect_to customer_orders_path(@order), :notice => "Successfully created order!"
     else
       redirect_to cart_path, :notice => "Checkout failed."
     end
