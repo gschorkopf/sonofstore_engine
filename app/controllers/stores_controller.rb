@@ -4,16 +4,8 @@ class StoresController < ApplicationController
     @stores = Store.order('name ASC').where(approval_status: 'approved')
   end
 
-  def show
-    @store = Store.find(params[:id])
-  end
-
   def new
     @store = Store.new
-  end
-
-  def edit
-    @store = Store.find(params[:id])
   end
 
   def create
@@ -34,18 +26,9 @@ class StoresController < ApplicationController
     end
   end
 
-  def update
-    @store = Store.find(params[:id])
-    if @store.update_attributes(params[:store])
-      redirect_to @store, notice: 'Store was successfully updated.'
-    else
-      render action: "edit"
-    end
-  end
-
-  def destroy
-    @store = Store.find(params[:id])
-    @store.destroy
-    redirect_to admin_stores_path, :notice => 'Store successfully deleted'
-  end
+  # def destroy
+  #   @store = Store.find(params[:id])
+  #   @store.destroy
+  #   redirect_to admin_stores_path, :notice => 'Store successfully deleted'
+  # end
 end
