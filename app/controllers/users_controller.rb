@@ -33,7 +33,9 @@ class UsersController < ApplicationController
     if current_user.present?
       @user = User.find(current_user.id)
       @orders = @user.orders
-      @stores = @user.stores
+      @pending_stores = @user.stores.order('name ASC').where(approval_status: 'pending')
+      @approved_stores = @user.stores.order('name ASC').where(approval_status: 'approved')
+      @disapproved_stores = @user.stores.order('name ASC').where(approval_status: 'disapproved')
     else
       redirect_to login_path, alert: 'Please log in!'
     end

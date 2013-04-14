@@ -29,6 +29,8 @@ StoreEngine::Application.routes.draw do
     resources :categories, only: [ :index, :show ]
     
     namespace :admin do
+      get '/' => "users#show", as: 'home'
+      resources :users
       resources :products do
         member do
           post :toggle_status

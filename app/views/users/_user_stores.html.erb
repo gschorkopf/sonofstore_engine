@@ -1,11 +1,31 @@
- <%= button_to "Create a New Store", new_store_path, class: 'btn btn-custom-lighten', method: :get %>
-<br>
-<h3>Created Stores</h3>
+<h3>Store Manager</h3>
+<table class="table table-striped">
+  <tr>
+    <th>Name</th>
+    <th>URL ID</th>
+    <th>Description</th>
+    <th>Active Status</th>
+  </tr>
 
- <ul>
-  <% @stores.each do |store| %>
-
-    <li><%= store %> is <%= store.approval_status %></li>
-   
+  <% @approved_stores.each do |store| %>
+    <tr>
+      <td><%= link_to store, store_home_path(store) %></td>
+      <td><%= store.path %></td>
+      <td><%= store.description %></td>
+      <td><%= store.active_to_s %></td>
+    </tr>
   <% end %>
- </ul>
+</table>
+
+<h3>Pending Stores</h3>
+<ul>
+  <% @pending_stores.each do |store| %>
+    <li><%= store %></li>
+  <% end %>
+</ul>
+<h3>Disapproved Stores</h3>
+<ul>
+  <% @disapproved_stores.each do |store| %>
+    <li><%= store %></li>
+  <% end %>
+</ul>
