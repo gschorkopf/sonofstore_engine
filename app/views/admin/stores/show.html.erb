@@ -1,1 +1,26 @@
-<%= link_to "Dashboard", admin_dashboard_path %>
+<div class="user-index">
+  <%= render partial: 'user_navigation', :locals => { active: :stores } %>
+
+  <div class="span8">
+    <p id="notice"><%= notice %></p>
+
+    <p>
+      <b>Name:</b>
+      <%= @store.name %>
+    </p>
+
+    <p>
+      <b>Path:</b>
+      <%= @store.path %>
+    </p>
+
+    <p>
+      <b>Description:</b>
+      <%= @store.description %>
+    </p>
+
+
+    <%= link_to 'Edit', root_path %> |
+    <%= link_to 'Back', root_path %>
+  </div>
+</div>

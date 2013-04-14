@@ -29,7 +29,7 @@ StoreEngine::Application.routes.draw do
     resources :categories, only: [ :index, :show ]
     
     namespace :admin do
-      get '/' => "users#show", as: 'home'
+      get '/' => "stores#show"
       resources :users
       resources :products do
         member do
@@ -48,21 +48,15 @@ StoreEngine::Application.routes.draw do
 
   namespace :admin do
     # namespace dedicated to platform admin
+    
     root to: redirect("/admin/dashboard")
     get :dashboard, to: "orders#index", as: 'dashboard'
-    # get :search, to: "orders#index", as: 'search'
 
     resources :categories, except: [ :index, :show ]
 
     resources :orders, only: [ :show, :update ]
     
     resources :order_items, only: [ :update, :destroy]
-
-    # resources :products do
-    #   member do
-    #     post :toggle_status
-    #   end
-    # end
 
     resources :stores, except: [:new] do
       member do
