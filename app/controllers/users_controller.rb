@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
       Mailer.welcome_email(@user).deliver
       # Resque.enqueue(IntroMailer, @user.id)
-      
+
       auto_login(@user)
       #redirect_to root_url, :notice => "Welcome, #{@user.full_name}"
       redirect_to session[:return_to] || root_path, notice: 'Logged in!'
@@ -32,8 +32,8 @@ class UsersController < ApplicationController
   def show
     if current_user.present?
       @user = User.find(current_user.id)
-      @orders = @user.orders
-      @stores = @user.stores
+      @orders =[]# @user.orders
+      @stores = []#@user.stores
     else
       redirect_to login_path, alert: 'Please log in!'
     end

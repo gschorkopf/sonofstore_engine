@@ -19,7 +19,12 @@ class User < ActiveRecord::Base
   end
 
   def to_s
-    full_name
+    customer.full_name
+  end
+
+  def self.email(email)
+    customer = Customer.find_by_email("#{email}")
+    user = User.find_by_customer_id(customer.id)
   end
 
   def role_for_store?(role, store)

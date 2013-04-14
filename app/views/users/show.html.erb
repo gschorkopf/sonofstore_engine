@@ -12,11 +12,11 @@
       <h1>Edit Account Information</h1>
       <hr>
       <%= simple_form_for @user do |f| %>
-          <%= f.input :full_name, input_html: { placeholder: t('placeholder.user.fullname') } %>
-          <%= f.input :email, input_html: { placeholder: t('placeholder.user.email') } %>
-          <%= f.input :display_name, input_html: { placeholder: t('placeholder.user.displayname') } %>
-          <%= f.input :password %>
-          <%= f.input :password_confirmation %>
+          <%#= f.input :full_name, input_html: { placeholder: t('placeholder.user.fullname') } %>
+          <%#= f.input :email, input_html: { placeholder: t('placeholder.user.email') } %>
+          <%#= f.input :display_name, input_html: { placeholder: t('placeholder.user.displayname') } %>
+          <%#= f.input :password %>
+          <%#= f.input :password_confirmation %>
           <%= f.hidden_field :admin, value: false %>
           <%= f.submit t('account.update'), class: 'btn btn-custom-lighten' %>
       <% end %>
@@ -24,24 +24,24 @@
 
     <div id="edit_shipping">
       <h3>Shipping Address:</h3>
-      <% if @user.shipping_address != nil %>
+      <% if @user.customer.shipping_address != nil %>
 
       <table class="shipping">
         <tr>
           <th> Street Address: </th>
-          <td><%= @user.shipping_address.street_address %></td><br/>
+          <td><%= @user.customer.shipping_address.street_address %></td><br/>
         </tr>
         <tr>
           <th> City: </th>
-          <td><%= @user.shipping_address.city %></td><br/>
+          <td><%= @user.customer.shipping_address.city %></td><br/>
         </tr>
         <tr>
           <th> Zipcode: </th>
-          <td><%= @user.shipping_address.zip %></td><br/>
+          <td><%= @user.customer.shipping_address.zip %></td><br/>
         </tr>
         <tr>
           <th> State: </th>
-          <td><%= @user.shipping_address.state %></td><br/>
+          <td><%= @user.customer.shipping_address.state %></td><br/>
         </tr>
       </table>
 
@@ -53,24 +53,24 @@
     </div>
 
     <h3>Billing Address:</h3>
-  <% if @user.billing_address != nil %>
+  <% if @user.customer.billing_address != nil %>
 
   <table class="shipping">
     <tr>
       <th>Street Address: </th>
-      <td><%= @user.billing_address.street_address %></td><br/>
+      <td><%= @user.customer.billing_address.street_address %></td><br/>
     </tr>
     <tr>
       <th>City: </th>
-      <td><%= @user.billing_address.city %></td><br/>
+      <td><%= @user.customer.billing_address.city %></td><br/>
     </tr>
     <tr>
       <th>Zipcode: </th>
-      <td><%= @user.billing_address.zip %></td><br/>
+      <td><%= @user.customer.billing_address.zip %></td><br/>
     </tr>
     <tr>
       <th>State: </th>
-      <td><%= @user.billing_address.state %></td><br/>
+      <td><%= @user.customer.billing_address.state %></td><br/>
     </tr>
   </table>
     <%= button_to "Edit", edit_user_billing_addresses_path(current_user), method: :get %>
@@ -81,24 +81,24 @@
 
     <div>
       <h3>Credit Card Information:</h3>
-    <% if @user.credit_card != nil %>
+    <% if @user.customer.credit_card != nil %>
 
     <table class="shipping">
       <tr>
         <th>Credit Card Number: </th>
-        <td><%= @user.credit_card.number %></td><br/>
+        <td><%= @user.customer.credit_card.number %></td><br/>
       </tr>
       <tr>
         <th>Security Code: </th>
-        <td><%= @user.credit_card.security_code %></td><br/>
+        <td><%= @user.customer.redit_card.security_code %></td><br/>
       </tr>
       <tr>
         <th>Expiration Month: </th>
-        <td><%= @user.credit_card.expiration_month %></td><br/>
+        <td><%= @user.customer.credit_card.expiration_month %></td><br/>
       </tr>
       <tr>
         <th>Expiration Year: </th>
-        <td><%= @user.credit_card.expiration_year %></td><br/>
+        <td><%= @user.customer.credit_card.expiration_year %></td><br/>
       </tr>
     </table>
       <%= button_to "Edit", edit_user_credit_cards_path(current_user), method: :get %>

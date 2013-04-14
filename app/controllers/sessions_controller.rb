@@ -4,7 +4,9 @@ class SessionsController < ApplicationController
 
   def create
     session_params = params[:sessions]
-    user = login(session_params[:email],
+    customer_id = Customer.find_by_email(session_params[:email]).id
+
+    user = login(customer_id,
                  session_params[:password],
                  session_params[:remember_me]
                  )
