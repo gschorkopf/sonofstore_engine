@@ -9,6 +9,7 @@ class Admin::StoresController < ApplicationController
 
   def show
     @store = Store.find_by_path(params[:store_path])
+    @store_users = @store.users
   end
 
   def edit

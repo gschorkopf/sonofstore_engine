@@ -22,4 +22,14 @@ class Admin::UsersController < ApplicationController
       redirect_to store_admin_path(@store), notice: "This person is not currently registered with Pink SoSE.  A welcome email has been sent on your behalf."
     end
   end
+
+  def destroy
+    @store = current_store
+    @user = User.find(params[:id])
+
+    ur = UserRole.find_by_user_id_and_store_id(@user, @store)
+    ur.destroy
+    Mailer.remove_admin_from_store(@user, @store).deliver
+    redirect_to store_admin_path(@store), notice: "Admin privileges for #{@user} have been removed."
+  end
 end
