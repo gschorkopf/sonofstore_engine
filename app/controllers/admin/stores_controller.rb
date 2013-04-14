@@ -33,7 +33,7 @@ class Admin::StoresController < ApplicationController
     store.active = true if store.approved?
     store.save
 
-    Mailer.store_decision_confirmation(store).deliver
+    # Mailer.store_decision_confirmation(store).deliver
     # Resque.enqueue(StoreDecisionMailer, store.id)
 
     redirect_to admin_stores_path,
