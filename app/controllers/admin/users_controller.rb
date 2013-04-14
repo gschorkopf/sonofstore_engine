@@ -6,7 +6,4 @@ class Admin::UsersController < ApplicationController
     @store = current_store
   end
 
-  def edit
-    
-  end
 end

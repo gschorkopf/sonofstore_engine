@@ -1,13 +1,12 @@
 <div class="user-index">
   <%= render partial: 'user_navigation', :locals => { active: :stores } %>
-  <p id="notice"><%= notice %></p>
 
   <div class="span8">
     <h3>Hi <%= @user %>!</h3>
 
     <h4>Edit information for <%= @store %>:</h4>
 
-    <%= simple_form_for [:admin, @store] do |f| %>
+    <%= simple_form_for [:admin, @store], html: {multipart: true} do |f| %>
     <%= f.error_notification %>
 
     <div class="form-inputs">
