@@ -12,7 +12,7 @@ class CreditCardsController < ApplicationController
       if session[:return_to] == profile_url(current_user)
         redirect_to profile_path(current_user)
       else
-        redirect_to new_user_order_path(current_user)
+        redirect_to new_customer_order_path(current_user)
       end
     else
       render "new"
@@ -20,11 +20,11 @@ class CreditCardsController < ApplicationController
   end
 
   def edit
-    @credit_card = CreditCard.find_by_user_id(params[:user_id])
+    @credit_card = CreditCard.find_by_customer_id(params[:customer_id])
   end
 
   def update
-    @credit_card = CreditCard.find_by_user_id(params[:user_id])
+    @credit_card = CreditCard.find_by_customer_id(params[:customer_id])
     if @credit_card.update_attributes(params[:credit_card])
       redirect_to profile_path,
         :notice  => "Successfully updated credit card information."

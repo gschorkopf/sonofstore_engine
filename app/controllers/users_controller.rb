@@ -32,8 +32,9 @@ class UsersController < ApplicationController
   def show
     if current_user.present?
       @user = User.find(current_user.id)
-      @orders =[]# @user.orders
-      @stores = []#@user.stores
+      @orders = @user.customer.orders
+      @stores = @user.stores
+      @customer = @user.customer
     else
       redirect_to login_path, alert: 'Please log in!'
     end

@@ -12,13 +12,15 @@
       <h1>Edit Account Information</h1>
       <hr>
       <%= simple_form_for @user do |f| %>
-          <%#= f.input :full_name, input_html: { placeholder: t('placeholder.user.fullname') } %>
-          <%#= f.input :email, input_html: { placeholder: t('placeholder.user.email') } %>
-          <%#= f.input :display_name, input_html: { placeholder: t('placeholder.user.displayname') } %>
-          <%#= f.input :password %>
-          <%#= f.input :password_confirmation %>
+          <%= f.input :display_name, input_html: { placeholder: t('placeholder.user.displayname') } %>
+          <%= f.input :password %>
+          <%= f.input :password_confirmation %>
           <%= f.hidden_field :admin, value: false %>
           <%= f.submit t('account.update'), class: 'btn btn-custom-lighten' %>
+      <% end %>
+      <%= simple_form_for @customer do |f| %>
+          <%= f.input :full_name, input_html: { placeholder: t('placeholder.user.fullname') } %>
+          <%= f.input :email, input_html: { placeholder: t('placeholder.user.email') } %>
       <% end %>
     </div>
 
@@ -45,10 +47,10 @@
         </tr>
       </table>
 
-        <%= button_to "Edit", edit_user_shipping_addresses_path(current_user), method: :get %>
+        <%= button_to "Edit", edit_customer_shipping_addresses_path(current_user), method: :get %>
       <% else %>
         No address currently on file.<br/><br/>
-        <%= button_to "Add Shipping Address", new_user_shipping_addresses_path(current_user), method: :get %>
+        <%= button_to "Add Shipping Address", new_customer_shipping_addresses_path(current_user), method: :get %>
       <% end %>
     </div>
 
@@ -73,10 +75,10 @@
       <td><%= @user.customer.billing_address.state %></td><br/>
     </tr>
   </table>
-    <%= button_to "Edit", edit_user_billing_addresses_path(current_user), method: :get %>
+    <%= button_to "Edit", edit_customer_billing_addresses_path(current_user), method: :get %>
   <% else %>
     No address currently on file.<br/><br/>
-    <%= button_to "Add Billing Address", new_user_billing_addresses_path(current_user), method: :get %>
+    <%= button_to "Add Billing Address", new_customer_billing_addresses_path(current_user), method: :get %>
   <% end %>
 
     <div>
@@ -101,10 +103,10 @@
         <td><%= @user.customer.credit_card.expiration_year %></td><br/>
       </tr>
     </table>
-      <%= button_to "Edit", edit_user_credit_cards_path(current_user), method: :get %>
+      <%= button_to "Edit", edit_customer_credit_cards_path(current_user), method: :get %>
     <% else %>
       No credit card currently on file.<br/><br/>
-      <%= button_to "Add Credit Card", new_user_credit_cards_path(current_user), method: :get %>
+      <%= button_to "Add Credit Card", new_customer_credit_cards_path(current_user), method: :get %>
     <% end %>
     </div>
   </div>

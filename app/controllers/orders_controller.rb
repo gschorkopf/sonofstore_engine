@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.create(status: 'pending', user_id: current_user.id)
+    @order = Order.create(status: 'pending', customer_id: current_user.customer_id)
 
     session[:cart].each do |product_id, quantity|
       product = Product.find(product_id)
@@ -50,7 +50,7 @@ class OrdersController < ApplicationController
 
       Mailer.order_confirmation(current_user, @order).deliver
       # Resque.enqueue(OrderMailer, current_user.id, @order.id)
-      
+
       redirect_to account_order_path(@order),
         :notice => "Order submitted!"
     else

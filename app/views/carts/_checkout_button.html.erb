@@ -1,7 +1,7 @@
 
 <%if false %>
 <% if current_user %>
-  <%= form_tag user_orders_path(current_user) do %>
+  <%= form_tag customer_orders_path(current_user) do %>
     <script src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button"
             data-key="pk_test_osSOH0LyEEACshdRsLjyvGSz"
             data-image="/assets/marcy_stripe.png"
@@ -17,10 +17,10 @@
   <%= button_to "Checkout", guest_checkout_path, class: 'btn btn-custom-lighten', method: :get %>
 <%end%>
 
-<% if current_user && current_user.shipping_address && current_user.billing_address && current_user.credit_card %>
-  <%= button_to ("checkout"), new_user_order_path(current_user), class: 'btn btn-custom-lighten', method: :get %>
+<% if current_user && current_user.customer.shipping_address && current_user.customer.billing_address && current_user.customer.credit_card %>
+  <%= button_to ("checkout"), new_customer_order_path(current_user), class: 'btn btn-custom-lighten', method: :get %>
 <% elsif current_user %>
-  <%= button_to t("checkout"), new_user_shipping_addresses_path(current_user), class: 'btn btn-custom-lighten', method: :get %>
+  <%= button_to t("checkout"), new_customer_shipping_addresses_path(current_user), class: 'btn btn-custom-lighten', method: :get %>
 <% else %>
   <%= button_to "Checkout", login_path, class: 'btn btn-custom-lighten', method: :get %>
 <% end %>

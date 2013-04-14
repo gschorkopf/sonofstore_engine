@@ -2,6 +2,7 @@ StoreEngine::Application.routes.draw do
   root to: 'stores#index'
   get "/stores" => redirect('/')
 
+  get "/user" => "users#show"
   get "/code" => redirect("http://github.com/gschorkopf/sonofstore_engine")
   get "/logout" => "sessions#destroy", :as => "logout"
   get "/login" => "sessions#new", :as => "login"
@@ -29,11 +30,12 @@ StoreEngine::Application.routes.draw do
     resources :categories, only: [ :index, :show ]
   end
 
-  resources :users, only: [ :new, :create, :update ] do
+  resources :customers, only: [ :new, :create, :update, :show ] do
     resources :orders, except: [ :show ]
     resource :shipping_addresses, except: [ :index ]
     resource :billing_addresses, except: [ :index ]
     resource :credit_cards, except: [ :index ]
+    resource :user, only: [:new, :create, :update, :show]
   end
 
   namespace :admin do
@@ -44,7 +46,7 @@ StoreEngine::Application.routes.draw do
     resources :categories, except: [ :index, :show ]
 
     resources :orders, only: [ :show, :update ]
-    
+
     resources :order_items, only: [ :update, :destroy]
 
     resources :products do

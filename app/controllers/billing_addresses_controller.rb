@@ -12,7 +12,7 @@ class BillingAddressesController < ApplicationController
       if session[:return_to] == profile_url(current_user)
         redirect_to profile_path(current_user)
       else
-        redirect_to new_user_credit_cards_path(current_user)
+        redirect_to new_customer_credit_cards_path(current_user)
       end
     else
       render "new"
@@ -20,11 +20,11 @@ class BillingAddressesController < ApplicationController
   end
 
   def edit
-    @billing_address = BillingAddress.find_by_user_id(current_user.id)
+    @billing_address = BillingAddress.find_by_customer_id(current_user.customer.id)
   end
 
   def update
-    @billing_address = BillingAddress.find_by_user_id(current_user.id)
+    @billing_address = BillingAddress.find_by_customer_id(current_user.customer.id)
 
     if @billing_address.update_attributes(params[:billing_address])
       redirect_to profile_path,

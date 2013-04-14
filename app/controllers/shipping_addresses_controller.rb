@@ -12,7 +12,7 @@ class ShippingAddressesController < ApplicationController
       if session[:return_to] == profile_url(current_user)
         redirect_to profile_path(current_user)
       else
-        redirect_to new_user_billing_addresses_path(current_user)
+        redirect_to new_customer_billing_addresses_path(current_user)
       end
     else
       render "new"
@@ -20,7 +20,7 @@ class ShippingAddressesController < ApplicationController
   end
 
   def edit
-    @shipping_address = ShippingAddress.find_by_user_id(params[:user_id])
+    @shipping_address = ShippingAddress.find_by_customer_id(params[:customer_id])
     # @shipping_address = current_user.create_shipping_address street_address: "something",
     #   city: "city", state: "state", zip: "zip"
 
@@ -28,7 +28,7 @@ class ShippingAddressesController < ApplicationController
   end
 
   def update
-    @shipping_address = ShippingAddress.find_by_user_id(params[:user_id])
+    @shipping_address = ShippingAddress.find_by_customer_id(params[:customer_id])
     if @shipping_address.update_attributes(params[:shipping_address])
       redirect_to profile_path,
         :notice  => "Successfully updated shipping address."
