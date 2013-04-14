@@ -11,6 +11,7 @@ StoreEngine::Application.routes.draw do
   put "/i18n" => "i18n#update"
   get "/profile" => "users#show"
   get "/account" => redirect("/profile")
+  get "/guest-checkout" => "customers#new", :as => "guest_checkout"
 
   resource :cart, only: [ :update, :show, :destroy ] do
     member do

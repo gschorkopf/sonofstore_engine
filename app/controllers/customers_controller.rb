@@ -1,11 +1,17 @@
 class CustomersController < ApplicationController
 
   def create
+    @customer = Customer.new(params[:customer])
 
+    if @customer.save
+      redirect_to new_customer_shipping_addresses_path
+    else
+      YOU FUCKED UP!
+    end
   end
 
   def new
-
+    @customer = Customer.new
   end
 
   def update
