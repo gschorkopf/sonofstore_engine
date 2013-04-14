@@ -25,10 +25,4 @@ class StoresController < ApplicationController
       render action: "new"
     end
   end
-
-  # def destroy
-  #   @store = Store.find(params[:id])
-  #   @store.destroy
-  #   redirect_to admin_stores_path, :notice => 'Store successfully deleted'
-  # end
 end

@@ -31,6 +31,8 @@ StoreEngine::Application.routes.draw do
     namespace :admin do
       get '/' => "stores#show"
       resources :users
+      get '/edit' => "stores#edit"
+      put '/' => "stores#update"
       resources :products do
         member do
           post :toggle_status
@@ -58,7 +60,7 @@ StoreEngine::Application.routes.draw do
     
     resources :order_items, only: [ :update, :destroy]
 
-    resources :stores, except: [:new] do
+    resources :stores, except: [:update, :new] do
       member do
         put :choose_approval_status, :as => "choose_approval_status_on"
         put :toggle_active

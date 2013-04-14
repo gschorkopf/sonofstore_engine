@@ -2,25 +2,31 @@
   <%= render partial: 'user_navigation', :locals => { active: :stores } %>
 
   <div class="span8">
-    <p id="notice"><%= notice %></p>
-
+    <div class="pull-right">
+      <%= button_to "Add New Store Admin", new_store_admin_user_path, method: :get, class: 'btn btn-custom-lighten' %>
+    </div>
+    <h3>Store Details:</h3>
     <p>
       <b>Name:</b>
-      <%= @store.name %>
+      <%= @store %>
     </p>
 
     <p>
-      <b>Path:</b>
+      <b>URL ID:</b>
       <%= @store.path %>
     </p>
 
     <p>
       <b>Description:</b>
       <%= @store.description %>
-    </p>
+    </p><br/>
 
+    <h4>Store Admins:</h4>
+    <% @store.users.each do |user| %>
+      <p><%= user %></p>
+    <% end %><br/>
 
-    <%= link_to 'Edit', root_path %> |
+    <%= link_to 'Edit', store_admin_edit_path(@store) %> |
     <%= link_to 'Back', root_path %>
   </div>
 </div>

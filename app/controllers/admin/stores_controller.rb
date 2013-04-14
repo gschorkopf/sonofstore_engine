@@ -1,6 +1,6 @@
 class Admin::StoresController < ApplicationController
   before_filter :require_platform_admin, except: [:update, :show, :edit]
-  before_filter :require_admin, only: [:update, :show, :edit]
+  before_filter :require_admin, only: [:show, :edit]
 
   def index
     @pending_stores = Store.order('name ASC').where(approval_status: 'pending')
@@ -48,5 +48,11 @@ class Admin::StoresController < ApplicationController
     else
       head 400
     end
+  end
+
+  def destroy
+    @store = Store.find(params[:id])
+    @store.destroy
+    redirect_to admin_stores_path, :notice => 'Store successfully deleted'
   end
 end

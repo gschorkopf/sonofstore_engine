@@ -6,8 +6,8 @@ class Store < ActiveRecord::Base
   has_many :user_roles
   has_many :users, through: :user_roles
 
-  validate :unique_name_among_approved_stores, only: [:create]
-  validate :unique_path_among_approved_stores, only: [:create]
+  # validate :unique_name_among_approved_stores, only: [:create]
+  # validate :unique_path_among_approved_stores, only: [:create]
 
   validates :name, :presence => true
   validates :path, :presence => true
