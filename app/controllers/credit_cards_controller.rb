@@ -7,8 +7,13 @@ class CreditCardsController < ApplicationController
 
   def create
     @credit_card = CreditCard.new(params[:credit_card])
-    @credit_card.customer_id = params[:customer_id].to_i
-    @customer = Customer.find_by_id(params[:customer_id])
+    if current_user
+      # @customer = Customer.find_by_id(params[:credit_card][:customer_id])
+      @customer = Customer.find_by_id(params[:customer_id])
+    else
+      @customer = Customer.find_by_id(params[:customer_id])
+    end
+    @credit_card.customer_id = @customer.id
 # fail
     if @credit_card.save
       if session[:return_to] == profile_url(current_user)

@@ -1,11 +1,11 @@
 <% if current_user %>
-  <%= simple_form_for [current_user.customer, @credit_card], url: customer_credit_cards_path, html: {multipart: true} do |f| %>
+  <%= simple_form_for [ @customer, @credit_card], url: customer_credit_cards_path, html: {multipart: true} do |f| %>
 
     <%= f.input :number, input_html: { placeholder: '' } %>
     <%= f.input :expiration_month, input_html: { placeholder: '' } %>
     <%= f.input :expiration_year, input_html: { placeholder: '' } %>
     <%= f.input :security_code, input_html: { placeholder: '' } %>
-    <%= f.hidden_field :customer_id, value: current_user.customer_id %>
+    <%= f.hidden_field :customer_id, value: @customer_id %>
 
     <%= f.button :submit, t('submit'), class:'btn btn-custom-lighten' %>
   <% end %>

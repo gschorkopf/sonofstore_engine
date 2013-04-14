@@ -2,7 +2,6 @@ class CustomersController < ApplicationController
 
   def create
     @customer = Customer.new(email: params[:customer][:email], full_name: params[:customer][:full_name])
-
     if @customer.save
       if params[:customer][:users]
         display_name = params[:customer][:users][:display_name]
@@ -11,10 +10,11 @@ class CustomersController < ApplicationController
         @user = User.create(display_name: display_name, password: password, customer_id: @customer.id)
         auto_login(@user)
       end
-
-
-
-      redirect_to new_customer_shipping_addresses_path(@customer.id)
+      if current_user
+        redirect_to new_customer_shipping_addresses_path(@customer)
+      else
+        redirect_to new_customer_shipping_addresses_path(@customer.id)
+      end
     else
       YOU FUCKED UP!
     end

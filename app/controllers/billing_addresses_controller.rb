@@ -7,9 +7,14 @@ class BillingAddressesController < ApplicationController
 
   def create
     @billing_address = BillingAddress.new(params[:billing_address])
-    @billing_address.customer_id = params[:customer_id].to_i
+    if current_user
+      # @customer = Customer.find_by_id(params[:billing_address][:customer_id])
+      @customer = Customer.find_by_id(params[:customer_id])
+    else
+      @customer = Customer.find_by_id(params[:customer_id])
+    end
+    @billing_address.customer_id = @customer.id
 
-    @customer = Customer.find_by_id(params[:customer_id])
 
     if @billing_address.save
       if session[:return_to] == profile_url(current_user)

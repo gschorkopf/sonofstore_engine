@@ -3,13 +3,18 @@ class ShippingAddressesController < ApplicationController
 
   def new
     @shipping_address = ShippingAddress.new
+    @customer = Customer.find_by_id(params[:customer_id])
   end
 
   def create
     @shipping_address = ShippingAddress.new(params[:shipping_address])
-    @shipping_address.customer_id = params[:customer_id].to_i
-
-    @customer = Customer.find_by_id(params[:customer_id])
+    if current_user
+      # @customer = Customer.find_by_id(params[:shipping_address][:customer_id])
+      @customer = Customer.find_by_id(params[:customer_id])
+    else
+      @customer = Customer.find_by_id(params[:customer_id])
+    end
+    @shipping_address.customer_id = @customer.id
 
     if @shipping_address.save
       if session[:return_to] == profile_url(current_user)
