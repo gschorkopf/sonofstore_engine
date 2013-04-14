@@ -12,6 +12,8 @@ StoreEngine::Application.routes.draw do
   get "/profile" => "users#show"
   get "/account" => redirect("/profile")
   get "/guest-checkout" => "customers#new", :as => "guest_checkout"
+  get "/confirmation-page/:id" => "orders#confirm", :as => "order_confirmation"
+  get "/order_details/:uuid_hash" => "orders#display", :as => "obscure_link"
 
   resource :cart, only: [ :update, :show, :destroy ] do
     member do
@@ -32,7 +34,7 @@ StoreEngine::Application.routes.draw do
   end
 
   resources :customers, only: [ :new, :create, :update, :show ] do
-    resources :orders, except: [ :show ]
+    resources :orders
     resource :shipping_addresses, except: [ :index ]
     resource :billing_addresses, except: [ :index ]
     resource :credit_cards, except: [ :index ]

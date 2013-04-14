@@ -1,5 +1,5 @@
 class CreditCardsController < ApplicationController
-  before_filter :require_login
+  # before_filter :require_login
 
   def new
     @credit_card = CreditCard.new
@@ -7,12 +7,16 @@ class CreditCardsController < ApplicationController
 
   def create
     @credit_card = CreditCard.new(params[:credit_card])
-
+    @credit_card.customer_id = params[:customer_id].to_i
+    @customer = Customer.find_by_id(params[:customer_id])
+# fail
     if @credit_card.save
       if session[:return_to] == profile_url(current_user)
         redirect_to profile_path(current_user)
       else
-        redirect_to new_customer_order_path(current_user)
+        @customer.credit_card_id = @credit_card.id
+        @customer.save
+        redirect_to new_customer_order_path(@customer.id)
       end
     else
       render "new"

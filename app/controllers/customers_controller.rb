@@ -4,7 +4,7 @@ class CustomersController < ApplicationController
     @customer = Customer.new(params[:customer])
 
     if @customer.save
-      redirect_to new_customer_shipping_addresses_path
+      redirect_to new_customer_shipping_addresses_path(@customer.id)
     else
       YOU FUCKED UP!
     end

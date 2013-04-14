@@ -1,12 +1,24 @@
-<%= simple_form_for [ current_user.customer, @shipping_address ], url: customer_shipping_addresses_path, html: {multipart: true} do |f| %>
-  <%= f.input :street_address, input_html: { placeholder: '123 Main Street Apt #1' } %>
-  <%= f.input :city, input_html: { placeholder: 'Denver' } %>
-  <%= f.input :zip, input_html: { placeholder: '80203' } %>
-  <%= f.input :state, input_html: { placeholder: 'Colorado' } %>
-  <%= f.hidden_field :customer_id, value: current_user.customer_id %>
-  <%#= f.collection_select :state, STATE_ABBREVIATIONS %>
+<% if current_user %>
+  <%= simple_form_for [ current_user.customer, @shipping_address ], url: customer_shipping_addresses_path, html: {multipart: true} do |f| %>
+    <%= f.input :street_address, input_html: { placeholder: '123 Main Street Apt #1' } %>
+    <%= f.input :city, input_html: { placeholder: 'Denver' } %>
+    <%= f.input :zip, input_html: { placeholder: '80203' } %>
+    <%= f.input :state, input_html: { placeholder: 'Colorado' } %>
+    <%= f.hidden_field :customer_id, value: current_user.customer_id %>
+    <%#= f.collection_select :state, STATE_ABBREVIATIONS %>
 
-  <%= f.button :submit, t('submit'), class:'btn btn-custom-lighten' %>
+    <%= f.button :submit, t('submit'), class:'btn btn-custom-lighten' %>
+  <% end %>
+<% else %>
+  <%= simple_form_for [ @customer, @shipping_address ], url: customer_shipping_addresses_path, html: {multipart: true} do |f| %>
+    <%= f.input :street_address, input_html: { placeholder: '123 Main Street Apt #1' } %>
+    <%= f.input :city, input_html: { placeholder: 'Denver' } %>
+    <%= f.input :zip, input_html: { placeholder: '80203' } %>
+    <%= f.input :state, input_html: { placeholder: 'Colorado' } %>
+    <%= f.hidden_field :customer_id, value: @customer_id %>
+    <%#= f.collection_select :state, STATE_ABBREVIATIONS %>
+
+    <%= f.button :submit, t('submit'), class:'btn btn-custom-lighten' %>
+    <% end %>
 <% end %>
-
 

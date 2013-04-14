@@ -3,24 +3,24 @@ class Mailer < ActionMailer::Base
 
   def welcome_email(user)
     @user = user
-    mail(to: user.customer.email, subject: "Welcome to Frank's Monsterporium!")
+    mail(to: customer.email, subject: "Welcome to Frank's Monsterporium!")
   end
 
-  def order_confirmation(user, order)
-    @user = user
+  def order_confirmation(customer_id, order)
+    @customer = Customer.find_by_id(customer_id)
     @order = order
-    mail(to: user.customer.email, subject: "Thanks for your purchase!")
+    mail(to: @customer.email, subject: "Thanks for your purchase!")
   end
 
   def store_creation_confirmation(user, store)
     @user = user
     @store = store
-    mail(to: user.customer.email, subject: "Your store #{store} has been created and pending approval")
+    mail(to: customer.email, subject: "Your store #{store} has been created and pending approval")
   end
 
   def store_decision_confirmation(store)
     @store = store
     @user = @store.users.first
-    mail(to: @user.customer.email, subject: "Your store #{@store} has been #{@store.approval_status}")
+    mail(to: customer.email, subject: "Your store #{@store} has been #{@store.approval_status}")
   end
 end

@@ -9,7 +9,7 @@
 
   <%= link_to t('account.create'), signup_path %>
 
-  <% render :partial "/guest checkout" %>
+  <%= render partial: "carts/guest_checkout" %>
   <%# if current_cart.cart_items.count != 0 %>
   <%# link_to "Checkout as guest", new_guest_path or something %>
   <%# end %>

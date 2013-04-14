@@ -1,14 +1,6 @@
-Dear <%= @customer.full_name.titleize %>,
+Thanks so much for your purchase
 <br>
 <br>
-Thanks so much for your purchase of:
-<br>
-<% @order.order_items.each do |order_item| %>
-<%= order_item.quantity %>x <%= order_item.title %>
-<br>
-<% end %>
-
-<%= @order.inspect %>
 You can view your order details <%= link_to "Here", obscure_link_path(@order.uuid_hash) %>
 <br>
 We've processed your payment for <%= number_to_currency(@order.total) %>.
