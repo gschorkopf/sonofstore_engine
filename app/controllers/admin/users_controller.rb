@@ -2,6 +2,7 @@ class Admin::UsersController < ApplicationController
   before_filter :require_admin
 
   def new
+    fail
     @store = current_store
     @user = User.new
   end

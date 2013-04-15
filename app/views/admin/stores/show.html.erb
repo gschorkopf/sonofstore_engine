@@ -4,7 +4,10 @@
   <div class="span8">
 
     <div class="pull-right">
-      <%= button_to "Add New Store Admin", new_store_admin_user_path, method: :get, class: 'btn btn-custom-lighten' %>
+      <%= button_to "Add New Store Admin", new_store_admin_user_path, 
+      class: 'btn btn-custom-lighten', method: :get %>
+      <%= button_to "Add New Stocker", new_store_admin_user_path, 
+      class: 'btn btn-custom-lighten', method: :get %>
     </div>
     
     <div class="store_details">
@@ -23,7 +26,7 @@
         <b>Description:</b>
         <%= @store.description %>
       </p>
-      <%= link_to 'Edit', store_admin_edit_path(@store) %>
+      <%= button_to 'Edit Store Details', store_admin_edit_path(@store), method: :get %>
     </div>
 
     <div class="store_admins">
