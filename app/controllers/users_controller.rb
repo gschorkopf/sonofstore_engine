@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def new
     @user = User.new
-  end
+   end
 
   def create
     @user = User.new(params[:user])
@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
       Mailer.welcome_email(@user).deliver
       # Resque.enqueue(IntroMailer, @user.id)
-      
+
       auto_login(@user)
       #redirect_to root_url, :notice => "Welcome, #{@user.full_name}"
       redirect_to session[:return_to] || root_path, notice: 'Logged in!'
@@ -32,7 +32,9 @@ class UsersController < ApplicationController
   def show
     if current_user.present?
       @user = User.find(current_user.id)
-      @orders = @user.orders
+
+      @customer = @user.customer
+      @orders = @user.customer.orders
       @pending_stores = @user.stores.order('name ASC').where(approval_status: 'pending')
       @approved_stores = @user.stores.order('name ASC').where(approval_status: 'approved')
       @disapproved_stores = @user.stores.order('name ASC').where(approval_status: 'disapproved')

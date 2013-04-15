@@ -1,12 +1,24 @@
-<%= simple_form_for [current_user, @credit_card], url: user_credit_cards_path, html: {multipart: true} do |f| %>
+<% if current_user %>
+  <%= simple_form_for [ @customer, @credit_card], url: customer_credit_cards_path, html: {multipart: true} do |f| %>
 
-  <%= f.input :number, input_html: { placeholder: '' } %>
-  <%= f.input :expiration_month, input_html: { placeholder: '' } %>
-  <%= f.input :expiration_year, input_html: { placeholder: '' } %>
-  <%= f.input :security_code, input_html: { placeholder: '' } %>
-  <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.input :number, input_html: { placeholder: '' } %>
+    <%= f.input :expiration_month, input_html: { placeholder: '' } %>
+    <%= f.input :expiration_year, input_html: { placeholder: '' } %>
+    <%= f.input :security_code, input_html: { placeholder: '' } %>
+    <%= f.hidden_field :customer_id, value: @customer_id %>
 
-  <%= f.button :submit, t('submit'), class:'btn btn-custom-lighten' %>
+    <%= f.button :submit, t('submit'), class:'btn btn-custom-lighten' %>
+  <% end %>
+<% else %>
+  <%= simple_form_for [@customer, @credit_card], url: customer_credit_cards_path, html: {multipart: true} do |f| %>
+
+    <%= f.input :number, input_html: { placeholder: '' } %>
+    <%= f.input :expiration_month, input_html: { placeholder: '' } %>
+    <%= f.input :expiration_year, input_html: { placeholder: '' } %>
+    <%= f.input :security_code, input_html: { placeholder: '' } %>
+    <%= f.hidden_field :customer_id, value: @customer_id %>
+
+    <%= f.button :submit, t('submit'), class:'btn btn-custom-lighten' %>
+  <% end %>
 <% end %>
-
 <%# button_to t("checkout"), user_orders_path(current_user), method: :post %>

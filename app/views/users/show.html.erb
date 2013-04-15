@@ -16,50 +16,102 @@
       <h1>Edit Account Information</h1>
       <hr>
       <%= simple_form_for @user do |f| %>
-          <%= f.input :full_name, input_html: { placeholder: t('placeholder.user.fullname') } %>
-          <%= f.input :email, input_html: { placeholder: t('placeholder.user.email') } %>
           <%= f.input :display_name, input_html: { placeholder: t('placeholder.user.displayname') } %>
           <%= f.input :password %>
           <%= f.input :password_confirmation %>
           <%= f.hidden_field :admin, value: false %>
           <%= f.submit t('account.update'), class: 'btn btn-custom-lighten' %>
       <% end %>
+      <%= simple_form_for @customer do |f| %>
+          <%= f.input :full_name, input_html: { placeholder: t('placeholder.user.fullname') } %>
+          <%= f.input :email, input_html: { placeholder: t('placeholder.user.email') } %>
+      <% end %>
     </div>
 
-  <h3>Shipping Address:</h3>
-  <% if @user.shipping_address != nil %>
-    <%= @user.shipping_address.street_address %><br/>
-    <%= @user.shipping_address.city %><br/>
-    <%= @user.shipping_address.zip %><br/>
-    <%= @user.shipping_address.state %><br/>
-    <%= button_to "Edit", edit_user_shipping_addresses_path(current_user), method: :get %>
-  <% else %>
-    No address currently on file.<br/><br/>
-    <%= button_to "Add Shipping Address", new_user_shipping_addresses_path(current_user), method: :get %>
-  <% end %>
+    <div id="edit_shipping">
+      <h3>Shipping Address:</h3>
+      <% if @user.customer.shipping_address != nil %>
+
+      <table class="shipping">
+        <tr>
+          <th> Street Address: </th>
+          <td><%= @user.customer.shipping_address.street_address %></td><br/>
+        </tr>
+        <tr>
+          <th> City: </th>
+          <td><%= @user.customer.shipping_address.city %></td><br/>
+        </tr>
+        <tr>
+          <th> Zipcode: </th>
+          <td><%= @user.customer.shipping_address.zip %></td><br/>
+        </tr>
+        <tr>
+          <th> State: </th>
+          <td><%= @user.customer.shipping_address.state %></td><br/>
+        </tr>
+      </table>
+
+        <%= button_to "Edit", edit_customer_shipping_addresses_path(current_user), method: :get %>
+      <% else %>
+        No address currently on file.<br/><br/>
+        <%= button_to "Add Shipping Address", new_customer_shipping_addresses_path(current_user), method: :get %>
+      <% end %>
+    </div>
 
     <h3>Billing Address:</h3>
-  <% if @user.billing_address != nil %>
-    <%= @user.billing_address.street_address %><br/>
-    <%= @user.billing_address.city %><br/>
-    <%= @user.billing_address.zip %><br/>
-    <%= @user.billing_address.state %><br/>
-    <%= button_to "Edit", edit_user_billing_addresses_path(current_user), method: :get %>
+  <% if @user.customer.billing_address != nil %>
+
+  <table class="shipping">
+    <tr>
+      <th>Street Address: </th>
+      <td><%= @user.customer.billing_address.street_address %></td><br/>
+    </tr>
+    <tr>
+      <th>City: </th>
+      <td><%= @user.customer.billing_address.city %></td><br/>
+    </tr>
+    <tr>
+      <th>Zipcode: </th>
+      <td><%= @user.customer.billing_address.zip %></td><br/>
+    </tr>
+    <tr>
+      <th>State: </th>
+      <td><%= @user.customer.billing_address.state %></td><br/>
+    </tr>
+  </table>
+    <%= button_to "Edit", edit_customer_billing_addresses_path(current_user), method: :get %>
   <% else %>
     No address currently on file.<br/><br/>
-    <%= button_to "Add Billing Address", new_user_billing_addresses_path(current_user), method: :get %>
+    <%= button_to "Add Billing Address", new_customer_billing_addresses_path(current_user), method: :get %>
   <% end %>
 
-    <h3>Credit Card Information:</h3>
-  <% if @user.credit_card != nil %>
-    <%= @user.credit_card.number %><br/>
-    <%= @user.credit_card.security_code %><br/>
-    <%= @user.credit_card.expiration_month %><br/>
-    <%= @user.credit_card.expiration_year %><br/>
-    <%= button_to "Edit", edit_user_credit_cards_path(current_user), method: :get %>
-  <% else %>
-    No credit card currently on file.<br/><br/>
-    <%= button_to "Add Credit Card", new_user_credit_cards_path(current_user), method: :get %>
-  <% end %>
+    <div>
+      <h3>Credit Card Information:</h3>
+    <% if @user.customer.credit_card != nil %>
+
+    <table class="shipping">
+      <tr>
+        <th>Credit Card Number: </th>
+        <td><%= @user.customer.credit_card.number %></td><br/>
+      </tr>
+      <tr>
+        <th>Security Code: </th>
+        <td><%= @user.customer.credit_card.security_code %></td><br/>
+      </tr>
+      <tr>
+        <th>Expiration Month: </th>
+        <td><%= @user.customer.credit_card.expiration_month %></td><br/>
+      </tr>
+      <tr>
+        <th>Expiration Year: </th>
+        <td><%= @user.customer.credit_card.expiration_year %></td><br/>
+      </tr>
+    </table>
+      <%= button_to "Edit", edit_customer_credit_cards_path(current_user), method: :get %>
+    <% else %>
+      No credit card currently on file.<br/><br/>
+      <%= button_to "Add Credit Card", new_customer_credit_cards_path(current_user), method: :get %>
+    <% end %>
+    </div>
   </div>
 </div>

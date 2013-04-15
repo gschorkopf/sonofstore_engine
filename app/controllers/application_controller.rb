@@ -3,6 +3,20 @@ class ApplicationController < ActionController::Base
   helper_method :current_cart, :get_flag, :current_store
   before_filter :get_locale
 
+
+  ##########
+  #restricts the linking of payment specific info to checkout
+  #redirects the user to their homepage whenever they add or edit this information directly
+  ##########
+  before_filter :get_referrer, :except => [:create, :update, :destroy]
+
+  def get_referrer
+    session[:return_to] = request.referrer
+  end
+  #########
+
+
+
   def current_store
     @current_store ||= Store.find_by_path(params[:store_path])
   end

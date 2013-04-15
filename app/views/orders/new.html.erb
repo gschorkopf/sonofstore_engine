@@ -21,30 +21,30 @@
 
   <h4>Shipping information:</h4>
 <ul>
-  <li><%= @user.shipping_address.street_address %></li>
-  <li><%= @user.shipping_address.city %></li>
-  <li><%= @user.shipping_address.zip %></li>
-  <li><%= @user.shipping_address.state %></li>
+  <li><%= @customer.shipping_address.street_address %></li>
+  <li><%= @customer.shipping_address.city %></li>
+  <li><%= @customer.shipping_address.zip %></li>
+  <li><%= @customer.shipping_address.state %></li>
 </ul><br/>
 
 <h4>Billing information:</h4>
 <ul>
-  <li><%= @user.billing_address.street_address %></li>
-  <li><%= @user.billing_address.city %></li>
-  <li><%= @user.billing_address.zip %></li>
-  <li><%= @user.billing_address.state %></li>
+  <li><%= @customer.billing_address.street_address %></li>
+  <li><%= @customer.billing_address.city %></li>
+  <li><%= @customer.billing_address.zip %></li>
+  <li><%= @customer.billing_address.state %></li>
 </ul><br/>
 
 <h4>Credit card information:</h4>
 <ul>
-  <li><%= @user.credit_card.number %></li>
-  <li><%= @user.credit_card.expiration_month%></li>
-  <li><%= @user.credit_card.expiration_year%></li>
-  <li><%= @user.credit_card.security_code%></li>
+  <li><%= @customer.credit_card.number %></li>
+  <li><%= @customer.credit_card.expiration_month%></li>
+  <li><%= @customer.credit_card.expiration_year%></li>
+  <li><%= @customer.credit_card.security_code%></li>
 </ul><br/>
 
 <% if current_cart.empty? %>
   <h3>Nothing in your cart.  Go shopping!</h3>
 <% else %>
-  <%= button_to "Submit Order", user_orders_path(current_user), method: :post %>
+  <%= button_to "Submit Order", customer_orders_path(@customer), method: :post %>
 <% end %>

@@ -6,6 +6,7 @@
     <th>Description</th>
   </tr>
 
+
 <% @stores.each do |store| %>
   <tr>
     <td><%= link_to store.name, store_home_path(store) %></td>
