@@ -44,8 +44,12 @@ end
 
 
 1000.times do
-  cat_id = rand(1...90)
-  Product.create(title: Faker::Address.street_name.split[0], description: "#{Faker::Company.bs} " + "#{Faker::Company.bs}", price: rand(1...5000), status: 'active', store_id: rand(1...10), category_ids: [cat_id])
+  # cat_id = rand(1...90)
+  Product.create(title: Faker::Address.street_name.split[0], description: "#{Faker::Company.bs} " + "#{Faker::Company.bs}",
+    price: rand(1...5000),
+    status: 'active',
+    store_id: rand(1...10),
+    category_ids: [1])
 end
 
 #Product.create(title: "Schwinn 10 Speed", description: "This bike will really knock your socks off!  Not one, not two, but TEN SPEEDS!", price: 125.99, status: 'active', store_id: 3, category_ids: [5, 6])
