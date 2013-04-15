@@ -12,7 +12,7 @@ class Store < ActiveRecord::Base
   validates :name, :presence => true
   validates :path, :presence => true
   validates :description, :presence => true
-  
+
   def to_param
     path
   end
@@ -52,7 +52,7 @@ class Store < ActiveRecord::Base
   def approved?
     approval_status == 'approved'
   end
-  
+
   def to_s
     name
   end

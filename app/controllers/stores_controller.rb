@@ -1,5 +1,4 @@
 class StoresController < ApplicationController
-  
   def index
     @stores = Store.order('name ASC').where(approval_status: 'approved')
   end
@@ -16,7 +15,7 @@ class StoresController < ApplicationController
                       store_id: @store.id )
       ur.role = 'store_admin'
       ur.save
-
+      
       Mailer.store_creation_confirmation(current_user, @store).deliver
       # Resque.enqueue(StoreCreateMailer, current_user.id, @store.id)
       
