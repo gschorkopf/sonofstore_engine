@@ -42,12 +42,18 @@ end
   Category.create(title: Faker::Lorem.words[0], store_id: 10)
 end
 
-1000.times do
-  Product.create(title: Faker::Address.street_name.split[0], description: "#{Faker::Company.bs} " + "#{Faker::Company.bs}",
-    price: rand(1...5000),
-    status: 'active',
-    store_id: rand(1...10),
-    category_ids: [rand(1...90)])
+s_id = 1
+c_id = 1
+10.times do
+  100.times do
+    Product.create(title: Faker::Address.street_name.split[0], description: "#{Faker::Company.bs} " + "#{Faker::Company.bs}",
+      price: 5000,
+      status: 'active',
+      store_id: s_id,
+      category_ids: c_id)
+  end
+  s_id += 1
+  c_id += 10
 end
 
 customer1 = Customer.create(full_name: "Franklin Webber", email: "demoXX+franklin@jumpstartlab.com")
