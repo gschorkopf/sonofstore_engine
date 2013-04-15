@@ -44,11 +44,11 @@ end
 
 
 1000.times do
-  Product.create(title: Faker::Address.street_name.split[0], description: "#{Faker::Company.bs} " + "#{Faker::Company.bs}", price: rand(1..5000), status: 'active', store_id: rand(1..10), category_ids: rand(1..90))
+  Product.create(title: Faker::Address.street_name.split[0], description: "#{Faker::Company.bs} " + "#{Faker::Company.bs}", price: rand(1...5000), status: 'active', store_id: rand(1...10), category_ids: [rand(1...90)])
 end
 
-Product.create(title: "Schwinn 10 Speed", description: "This bike will really knock your socks off!  Not one, not two, but TEN SPEEDS!", price: 125.99, status: 'active', store_id: 3, category_ids: [5, 6])
-Product.create(title: "Hello Kitty Lunchbox", description: "I belong in Hello Kitty Hell", price: 10.78, status: "active", store_id: 1, category_ids: [1])
+#Product.create(title: "Schwinn 10 Speed", description: "This bike will really knock your socks off!  Not one, not two, but TEN SPEEDS!", price: 125.99, status: 'active', store_id: 3, category_ids: [5, 6])
+#Product.create(title: "Hello Kitty Lunchbox", description: "I belong in Hello Kitty Hell", price: 10.78, status: "active", store_id: 1, category_ids: [1])
 
 
 customer1 = Customer.create(full_name: "Franklin Webber", email: "demoXX+franklin@jumpstartlab.com")

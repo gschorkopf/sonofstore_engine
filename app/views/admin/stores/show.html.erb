@@ -1,1 +1,38 @@
-<%= link_to "Dashboard", admin_dashboard_path %>
+<div class="user-index">
+  <%= render partial: 'user_navigation', :locals => { active: :stores } %>
+
+  <div class="span8">
+
+    <div class="pull-right">
+      <%= button_to "Add New Store Admin", new_store_admin_user_path, 
+      class: 'btn btn-custom-lighten', method: :get %>
+      <%= button_to "Add New Stocker", new_store_admin_user_path, 
+      class: 'btn btn-custom-lighten', method: :get %>
+    </div>
+    
+    <div class="store_details">
+      <h3>Store Details:</h3>
+      <p>
+        <b>Name:</b>
+        <%= @store %>
+      </p>
+
+      <p>
+        <b>URL ID:</b>
+        <%= @store.path %>
+      </p>
+
+      <p>
+        <b>Description:</b>
+        <%= @store.description %>
+      </p>
+      <%= button_to 'Edit Store Details', store_admin_edit_path(@store), method: :get %>
+    </div>
+
+    <div class="store_admins">
+      <h3>Store Admins:</h3>
+      <%= render partial: 'store_admins', :locals => {users: @store_users, store: @store} %>
+    </div> 
+
+  </div>
+</div>

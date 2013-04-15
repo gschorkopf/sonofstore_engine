@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
 
 
   def current_store
-    @current_store ||= Store.find(params[:store_path])
+    @current_store ||= Store.find_by_path(params[:store_path])
   end
 
   def require_admin

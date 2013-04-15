@@ -5,13 +5,10 @@
       <%= link_to t('admin.dashboard'), admin_dashboard_path %>
     </li>
     <li class="<%= active == :products ? 'active' : '' %>">
-      <%= link_to t('product.collection'), admin_products_path %>
+      <%= link_to t('product.collection'), store_admin_products_path %>
     </li>
     <li class="<%= active == :categories ? 'active' : '' %>">
       <%= link_to t('categories.self'), admin_categories_path %>
-    </li>
-    <li class="<%= active == :search ? 'active' : '' %>">
-      <%= link_to t('navigation.search'), admin_search_path %>
     </li>
   </ul>
 </div>

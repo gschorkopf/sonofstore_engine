@@ -1,18 +1,30 @@
 class Admin::StoresController < ApplicationController
-  before_filter :require_platform_admin
+  before_filter :require_platform_admin, except: [:update, :show, :edit]
+  before_filter :require_admin, only: [:show, :edit]
 
   def index
     @pending_stores = Store.order('name ASC').where(approval_status: 'pending')
     @approved_stores = Store.order('name ASC').where(approval_status: 'approved')
   end
 
+  def show
+    @store = Store.find_by_path(params[:store_path])
+    @store_users = @store.users
+  end
+
+  def edit
+    @store = Store.find_by_path(params[:store_path])
+  end
+
   def update
-    @store = Store.find(params[:id])
+    @store = Store.find_by_path(params[:store_path])
+
     if @store.update_attributes(params[:store])
-      redirect_to admin_stores_path,
+      redirect_to store_admin_path(@store),
         :notice  => "Successfully updated store."
     else
-      render :action => 'edit', :notice  => "Update failed."
+      redirect_to store_admin_path(@store),
+        :alert  => "Store didn't update. Something went wrong."
     end
   end
 
@@ -37,5 +49,11 @@ class Admin::StoresController < ApplicationController
     else
       head 400
     end
+  end
+
+  def destroy
+    @store = Store.find(params[:id])
+    @store.destroy
+    redirect_to admin_stores_path, :notice => 'Store successfully deleted'
   end
 end

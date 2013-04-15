@@ -2,6 +2,10 @@
   <%= render partial: 'user_navigation', :locals => { active: :stores } %>
 
   <div class="span8">
+    <div class="pull-right">
+      <%= button_to "Create a New Store", new_store_path, class: 'btn btn-custom-lighten', method: :get %>
+    </div>
+    
     <div id="manage_stores">
       <h1>Manage Stores</h1>
       <hr>

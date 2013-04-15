@@ -7,7 +7,7 @@ describe 'the admin products view', type: :feature do
     fill_in 'sessions_email', with: 'logan@gmail.com'
     fill_in 'sessions_password', with: 'password'
     click_button 'Login'
-    visit admin_products_path
+    visit store_admin_products_path
   end
 
   it 'should have a title' do
@@ -39,15 +39,15 @@ describe 'the admin products view', type: :feature do
 
   it 'edits a product correctly' do
     product = FactoryGirl.create(:product)
-    visit edit_admin_product_path(product)
+    visit edit_store_admin_product_path(product)
     fill_in "Title", with: "whateveryouwant"
     click_button "Submit"
-    expect(current_path).to eq admin_products_path
+    expect(current_path).to eq store_admin_products_path
   end
 
   it 'edits a product with incorrect info' do
     product = FactoryGirl.create(:product)
-    visit edit_admin_product_path(product)
+    visit edit_store_admin_product_path(product)
     fill_in "Title", with: ""
     click_button "Submit"
     expect(page).to have_content("can't be blank")

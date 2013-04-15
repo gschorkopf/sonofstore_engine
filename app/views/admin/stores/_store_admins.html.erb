@@ -1,0 +1,23 @@
+<table class="table table-striped">
+  <thead>
+    <th>Name</th>
+    <th>Email</th>
+    <!-- <th>Role</th> -->
+    <th>Remove?</th>
+  </thead>
+
+  <tbody>
+  <% users.each do |user| %>
+    <tr>
+      <td><%= user %></td>
+      <td><%= user.email %></td>
+      <!-- <td><%#= user.role %></td> -->
+      <td><%= link_to 'Remove', store_admin_user_path(store, user), method: :delete, confirm: "Are you sure you want to remove #{user} as an admin?" %></td>
+    </tr>
+  <% end %>
+  </tbody>
+
+  <tfoot>
+  </tfoot>
+
+</table>

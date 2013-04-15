@@ -1,4 +1,4 @@
-<%= simple_form_for [:admin, @product], html: {multipart: true} do |f| %>
+<%= simple_form_for [@store, :admin, @product], html: {multipart: true} do |f| %>
   <% if @product.image.exists? %>
     <%= image_tag @product.image.url(:large) %><br/>
   <% end %>
@@ -12,5 +12,6 @@
   <% end %>
   <%= f.association :categories %>
   <%= f.input :status, as: :radio_buttons, collection: ['active', 'retired'] %>
+  <%= f.hidden_field :store_id, value: @store.id %>
   <%= f.button :submit, t('submit'), class:'btn btn-custom-lighten' %>
 <% end %>

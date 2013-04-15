@@ -1,30 +1,27 @@
-# StoreEngine
+# Mr. Pinks' Son of StoreEngine
+_a gSchool project by Erin Drummond, Daniel Mee, Laura Steadman, and Geoffrey Schorkopf_
 
-## Welcome to Frank's Monsterporium, a faux online store
+## Welcome to Mr. Pink's Son of StoreEngine, a multi-tenancy online store
 
-Frank's Monsterporium has the best selection, nay, the ONLY selection of Frank's awesome creations on the web.
-
-This project was created for the gSchool StoreEngine Project. The background for this project can be found at: http://tutorials.jumpstartlab.com/projects/store_engine.html
+The background requirements for this project can be found at: http://tutorials.jumpstartlab.com/projects/son_of_store_engine.html
 
 #####Extensions Completed for This Project:
-ALL (Put Items on Sale, Product Reviews, Search, Transaction Processor)
 
-#####Bonus Work on This Project:
-Four languages and locales supported!
+
 
 ### View the Live Site:
 
-http://franks-monsterporium.herokuapp.com/
+http://pink-sose.herokuapp.com/
 
-### Installing Frank's Creatures Shop on your computer:
+### Installing Mr. Pink's SOSE on your computer:
 
 Once you've git cloned this repo, make sure to run
 
-```bundle install```
+```bundle install``` to load the gems used in this project
 
-```rake db:create```
+```rake db:create``` to create the database
 
-```rake db:migrate```
+```rake db:migrate``` to set up the database tables
 
 ```rake db:seed``` to load the products
 
