@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   #restricts the linking of payment specific info to checkout
   #redirects the user to their homepage whenever they add or edit this information directly
   ##########
-  before_filter :get_referrer, :except => [:create, :update, :destroy]
+  before_filter :get_referrer, :except => [:create, :update, :destroy, :signup]
 
   def get_referrer
     session[:return_to] = request.referrer

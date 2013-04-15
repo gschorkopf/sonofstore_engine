@@ -11,7 +11,8 @@ class CustomersController < ApplicationController
         auto_login(@user)
       end
       if current_user
-        redirect_to new_customer_shipping_addresses_path(@customer)
+        redirect_to session[:return_to] || profile_path, notice: 'Logged in!'
+        # redirect_to new_customer_shipping_addresses_path(@customer)
       else
         redirect_to new_customer_shipping_addresses_path(@customer.id)
       end
