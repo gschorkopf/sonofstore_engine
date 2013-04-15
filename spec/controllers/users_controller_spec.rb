@@ -12,7 +12,8 @@ describe UsersController do
     context 'when a user is logged in' do
 
       before(:each) do
-        @user = FactoryGirl.create(:user)
+        customer = FactoryGirl.create(:customer)
+        @user = FactoryGirl.create(:user, customer_id: customer.id)
         login_user @user
       end
 
@@ -31,7 +32,7 @@ describe UsersController do
       render_views
       it 'redirects them to the home page' do
         get :show
-        response.should redirect_to(root_path)
+        response.should redirect_to(login_path)
       end
     end
   end

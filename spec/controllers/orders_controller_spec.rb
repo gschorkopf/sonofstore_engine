@@ -13,21 +13,25 @@ describe OrdersController do
     context 'when the user is logged in' do
 
       context 'when the user has orders in their history' do
+        before(:each) do
+          @customer = FactoryGirl.create(:customer)
+        end
+
         it 'renders the index view' do
-          user = FactoryGirl.create(:user)
+          user = FactoryGirl.create(:user, customer_id: @customer.id)
           login_user user
           expect(response).to be_success
         end
 
         it 'assigns the user variable' do
-          user = FactoryGirl.create(:user)
+          user = FactoryGirl.create(:user, customer_id: @customer.id)
           login_user user
           get :index
           assigns(user).should eq @user
         end
 
         it 'assigns order variables' do
-          user = FactoryGirl.create(:user)
+           user = FactoryGirl.create(:user, customer_id: @customer.id)
           login_user user
           orders = Order.create(user_id: user.id, status:"pending")
           get :index
@@ -49,8 +53,9 @@ describe OrdersController do
 
       context 'when the order belongs to the user' do
         it 'assigns the order variable' do
-          user = FactoryGirl.create(:user)
-          order = FactoryGirl.create(:order, user: user)
+          customer = FactoryGirl.create(:customer)
+          user = FactoryGirl.create(:user, customer_id: customer.id)
+          order = FactoryGirl.create(:order, customer: customer)
           login_user user
           get :show, params = {id: order.id}
           assigns(order).should eq @order
@@ -59,12 +64,14 @@ describe OrdersController do
 
       context 'when the order does NOT belong to the user' do
         it 'redirects to the order history' do
-          user = FactoryGirl.create(:user)
-          user2 = FactoryGirl.create(:user, email: 'sneaky@laura.com')
-          order = FactoryGirl.create(:order, user: user)
+          customer1 = FactoryGirl.create(:customer)
+          customer2 = FactoryGirl.create(:customer, email: 'what@where.com')
+          user = FactoryGirl.create(:user, customer_id: customer1.id)
+          user2 = FactoryGirl.create(:user,customer_id: customer2.id)
+          order = FactoryGirl.create(:order, customer: customer1)
           login_user user2
           get :show, params = {id: order.id}
-          expect(response).to redirect_to user_orders_path(order)
+          expect(response).to redirect_to customer_orders_path(order)
         end
       end
     end

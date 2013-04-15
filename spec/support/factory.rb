@@ -33,9 +33,13 @@ FactoryGirl.define do
     status 'active'
   end
 
-  factory :user do
+  factory :customer do
     full_name 'Daniel Boone'
     email 'dboone54@yahoo.com'
+  end
+
+  factory :user do
+     #is there a way i can assign customer_id in here? it would be nice
     display_name 'Booner'
     password 'password'
     platform_admin false
@@ -43,16 +47,16 @@ FactoryGirl.define do
 
   factory :store_admin, parent: :user do
     #need to assign a user role for this one, not exactly sure how
-    full_name 'Teeny Tiny'
-    email 'teeny@tiny.com'
+    # full_name 'Teeny Tiny'
+    # email 'teeny@tiny.com'
     display_name 'Teeny'
     password 'password'
     platform_admin false
   end
 
   factory :platform_admin, parent: :user do
-    full_name 'Davey Crockett'
-    email 'crockett@hotmail.com'
+    # full_name 'Davey Crockett'
+    # email 'crockett@hotmail.com'
     display_name 'coonskin'
     password 'password'
     platform_admin true

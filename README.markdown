@@ -26,3 +26,10 @@ Once you've git cloned this repo, make sure to run
 ```rake db:seed``` to load the products
 
 Then, to view the site from your computer, you can then run ```unicorn``` to view it at http://localhost:8080.
+
+##### To Run Rspec Tests on the Code
+Make sure to run:
+
+``` rake db:test:prepare```
+
+to setup your test database.
