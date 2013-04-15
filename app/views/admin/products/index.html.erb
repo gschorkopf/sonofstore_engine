@@ -2,12 +2,12 @@
   <%= render partial: 'shared/admin_navigation', :locals => { active: :products }  %>
 
   <div class="span8">
+    <div class="pull-right">
+      <%= button_to "New Product", new_store_admin_product_path, method: :get, class: 'btn btn-large btn-custom-lighten' %>
+    </div>
+    
     <h1><%= t 'product.collection' %></h1>
     <hr>
-
-    <div class="pull-right">
-      <%= button_to t('product.create'), new_admin_product_path, method: :get, class: 'btn btn-large btn-custom-lighten' %>
-    </div>
 
     <table class="table table-striped">
       <thead>

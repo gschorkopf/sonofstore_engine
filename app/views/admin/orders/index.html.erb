@@ -7,14 +7,9 @@
     <hr>
 
     <% if @count > 0 %>
-
-        <% if current_page?(admin_search_path) %>
-            <%= render 'advanced_search_form' %>
-        <% else %>
-            <%= render partial: 'admin_dashboard_nav', locals: {active_tab: @active_tab,
+      <%= render partial: 'admin_dashboard_nav', locals: {active_tab: @active_tab,
                                                                 count: @count,
                                                                 statuses: @statuses} %>
-        <% end %>
         <br>
         <table class="table">
           <thead>

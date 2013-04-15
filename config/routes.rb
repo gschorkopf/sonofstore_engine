@@ -27,6 +27,18 @@ StoreEngine::Application.routes.draw do
     get '/' => "products#index", as: 'home'
     resources :products, only: [ :index, :show ]
     resources :categories, only: [ :index, :show ]
+    
+    namespace :admin do
+      get '/' => "stores#show"
+      resources :users
+      get '/edit' => "stores#edit"
+      put '/' => "stores#update"
+      resources :products do
+        member do
+          post :toggle_status
+        end
+      end
+    end
   end
 
   resources :users, only: [ :new, :create, :update ] do
@@ -37,9 +49,10 @@ StoreEngine::Application.routes.draw do
   end
 
   namespace :admin do
+    # namespace dedicated to platform admin
+    
     root to: redirect("/admin/dashboard")
     get :dashboard, to: "orders#index", as: 'dashboard'
-    # get :search, to: "orders#index", as: 'search'
 
     resources :categories, except: [ :index, :show ]
 
@@ -47,13 +60,7 @@ StoreEngine::Application.routes.draw do
     
     resources :order_items, only: [ :update, :destroy]
 
-    resources :products do
-      member do
-        post :toggle_status
-      end
-    end
-
-    resources :stores, except: [:new] do
+    resources :stores, except: [:update, :new] do
       member do
         put :choose_approval_status, :as => "choose_approval_status_on"
         put :toggle_active

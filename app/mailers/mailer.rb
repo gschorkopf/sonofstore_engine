@@ -23,4 +23,22 @@ class Mailer < ActionMailer::Base
     @user = @store.users.first
     mail(to: @user.email, subject: "Your store #{@store} has been #{@store.approval_status}")
   end
+
+  def store_admin_welcome_email(user, store)
+    @user = user
+    @store = store
+    mail(to: user.email, subject: "You have been confirmed as an admin of #{@store}")
+  end
+
+  def sign_up_as_admin(email, store)
+    @email = email
+    @store = store
+    mail(to: @email, subject: "You have been invited to become admin of #{@store}")
+  end
+
+  def remove_admin_from_store(user, store)
+    @user = user
+    @store = store
+    mail(to: @user.email, subject: "You have been removed as an admin of #{@store}")
+  end
 end
