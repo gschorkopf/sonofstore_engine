@@ -19,6 +19,9 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe StoresController do
+  before (:each) do
+    ApplicationController.stub!(:require_admin).and_return(true)
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Store. As you add validations to Store, be sure to
