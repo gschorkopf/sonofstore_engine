@@ -1,7 +1,7 @@
 <br/>
 <br/>
 <% unless current_user %>
-  <% if !current_cart.empty? || current_cart == false %>
+  <% unless current_cart.session.nil? %>
     <%= link_to "Checkout as guest", guest_checkout_path %>
   <% end %>
 <%end%>
