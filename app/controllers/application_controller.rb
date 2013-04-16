@@ -59,11 +59,13 @@ class ApplicationController < ActionController::Base
     redirect_to login_path, :alert => "First login to access this page."
   end
 
-  def find_or_create_cart
+  def find_or_create_cart(store)
+    current_store = store
     session[:cart] ||= Hash.new(0)
   end
 
-  def current_cart
+  def current_cart(store)
+    current_store = store
     @cart ||= Cart.new(session[:cart])
   end
 
