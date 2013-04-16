@@ -17,6 +17,6 @@ class CartsController < ApplicationController
 
   def destroy
     session[current_store.path] = current_cart.destroy
-    redirect_to root_path, :notice  => "Cart cleared."
+    redirect_to store_home_path(current_store), :notice  => "Cart cleared."
   end
 end
