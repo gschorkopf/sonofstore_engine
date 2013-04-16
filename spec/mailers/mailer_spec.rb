@@ -13,11 +13,10 @@ describe Mailer do
   end
 
   it 'sends an order confirmation email' do
-    pending "not sure how to fix this test properly: Ask Katrina?"
-    # order = FactoryGirl.create(:order, customer_id: @customer.id)
-    # display = order_confirmation_path
-    # display.stub!(:uuid).and_returns("randomstring-here-I-am")
-    # email = Mailer.order_confirmation(@customer, order).deliver
-    # expect(ActionMailer::Base.deliveries).to_not be_empty
+    order = FactoryGirl.create(:order, customer_id: @customer.id)
+    display = order_confirmation_path(order)
+    display.stub!(:uuid).and_return("randomstring-here-I-am")
+    email = Mailer.order_confirmation(@customer, order).deliver
+    expect(ActionMailer::Base.deliveries).to_not be_empty
   end
 end
