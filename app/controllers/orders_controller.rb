@@ -56,7 +56,7 @@ class OrdersController < ApplicationController
         redirect_to order_confirmation_path(@order.id), :notice => "Successfully created order!"
       end
     else
-      redirect_to cart_path, :notice => "Checkout failed."
+      redirect_to store_cart_path(current_store), :notice => "Checkout failed."
     end
   end
 

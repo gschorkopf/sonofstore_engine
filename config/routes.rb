@@ -15,11 +15,7 @@ StoreEngine::Application.routes.draw do
   get "/confirmation-page/:id" => "orders#confirm", :as => "order_confirmation"
   get "/order_details/:uuid_hash" => "orders#display", :as => "obscure_link"
 
-  resource :cart, only: [ :update, :show, :destroy ] do
-    member do
-      put :remove_item
-    end
-  end
+
 
   resources :products, only: [ :index, :show ]
 
@@ -31,6 +27,12 @@ StoreEngine::Application.routes.draw do
     get '/' => "products#index", as: 'home'
     resources :products, only: [ :index, :show ]
     resources :categories, only: [ :index, :show ]
+
+    resource :cart, only: [ :update, :show, :destroy ] do
+      member do
+        put :remove_item
+      end
+    end
 
     namespace :stock do
       resources :products, except: [:destroy] do

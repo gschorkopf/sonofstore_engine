@@ -17,9 +17,7 @@ class ApplicationController < ActionController::Base
 
 
 
-  def current_store
-    @current_store ||= Store.find_by_path(params[:store_path])
-  end
+
 
   def require_admin
     if current_user == false
@@ -59,12 +57,17 @@ class ApplicationController < ActionController::Base
     redirect_to login_path, :alert => "First login to access this page."
   end
 
-  def find_or_create_cart
-    session[:cart] ||= Hash.new(0)
+  def find_or_create_store_cart
+    session[current_store.path] ||= Hash.new(0)
+  end
+
+  def current_store
+    @current_store ||= Store.find_by_path(params[:store_path])
   end
 
   def current_cart
-    @cart ||= Cart.new(session[:cart])
+     # raise 'hey'
+    @cart ||= Cart.new(session[current_store.path])
   end
 
   def get_locale
