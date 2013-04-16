@@ -71,7 +71,6 @@ describe 'the platform admin does platform admin things', type: :feature do
         @store1.save
 
         visit admin_stores_path
-        save_and_open_page
         click_link_or_button 'visit_store_admin_page'
         expect(current_path).to eq store_admin_path(@store1)
       end

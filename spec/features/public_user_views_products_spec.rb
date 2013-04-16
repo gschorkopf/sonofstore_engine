@@ -7,7 +7,6 @@ feature "Public User Views Products" do
       @store = FactoryGirl.create(:store)
       @product = FactoryGirl.create(:product, store_id: @store.id)
       visit store_home_path(@store)
-      save_and_open_page
     end
 
     it "displays products" do
