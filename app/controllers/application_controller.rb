@@ -66,8 +66,9 @@ class ApplicationController < ActionController::Base
   end
 
   def current_cart
-     # raise 'hey'
-    @cart ||= Cart.new(session[current_store.path])
+    if current_store
+      @cart ||= Cart.new(session[current_store.path]) || Cart.new(session[:cart])
+    end
   end
 
   def get_locale

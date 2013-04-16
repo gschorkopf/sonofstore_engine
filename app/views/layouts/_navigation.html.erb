@@ -25,7 +25,9 @@
         <li><%= link_to t('navigation.signup'), signup_path %></li>
     <% end %>
     <li>
-      <%= button_to "#{t 'navigation.cart'} #{current_cart.count}", store_cart_path(current_store), class: 'btn btn-custom-lighten', method: :get %>
+      <% if current_store %>
+        <%= button_to "#{t 'navigation.cart'} #{current_cart.count}", store_cart_path(current_store), class: 'btn btn-custom-lighten', method: :get %>
+      <% end %>
     </li>
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= image_tag("/images/flags/#{get_flag}.png") %> <b class="caret"></b></a>
