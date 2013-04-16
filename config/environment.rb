@@ -7,8 +7,10 @@ StoreEngine::Application.configure do
     :address              => 'smtp.gmail.com',
     :port                 => 587,
     :domain               => 'baci.lindsaar.net',
-    :user_name            => 'franks.monsterporium@gmail.com',
-    :password             => 'bosschops',
+    :user_name            => 'mrpink.sose@gmail.com',
+    :password             => 'sonofstoreengine',
+    # :user_name            => 'franks.monsterporium@gmail.com',
+    # :password             => 'bosschops',
     :authentication       => 'plain',
     :enable_starttls_auto => true  }
 end
