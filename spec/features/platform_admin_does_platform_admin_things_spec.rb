@@ -20,10 +20,13 @@ describe 'the platform admin does platform admin things', type: :feature do
     expect(Store.where(approval_status: 'pending').count).to eq 1
   end
 
+
   context 'given there is a pending store' do
     it 'can accept a pending store' do
       visit admin_stores_path
       click_link_or_button "approve_store"
+
+      # create customer, test elsewhere?
       expect(Store.where(approval_status: 'pending').count).to eq 0
       expect(Store.where(approval_status: 'approved').count).to eq 1
     end
@@ -36,29 +39,42 @@ describe 'the platform admin does platform admin things', type: :feature do
     end
   end
 
-  context 'when a store is enabled' do
-    it 'can make an accepted store disabled' do
-      @store1.approval_status = 'approved'
-      @store1.active = 'true'
-      @store1.save
+  context 'working with an approved store' do
+    context 'when a store is disabled' do
+      it 'can make a disabled store enabled' do
+        @store1.approval_status = 'approved'
+        @store1.active = 'false'
+        @store1.save
 
-       visit admin_stores_path
-       click_link_or_button "disable_store"
-       expect(Store.where(active: false).count).to eq 1
-       expect(Store.where(active: true).count).to eq 0
+        visit admin_stores_path
+        click_link_or_button "enable_store"
+        expect(Store.where(active: true).count).to eq 1
+        expect(Store.where(active: false).count).to eq 0
+      end
     end
-  end
 
-  context 'when a store is disabled' do
-    it 'can make a disabled store enabled' do
-      @store1.approval_status = 'approved'
-      @store1.active = 'false'
-      @store1.save
+    context 'when a store is enabled' do
+      it 'can make an accepted store disabled' do
+        @store1.approval_status = 'approved'
+        @store1.active = 'true'
+        @store1.save
 
-      visit admin_stores_path
-      click_link_or_button "enable_store"
-      expect(Store.where(active: true).count).to eq 1
-      expect(Store.where(active: false).count).to eq 0
+        visit admin_stores_path
+        click_link_or_button "disable_store"
+        expect(Store.where(active: false).count).to eq 1
+        expect(Store.where(active: true).count).to eq 0
+      end
+
+      it 'can click a link to be taken to a view of the store' do
+        @store1.approval_status = 'approved'
+        @store1.active = true #enabled
+        @store1.save
+
+        visit admin_stores_path
+        save_and_open_page
+        click_link_or_button 'visit_store_admin_page'
+        expect(current_path).to eq store_admin_path(@store1)
+      end
     end
   end
 end

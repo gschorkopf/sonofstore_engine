@@ -58,7 +58,7 @@
             <%= store.active_to_s %> <%= link_to "(Re-Enable?)", toggle_active_admin_store_path(store), method: :put, :class => 'btn btn-mini', :id => 'enable_store' %>
             <% end %>
           </td>
-          <td><%= link_to "Admin", store_admin_path(store) %></td>
+          <td><%= link_to "Admin", store_admin_path(store), :id => 'visit_store_admin_page' %></td>
         </tr>
       <% end %>
       </tbody>
