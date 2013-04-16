@@ -29,18 +29,39 @@
       <br>
     </div>
 
-    
-
     <div class="store_admins">
       <h2>Store Admins</h2>
      
       <hr>
-      <%= link_to "Add New Store Admin", new_store_admin_user_path, method: :get %>
+      <a href='#new_Admin' role='button' data-toggle='modal'>Add a New Store Admin</a>
       OR
-      <%= link_to "Add New Stocker", new_store_admin_stocker_path, method: :get %>
+      <a href='#new_Stocker' role='button' data-toggle='modal'>Add a New Store Stocker</a>
       <br>
       <br>
       <%= render partial: 'store_admins', :locals => {users: @store_users, store: @store} %>
+
+      <div id="new_Admin" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModalLabel">Add a New Store Admin</h3>
+        </div>
+        <div class="modal-body">
+          <%= render partial: 'admin/users/new_admin' %>
+        </div>
+      </div>
+
+      <div id="new_Stocker" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModalLabel">Add a New Store Stocker</h3>
+        </div>
+        <div class="modal-body">
+          <%= render partial: 'admin/stockers/new_stocker' %>
+        </div>
+      </div>
+
     </div>
 
   </div>
