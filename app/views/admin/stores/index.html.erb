@@ -17,7 +17,11 @@
         <tr>
           <td><%= store.name %></td>
           <td><%= store.path %></td>
-          <td><%= store.description[0...31] %></td>
+          <td><%= store.description[0...31] %>
+            <% if store.description.length >= 32 %>
+              ...
+            <% end %>
+          </td>
           <td>
             <%= link_to "Approve", choose_approval_status_on_admin_store_path(:id => store.id, :status => 'approved'), :class => 'btn btn-mini', :method => "put" %> or 
             <%= link_to "Decline", choose_approval_status_on_admin_store_path(:id => store.id, :status => 'declined'), :class => 'btn btn-mini', :method => "put" %>
