@@ -1,0 +1,33 @@
+<tr>
+  <td><%= link_to product.title, product_path(product) %></td>
+  <td><%= number_to_currency(product.price) %></td>
+  <td>
+    <% product.categories.each do |category| %>
+      <%= category.title %> <br>
+    <% end %>
+  </td>
+  <td>
+    <%= render partial: 'product_status',
+               locals: { product: product } %>
+  </td>
+  <td>
+    <!-- <div class="btn-group">
+      <button class="btn dropdown-toggle" data-toggle="dropdown"><%= t('model.modify') %><span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu"> -->
+
+          <%= link_to t('crud.edit'),
+                      edit_store_stock_product_path(current_store, product) %>
+
+        <!-- <li class="divider"> -->
+
+
+          <%= link_to activate_or_retire_translation(product.status),
+                      toggle_status_store_stock_product_path(current_store, product, 'retire'),
+                      method: :post %>
+
+
+      <!-- </ul>
+    </div> -->
+  </td>
+</tr>

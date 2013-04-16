@@ -23,8 +23,4 @@ class Admin::StockersController < ApplicationController
       redirect_to store_admin_path(@store), notice: "This person is not currently registered with Pink SoSE.  A welcome email has been sent on your behalf."
     end
   end
-
-  def show
-
-  end
 end
