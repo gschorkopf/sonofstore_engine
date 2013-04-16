@@ -5,6 +5,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
+    @store = current_store
     @category = Category.find(params[:id])
   end
 end

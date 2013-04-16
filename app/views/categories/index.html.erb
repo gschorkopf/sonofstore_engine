@@ -6,7 +6,7 @@
     </tr>
   <% @categories.each do |category| %>
     <tr>
-      <td><%= link_to category.title, store_admin_category_path(current_store, category) %></td>
+      <td><%= link_to category.title, store_category_path(current_store, category) %></td>
     </tr>
   <% end %>
 </table>
