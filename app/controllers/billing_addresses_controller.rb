@@ -18,11 +18,9 @@ class BillingAddressesController < ApplicationController
       @customer = Customer.find_by_id(params[:customer_id])
     end
     @billing_address.customer_id = @customer.id
-
-
     if @billing_address.save
       if session[:return_to] == profile_url
-        redirect_to profile_path(current_user)
+        redirect_to profile_path
       else
         @customer.billing_address_id = @billing_address.id
         @customer.save
