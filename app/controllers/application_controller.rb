@@ -44,6 +44,17 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def require_stocker
+    if current_user == false
+      not_authenticated
+    elsif current_user.role_for_store?('stocker', current_store) || current_user.platform_admin? || current_user.role_for_store?('store_admin', current_store)
+      true
+    else
+      redirect_to login_path,
+        :alert => "Only store administrators may access this page"
+    end
+  end
+
   def not_authenticated
     redirect_to login_path, :alert => "First login to access this page."
   end

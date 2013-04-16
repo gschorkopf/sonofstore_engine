@@ -36,6 +36,18 @@ class Mailer < ActionMailer::Base
     mail(to: @email, subject: "You have been invited to become admin of #{@store}")
   end
 
+  def store_stocker_welcome_email(user, store)
+    @user = user
+    @store = store
+    mail(to: @user.customer.email, subject: "You have been confirmed as a stocker for #{@store}")
+  end
+
+  def sign_up_as_stocker(email, store)
+    @email = email
+    @store = store
+    mail(to: @email, subject: "You have been invited to become a stocker for #{@store}")
+  end
+
   def remove_admin_from_store(user, store)
     @user = user
     @store = store

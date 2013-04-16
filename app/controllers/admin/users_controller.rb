@@ -7,11 +7,13 @@ class Admin::UsersController < ApplicationController
   end
 
   def create
-    email = params[:user][:email]
-    @user = User.find_by_email(email)
+    email = params[:user][:customers][:email]
+    @customer = Customer.find_by_email(email)
+    #@user = User.find_by_customer_id(@customer.id) || nil
     @store = current_store
 
-    if @user
+    if @customer
+      @user = User.find_by_customer_id(@customer.id)
       ur = UserRole.create(store_id: @store.id, user_id: @user.id)
       ur.role = "store_admin"
       ur.save

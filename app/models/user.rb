@@ -27,6 +27,11 @@ class User < ActiveRecord::Base
     user = User.find_by_customer_id(customer.id)
   end
 
+  def role(store)
+    user_role = self.user_roles.where(store_id: store.id)
+    user_role.pop.role
+  end
+
   def role_for_store?(role, store)
     selected_store = self.stores.where(id: store.id).first
 

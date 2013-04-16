@@ -1,6 +1,8 @@
 <h4>Enter the e-mail address of the admin you would like to add</h4>
 
 <%= simple_form_for [@store, :admin, @user], html: {multipart: true} do |f| %>
-    <%= f.input :email, input_html: { placeholder: t('placeholder.user.email') } %>
+  <%= f.fields_for :customers do |builder| %>
+    <%= builder.input :email %>
+  <% end %>
     <%= f.button :submit, t('submit') %>
 <% end %>

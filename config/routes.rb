@@ -31,12 +31,13 @@ StoreEngine::Application.routes.draw do
     get '/' => "products#index", as: 'home'
     resources :products, only: [ :index, :show ]
     resources :categories, only: [ :index, :show ]
-    
+
     namespace :admin do
       get '/' => "stores#show"
       resources :users
       get '/edit' => "stores#edit"
       put '/' => "stores#update"
+      resources :stockers
       resources :products do
         member do
           post :toggle_status
@@ -55,7 +56,7 @@ StoreEngine::Application.routes.draw do
 
   namespace :admin do
     # namespace dedicated to platform admin
-    
+
     root to: redirect("/admin/dashboard")
     get :dashboard, to: "orders#index", as: 'dashboard'
 

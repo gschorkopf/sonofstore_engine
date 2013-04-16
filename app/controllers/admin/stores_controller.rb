@@ -1,6 +1,7 @@
 class Admin::StoresController < ApplicationController
   before_filter :require_platform_admin, except: [:update, :show, :edit]
-  before_filter :require_admin, only: [:show, :edit]
+  before_filter :require_admin, only: [:edit]
+  before_filter :require_stocker, only: [:show]
 
   def index
     @pending_stores = Store.order('name ASC').where(approval_status: 'pending')
