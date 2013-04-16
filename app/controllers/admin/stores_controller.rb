@@ -23,8 +23,7 @@ class Admin::StoresController < ApplicationController
       redirect_to store_admin_path(@store),
         :notice  => "Successfully updated store."
     else
-      redirect_to store_admin_path(@store),
-        :alert  => "Store didn't update. Something went wrong."
+      render :action => 'edit', :notice  => "Store update failed."
     end
   end
 
