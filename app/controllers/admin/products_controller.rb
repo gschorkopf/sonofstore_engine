@@ -16,7 +16,7 @@ class Admin::ProductsController < ApplicationController
     @store = current_store
     @product = Product.new(params[:product], store_id: @store.id)
     if @product.save
-      redirect_to store_admin_products_path,
+      redirect_to store_admin_products_path(store_path: @store) ,
         :notice => "Successfully created product."
     else
       render :action => 'new', :notice  => "Product creation failed."

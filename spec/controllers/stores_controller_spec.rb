@@ -41,6 +41,7 @@ describe StoresController do
     it "assigns all stores as @stores" do
       store = Store.create! valid_attributes
       store.approval_status = 'approved'
+      store.active = true
       store.save
       get :index, {}, valid_session
       assigns(:stores).should eq([store])
