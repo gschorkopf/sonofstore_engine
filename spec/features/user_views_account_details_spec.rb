@@ -3,7 +3,8 @@ require 'spec_helper'
 describe 'user account detail view' do
   context 'when the user is logged in' do
     before(:each) do
-      @user = FactoryGirl.create(:user)
+      customer = FactoryGirl.create(:customer)
+      @user = FactoryGirl.create(:user, customer_id: customer.id)
       visit '/login'
       fill_in 'sessions_email', with: 'dboone54@yahoo.com'
       fill_in 'sessions_password', with: 'password'
@@ -17,9 +18,8 @@ describe 'user account detail view' do
 
     it 'cannot update their profile with incorrect information' do
       visit 'profile'
-      fill_in 'Full Name', with: ''
+      fill_in 'Password', with: ''
       click_button 'Update Account'
-      # save_and_open_page
       expect(page).to have_content("can't be blank")
     end
 

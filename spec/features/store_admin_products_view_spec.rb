@@ -8,7 +8,7 @@ describe 'the admin products view', type: :feature do
     fill_in 'sessions_email', with: 'teeny@tiny.com'
     fill_in 'sessions_password', with: 'password'
     click_button 'Login'
-    visit admin_products_path
+    visit store_admin_products_path
   end
 
   it 'should have a title' do
@@ -48,7 +48,7 @@ describe 'the admin products view', type: :feature do
       visit edit_admin_product_path(@product)
       fill_in "Title", with: "whateveryouwant"
       click_button "Submit"
-      expect(current_path).to eq admin_products_path
+      expect(current_path).to eq store_admin_products_path
     end
 
     it 'edits a product with incorrect info' do
@@ -59,17 +59,17 @@ describe 'the admin products view', type: :feature do
     end
 
     it 'can destroy an existing product' do
-      page.driver.submit :delete, admin_product_path(@product), {}
+      page.driver.submit :delete, store_admin_product_path(@product), {}
       expect(Product.all).to eq []
     end
 
     it 'can retire an active product' do
-      page.driver.post toggle_status_admin_product_path(@product)
+      page.driver.post toggle_status_store_admin_product_path(@product)
       expect(@product.status).to eq 'active'
     end
 
     it 'can activate a retired product' do
-      page.driver.post toggle_status_admin_product_path(@product)
+      page.driver.post toggle_status_store_admin_product_path(@product)
       expect(@product.status).to eq 'active'
     end
   end

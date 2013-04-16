@@ -1,6 +1,6 @@
 class StoresController < ApplicationController
   def index
-    @stores = Store.order('name ASC').where(approval_status: 'approved')
+    @stores = Store.where(active: true).order('name ASC')
   end
 
   def new
