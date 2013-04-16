@@ -15,9 +15,8 @@ class CreditCardsController < ApplicationController
       @customer = Customer.find_by_id(params[:customer_id])
     end
     @credit_card.customer_id = @customer.id
-# fail
     if @credit_card.save
-      if session[:return_to] == profile_url(current_user)
+      if session[:return_to] == profile_url
         redirect_to profile_path
       else
         @customer.credit_card_id = @credit_card.id

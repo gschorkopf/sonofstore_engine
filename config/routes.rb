@@ -6,7 +6,7 @@ StoreEngine::Application.routes.draw do
   get "/code" => redirect("http://github.com/gschorkopf/sonofstore_engine")
   get "/logout" => "sessions#destroy", :as => "logout"
   get "/login" => "sessions#new", :as => "login"
-  get "/signup" => "customers#signup", :as => "signup"
+  get "/signup" => "users#signup", :as => "signup"
   post "/buy_now" => "orders#buy_now", :as => 'buy_now'
   put "/i18n" => "i18n#update"
   get "/profile" => "users#show"
@@ -54,6 +54,7 @@ StoreEngine::Application.routes.draw do
     end
   end
 
+  resources :users, only: [:create]
 
   resources :customers, only: [ :new, :create, :update, :show ] do
     resources :orders
