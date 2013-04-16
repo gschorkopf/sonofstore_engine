@@ -4,6 +4,10 @@
   <div class="span8">
     <h2><%= t('categories.create') %></h2>
     <hr>
-    <%= render 'form' %>
+    <%= simple_form_for [@store, :admin, @category] do |f| %>
+      <%= f.input :title, input_html: { placeholder: t('placeholder.category.title') } %>
+      <%= f.hidden_field :store_id, value: @store.id %>
+      <%= f.button :submit, t('submit'), class:'btn btn-custom-lighten' %>
+    <% end %>
   </div>
 </div>

@@ -1,7 +1,8 @@
 class Category < ActiveRecord::Base
   attr_accessible :title, :product_ids, :store_id
-  # has_and_belongs_to_many :products
-  has_many :products
+
+  has_many :product_categories
+  has_many :products, through: :product_categories
   belongs_to :store
 
   validates :title, presence: true

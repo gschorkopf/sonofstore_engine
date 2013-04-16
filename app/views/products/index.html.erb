@@ -7,21 +7,7 @@
 <div class="product-index">
 
   <section class="row">
-      <div class="btn-group span1" id="homepage-category-dropdown">
-        <a class="btn btn-custom-lighten dropdown-toggle" data-toggle="dropdown" href="#">
-          <%= t 'categories.select' %>
-          <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li><%=link_to "Show All", store_home_path %></li>
-          <% unless @categories.nil? %>
-            <% @categories.each do |category| %>
-              <li>
-                <%=link_to category.title, store_category_path(current_store, category.id) %>
-              </li>
-            <% end %>
-          <% end %>
-        </ul>
+        <%= button_to "Browse by category", store_categories_path(current_store), method: :get %>
       </div>
   </section>
 

@@ -4,7 +4,8 @@ class Product < ActiveRecord::Base
 
   belongs_to :store
 
-  has_and_belongs_to_many :categories
+  has_many :product_categories
+  has_many :categories, through: :product_categories
 
   has_attached_file :image, styles: { retail: "500x500",
                                       large: "500x500",
