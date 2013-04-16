@@ -14,6 +14,8 @@ class UsersController < ApplicationController
       auto_login(@signup.user)
       #redirect_to root_url, :notice => "Welcome, #{@user.full_name}"
       redirect_to session[:return_to] || root_path, notice: 'Logged in!'
+    elsif params[:password] != params[:password_confirmation]
+      redirect_to signup_path, notice: "Password must match confirmation"
     else
       redirect_to signup_path, notice: "Invalid Attributes"
     end
