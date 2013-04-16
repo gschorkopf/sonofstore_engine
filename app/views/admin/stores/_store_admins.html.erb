@@ -3,7 +3,7 @@
     <th>Name</th>
     <th>Email</th>
     <th>Role</th>
-    <th>Remove?</th>
+    <th>Remove Role</th>
   </thead>
 
   <tbody>
@@ -11,7 +11,7 @@
     <tr>
       <td><%= user %></td>
       <td><%= user.customer.email %></td>
-      <td><%= user.role(store) %></td>
+      <td><%= user.role_to_s(store) %></td>
       <td><%= link_to 'Remove', store_admin_user_path(store, user), method: :delete, confirm: "Are you sure you want to remove #{user}'s #{user.role(store)} privileges?" %></td>
     </tr>
   <% end %>
