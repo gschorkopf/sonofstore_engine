@@ -5,11 +5,20 @@
     <h1><%= t 'categories.self' %></h1>
     <hr>
     <div class="pull-right">
-      <%= button_to t('categories.create'), new_admin_category_path, method: :get, class: 'btn btn-large btn-custom-lighten' %>
+      <%= button_to "New Category", new_store_admin_category_path, method: :get, class: 'btn btn-large btn-custom-lighten' %>
     </div>
 
     <table class="table table-striped">
-      <%= render @categories %>
+      <tr>
+        <td><strong>name</strong></td>
+        <td><strong></strong></td>
+      </tr>
+      <% @categories.each do |category| %>
+      <tr>
+        <td><%= link_to category.title, store_admin_category_path(current_store, category) %></td>
+        <td><%= link_to "edit", edit_store_admin_category_path(current_store, category) %>
+      </tr>
+      <% end %>
     </table>
   </div>
 </div>

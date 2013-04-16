@@ -4,6 +4,8 @@ FactoryGirl.define do
     name "MyString"
     path "my-string"
     description "My String Store Rocks!"
+    approval_status "approved"
+    active true
   end
 
   factory :category do

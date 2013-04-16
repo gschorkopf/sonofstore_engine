@@ -2,11 +2,11 @@ require 'spec_helper'
 
 feature "Public User Views Products" do
 
-  context "the root page" do
+  context "the store home page" do
     before(:each) do
       @store = FactoryGirl.create(:store)
       @product = FactoryGirl.create(:product, store_id: @store.id)
-      visit root_path
+      visit store_home_path(@store)
     end
 
     it "displays products" do

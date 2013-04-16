@@ -22,5 +22,10 @@ class ProductsController < ApplicationController
   def show
     session[:return_to] = request.fullpath
     @product = Product.find(params[:id])
+    if current_store && current_store.id == @product.store_id
+      render :show
+    else
+      redirect_to root_path, alert: "The product you are looking for does not exist."
+    end
   end
 end

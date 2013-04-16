@@ -10,7 +10,8 @@ class Store < ActiveRecord::Base
   validate :unique_path_among_approved_stores
 
   validates :name, :presence => true
-  validates :path, :presence => true
+  validates :path, :presence => true,
+            format: { with: /\A[A-Za-z0-9-]+\z/ }
   validates :description, :presence => true
 
   def to_param 

@@ -17,10 +17,14 @@
         <tr>
           <td><%= store.name %></td>
           <td><%= store.path %></td>
-          <td><%= store.description[0...31] %></td>
+          <td><%= store.description[0...31] %>
+            <% if store.description.length >= 32 %>
+              ...
+            <% end %>
+          </td>
           <td>
-            <%= link_to "Approve", choose_approval_status_on_admin_store_path(:id => store.id, :status => 'approved'), :class => 'btn btn-mini', :method => "put" %> or 
-            <%= link_to "Decline", choose_approval_status_on_admin_store_path(:id => store.id, :status => 'declined'), :class => 'btn btn-mini', :method => "put" %>
+            <%= link_to "Approve", choose_approval_status_on_admin_store_path(:id => store.id, :status => 'approved'), :class => 'btn btn-mini', :id => 'approve_store', :method => "put" %> or 
+            <%= link_to "Decline", choose_approval_status_on_admin_store_path(:id => store.id, :status => 'declined'), :class => 'btn btn-mini', :id => 'decline_store', :method => "put" %>
           </td>
         </tr>
       <% end %>
@@ -53,12 +57,12 @@
           <td><%= store.description[0...31] %></td>
           <td>
             <% if store.active? %>
-            <%= store.active_to_s %> <%= link_to "(Disable?)", toggle_active_admin_store_path(store), method: :put, :class => 'btn btn-mini' %>
+            <%= store.active_to_s %> <%= link_to "(Disable?)", toggle_active_admin_store_path(store), method: :put, :class => 'btn btn-mini', :id => 'disable_store' %>
             <% else %>
-            <%= store.active_to_s %> <%= link_to "(Re-Enable?)", toggle_active_admin_store_path(store), method: :put, :class => 'btn btn-mini' %>
+            <%= store.active_to_s %> <%= link_to "(Re-Enable?)", toggle_active_admin_store_path(store), method: :put, :class => 'btn btn-mini', :id => 'enable_store' %>
             <% end %>
           </td>
-          <td><%= link_to "Admin", store_admin_path(store) %></td>
+          <td><%= link_to "Admin", store_admin_path(store), :id => 'visit_store_admin_page' %></td>
         </tr>
       <% end %>
       </tbody>

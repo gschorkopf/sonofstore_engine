@@ -7,7 +7,7 @@ describe 'new user creates and edits account' do
     fill_in "Email", with: 'poetry@poetry.com'
     fill_in "Display Name", with: 'poet'
     fill_in "Password", with: 'poet'
-    fill_in "Password Confirmation", with: 'poet'
+    # fill_in "Password Confirmation", with: 'poet'
     click_button "Submit"
   end
 
@@ -18,8 +18,8 @@ describe 'new user creates and edits account' do
 
     context 'when they provide unique login info' do
       it 'creates a new user account' do
-        expect(page).to have_content "Welcome, Maya Angelou"
-        expect(current_path).to eq root_path
+        expect(page).to have_content "Logged in!"
+        expect(current_path).to eq profile_path
       end
     end
 
@@ -30,7 +30,7 @@ describe 'new user creates and edits account' do
         fill_in "Email", with: 'poetry@poetry.com'
         fill_in "Display Name", with: 'poet'
         fill_in "Password", with: 'poet'
-        fill_in "Password Confirmation", with: 'poet'
+        # fill_in "Password Confirmation", with: 'poet'
         click_button "Submit"
         expect(page).to have_content "has already been taken"
         expect(current_path).to eq '/users'

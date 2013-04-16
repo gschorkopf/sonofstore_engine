@@ -46,6 +46,7 @@ StoreEngine::Application.routes.draw do
       get '/edit' => "stores#edit"
       put '/' => "stores#update"
       resources :stockers
+      resources :categories
       resources :products do
         member do
           post :toggle_status

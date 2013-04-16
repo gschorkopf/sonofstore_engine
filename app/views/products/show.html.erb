@@ -1,6 +1,7 @@
 <div class="row">
   <div class="prod_detail_img span6">
-    <p><%= image_tag @product.image.url(:large) %></p>
+    <P><%= image_tag 'http://lorempixel.com/300/300' %></P>
+    <!-- <p><%#= image_tag @product.image.url(:large) %></p> -->
   </div>
   <div class="prod_detail_text span6">
     <h2><% t('product.title') %><%= @product.title %></h2>
@@ -15,7 +16,6 @@
       <p><%= t('product.price') %>: <%= number_to_currency(@product.price) %></p>
     <% if @product.status == 'active' %>
       <%= render partial: 'add_to_cart_button', locals: {product: @product} %>
-      <%= render partial: 'buy_now_button', locals: {product: @product} %>
     <% else %>
       <p> Product is retired! </p>
     <% end %>
