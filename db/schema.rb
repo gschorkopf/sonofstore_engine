@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130414201225) do
+ActiveRecord::Schema.define(:version => 20130416030422) do
 
   create_table "billing_addresses", :force => true do |t|
     t.string   "street_address"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(:version => 20130414201225) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.integer  "store_id"
+    t.string   "photo_url"
   end
 
   add_index "products", ["store_id"], :name => "index_products_on_store_id"

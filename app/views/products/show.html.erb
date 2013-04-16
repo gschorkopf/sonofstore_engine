@@ -1,6 +1,7 @@
 <div class="row">
   <div class="prod_detail_img span6">
-    <p><%= image_tag @product.image.url(:large) %></p>
+    <P><%= image_tag 'http://lorempixel.com/300/300' %></P>
+    <!-- <p><%#= image_tag @product.image.url(:large) %></p> -->
   </div>
   <div class="prod_detail_text span6">
     <h2><% t('product.title') %><%= @product.title %></h2>

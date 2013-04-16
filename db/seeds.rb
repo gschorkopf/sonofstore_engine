@@ -45,15 +45,20 @@ end
 s_id = 1
 c_id = 1
 10.times do
-  100.times do
-    Product.create(title: Faker::Address.street_name.split[0], description: "#{Faker::Company.bs} " + "#{Faker::Company.bs}",
-      price: 5000,
-      status: 'active',
-      store_id: s_id,
-      category_ids: c_id)
+  10.times do
+    10.times do
+      Product.create(title: Faker::Address.street_name.split[0],
+        description: "#{Faker::Company.bs} " + "#{Faker::Company.bs}",
+        price: "#{(1..500).to_a.sample}.0".to_f,
+        status: 'active',
+        store_id: s_id,
+        category_ids: c_id,
+        photo_url: "http://lorempixel.com/300/300")
+        #better way to do fake photos? there's gotta be.
+    end
+    c_id += 1
   end
   s_id += 1
-  c_id += 10
 end
 
 customer1 = Customer.create(full_name: "Franklin Webber", email: "demoXX+franklin@jumpstartlab.com")
