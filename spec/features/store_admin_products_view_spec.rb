@@ -2,16 +2,18 @@ require 'spec_helper'
 
 describe 'the admin products view', type: :feature do
   before(:each) do
-    customer = FactoryGirl.create(:customer)
+    @store = FactoryGirl.create(:store, approval_status: 'approved', active: true)
+    customer = FactoryGirl.create(:customer, email: 'teeny@tiny.com')
     FactoryGirl.create(:store_admin, customer_id: customer.id)
     visit login_path
     fill_in 'sessions_email', with: 'teeny@tiny.com'
     fill_in 'sessions_password', with: 'password'
     click_button 'Login'
-    visit store_admin_products_path
+    visit store_admin_products_path(@store)
   end
 
   it 'should have a title' do
+    save_and_open_page
     expect(page).to have_selector('h1', text: 'Products')
   end
 

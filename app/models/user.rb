@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   belongs_to :customer
 
   def default_values
-    self.admin = false
+    self.platform_admin = false
   end
 
   def to_s
