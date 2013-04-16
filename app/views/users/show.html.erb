@@ -5,7 +5,7 @@
     <div class="pull-right">
       <%= button_to "Create a New Store", new_store_path, class: 'btn btn-custom-lighten', method: :get %>
     </div>
-    
+
     <div id="manage_stores">
       <h1>Manage Stores</h1>
       <hr>
@@ -13,18 +13,19 @@
     </div>
 
     <div id="edit_profile">
-      <h1>Edit Account Information</h1>
-      <hr>
-      <%= simple_form_for @user do |f| %>
-          <%= f.input :display_name, input_html: { placeholder: t('placeholder.user.displayname') } %>
-          <%= f.input :password %>
-          <%= f.input :password_confirmation %>
-          <%= f.hidden_field :admin, value: false %>
-          <%= f.submit t('account.update'), class: 'btn btn-custom-lighten' %>
-      <% end %>
-      <%= simple_form_for @customer do |f| %>
-          <%= f.input :full_name, input_html: { placeholder: t('placeholder.user.fullname') } %>
-          <%= f.input :email, input_html: { placeholder: t('placeholder.user.email') } %>
+      <h1>Personal Information</h1>
+      <%= form_tag(:controller => "users", :action => "update", :method => "put") do %>
+        <p>* Full Name</p>
+        <%= text_field_tag(:full_name, current_user.customer.full_name) %><br/>
+        <p>* Email</p>
+        <%= text_field_tag(:email, current_user.customer.email) %><br/>
+        <p>Display Name</p>
+        <%= text_field_tag(:display_name, current_user.display_name) %><br/>
+        <p>* Password</p>
+        <%= password_field_tag(:password, current_user.password) %><br/>
+        <p>* Password Confirmation</p>
+        <%= password_field_tag(:password_confirmation) %><br/>
+        <%= submit_tag("Update") %>
       <% end %>
     </div>
 

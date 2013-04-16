@@ -26,8 +26,10 @@ class UsersController < ApplicationController
   end
 
   def update
+    @signup = Signup.new(params)
+
     @user = current_user
-    if @user.update_attributes(params[:user])
+    if @signup.success?
       redirect_to profile_path,
       :notice => "Successfully updated account"
     else

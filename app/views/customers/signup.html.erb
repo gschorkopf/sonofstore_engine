@@ -1,9 +1,0 @@
-<%= simple_form_for @customer do |f| %>
-    <%= f.input :full_name, input_html: { placeholder: t('placeholder.user.fullname') } %>
-    <%= f.input :email, input_html: { placeholder: t('placeholder.user.email') } %>
-    <%= f.fields_for :users do |builder| %>
-          <%= builder.input :display_name %>
-          <%= builder.input :password %>
-    <% end %>
-    <%= f.button :submit, t('submit') %>
-<% end %>
