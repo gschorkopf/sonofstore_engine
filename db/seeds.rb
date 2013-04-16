@@ -43,7 +43,6 @@ end
 end
 
 s_id = 1
-c_id = 1
 10.times do
   10.times do
     10.times do
@@ -52,13 +51,121 @@ c_id = 1
         price: "#{(1..500).to_a.sample}.0".to_f,
         status: 'active',
         store_id: s_id,
-        category_ids: c_id,
         photo_url: "http://lorempixel.com/300/300")
         #better way to do fake photos? there's gotta be.
     end
-    c_id += 1
   end
   s_id += 1
+end
+
+#product_categories store1
+p_id = 1
+c_id = 1
+10.times do
+  10.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store2
+p_id = 101
+c_id = 11
+10.times do
+  10.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store3
+p_id = 201
+c_id = 21
+10.times do
+  10.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store4
+p_id = 301
+c_id = 31
+10.times do
+  10.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store5
+p_id = 401
+c_id = 41
+10.times do
+  10.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store6
+p_id = 501
+c_id = 51
+10.times do
+  10.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store7
+p_id = 601
+c_id = 61
+10.times do
+  10.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store8
+p_id = 701
+c_id = 71
+10.times do
+  10.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store9
+p_id = 801
+c_id = 81
+10.times do
+  10.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store10
+p_id = 901
+c_id = 91
+10.times do
+  10.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
 end
 
 customer1 = Customer.create(full_name: "Franklin Webber", email: "demoXX+franklin@jumpstartlab.com")
