@@ -8,7 +8,7 @@ Thanks so much for your purchase of:
 <br>
 <% end %>
 
-You can view your order details <%= link_to "Here", obscure_link_path(@order.uuid_hash) %>
+You can view your order details <a href="pink-sose.herokuapp.com/order_details/<%=@order.uuid_hash%>">here</a>.
 <br>
 We've processed your payment for <%= number_to_currency(@order.total) %>.
 <br>

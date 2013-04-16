@@ -14,7 +14,9 @@
   <br/>
 
   <div id="product_listing" class="row-fluid">
-    <%= render @products %>
+    <% @products.each do |product| %>
+      <%= render partial: 'product', locals: { store: current_store, product: product }  %>
+    <% end %>
   </div>
 </div>
 

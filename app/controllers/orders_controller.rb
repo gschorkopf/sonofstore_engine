@@ -15,7 +15,8 @@ class OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.find_all_by_customer_id(current_user.customer_id)
+    @orders = Order.find_all_by_customer_id(params[:customer_id])
+    # @orders = Order.find_all_by_customer_id(current_user.customer_id)
   end
 
   def show
