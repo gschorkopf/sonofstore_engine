@@ -22,4 +22,9 @@ describe User do
     expect(FactoryGirl.build(:user, customer_id: @customer.id, display_name: 'p' * 33)).to_not be_valid
     expect(FactoryGirl.build(:user, customer_id: @customer.id, display_name: 'p' * 32)).to be_valid
   end
+
+  it 'is created with a default admin value of false' do
+    user = FactoryGirl.build(:user, customer_id: @customer.id)
+    expect(user.platform_admin).to be_false
+  end
 end
