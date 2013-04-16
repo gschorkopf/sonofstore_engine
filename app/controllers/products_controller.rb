@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
 
   def index
-    if current_store.pending?
+    if current_store && current_store.pending?
       redirect_to root_path,
                       alert: "The store you are looking for does not exist."
       return
@@ -13,6 +13,7 @@ class ProductsController < ApplicationController
       @products = current_store.products
       @categories = current_store.categories
     else
+      # 404
       redirect_to root_path,
                       alert: "The store you are looking for does not exist."
       return
