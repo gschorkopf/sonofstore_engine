@@ -53,4 +53,10 @@ class Mailer < ActionMailer::Base
     @store = store
     mail(to: @user.customer.email, subject: "You have been removed as an admin of #{@store}")
   end
+
+  def remove_stocker_from_store(user, store)
+    @user = user
+    @store = store
+    mail(to: @user.customer.email, subject: "You have been removed as a stocker of #{@store}")
+  end
 end
