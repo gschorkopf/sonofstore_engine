@@ -1,20 +1,22 @@
 <div class="user-index">
   <%= render partial: 'user_navigation', :locals => { active: :stores } %>
 
-  <div class="span8">
-    <div class="pull-right">
-      <%= button_to "Create a New Store", new_store_path, class: 'btn btn-custom-lighten', method: :get %>
-    </div>
-    
-    <div id="manage_stores">
+  <div class="span8 tab-content">
+    <div id="manage_stores" class="tab-pane active">
       <h1>Manage Stores</h1>
       <hr>
+
+      <div class="pull-right">
+      <%= button_to "Create a New Store", new_store_path, class: 'btn btn-custom-lighten', method: :get %>
+      </div>
+
       <%= render partial: 'user_stores' %>
     </div>
 
-    <div id="edit_profile">
+    <div id="edit_account" class="tab-pane">
       <h1>Edit Account Information</h1>
       <hr>
+
       <%= simple_form_for @user do |f| %>
           <%= f.input :display_name, input_html: { placeholder: t('placeholder.user.displayname') } %>
           <%= f.input :password %>
@@ -22,14 +24,14 @@
           <%= f.hidden_field :admin, value: false %>
           <%= f.submit t('account.update'), class: 'btn btn-custom-lighten' %>
       <% end %>
+
       <%= simple_form_for @customer do |f| %>
           <%= f.input :full_name, input_html: { placeholder: t('placeholder.user.fullname') } %>
           <%= f.input :email, input_html: { placeholder: t('placeholder.user.email') } %>
       <% end %>
-    </div>
 
-    <div id="edit_shipping">
       <h3>Shipping Address:</h3>
+
       <% if @user.customer.shipping_address != nil %>
 
       <table class="shipping">
@@ -51,67 +53,92 @@
         </tr>
       </table>
 
-        <%= button_to "Edit", edit_customer_shipping_addresses_path(current_user), method: :get %>
+      <%= button_to "Edit", edit_customer_shipping_addresses_path(current_user), method: :get %>
       <% else %>
         No address currently on file.<br/><br/>
         <%= button_to "Add Shipping Address", new_customer_shipping_addresses_path(current_user), method: :get %>
       <% end %>
-    </div>
 
-    <h3>Billing Address:</h3>
-  <% if @user.customer.billing_address != nil %>
 
-  <table class="shipping">
-    <tr>
-      <th>Street Address: </th>
-      <td><%= @user.customer.billing_address.street_address %></td><br/>
-    </tr>
-    <tr>
-      <th>City: </th>
-      <td><%= @user.customer.billing_address.city %></td><br/>
-    </tr>
-    <tr>
-      <th>Zipcode: </th>
-      <td><%= @user.customer.billing_address.zip %></td><br/>
-    </tr>
-    <tr>
-      <th>State: </th>
-      <td><%= @user.customer.billing_address.state %></td><br/>
-    </tr>
-  </table>
-    <%= button_to "Edit", edit_customer_billing_addresses_path(current_user), method: :get %>
-  <% else %>
-    No address currently on file.<br/><br/>
-    <%= button_to "Add Billing Address", new_customer_billing_addresses_path(current_user), method: :get %>
-  <% end %>
+      <h3>Billing Address:</h3>
+      <% if @user.customer.billing_address != nil %>
 
-    <div>
+      <table class="shipping">
+        <tr>
+          <th>Street Address: </th>
+          <td><%= @user.customer.billing_address.street_address %></td><br/>
+        </tr>
+        <tr>
+          <th>City: </th>
+          <td><%= @user.customer.billing_address.city %></td><br/>
+        </tr>
+        <tr>
+          <th>Zipcode: </th>
+          <td><%= @user.customer.billing_address.zip %></td><br/>
+        </tr>
+        <tr>
+          <th>State: </th>
+          <td><%= @user.customer.billing_address.state %></td><br/>
+        </tr>
+      </table>
+        <%= button_to "Edit", edit_customer_billing_addresses_path(current_user), method: :get %>
+      <% else %>
+        No address currently on file.<br/><br/>
+        <%= button_to "Add Billing Address", new_customer_billing_addresses_path(current_user), method: :get %>
+      <% end %>
+
       <h3>Credit Card Information:</h3>
-    <% if @user.customer.credit_card != nil %>
+      <% if @user.customer.credit_card != nil %>
 
-    <table class="shipping">
-      <tr>
-        <th>Credit Card Number: </th>
-        <td><%= @user.customer.credit_card.number %></td><br/>
-      </tr>
-      <tr>
-        <th>Security Code: </th>
-        <td><%= @user.customer.credit_card.security_code %></td><br/>
-      </tr>
-      <tr>
-        <th>Expiration Month: </th>
-        <td><%= @user.customer.credit_card.expiration_month %></td><br/>
-      </tr>
-      <tr>
-        <th>Expiration Year: </th>
-        <td><%= @user.customer.credit_card.expiration_year %></td><br/>
-      </tr>
-    </table>
-      <%= button_to "Edit", edit_customer_credit_cards_path(current_user), method: :get %>
-    <% else %>
-      No credit card currently on file.<br/><br/>
-      <%= button_to "Add Credit Card", new_customer_credit_cards_path(current_user), method: :get %>
-    <% end %>
+      <table class="shipping">
+        <tr>
+          <th>Credit Card Number: </th>
+          <td><%= @user.customer.credit_card.number %></td><br/>
+        </tr>
+        <tr>
+          <th>Security Code: </th>
+          <td><%= @user.customer.credit_card.security_code %></td><br/>
+        </tr>
+        <tr>
+          <th>Expiration Month: </th>
+          <td><%= @user.customer.credit_card.expiration_month %></td><br/>
+        </tr>
+        <tr>
+          <th>Expiration Year: </th>
+          <td><%= @user.customer.credit_card.expiration_year %></td><br/>
+        </tr>
+      </table>
+        <%= button_to "Edit", edit_customer_credit_cards_path(current_user), method: :get %>
+      <% else %>
+        No credit card currently on file.<br/><br/>
+        <%= button_to "Add Credit Card", new_customer_credit_cards_path(current_user), method: :get %>
+      <% end %>
     </div>
+
+    <div id="order_history" class="tab-pane">
+      <h1>Order History</h1>
+      <hr>
+
+      <% if @orders.empty? %>
+        <p>You currently don't have any orders. Start Shopping!</p>
+      <% else %>
+        <h1><%= t('order.history') %></h1>
+        <hr>
+
+        <table class="table table-striped">
+          <thead>
+          <th>#</th>
+          <th><%= t('model.status') %></th>
+          <th><%= t('order.date') %></th>
+          <th><%= t('total') %></th>
+          </thead>
+          <tbody>
+          <%= render partial: 'order', collection: @orders %>
+          </tbody>
+        </table>
+        <% end %>
+
+    </div>
+  
   </div>
 </div>

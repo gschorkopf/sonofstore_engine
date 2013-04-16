@@ -1,31 +1,42 @@
-<h3>Store Manager</h3>
-<table class="table table-striped">
-  <tr>
-    <th>Name</th>
-    <th>URL ID</th>
-    <th>Description</th>
-    <th>Active Status</th>
-  </tr>
+<% if @stores.empty? %>
+  It doesn't seem you've created any stores yet! Use the button above to create a new store.
+<% end %>
 
-  <% @approved_stores.each do |store| %>
+<% unless @approved_stores.empty? %>
+  <h3>Store Manager</h3>
+  <table class="table table-striped">
     <tr>
-      <td><%= link_to store, store_home_path(store) %></td>
-      <td><%= store.path %></td>
-      <td><%= store.description %></td>
-      <td><%= store.active_to_s %></td>
+      <th>Name</th>
+      <th>URL ID</th>
+      <th>Description</th>
+      <th>Active Status</th>
     </tr>
-  <% end %>
-</table>
 
-<h3>Pending Stores</h3>
-<ul>
-  <% @pending_stores.each do |store| %>
-    <li><%= store %></li>
-  <% end %>
-</ul>
-<h3>Disapproved Stores</h3>
-<ul>
-  <% @disapproved_stores.each do |store| %>
-    <li><%= store %></li>
-  <% end %>
-</ul>
+    <% @approved_stores.each do |store| %>
+      <tr>
+        <td><%= link_to store, store_admin_path(store) %></td>
+        <td><%= store.path %></td>
+        <td><%= store.description %></td>
+        <td><%= store.active_to_s %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<% unless @pending_stores.empty? %>
+  <h3>Pending Stores</h3>
+  <ul>
+    <% @pending_stores.each do |store| %>
+      <li><%= store %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% unless @disapproved_stores.empty? %>
+  <h3>Disapproved Stores</h3>
+  <ul>
+    <% @disapproved_stores.each do |store| %>
+      <li><%= store %></li>
+    <% end %>
+  </ul>
+<% end %>

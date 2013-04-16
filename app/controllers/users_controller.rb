@@ -41,9 +41,10 @@ class UsersController < ApplicationController
 
       @customer = @user.customer
       @orders = @user.customer.orders
-      @pending_stores = @user.stores.order('name ASC').where(approval_status: 'pending')
-      @approved_stores = @user.stores.order('name ASC').where(approval_status: 'approved')
-      @disapproved_stores = @user.stores.order('name ASC').where(approval_status: 'disapproved')
+      @stores = @user.stores
+      @pending_stores = @stores.order('name ASC').where(approval_status: 'pending')
+      @approved_stores = @stores.order('name ASC').where(approval_status: 'approved')
+      @disapproved_stores = @stores.order('name ASC').where(approval_status: 'disapproved')
     else
       redirect_to login_path, alert: 'Please log in!'
     end

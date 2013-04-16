@@ -45,6 +45,16 @@ body {
   height:50px;
 }
 
+#welcome_user{ 
+float: left;
+padding-top: 32px;
+}
+
+#welcome_user p{
+  font-family: cursive;
+  font-weight: bold;
+  letter-spacing: 0.4em ;
+}
 
 // This makes the scrolly hr rule as seen on homepage
 /* Single-direction drop shadow */

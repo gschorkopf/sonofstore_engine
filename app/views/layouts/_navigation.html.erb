@@ -4,6 +4,13 @@
 <div class="logo-text">
   <%= link_to "Pink SoSE", root_path, :class => 'brand' %>
 </div>
+
+<div id='welcome_user'>
+  <% if logged_in? %>
+    <p id="signature">Welcome, <%= current_user %></p>
+  <% end %>
+</div> 
+
 <div class="nav-buttons">
   <ul class="nav pull-right">
     <%if false%>
@@ -11,11 +18,6 @@
     <li><%= link_to t('admin.self'), admin_dashboard_path %></li>
     <% end %>
     <%end%>
-
-    <% if can? :edit, Product %>
-    <li><%= link_to t('admin.self'), admin_dashboard_path %></li>
-    <% end %>
-
 
     <% if logged_in? %>
       <li><%= render 'layouts/admin_button' %></li>
