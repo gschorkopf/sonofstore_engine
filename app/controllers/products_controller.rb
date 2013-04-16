@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
       return
     elsif current_store.active == false && current_store.approved?
       redirect_to root_path,
-                alert: "#{current_store.name} is currently under construction."
+                alert: "#{current_store.name} is currently down for maintenance."
       return
     elsif current_store.approved?
       @products = current_store.products
