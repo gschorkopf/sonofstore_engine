@@ -1,18 +1,14 @@
 FactoryGirl.define do
 
-  factory :rating do
-    title "Love it"
-    body "You should buy it too!"
-    stars 1
+  factory :store do
+    name "MyString"
+    path "my-string"
+    description "My String Store Rocks!"
   end
 
   factory :category do
+    #can i assign store id in here?
     title 'Dark Matter'
-  end
-
-  factory :sale do
-    percent_off 50
-    status 'active'
   end
 
   factory :order_item do
@@ -20,7 +16,6 @@ FactoryGirl.define do
     order { FactoryGirl.build(:order) }
     unit_price 20.00
     selling_price 10.00
-    percent_off 50
     quantity 3
   end
 
@@ -29,26 +24,41 @@ FactoryGirl.define do
   end
 
   factory :product do
-    categories { [FactoryGirl.build(:category)] }
+   #is there a way i can assign store_id in here? it would be nice
+    #as well as categories?
+    # categories { [FactoryGirl.build(:category)] }
     title 'Itchy Sweater'
     description 'Hurts so good'
     price 12.99
     status 'active'
   end
 
-  factory :user do
-    full_name 'Raphael Weiner'
-    email 'raphael@example.com'
-    display_name 'raphweiner'
-    password 'password'
-    admin false
+  factory :customer do
+    full_name 'Daniel Boone'
+    email 'dboone54@yahoo.com'
   end
 
-  factory :admin, parent: :user do
-    full_name 'Logan Sears'
-    email 'logan@gmail.com'
-    display_name 'lsears'
+  factory :user do
+     #is there a way i can assign customer_id in here? it would be nice
+    display_name 'Booner'
     password 'password'
-    admin true
+    platform_admin false
+  end
+
+  factory :store_admin, parent: :user do
+    #need to assign a user role for this one, not exactly sure how
+    # full_name 'Teeny Tiny'
+    # email 'teeny@tiny.com'
+    display_name 'Teeny'
+    password 'password'
+    platform_admin false
+  end
+
+  factory :platform_admin, parent: :user do
+    # full_name 'Davey Crockett'
+    # email 'crockett@hotmail.com'
+    display_name 'coonskin'
+    password 'password'
+    platform_admin true
   end
 end

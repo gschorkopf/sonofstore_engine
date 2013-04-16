@@ -1,4 +1,5 @@
-<%= form_for [:admin, @store], url: store_admin_path, html: {multipart: true} do |f| %>
+<%= form_for [:admin, @store], url: store_admin_path,
+    html: {multipart: true, id: 'edit_store'} do |f| %>
   <ul>
   <% @store.errors.full_messages.each do |error| %>
     <li><%= error %></li>
@@ -9,12 +10,12 @@
     <%= f.text_field :name %>
   </p>
   <p>
-    <%= f.label :path %><br/>
+    <%= f.label :path, "URL ID" %><br/>
     <%= f.text_field :path %>
   </p>
   <p>
     <%= f.label :description %><br/>
-    <%= f.text_area :description %>
+    <%= f.text_area :description, :size => "15x10" %>
   </p>
   <p>
     <%= f.submit %>

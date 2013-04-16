@@ -6,35 +6,35 @@ class Store < ActiveRecord::Base
   has_many :user_roles
   has_many :users, through: :user_roles
 
-  # validate :unique_name_among_approved_stores, only: [:create]
-  # validate :unique_path_among_approved_stores, only: [:create]
+  validate :unique_name_among_approved_stores
+  validate :unique_path_among_approved_stores
 
   validates :name, :presence => true
   validates :path, :presence => true
   validates :description, :presence => true
-  
+
   def to_param
     path
   end
 
   def unique_name_among_approved_stores
-    if Store.exists_with_name?(name)
+    if Store.exists_with_name?(name, id)
       errors.add(:name, "already exists")
     end
   end
 
   def unique_path_among_approved_stores
-    if Store.exists_with_path?(path)
+    if Store.exists_with_path?(path, id)
       errors.add(:path, "already exists")
     end
   end
 
-  def self.exists_with_name?(name)
-    !Store.approved.where("name ILIKE ?", "%#{name}%").empty?
+  def self.exists_with_name?(name, id)
+    !Store.approved.where("name ILIKE ?", "%#{name}%").where("id <> ?", id).empty?
   end
 
-  def self.exists_with_path?(path)
-    !Store.approved.where("path ILIKE ?", "%#{path}%").empty?
+  def self.exists_with_path?(path, id)
+    !Store.approved.where("path ILIKE ?", "%#{path}%").where("id <> ?", id).empty?
   end
 
   def self.find(path)
@@ -52,7 +52,7 @@ class Store < ActiveRecord::Base
   def approved?
     approval_status == 'approved'
   end
-  
+
   def to_s
     name
   end

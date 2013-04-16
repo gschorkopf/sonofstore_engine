@@ -1,5 +1,9 @@
 class Product < ActiveRecord::Base
-  attr_accessible :title, :description, :price, :status, :category_ids, :image, :store_id
+  attr_accessible :title, :description, :price,
+                  :status, :category_ids, :image, :store_id
+
+  belongs_to :store
+
   has_and_belongs_to_many :categories
 
   has_attached_file :image, styles: { retail: "500x500",
@@ -25,13 +29,12 @@ class Product < ActiveRecord::Base
                     format: { with: /^\d+??(?:\.\d{0,2})?$/ },
                     numericality: { greater_than: 0 }
 
+
   def unique_product_title_in_store
-    store = Store.find_by_id(store_id)
     if !store.products.where("title ILIKE ?", "%#{title}%").empty?
       errors.add(:title,"This store can have only one product with this name")
     end
   end
-  # UNTESTED
 
   def toggle_status
     if status == 'active'
