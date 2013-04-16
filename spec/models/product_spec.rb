@@ -19,8 +19,7 @@ describe Product do
   end
 
   it 'is invalid without a store id' do
-    pending "talk to Frank about"
-    # expect(FactoryGirl.build(:product, store_id: '').valid?).to be_false
+    expect(FactoryGirl.build(:product, store_id: '').valid?).to be_false
   end
 
   it 'is invalid if title already exists in the same store' do
@@ -30,7 +29,7 @@ describe Product do
   end
 
   it 'is invalid if title already exists (case insensitive) in the same store' do
-    pending "write test when case insensitivy is updated"
+    #fix test when case insensitivy is updated
     FactoryGirl.create(:product, title: 'ITCHY Sweater', store_id: @store.id)
     product = FactoryGirl.build(:product, store_id: @store.id)
     expect(product.valid?).to be_false
@@ -72,10 +71,11 @@ describe Product do
     expect(product.categories.count).to eq 2
   end
 
-  # # it "includes Paperclip correctly" do
-  # #   example = Product.new :image => File.new(Rails.root + 'spec/fixtures/images/rails.png')
-  # #   expect(example.image_file_name).to eq 'rails.png'
-  # # end
+  it "includes Paperclip correctly" do
+    pending "fix when we do paperclip, or write a different test"
+    example = Product.new :image => File.new(Rails.root + 'spec/fixtures/images/rails.png')
+    expect(example.image_file_name).to eq 'rails.png'
+  end
 
   describe '.toggle_status' do
     context 'on an active product' do

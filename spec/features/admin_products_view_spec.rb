@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe 'the admin products view', type: :feature do
   before(:each) do
-    FactoryGirl.create(:admin)
+    customer = FactoryGirl.create(:customer)
+    FactoryGirl.create(:store_admin, customer_id: customer.id)
     visit login_path
     fill_in 'sessions_email', with: 'logan@gmail.com'
     fill_in 'sessions_password', with: 'password'
