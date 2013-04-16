@@ -2,16 +2,15 @@
   <%= render partial: 'user_navigation', :locals => { active: :stores } %>
 
   <div class="span8">
-
-    <div class="pull-right">
-      <%= button_to "Add New Store Admin", new_store_admin_user_path,
-      class: 'btn btn-custom-lighten', method: :get %>
-      <%= button_to "Add New Stocker", new_store_admin_stocker_path,
-      class: 'btn btn-custom-lighten', method: :get %>
-    </div>
+      
+  
 
     <div class="store_details">
-      <h3>Store Details:</h3>
+      <h2>Store Details</h2>
+      <hr>
+      <%= link_to 'Edit Store Details', store_admin_edit_path(@store), method: :get %>
+      <br>
+      <br>
       <p>
         <b>Name:</b>
         <%= @store %>
@@ -26,11 +25,21 @@
         <b>Description:</b>
         <%= @store.description %>
       </p>
-      <%= button_to 'Edit Store Details', store_admin_edit_path(@store), method: :get %>
+      <br>
+      <br>
     </div>
 
+    
+
     <div class="store_admins">
-      <h3>Store Admins:</h3>
+      <h2>Store Admins</h2>
+     
+      <hr>
+      <%= link_to "Add New Store Admin", new_store_admin_user_path, method: :get %>
+      OR
+      <%= link_to "Add New Stocker", new_store_admin_stocker_path, method: :get %>
+      <br>
+      <br>
       <%= render partial: 'store_admins', :locals => {users: @store_users, store: @store} %>
     </div>
 
