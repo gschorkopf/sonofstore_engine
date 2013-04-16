@@ -13,7 +13,7 @@ class Store < ActiveRecord::Base
   validates :path, :presence => true
   validates :description, :presence => true
 
-  def to_param
+  def to_param 
     path
   end
 
