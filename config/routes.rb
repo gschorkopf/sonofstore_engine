@@ -32,6 +32,14 @@ StoreEngine::Application.routes.draw do
     resources :products, only: [ :index, :show ]
     resources :categories, only: [ :index, :show ]
 
+    namespace :stock do
+      resources :products, except: [:destroy] do
+        member do
+          post :toggle_status
+        end
+      end
+    end
+
     namespace :admin do
       get '/' => "stores#show"
       resources :users
@@ -45,6 +53,7 @@ StoreEngine::Application.routes.draw do
       end
     end
   end
+
 
   resources :customers, only: [ :new, :create, :update, :show ] do
     resources :orders
