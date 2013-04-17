@@ -4,8 +4,10 @@ class Admin::StoresController < ApplicationController
   before_filter :require_stocker, only: [:show]
 
   def index
-    @pending_stores = Store.order('name ASC').where(approval_status: 'pending')
-    @approved_stores = Store.order('name ASC').
+    @pending_stores ||= Store.order('name ASC').
+                              where(approval_status: 'pending')
+
+    @approved_stores ||= Store.order('name ASC').
                              where(approval_status: 'approved')
   end
 
@@ -17,6 +19,7 @@ class Admin::StoresController < ApplicationController
 
   def edit
     @store = Store.find_by_path(params[:store_path])
+
     expire_fragment("product_index_for_store_#{@store.path}")
     expire_fragment("root_page")
   end
@@ -25,6 +28,7 @@ class Admin::StoresController < ApplicationController
     @store = Store.find_by_path(params[:store_path])
 
     if @store.update_attributes(params[:store])
+
       expire_fragment("product_index_for_store_#{@store.path}")
       expire_fragment("root_page")
 

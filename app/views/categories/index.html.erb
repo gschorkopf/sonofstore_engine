@@ -1,12 +1,16 @@
-<h2> Categories for <%= @current_store %></h2>
+<% cache("categories_index_#{@store.path}") do %>
 
-<table class="table table-striped">
-    <tr>
-      <td><strong>name</strong></td>
-    </tr>
-  <% @categories.each do |category| %>
-    <tr>
-      <td><%= link_to category.title, store_category_path(current_store, category) %></td>
-    </tr>
-  <% end %>
-</table>
+  <h2> Categories for <%= @current_store %></h2>
+
+  <table class="table table-striped">
+      <tr>
+        <td><strong>name</strong></td>
+      </tr>
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= link_to category.title, store_category_path(current_store, category) %></td>
+      </tr>
+    <% end %>
+  </table>
+
+<% end %>

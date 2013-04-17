@@ -1,0 +1,57 @@
+<% unless current_user %>
+  <h3>Existing user?  Log in here!</h3>
+  <br/>
+  <%= simple_form_for :sessions, :url => sessions_path, method: 'POST' do |f| %>
+    <%= f.input :email, input_html: { placeholder: t('placeholder.session.email') } %>
+    <%= f.input :password %>
+    <%= f.button :submit, t('navigation.login'), class:"btn btn-custom-lighten" %>
+  <% end %>
+<% end %>
+
+<%= form_tag( :controller => "checkouts", :action => "create", method: :post) do %>
+<% unless current_user %>
+  <h3>Checkout as guest</h3>
+  <br/>
+            <p>Full Name</p>
+            <%= text_field_tag("guest[full_name]") %><br/>
+            <p>Email</p>
+            <%= text_field_tag("guest[email]") %><br/>
+<% else %>
+  <%= hidden_field_tag("guest[full_name]", current_user.customer.full_name)  %>
+  <%= hidden_field_tag("guest[email]", current_user.customer.email) %>
+<% end %>
+  <h3>Shipping Address:</h3>
+  <br/>
+            <p>Street Address</p>
+            <%= text_field_tag("shipping_address[street_address]") %><br/>
+            <p>City</p>
+            <%= text_field_tag("shipping_address[city]") %><br/>
+            <p>Zipcode</p>
+            <%= text_field_tag("shipping_address[zip]") %><br/>
+            <p>State</p>
+            <%= text_field_tag("shipping_address[state]") %><br/>
+
+  <h3>Billing Address:</h3>
+  <br/>
+            <p>Street Address</p>
+            <%= text_field_tag("billing_address[street_address]") %><br/>
+            <p>City</p>
+            <%= text_field_tag("billing_address[city]") %><br/>
+            <p>Zipcode</p>
+            <%= text_field_tag("billing_address[zip]") %><br/>
+            <p>State</p>
+            <%= text_field_tag("billing_address[state]") %><br/>
+
+  <h3>Credit Card Information:</h3>
+  <br/>
+            <p>Credit Card Number</p>
+            <%= text_field_tag("credit_card[number]") %><br/>
+            <p>Security Code</p>
+            <%= text_field_tag("credit_card[security_code]") %><br/>
+            <p>Expiration Month</p>
+            <%= text_field_tag("credit_card[expiration_month]") %><br/>
+            <p>Expiration Year</p>
+            <%= text_field_tag("credit_card[expiration_year]") %><br/>
+    <%= submit_tag("Submit") %>
+<% end %>
+    </div>
