@@ -1,10 +1,9 @@
 class Signup
   attr_reader :customer, :user, :message
-  #whats that? you think the following two methods could be broken into like 12?
-  #HA
+
 
   def initialize(params)
-    if Customer.find_by_email(params[:email]) != nil
+    if Customer.find_by_email(params[:email]) != nil && Customer.find_by_email(params[:email]).user != nil
       @customer = Customer.new
       @user = User.new
       @message = "Email already exists"
@@ -19,6 +18,15 @@ class Signup
       unless params[:display_name].blank?
         @user.update_attributes(display_name: params[:display_name])
       end
+    end
+    if Customer.find_by_email(params[:email]) != nil && Customer.find_by_email(params[:email]).user == nil
+      @customer = Customer.find_by_email(params[:email])
+      @customer.full_name = params[:full_name]
+      @customer.save
+      @user = User.create(password: params[:password],
+             password_confirmation: params[:password_confirmation],
+                      display_name: params[:display_name],
+                       customer_id: @customer.id)
     end
   end
 
