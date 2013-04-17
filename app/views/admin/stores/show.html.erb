@@ -1,17 +1,14 @@
 <div class="user-index">
-  <%= render partial: 'user_navigation', :locals => { active: :stores } %>
+  <%= render partial: 'shared/admin_navigation', :locals => { active: :stores } %>
 
   <div class="span8">
 
-    <div class="pull-right">
-      <%= button_to "Add New Store Admin", new_store_admin_user_path,
-      class: 'btn btn-custom-lighten', method: :get %>
-      <%= button_to "Add New Stocker", new_store_admin_stocker_path,
-      class: 'btn btn-custom-lighten', method: :get %>
-    </div>
-
     <div class="store_details">
-      <h3>Store Details:</h3>
+      <h2>Store Details</h2>
+      <hr>
+      <%= link_to 'Edit Store Details', store_admin_edit_path(@store), method: :get %>
+      <br>
+      <br>
       <p>
         <b>Name:</b>
         <%= @store %>
@@ -26,12 +23,43 @@
         <b>Description:</b>
         <%= @store.description %>
       </p>
-      <%= button_to 'Edit Store Details', store_admin_edit_path(@store), method: :get %>
+      <br>
+      <br>
     </div>
 
     <div class="store_admins">
-      <h3>Store Admins:</h3>
+      <h2>Store Admins</h2>
+     
+      <hr>
+      <a href='#new_Admin' role='button' data-toggle='modal'>Add a New Store Admin</a>
+      OR
+      <a href='#new_Stocker' role='button' data-toggle='modal'>Add a New Store Stocker</a>
+      <br>
+      <br>
       <%= render partial: 'store_admins', :locals => {users: @store_users, store: @store} %>
+
+      <div id="new_Admin" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModalLabel">Add a New Store Admin</h3>
+        </div>
+        <div class="modal-body">
+          <%= render partial: 'admin/users/new_admin' %>
+        </div>
+      </div>
+
+      <div id="new_Stocker" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModalLabel">Add a New Store Stocker</h3>
+        </div>
+        <div class="modal-body">
+          <%= render partial: 'admin/stockers/new_stocker' %>
+        </div>
+      </div>
+
     </div>
 
   </div>

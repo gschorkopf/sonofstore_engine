@@ -32,6 +32,15 @@ class User < ActiveRecord::Base
     user_role.pop.role
   end
 
+  def role_to_s(store)
+    user_role = role(store)
+    if user_role == 'store_admin'
+      "Admin"
+    else  # user_role =='stocker'
+      "Stocker"
+    end
+  end
+
   def role_for_store?(role, store)
     selected_store = self.stores.where(id: store.id).first
 

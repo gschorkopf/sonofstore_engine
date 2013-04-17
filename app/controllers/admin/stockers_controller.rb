@@ -20,7 +20,8 @@ class Admin::StockersController < ApplicationController
       redirect_to store_admin_path(@store), notice: "Stocker added!"
     else
       Mailer.sign_up_as_stocker(email, @store).deliver
-      redirect_to store_admin_path(@store), notice: "This person is not currently registered with Pink SoSE.  A welcome email has been sent on your behalf."
+      redirect_to store_admin_path(@store),
+      notice: "This person is not currently registered with Pink SoSE.  A welcome email has been sent on your behalf."
     end
   end
 end
