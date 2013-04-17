@@ -39,11 +39,11 @@ StoreEngine::Application.routes.draw do
 
     namespace :admin do
       get '/' => "stores#show"
-      resources :users
       get '/edit' => "stores#edit"
       put '/' => "stores#update"
+      resources :users
       resources :stockers
-      resources :categories
+      resources :categories, except: [:destroy]
       resources :products do
         member do
           post :toggle_status
@@ -57,18 +57,14 @@ StoreEngine::Application.routes.draw do
   resources :customers, only: [ :new, :create, :update, :show ] do
     resources :orders
     resource :shipping_addresses, except: [ :index ]
-    resource :billing_addresses, except: [ :index ]
-    resource :credit_cards, except: [ :index ]
+    resource :billing_addresses, except: [ :index, :show, :destroy ]
+    resource :credit_cards, except: [ :index, :show, :destroy ]
     resource :user, only: [:new, :create, :update, :show]
   end
 
   namespace :admin do
-    # namespace dedicated to platform admin
-
     root to: redirect("/admin/dashboard")
     get :dashboard, to: "orders#index", as: 'dashboard'
-
-    resources :categories, except: [ :index, :show ]
 
     resources :orders, only: [ :show, :update ]
 
