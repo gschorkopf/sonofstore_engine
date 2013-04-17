@@ -33,9 +33,8 @@ class OrdersController < ApplicationController
 
   def create
     @customer_id = params[:customer_id]
-    uuid = UUID.new.generate
     @order = Order.create(status: 'pending', customer_id: @customer_id)
-    @order.uuid_hash = uuid
+    @order.uuid_hash = UUID.new.generate
 
     session[:cart].each do |product_id, quantity|
       product = Product.find(product_id)
@@ -47,7 +46,7 @@ class OrdersController < ApplicationController
     if @order.save
       Mailer.order_confirmation(@customer_id, @order).deliver
       # Resque.enqueue(OrderMailer, current_user.id, @order.id)
-      
+
       session[:cart] = {}
       if current_user
         redirect_to profile_path(current_user),

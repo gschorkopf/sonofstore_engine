@@ -14,7 +14,7 @@ class Store < ActiveRecord::Base
             format: { with: /\A[A-Za-z0-9-]+\z/ }
   validates :description, :presence => true
 
-  def to_param 
+  def to_param
     path
   end
 
