@@ -54,7 +54,7 @@ StoreEngine::Application.routes.draw do
 
   resources :users
 
-  resources :customers, only: [ :new, :create, :update, :show ] do
+  resources :customers, only: [ :new, :create, :update ] do
     resources :orders
     resource :shipping_addresses, except: [ :index ]
     resource :billing_addresses, except: [ :index, :show, :destroy ]
