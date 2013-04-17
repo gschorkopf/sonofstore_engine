@@ -1,5 +1,3 @@
-<% cache("product_index_for_store_#{current_store.path}") do %>
-
 <div class="product-index">
 
   <div class="pull-right">
@@ -9,6 +7,7 @@
       <%= link_to 'Store Administration', store_admin_path(current_store) %>
     <% end %>
   </div>
+<% cache("product_index_for_store_#{current_store.path}") do %>
 
   <div class="store-information">
     <h2><%= current_store %></h2>
@@ -21,7 +20,5 @@
           locals: { store: current_store, product: product }  %>
       <% end %>
   </div>
-
-</div>
-
 <% end %> <!-- end of caching block-->
+</div>
