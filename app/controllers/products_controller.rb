@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
         return
     elsif current_store.active == false && current_store.approved?
       redirect_to root_path,
-                alert: "#{current_store.name} is currently down for maintenance."
+              alert: "#{current_store.name} is currently down for maintenance."
       return
     elsif current_store.approved?
       @products = current_store.products
@@ -26,7 +26,8 @@ class ProductsController < ApplicationController
     if @product
       render :show
     else
-      redirect_to root_path, alert: "The product you are looking for does not exist."
+      redirect_to root_path,
+      alert: "The product you are looking for does not exist."
     end
   end
 end

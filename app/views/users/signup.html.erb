@@ -1,4 +1,6 @@
-<%= form_tag(:controller => "users", :action => "create", :method => "post") do %>
+<div class="span8" id="signup">
+
+  <%= form_tag(:controller => "users", :action => "create", :method => "post") do %>
   <p>* Full Name</p>
   <%= text_field_tag(:full_name) %><br/>
   <p>* Email</p>
@@ -9,5 +11,7 @@
   <%= password_field_tag(:password) %><br/>
   <p>* Password Confirmation</p>
   <%= password_field_tag(:password_confirmation) %><br/>
-  <%= submit_tag("Sign Up") %>
+  <%= button_tag("Sign Up", class: 'btn btn-custom-lighten') %>
 <% end %>
+
+</div>

@@ -3,7 +3,9 @@ class BillingAddress < ActiveRecord::Base
 
   validates_presence_of :street_address, :city, :zip, :state
 
-  validates :zip, :length => {:minimum => 5, :maximum => 5}, :numericality => true
+  validates :zip,
+            :length => {:minimum => 5, :maximum => 5},
+            :numericality => true
 
   belongs_to :customer
   # attr_accessible :title, :body
