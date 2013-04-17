@@ -16,7 +16,6 @@ StoreEngine::Application.routes.draw do
   get "/order_details/:uuid_hash" => "orders#display", :as => "obscure_link"
 
 
-
   resources :products, only: [ :index, :show ]
 
   resources :sessions, only: [ :new, :create, :destroy ]
@@ -27,6 +26,7 @@ StoreEngine::Application.routes.draw do
     get '/' => "products#index", as: 'home'
     resources :products, only: [ :index, :show ]
     resources :categories, only: [ :index, :show ]
+    resources :checkout, only: [ :new, :create, :show ]
 
     resource :cart, only: [ :update, :show, :destroy ] do
       member do
