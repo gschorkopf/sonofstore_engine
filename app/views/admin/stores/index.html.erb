@@ -3,6 +3,7 @@
 
   <div class="span11">
     <h2>Platform Administration for All Stores</h2>
+    <hr>
     <h3>Pending Stores</h3>
 
     <table class="table table-striped">
@@ -47,13 +48,19 @@
         <th>URL ID</th>
         <th>Description</th>
         <th>Active Status</th>
-        <th>Admin</th>
+        <th>Admin Page</th>
       </thead>
 
       <tbody>
       <% @approved_stores.each do |store| %>
         <tr>
-          <td><%= store.name %></td>
+          <td>
+            <% if store.active? %>
+              <%= link_to store, store_home_path(store) %>
+            <% else %>
+              <%= store %>
+            <% end %>
+          </td>
           <td><%= store.path %></td>
           <td><%= store.description[0...31] %>
             <% if store.description.length >= 32 %>

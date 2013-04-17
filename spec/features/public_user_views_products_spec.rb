@@ -18,7 +18,7 @@ feature "Public User Views Products" do
     before(:each) do
       @store = FactoryGirl.create(:store)
       @product = FactoryGirl.create(:product, store_id: @store.id)
-      visit product_path(@product)
+      visit store_product_path(@store, @product)
     end
 
     it "displays the product name" do
