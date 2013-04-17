@@ -2,19 +2,20 @@
   <%= render partial: 'user_navigation', :locals => { active: :stores } %>
 
   <div class="span8 tab-content">
+
     <div id="manage_stores" class="tab-pane active">
       <div class="pull-right">
-      <%= button_to "Create a New Store", new_store_path, class: 'btn btn-custom-lighten', method: :get %>
-
+        <%= button_to "Create a New Store", new_store_path, class: 'btn btn-custom-lighten', method: :get %>
       </div>
+
       <h1>Manage My Stores</h1>
       <hr>
-
       <%= render partial: 'user_stores' %>
     </div>
 
-    <div id="edit_profile">
-      <h1>Personal Information</h1>
+    <div id="edit_account" class="tab-pane">
+      <h1>Edit Account</h1>
+      <hr>
       <%= form_tag(user_path(current_user), method: :put) do %>
         <p>* Full Name</p>
         <%= text_field_tag(:full_name, current_user.customer.full_name) %><br/>
@@ -27,69 +28,63 @@
         <p>* Password Confirmation</p>
         <%= password_field_tag(:password_confirmation) %><br/>
         <%= submit_tag("Update") %>
-
       <% end %>
 
       <h3>Shipping Address:</h3>
 
       <% if @user.customer.shipping_address != nil %>
-
-      <%= form_tag(customer_shipping_addresses_path(@customer.id), method: :put) do %>
-        <p>Street Address</p>
-        <%= text_field_tag(:street_address, current_user.customer.shipping_address.street_address) %><br/>
-        <p>City</p>
-        <%= text_field_tag(:city, current_user.customer.shipping_address.city) %><br/>
-        <p>Zipcode</p>
-        <%= text_field_tag(:zip, current_user.customer.shipping_address.zip) %><br/>
-        <p>State</p>
-        <%= text_field_tag(:state, current_user.customer.shipping_address.state) %><br/>
-        <%= submit_tag("Update") %>
-      <% end %>
-
+        <%= form_tag(customer_shipping_addresses_path(@customer.id), method: :put) do %>
+          <p>Street Address</p>
+          <%= text_field_tag(:street_address, current_user.customer.shipping_address.street_address) %><br/>
+          <p>City</p>
+          <%= text_field_tag(:city, current_user.customer.shipping_address.city) %><br/>
+          <p>Zipcode</p>
+          <%= text_field_tag(:zip, current_user.customer.shipping_address.zip) %><br/>
+          <p>State</p>
+          <%= text_field_tag(:state, current_user.customer.shipping_address.state) %><br/>
+          <%= submit_tag("Update") %>
+        <% end %>
       <% else %>
         No address currently on file.<br/><br/>
         <%= button_to "Add Shipping Address", new_customer_shipping_addresses_path(current_user), method: :get %>
       <% end %>
 
-    <h3>Billing Address:</h3>
-  <% if @user.customer.billing_address != nil %>
-
-      <%= form_tag(customer_billing_addresses_path(@customer.id), method: :put) do %>
-        <p>Street Address</p>
-        <%= text_field_tag(:street_address, current_user.customer.billing_address.street_address) %><br/>
-        <p>City</p>
-        <%= text_field_tag(:city, current_user.customer.billing_address.city) %><br/>
-        <p>Zipcode</p>
-        <%= text_field_tag(:zip, current_user.customer.billing_address.zip) %><br/>
-        <p>State</p>
-        <%= text_field_tag(:state, current_user.customer.billing_address.state) %><br/>
-        <%= submit_tag("Update") %>
+      <h3>Billing Address:</h3>
+      <% if @user.customer.billing_address != nil %>
+        <%= form_tag(customer_billing_addresses_path(@customer.id), method: :put) do %>
+          <p>Street Address</p>
+          <%= text_field_tag(:street_address, current_user.customer.billing_address.street_address) %><br/>
+          <p>City</p>
+          <%= text_field_tag(:city, current_user.customer.billing_address.city) %><br/>
+          <p>Zipcode</p>
+          <%= text_field_tag(:zip, current_user.customer.billing_address.zip) %><br/>
+          <p>State</p>
+          <%= text_field_tag(:state, current_user.customer.billing_address.state) %><br/>
+          <%= submit_tag("Update") %>
+        <% end %>
+      <% else %>
+        No address currently on file.<br/><br/>
+        <%= button_to "Add Billing Address", new_customer_billing_addresses_path(current_user), method: :get %>
       <% end %>
-  <% else %>
-    No address currently on file.<br/><br/>
-    <%= button_to "Add Billing Address", new_customer_billing_addresses_path(current_user), method: :get %>
-  <% end %>
 
-    <div>
       <h3>Credit Card Information:</h3>
-    <% if @user.customer.credit_card != nil %>
-
-      <%= form_tag(customer_credit_cards_path(@customer.id), method: :put) do %>
-        <p>Credit Card Number</p>
-        <%= text_field_tag(:number, current_user.customer.credit_card.number) %><br/>
-        <p>Security Code</p>
-        <%= text_field_tag(:security_code, current_user.customer.credit_card.security_code) %><br/>
-        <p>Expiration Month</p>
-        <%= text_field_tag(:expiration_month, current_user.customer.credit_card.expiration_month) %><br/>
-        <p>Expiration Year</p>
-        <%= text_field_tag(:expiration_year, current_user.customer.credit_card.expiration_year) %><br/>
-        <%= submit_tag("Update") %>
+      <% if @user.customer.credit_card != nil %>
+        <%= form_tag(customer_credit_cards_path(@customer.id), method: :put) do %>
+          <p>Credit Card Number</p>
+          <%= text_field_tag(:number, current_user.customer.credit_card.number) %><br/>
+          <p>Security Code</p>
+          <%= text_field_tag(:security_code, current_user.customer.credit_card.security_code) %><br/>
+          <p>Expiration Month</p>
+          <%= text_field_tag(:expiration_month, current_user.customer.credit_card.expiration_month) %><br/>
+          <p>Expiration Year</p>
+          <%= text_field_tag(:expiration_year, current_user.customer.credit_card.expiration_year) %><br/>
+          <%= submit_tag("Update") %>
+        <% end %>
+      <% else %>
+        No credit card currently on file.<br/><br/>
+        <%= button_to "Add Credit Card", new_customer_credit_cards_path(current_user), method: :get %>
       <% end %>
-    <% else %>
-      No credit card currently on file.<br/><br/>
-      <%= button_to "Add Credit Card", new_customer_credit_cards_path(current_user), method: :get %>
-    <% end %>
-
+    </div>
 
     <div id="order_history" class="tab-pane">
       <h1>Order History</h1>
@@ -98,9 +93,6 @@
       <% if @orders.empty? %>
         <p>You currently don't have any orders. Start Shopping!</p>
       <% else %>
-        <h1><%= t('order.history') %></h1>
-        <hr>
-
         <table class="table table-striped">
           <thead>
           <th>#</th>
@@ -109,11 +101,10 @@
           <th><%= t('total') %></th>
           </thead>
           <tbody>
-          <%= render partial: 'order', collection: @orders %>
+            <%= render partial: 'order', collection: @orders %>
           </tbody>
         </table>
-        <% end %>
-
+      <% end %>
     </div>
 
   </div>
