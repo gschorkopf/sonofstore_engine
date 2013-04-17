@@ -1,19 +1,25 @@
 class Signup
-  attr_reader :customer, :user
+  attr_reader :customer, :user, :message
+  #whats that? you think the following two methods could be broken into like 12?
+  #HA
 
   def initialize(params)
-    @customer = Customer.find_or_create_by_email(params[:email])
-    @customer.full_name = params[:full_name]
-    @customer.save
+    if Customer.find_by_email(params[:email]) != nil
+      @customer = Customer.new
+      @user = User.new
+      @message = "Email already exists"
+    else
+      @customer = Customer.create(params[:email])
+      @customer.full_name = params[:full_name]
+      @customer.save
 
-    @user = User.find_or_create_by_customer_id(@customer.id)
-    @user.update_attributes(password: params[:password],
-               password_confirmation: params[:password_confirmation])
-    unless params[:display_name].blank?
-      @user.update_attributes(display_name: params[:display_name])
+      @user = User.find_or_create_by_customer_id(@customer.id)
+      @user.update_attributes(password: params[:password],
+                 password_confirmation: params[:password_confirmation])
+      unless params[:display_name].blank?
+        @user.update_attributes(display_name: params[:display_name])
+      end
     end
-#check to see if the user is saved, if it isn't call .errors on it
-#redirect to same form and display them on that form
   end
 
   def self.update(params)

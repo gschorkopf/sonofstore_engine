@@ -14,6 +14,8 @@ class UsersController < ApplicationController
       auto_login(@signup.user)
       #redirect_to root_url, :notice => "Welcome, #{@user.full_name}"
       redirect_to session[:return_to] || root_path, notice: 'Logged in!'
+    elsif @signup.message
+      redirect_to signup_path, notice: "Email already exists"
     else
       redirect_to signup_path, notice: "#{formated_errors}"
     end
