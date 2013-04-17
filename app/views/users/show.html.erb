@@ -33,26 +33,17 @@
       <h3>Shipping Address:</h3>
       <% if @user.customer.shipping_address != nil %>
 
-      <table class="shipping">
-        <tr>
-          <th> Street Address: </th>
-          <td><%= @user.customer.shipping_address.street_address %></td><br/>
-        </tr>
-        <tr>
-          <th> City: </th>
-          <td><%= @user.customer.shipping_address.city %></td><br/>
-        </tr>
-        <tr>
-          <th> Zipcode: </th>
-          <td><%= @user.customer.shipping_address.zip %></td><br/>
-        </tr>
-        <tr>
-          <th> State: </th>
-          <td><%= @user.customer.shipping_address.state %></td><br/>
-        </tr>
-      </table>
-
-        <%= button_to "Edit", edit_customer_shipping_addresses_path(current_user), method: :get %>
+      <%= form_tag(customer_shipping_addresses_path(@customer.id), method: :put) do %>
+        <p>Street Address</p>
+        <%= text_field_tag(:street_address, current_user.customer.shipping_address.street_address) %><br/>
+        <p>City</p>
+        <%= text_field_tag(:city, current_user.customer.shipping_address.city) %><br/>
+        <p>Zipcode</p>
+        <%= text_field_tag(:zip, current_user.customer.shipping_address.zip) %><br/>
+        <p>State</p>
+        <%= text_field_tag(:state, current_user.customer.shipping_address.state) %><br/>
+        <%= submit_tag("Update") %>
+      <% end %>
       <% else %>
         No address currently on file.<br/><br/>
         <%= button_to "Add Shipping Address", new_customer_shipping_addresses_path(current_user), method: :get %>
@@ -62,25 +53,17 @@
     <h3>Billing Address:</h3>
   <% if @user.customer.billing_address != nil %>
 
-  <table class="shipping">
-    <tr>
-      <th>Street Address: </th>
-      <td><%= @user.customer.billing_address.street_address %></td><br/>
-    </tr>
-    <tr>
-      <th>City: </th>
-      <td><%= @user.customer.billing_address.city %></td><br/>
-    </tr>
-    <tr>
-      <th>Zipcode: </th>
-      <td><%= @user.customer.billing_address.zip %></td><br/>
-    </tr>
-    <tr>
-      <th>State: </th>
-      <td><%= @user.customer.billing_address.state %></td><br/>
-    </tr>
-  </table>
-    <%= button_to "Edit", edit_customer_billing_addresses_path(current_user), method: :get %>
+      <%= form_tag(customer_billing_addresses_path(@customer.id), method: :put) do %>
+        <p>Street Address</p>
+        <%= text_field_tag(:street_address, current_user.customer.billing_address.street_address) %><br/>
+        <p>City</p>
+        <%= text_field_tag(:city, current_user.customer.billing_address.city) %><br/>
+        <p>Zipcode</p>
+        <%= text_field_tag(:zip, current_user.customer.billing_address.zip) %><br/>
+        <p>State</p>
+        <%= text_field_tag(:state, current_user.customer.billing_address.state) %><br/>
+        <%= submit_tag("Update") %>
+      <% end %>
   <% else %>
     No address currently on file.<br/><br/>
     <%= button_to "Add Billing Address", new_customer_billing_addresses_path(current_user), method: :get %>
@@ -90,25 +73,17 @@
       <h3>Credit Card Information:</h3>
     <% if @user.customer.credit_card != nil %>
 
-    <table class="shipping">
-      <tr>
-        <th>Credit Card Number: </th>
-        <td><%= @user.customer.credit_card.number %></td><br/>
-      </tr>
-      <tr>
-        <th>Security Code: </th>
-        <td><%= @user.customer.credit_card.security_code %></td><br/>
-      </tr>
-      <tr>
-        <th>Expiration Month: </th>
-        <td><%= @user.customer.credit_card.expiration_month %></td><br/>
-      </tr>
-      <tr>
-        <th>Expiration Year: </th>
-        <td><%= @user.customer.credit_card.expiration_year %></td><br/>
-      </tr>
-    </table>
-      <%= button_to "Edit", edit_customer_credit_cards_path(current_user), method: :get %>
+      <%= form_tag(customer_credit_cards_path(@customer.id), method: :put) do %>
+        <p>Credit Card Number</p>
+        <%= text_field_tag(:number, current_user.customer.credit_card.number) %><br/>
+        <p>Security Code</p>
+        <%= text_field_tag(:security_code, current_user.customer.credit_card.security_code) %><br/>
+        <p>Expiration Month</p>
+        <%= text_field_tag(:expiration_month, current_user.customer.credit_card.expiration_month) %><br/>
+        <p>Expiration Year</p>
+        <%= text_field_tag(:expiration_year, current_user.customer.credit_card.expiration_year) %><br/>
+        <%= submit_tag("Update") %>
+      <% end %>
     <% else %>
       No credit card currently on file.<br/><br/>
       <%= button_to "Add Credit Card", new_customer_credit_cards_path(current_user), method: :get %>
