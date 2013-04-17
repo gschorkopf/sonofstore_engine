@@ -4,9 +4,8 @@ class CustomersController < ApplicationController
   end
 
   def create
-    @customer = Customer.find_or_create_by_email(params[:customer])
-
-    if @customer
+    @customer = Customer.find_or_create_by_email(params[:customer][:email])
+    if @customer.user_id
       if current_user
         redirect_to session[:return_to] || profile_path, notice: 'Logged in!'
       else
