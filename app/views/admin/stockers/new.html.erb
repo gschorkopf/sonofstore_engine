@@ -1,8 +1,0 @@
-<h4>Enter the e-mail address of the stocker you would like to add</h4>
-
-<%= simple_form_for [@store, :admin, @user], :url => store_admin_stockers_path, :html => {:method => :post} do |f| %>
-  <%= f.fields_for :customers do |builder| %>
-    <%= builder.input :email %>
-  <% end %>
-    <%= f.button :submit, t('submit')  %>
-<% end %>
