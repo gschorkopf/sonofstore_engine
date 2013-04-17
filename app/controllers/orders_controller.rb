@@ -53,7 +53,7 @@ class OrdersController < ApplicationController
       Mailer.order_confirmation(@customer_id, @order).deliver
       # Resque.enqueue(OrderMailer, current_user.id, @order.id)
       session[current_store.path] = {}
-      Resque.enqueue(OrderMailer, @customer_id, @order.id)
+
       if current_user
         redirect_to customer_order_path(@customer_id, @order.id), :notice => "Successfully created order!"
       else
