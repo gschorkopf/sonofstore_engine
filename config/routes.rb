@@ -12,17 +12,39 @@ StoreEngine::Application.routes.draw do
   get "/confirmation-page/:id" => "orders#confirm", :as => "order_confirmation"
   get "/order_details/:uuid_hash" => "orders#display", :as => "obscure_link"
 
+  namespace :admin do
+    root to: redirect("/admin/dashboard")
+    get :dashboard, to: "orders#index", as: 'dashboard'
+
+    resources :orders, only: [ :show, :update ]
+
+    resources :order_items, only: [ :update, :destroy ]
+
+    resources :stores, except: [:update, :new ] do
+      member do
+        put :choose_approval_status, :as => "choose_approval_status_on"
+        put :toggle_active
+      end
+    end
+  end
+
   resource :cart, only: [ :update, :show, :destroy ] do
     member do
       put :remove_item
     end
   end
 
-  resources :products, only: [ :index, :show ]
+  resources :customers, only: [ :new, :create, :update ] do
+    resources :orders, except: [ :destroy ]
+    resource :shipping_addresses, except: [ :index, :show, :destroy ]
+    resource :billing_addresses, except: [ :index, :show, :destroy ]
+    resource :credit_cards, except: [ :index, :show, :destroy ]
+    resource :user, only: [:new, :create, :update, :show ]
+  end
 
   resources :sessions, only: [ :new, :create, :destroy ]
 
-  resources :stores, except: [ :index ]
+  resources :stores, only: [ :new, :create ]
 
   scope "/:store_path", as: 'store' do
     get '/' => "products#index", as: 'home'
@@ -30,7 +52,7 @@ StoreEngine::Application.routes.draw do
     resources :categories, only: [ :index, :show ]
 
     namespace :stock do
-      resources :products, except: [:destroy] do
+      resources :products, except: [ :destroy ] do
         member do
           post :toggle_status
         end
@@ -39,11 +61,11 @@ StoreEngine::Application.routes.draw do
 
     namespace :admin do
       get '/' => "stores#show"
-      resources :users
       get '/edit' => "stores#edit"
       put '/' => "stores#update"
+      resources :users, except: [ :index, :update, :edit, :show ]
       resources :stockers
-      resources :categories
+      resources :categories, except: [ :destroy ]
       resources :products do
         member do
           post :toggle_status
@@ -53,32 +75,5 @@ StoreEngine::Application.routes.draw do
   end
 
   resources :users
-
-  resources :customers, only: [ :new, :create, :update, :show ] do
-    resources :orders
-    resource :shipping_addresses, except: [ :index ]
-    resource :billing_addresses, except: [ :index ]
-    resource :credit_cards, except: [ :index ]
-    resource :user, only: [:new, :create, :update, :show]
-  end
-
-  namespace :admin do
-    # namespace dedicated to platform admin
-
-    root to: redirect("/admin/dashboard")
-    get :dashboard, to: "orders#index", as: 'dashboard'
-
-    resources :categories, except: [ :index, :show ]
-
-    resources :orders, only: [ :show, :update ]
-
-    resources :order_items, only: [ :update, :destroy]
-
-    resources :stores, except: [:update, :new] do
-      member do
-        put :choose_approval_status, :as => "choose_approval_status_on"
-        put :toggle_active
-      end
-    end
-  end
+  # Why do we have this as a duplicate to :customers => :users ?
 end

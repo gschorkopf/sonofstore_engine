@@ -1,6 +1,5 @@
 <% cache("admin_product_index_id_#{product.id}") do %>
 
-
   <tr>
     <td><%= link_to product.title, product_path(product) %></td>
     <td><%= number_to_currency(product.price) %></td>

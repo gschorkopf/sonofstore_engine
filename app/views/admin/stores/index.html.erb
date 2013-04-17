@@ -1,8 +1,12 @@
 <div class="admin-order-show">
-  <%#= render partial: 'shared/admin_navigation', locals: { active: false } %>
 
   <div class="span11">
+    <div class="pull-right">
+      <%= button_to "Manage My Stores", profile_path, method: :get, class: 'btn btn-custom-lighten' %>
+    </div>
+
     <h2>Platform Administration for All Stores</h2>
+    <hr>
     <h3>Pending Stores</h3>
 
     <table class="table table-striped">
@@ -15,7 +19,7 @@
 
       <tbody>
       <% @pending_stores.each do |store| %>
-       <%= render partial: 'pending_store', locals: { store: store } %>
+        <%= render partial: 'pending_store', locals: { store: store } %>
       <% end %>
 
       </tbody>
@@ -36,7 +40,7 @@
         <th>URL ID</th>
         <th>Description</th>
         <th>Active Status</th>
-        <th>Admin</th>
+        <th>Admin Page</th>
       </thead>
 
       <tbody>
