@@ -18,7 +18,7 @@
     <% product = Product.find(cart_item[0].to_i) %>
     <td><%= image_tag product.image.url(:thumbnail) %></td>
     <td>
-      <%= link_to product.title, product_path(product) %>
+      <%= link_to product.title, store_product_path(product.store, product) %>
       <br>
       <%= product.description %>
       <br>

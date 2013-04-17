@@ -27,7 +27,7 @@ feature "Public User Views Products" do
 
     it "has an add-to-cart action" do
       click_button "Add to Cart"
-      expect(current_path).to eq product_path(@product)
+      expect(current_path).to eq store_product_path(@store, @product)
     end
   end
 end
