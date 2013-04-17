@@ -5,7 +5,7 @@
   <%#= button_to t("checkout"), new_customer_shipping_addresses_path(current_user, :store_id => current_store), class: 'btn btn-custom-lighten', method: :get %>
   <% button_to "Checkout", new_store_checkout_path(current_store), class: "btn btn-custom-lighten", method: :get %>
 <% else %>
-  <%= button_to "Checkout", login_path(:store_id => current_store), class: 'btn btn-custom-lighten', method: :get %>
+  <%= button_to "Checkout", new_store_checkout_path(current_store), class: 'btn btn-custom-lighten', method: :get %>
 <% end %>
 
 

@@ -14,7 +14,8 @@ StoreEngine::Application.routes.draw do
   get "/guest-checkout" => "customers#new", :as => "guest_checkout"
   get "/confirmation-page/:id" => "orders#confirm", :as => "order_confirmation"
   get "/order_details/:uuid_hash" => "orders#display", :as => "obscure_link"
-
+  get "/:store_path/orders/:customer_id/new" => "orders#new", :as => "new_order"
+  post "/:store_path/orders/:customer_id/create" => "orders#create", :as => "create_order"
 
   resources :products, only: [ :index, :show ]
 
@@ -26,7 +27,7 @@ StoreEngine::Application.routes.draw do
     get '/' => "products#index", as: 'home'
     resources :products, only: [ :index, :show ]
     resources :categories, only: [ :index, :show ]
-    resources :checkout, only: [ :new, :create, :show ]
+    resources :checkouts, only: [ :new, :create, :show ]
 
     resource :cart, only: [ :update, :show, :destroy ] do
       member do

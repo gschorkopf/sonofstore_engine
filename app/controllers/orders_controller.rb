@@ -33,12 +33,12 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @customer_id = current_user.customer_id
+    @customer_id = params[:customer_id]
     @order = Order.new
     uuid = UUID.new.generate
     # @order = Order.create(status: 'pending', customer_id: @customer_id)
     @order.uuid_hash = uuid
-    @order.customer_id = current_user.customer_id
+    @order.customer_id = @customer_id
     @order.store_id = current_store.id
     @order.status = "pending"
     @order.save

@@ -75,5 +75,5 @@
 <% if current_cart.empty? %>
   <h3>Nothing in your cart.  Go shopping!</h3>
 <% else %>
-  <%= button_to "Submit Order", store_orders_path(current_store), method: :post %>
+  <%= button_to "Submit Order", create_order_path(current_store, @customer.id), method: :post %>
 <% end %>
