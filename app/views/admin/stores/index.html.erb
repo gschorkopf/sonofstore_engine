@@ -2,7 +2,8 @@
   <%#= render partial: 'shared/admin_navigation', locals: { active: false } %>
 
   <div class="span11">
-    <h2>Pending Stores</h2>
+    <h2>Platform Administration for All Stores</h2>
+    <h3>Pending Stores</h3>
 
     <table class="table table-striped">
       <thead>
@@ -38,7 +39,7 @@
   </div>
 
   <div class="span11">
-    <h2>Approved Stores</h2>
+    <h3>Approved Stores</h3>
 
     <table class="table table-striped">
       <thead>
@@ -54,7 +55,11 @@
         <tr>
           <td><%= store.name %></td>
           <td><%= store.path %></td>
-          <td><%= store.description[0...31] %></td>
+          <td><%= store.description[0...31] %>
+            <% if store.description.length >= 32 %>
+              ...
+            <% end %>
+          </td>
           <td>
             <% if store.active? %>
             <%= store.active_to_s %> <%= link_to "Disable", toggle_active_admin_store_path(store), method: :put, :class => 'btn btn-mini', :id => 'disable_store' %>
