@@ -1,5 +1,4 @@
 class ProductsController < ApplicationController
-
   def index
     if current_store.pending?
         redirect_to root_path,

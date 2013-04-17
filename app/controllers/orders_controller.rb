@@ -47,8 +47,8 @@ class OrdersController < ApplicationController
     if @order.save
       Mailer.order_confirmation(@customer_id, @order).deliver
       # Resque.enqueue(OrderMailer, current_user.id, @order.id)
+      
       session[:cart] = {}
-      Resque.enqueue(OrderMailer, @customer_id, @order.id)
       if current_user
         redirect_to customer_orders_path(@order),
         :notice => "Successfully created order!"
@@ -58,24 +58,6 @@ class OrdersController < ApplicationController
       end
     else
       redirect_to cart_path, :notice => "Checkout failed."
-    end
-  end
-
-
-
-  def buy_now
-    @order = Order.create_and_charge(cart: Cart.new({params[:order] => '1'}),
-                                     user: current_user)
-    if @order.save
-      session[:cart] = current_cart.destroy
-
-      Mailer.order_confirmation(current_user, @order).deliver
-      # Resque.enqueue(OrderMailer, current_user.id, @order.id)
-
-      redirect_to account_order_path(@order),
-        :notice => "Order submitted!"
-    else
-      redirect_to :back, :notice => "Checkout failed."
     end
   end
 end

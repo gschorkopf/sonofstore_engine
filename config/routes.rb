@@ -18,8 +18,6 @@ StoreEngine::Application.routes.draw do
     end
   end
 
-  resources :products, only: [ :index, :show ]
-
   resources :sessions, only: [ :new, :create, :destroy ]
 
   resources :stores, except: [ :index ]
@@ -55,8 +53,8 @@ StoreEngine::Application.routes.draw do
   resources :users
 
   resources :customers, only: [ :new, :create, :update ] do
-    resources :orders
-    resource :shipping_addresses, except: [ :index ]
+    resources :orders, except: [ :destroy ]
+    resource :shipping_addresses, except: [ :index, :show, :destroy ]
     resource :billing_addresses, except: [ :index, :show, :destroy ]
     resource :credit_cards, except: [ :index, :show, :destroy ]
     resource :user, only: [:new, :create, :update, :show]
