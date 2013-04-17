@@ -50,7 +50,7 @@ class OrdersController < ApplicationController
       
       session[:cart] = {}
       if current_user
-        redirect_to customer_orders_path(@order),
+        redirect_to profile_path(current_user),
         :notice => "Successfully created order!"
       else
         redirect_to order_confirmation_path(@order.id),

@@ -1,7 +1,10 @@
 class CustomersController < ApplicationController
+  def new
+    @customer = Customer.new
+  end
 
   def create
-    @customer = Customer.find_or_create_by_email(params[:customer][:email])
+    @customer = Customer.find_or_create_by_email(params[:customer])
 
     if @customer
       if current_user
@@ -12,10 +15,6 @@ class CustomersController < ApplicationController
     else
       redirect_to guest_checkout_path, notice: "Invalid credentials"
     end
-  end
-
-  def new
-    @customer = Customer.new
   end
 
   def update
