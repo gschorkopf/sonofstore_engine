@@ -3,7 +3,7 @@ stores = [
   Store.create(name: 'Cool Sunglasses', path: 'cool-sunglasses', description: 'Buy our COOL Sunglasses'),
   Store.create(name: "Speedy Bikes", path: "speedy-bikes", description: "Put the fun between your legs!"),
   Store.create(name: "Cool Runnings", path: "cool-runnings", description: "You'll come back tomorrow and the next day and the next day and the next day."),
-  Store.create(name: "Banana Hut", path: "banana-hut", description: "There's money in the hut!"),
+  Store.create(name: "Banana Stand", path: "banana-stand", description: "There's always money in the banana stand."),
   Store.create(name: "Florist-Gump", path: "florist-gump", description: "Life's not like a box of chocolates here.  What you see is what you get!"),
   Store.create(name: "World of Woolcraft", path: "world-of-woolcraft", description: "Knitting's no joke"),
   Store.create(name: "Frank's Monsterporium", path: "monsterporium", description: "Monster?  Maybe.  Cuddly?  Definitely."),
