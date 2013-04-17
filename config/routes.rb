@@ -44,6 +44,8 @@ StoreEngine::Application.routes.draw do
 
   resources :sessions, only: [ :new, :create, :destroy ]
 
+  resources :stores, only: [ :new, :create ]
+
   scope "/:store_path", as: 'store' do
     get '/' => "products#index", as: 'home'
     resources :products, only: [ :index, :show ]

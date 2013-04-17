@@ -6,6 +6,11 @@
         Manage My Stores
       </a>
     </li>
+    <% if current_user.platform_admin? %>
+    <li class="<%= active == :all_stores ? 'active' : '' %>">
+      <%= link_to 'Manage All Stores', admin_stores_path %>
+    </li>
+    <% end %>
     <li class="<%= active == :personal_info ? 'active' : '' %>">
       <a href="#edit_account" data-toggle="tab">
         Edit Account

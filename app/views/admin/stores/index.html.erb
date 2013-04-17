@@ -1,7 +1,10 @@
 <div class="admin-order-show">
-  <%#= render partial: 'shared/admin_navigation', locals: { active: false } %>
 
   <div class="span11">
+    <div class="pull-right">
+      <%= button_to "Back to Manage My Stores", profile_path, method: :get, class: 'btn btn-custom-lighten' %>
+    </div>
+
     <h2>Platform Administration for All Stores</h2>
     <hr>
     <h3>Pending Stores</h3>
