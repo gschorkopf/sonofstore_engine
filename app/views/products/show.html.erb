@@ -1,7 +1,7 @@
 <div class="row">
 
 
-  <% cache('product_show_#{@product.id}') do %>
+  <% cache("product_show_id_#{@product.id}") do %>
 
   <div class="prod_detail_img span6">
     <P><%= image_tag 'http://lorempixel.com/300/300' %></P>
