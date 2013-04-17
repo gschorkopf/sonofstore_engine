@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
   ##########
   before_filter :get_referrer, :except => [:create, :update, :destroy, :signup]
 
+
+#should be set_return_to or save_referrer.....
+
+
   def get_referrer
     session[:return_to] = request.referrer
   end
@@ -19,7 +23,7 @@ class ApplicationController < ActionController::Base
 
 
   def current_store
-    @current_store ||= Store.find_by_path(params[:store_path])
+    @current_store ||= Store.find_by_path(params[:store_path]) if params[:store_path]
   end
 
   def require_admin

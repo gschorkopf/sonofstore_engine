@@ -3,7 +3,7 @@ class Admin::ProductsController < ApplicationController
 
   def index
     @store = current_store
-    @products = @store.products.order('title ASC').all
+    @products = @store.products.includes(:categories).order('title ASC').all
   end
 
   def new
@@ -27,6 +27,7 @@ class Admin::ProductsController < ApplicationController
     @product = Product.find(params[:id])
     expire_fragment("product_show_id_#{@product.id}")
     expire_fragment("product_index_for_store_#{@store.path}")
+    expire_fragment("admin_product_index_id_#{@product.id}")
   end
 
   def update
@@ -35,6 +36,7 @@ class Admin::ProductsController < ApplicationController
     if @product.update_attributes(params[:product])
 
       expire_fragment("product_show_id_#{@product.id}")
+      expire_fragment("admin_product_index_id_#{@product.id}")
       expire_fragment("product_index_for_store_#{@store.path}")
 
       redirect_to store_admin_products_path,
@@ -50,6 +52,7 @@ class Admin::ProductsController < ApplicationController
     @product.destroy
 
     expire_fragment("product_show_id_#{@product.id}")
+    expire_fragment("admin_product_index_id_#{@product.id}")
     expire_fragment("product_index_for_store_#{@store.path}")
 
     redirect_to store_admin_products_path,
@@ -62,6 +65,7 @@ class Admin::ProductsController < ApplicationController
     if @product.toggle_status
 
       expire_fragment("product_show_id_#{@product.id}")
+      expire_fragment("admin_product_index_id_#{@product.id}")
       expire_fragment("product_index_for_store_#{@store.path}")
 
       redirect_to store_admin_products_path,
