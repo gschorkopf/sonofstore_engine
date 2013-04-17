@@ -53,7 +53,7 @@ class Admin::ProductsController < ApplicationController
     expire_fragment("product_index_for_store_#{@store.path}")
 
     redirect_to store_admin_products_path,
-      :notice => "Successfully destroyed product."
+      :notice => "Successfully removed product."
   end
 
   def toggle_status
