@@ -42,13 +42,18 @@ class ShippingAddressesController < ApplicationController
 
   def update
     @customer = current_user.customer
-
     @shipping_address = ShippingAddress.find_by_customer_id(@customer.id)
-    if @shipping_address.update_attributes(params[:shipping_address])
+    params.delete("utf8")
+    params.delete("_method")
+    params.delete("authenticity_token")
+    params.delete("controller")
+    params.delete("commit")
+    params.delete("action")
+    if @shipping_address.update_attributes(params)
       redirect_to profile_path,
         :notice  => "Successfully updated shipping address."
     else
-      render :action => 'edit', :notice  => "Update failed."
+      redirect_to profile_path, :notice  => "Update failed."
     end
   end
 end

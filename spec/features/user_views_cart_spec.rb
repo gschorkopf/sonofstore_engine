@@ -12,8 +12,8 @@ describe 'the user cart view' do
     before(:each) do
       @store = FactoryGirl.create(:store)
       @product = FactoryGirl.create(:product, store_id: @store.id)
-      visit product_path(@product)
-      click_button 'Add to Cart'
+      visit store_product_path(store_path: @store, id: @product.id)
+      click_link_or_button 'Add to Cart'
       visit cart_path
     end
 
@@ -21,9 +21,9 @@ describe 'the user cart view' do
       expect(page).to have_content('Total')
     end
 
-    context 'the user wants to empty the cart' do
-      it 'gets emptied' do
-        visit product_path(@product)
+    context 'and the user empties their cart' do
+      it 'then the cart gets emptied' do
+        visit store_product_path(store_path: @store, id: @product.id)
         click_button 'Add to Cart'
         visit cart_path
         click_link 'Remove'
@@ -41,7 +41,7 @@ describe 'the user cart view' do
     context 'the user wants to remove one item from the cart' do
       it 'removes one item' do
         product2 = FactoryGirl.create(:product, store_id: @store.id, title: 'coolthings')
-        visit product_path(product2)
+        visit store_product_path(store_path: @store, id: product2.id)
         click_button "Add to Cart"
         visit cart_path
         fill_in  'carts_quantity', with: '0'

@@ -1,22 +1,23 @@
-<div class="store-information">
-  <h2><%= current_store %></h2>
-  <span><%= current_store.description %></span>
-</div>
-
-
 <div class="product-index">
+  <div class="pull-right">
+    <%= button_to "Browse by category", store_categories_path(current_store),
+        class: 'btn btn-custom-lighten', method: :get %>
+    <% if current_user && (current_user.role_for_store?('store_admin', current_store) || current_user.platform_admin?) %>
+      <%= link_to 'Store Administration', store_admin_path(current_store) %>
+    <% end %>
+  </div>
 
-  <section class="row">
-        <%= button_to "Browse by category", store_categories_path(current_store), method: :get %>
-      </div>
-  </section>
-
-  <br/>
+  <div class="store-information">
+    <h2><%= current_store %></h2>
+    <span><%= current_store.description %></span><br />
+  </div>
 
   <div id="product_listing" class="row-fluid">
     <% @products.each do |product| %>
-      <%= render partial: 'product', locals: { store: current_store, product: product }  %>
-    <% end %>
+      <%= render partial: 'product',
+          locals: { store: current_store, product: product }  %>
+      <% end %>
   </div>
+
 </div>
 

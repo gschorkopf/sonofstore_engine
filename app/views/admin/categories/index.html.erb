@@ -2,11 +2,11 @@
   <%= render partial: 'shared/admin_navigation', :locals => { active: :categories } %>
 
   <div class="span8">
+    <div class="pull-right">
+      <%= button_to "New Category", new_store_admin_category_path, method: :get, class: 'btn btn-custom-lighten' %>
+    </div>
     <h1><%= t 'categories.self' %></h1>
     <hr>
-    <div class="pull-right">
-      <%= button_to "New Category", new_store_admin_category_path, method: :get, class: 'btn btn-large btn-custom-lighten' %>
-    </div>
 
     <table class="table table-striped">
       <tr>

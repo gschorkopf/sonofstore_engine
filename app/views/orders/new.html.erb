@@ -1,4 +1,5 @@
-<h2>Please review your order information</h2>
+<div id='order-new'>
+  <h2>Please review your order information</h2>
 
 <h4>Your current cart:</h4>
 <%# if @cart.empty? == false %>
@@ -46,29 +47,30 @@
 <%# end %>
 <br/><br/>
 
-  <h4>Shipping information:</h4>
-<ul>
-  <li><%= @customer.shipping_address.street_address %></li>
-  <li><%= @customer.shipping_address.city %></li>
-  <li><%= @customer.shipping_address.zip %></li>
-  <li><%= @customer.shipping_address.state %></li>
-</ul><br/>
+    <h4>Shipping information:</h4>
+  <ul>
+    <li><%= @customer.shipping_address.street_address %></li>
+    <li><%= @customer.shipping_address.city %></li>
+    <li><%= @customer.shipping_address.zip %></li>
+    <li><%= @customer.shipping_address.state %></li>
+  </ul><br/>
 
-<h4>Billing information:</h4>
-<ul>
-  <li><%= @customer.billing_address.street_address %></li>
-  <li><%= @customer.billing_address.city %></li>
-  <li><%= @customer.billing_address.zip %></li>
-  <li><%= @customer.billing_address.state %></li>
-</ul><br/>
+  <h4>Billing information:</h4>
+  <ul>
+    <li><%= @customer.billing_address.street_address %></li>
+    <li><%= @customer.billing_address.city %></li>
+    <li><%= @customer.billing_address.zip %></li>
+    <li><%= @customer.billing_address.state %></li>
+  </ul><br/>
 
-<h4>Credit card information:</h4>
-<ul>
-  <li><%= @customer.credit_card.number %></li>
-  <li><%= @customer.credit_card.expiration_month%></li>
-  <li><%= @customer.credit_card.expiration_year%></li>
-  <li><%= @customer.credit_card.security_code%></li>
-</ul><br/>
+  <h4>Credit card information:</h4>
+  <ul>
+    <li><%= @customer.credit_card.number %></li>
+    <li><%= @customer.credit_card.expiration_month%></li>
+    <li><%= @customer.credit_card.expiration_year%></li>
+    <li><%= @customer.credit_card.security_code%></li>
+  </ul><br/>
+
 
 <% if current_cart.empty? %>
   <h3>Nothing in your cart.  Go shopping!</h3>

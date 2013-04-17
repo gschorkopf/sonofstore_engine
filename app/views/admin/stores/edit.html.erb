@@ -1,5 +1,8 @@
-<div class='span11'>
-  <h2>Editing <%= @store %></h2>
-
-  <%= render 'form' %>
+<div class='user-index'>
+    <%= render partial: 'shared/admin_navigation', :locals => { active: :none } %>
+    
+  <div class = "span8">
+    <h2>Editing <%= @store %></h2>
+    <%= render 'form' %>
+  </div>
 </div>
