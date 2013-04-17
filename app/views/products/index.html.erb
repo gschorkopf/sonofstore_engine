@@ -1,4 +1,9 @@
 <div class="product-index">
+
+
+<% cache("product_index_for_store_#{current_store.path}") do %>
+
+
   <div class="pull-right">
     <%= button_to "Browse by category", store_categories_path(current_store),
         class: 'btn btn-custom-lighten', method: :get %>
@@ -18,6 +23,8 @@
           locals: { store: current_store, product: product }  %>
       <% end %>
   </div>
+
+<% end %> <!-- end of caching block-->
 
 </div>
 

@@ -16,12 +16,14 @@ class Admin::StoresController < ApplicationController
 
   def edit
     @store = Store.find_by_path(params[:store_path])
+    expire_fragment("product_index_for_store_#{@store.path}")
   end
 
   def update
     @store = Store.find_by_path(params[:store_path])
 
     if @store.update_attributes(params[:store])
+      expire_fragment("product_index_for_store_#{@store.path}")
       redirect_to store_admin_path(@store),
         :notice  => "Successfully updated store."
     else
@@ -55,6 +57,7 @@ class Admin::StoresController < ApplicationController
   def destroy
     @store = Store.find(params[:id])
     @store.destroy
+    expire_fragment("product_index_for_store_#{@store.path}")
     redirect_to admin_stores_path, :notice => 'Store successfully deleted'
   end
 end
