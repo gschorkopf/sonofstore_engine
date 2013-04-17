@@ -6,26 +6,30 @@
     <th>Description</th>
     <th>Active Status</th>
   </tr>
-
-  <% @approved_stores.each do |store| %>
-    <tr>
-      <td><%= link_to store, store_home_path(store) %></td>
-      <td><%= store.path %></td>
-      <td><%= store.description %></td>
-      <td><%= store.active_to_s %></td>
-    </tr>
-  <% end %>
-</table>
-
-<h3>Pending Stores</h3>
-<ul>
-  <% @pending_stores.each do |store| %>
-    <li><%= store %></li>
-  <% end %>
-</ul>
-<h3>Disapproved Stores</h3>
-<ul>
-  <% @disapproved_stores.each do |store| %>
-    <li><%= store %></li>
-  <% end %>
-</ul>
+<% if @approved_stores %>
+    <% @approved_stores.each do |store| %>
+      <tr>
+        <td><%= link_to store, store_home_path(store) %></td>
+        <td><%= store.path %></td>
+        <td><%= store.description %></td>
+        <td><%= store.active_to_s %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+<% if @pending_stores %>
+  <h3>Pending Stores</h3>
+  <ul>
+    <% @pending_stores.each do |store| %>
+      <li><%= store %></li>
+    <% end %>
+  </ul>
+<% end %>
+<% if @disapproved_stores %>
+  <h3>Disapproved Stores</h3>
+  <ul>
+    <% @disapproved_stores.each do |store| %>
+      <li><%= store %></li>
+    <% end %>
+  </ul>
+<% end %>

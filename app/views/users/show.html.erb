@@ -14,7 +14,7 @@
 
     <div id="edit_profile">
       <h1>Personal Information</h1>
-      <%= form_tag(:controller => "users", :action => "update", :method => "put") do %>
+      <%= form_tag(user_path(current_user), method: :put) do %>
         <p>* Full Name</p>
         <%= text_field_tag(:full_name, current_user.customer.full_name) %><br/>
         <p>* Email</p>
