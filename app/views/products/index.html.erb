@@ -7,7 +7,7 @@
       <%= link_to 'Store Administration', store_admin_path(current_store) %>
     <% end %>
   </div>
-<% cache("product_index_for_store_#{current_store.path}") do %>
+<% cache("product_index_for_store_#{current_store.path}") do %> <!-- Start cache -->
 
   <div class="store-information">
     <h2><%= current_store %></h2>
