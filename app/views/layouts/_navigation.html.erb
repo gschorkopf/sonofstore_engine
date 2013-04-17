@@ -9,34 +9,19 @@
   <% if logged_in? %>
     <p id="signature">Welcome, <%= current_user %></p>
   <% end %>
-</div> 
+</div>
 
 <div class="nav-buttons">
   <ul class="nav pull-right">
-    <%if false%>
-    <% if logged_in? && current_user.platform_admin? %>
-    <li><%= link_to t('admin.self'), admin_dashboard_path %></li>
-    <% end %>
-    <%end%>
-
     <% if logged_in? %>
       <li><%= render 'layouts/admin_button' %></li>
       <li><%= render 'layouts/logout_button' %></li>
       <li><%= link_to "Profile", profile_path %></li>
     <% else %>
-        <li><%= link_to t('navigation.login'), login_path  %></li>
-        <li><%= link_to t('navigation.signup'), signup_path %></li>
+        <li><%= link_to 'Login', login_path  %></li>
+        <li><%= link_to 'Sign Up', signup_path %></li>
     <% end %>
     <li>
       <%= button_to "#{t 'navigation.cart'} #{current_cart.count}", cart_path, class: 'btn btn-custom-lighten', method: :get %>
     </li>
-  <!-- <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= image_tag("/images/flags/#{get_flag}.png") %> <b class="caret"></b></a>
-    <ul class="dropdown-menu">
-      <li><%= link_to image_tag("/images/flags/us.png") + " #{t('languages.english')}", i18n_path(locale: 'en'), method: :put %></li>
-      <li><%= link_to image_tag("/images/flags/cs.png") + " #{t('languages.creaturespeak')}", i18n_path(locale: 'cs'), method: :put %></li>
-      <li><%= link_to image_tag("/images/flags/fr.png") + " #{t('languages.french')}", i18n_path(locale: 'fr'), method: :put %></li>
-      <li><%= link_to image_tag("/images/flags/ca.png") + " #{t('languages.canadian')}", i18n_path(locale: 'ca'), method: :put %></li>
-    </ul>
-  </li> -->
 </ul>

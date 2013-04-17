@@ -14,10 +14,40 @@ class UsersController < ApplicationController
       auto_login(@signup.user)
       #redirect_to root_url, :notice => "Welcome, #{@user.full_name}"
       redirect_to session[:return_to] || root_path, notice: 'Logged in!'
-    elsif params[:password] != params[:password_confirmation]
-      redirect_to signup_path, notice: "Password must match confirmation"
+    elsif @signup.message
+      redirect_to signup_path, notice: "Email already exists"
     else
-      redirect_to signup_path, notice: "Invalid Attributes"
+      redirect_to signup_path, notice: "#{formated_errors}"
+    end
+  end
+
+  def formated_errors
+    if user_errors && customer_errors
+      "#{customer_errors}, #{user_errors}"
+    elsif user_errors
+      "#{user_errors}"
+    else
+      "#{customer_errors}"
+    end
+  end
+
+  def user_errors
+    if @signup.user.errors.messages[:password]
+      @signup.user.errors.messages[:password][0].slice!("passwords ")
+      "Password #{@signup.user.errors.messages[:password][0]}"
+    end
+  end
+
+  def customer_errors
+    errors = []
+    if @signup.customer.errors.messages[:full_name]
+      errors << "Please enter a full name"
+    end
+    if @signup.customer.errors.messages[:email]
+      errors << "Email is invalid"
+    end
+    unless errors == []
+      "#{errors.join(", ")}"
     end
   end
 
@@ -26,12 +56,14 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = current_user
-    if @user.update_attributes(params[:user])
+    @update = Signup.update(params)
+
+    if @update == true
       redirect_to profile_path,
-      :notice => "Successfully updated account"
+        :notice => "Successfully updated account"
     else
-      render :action => 'show'
+      redirect_to "/profile",
+        notice: @update[:password].pop
     end
   end
 

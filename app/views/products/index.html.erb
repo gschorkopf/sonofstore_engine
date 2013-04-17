@@ -1,6 +1,10 @@
 <div class="product-index">
   <div class="pull-right">
-    <%= button_to "Browse by category", store_categories_path(current_store), method: :get %>
+    <%= button_to "Browse by category", store_categories_path(current_store),
+        class: 'btn btn-custom-lighten', method: :get %>
+    <% if current_user && (current_user.role_for_store?('store_admin', current_store) || current_user.platform_admin?) %>
+      <%= link_to 'Store Administration', store_admin_path(current_store) %>
+    <% end %>
   </div>
 
   <div class="store-information">

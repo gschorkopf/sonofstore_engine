@@ -9,8 +9,6 @@ StoreEngine::Application.configure do
     :domain               => 'baci.lindsaar.net',
     :user_name            => 'mrpink.sose@gmail.com',
     :password             => 'sonofstoreengine',
-    # :user_name            => 'franks.monsterporium@gmail.com',
-    # :password             => 'bosschops',
     :authentication       => 'plain',
     :enable_starttls_auto => true  }
 end
