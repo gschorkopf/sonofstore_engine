@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
     else
       @customer = Customer.find_by_id(params[:customer_id])
     end
-    @cart = current_cart
+    @cart_items = session[(params[:store_path])]
   end
 
   def display
@@ -33,12 +33,13 @@ class OrdersController < ApplicationController
   end
 
   def create
+    #@current_store = session[(params[:store_path])]
     @customer_id = params[:customer_id]
     uuid = UUID.new.generate
     @order = Order.create(status: 'pending', customer_id: @customer_id)
     @order.uuid_hash = uuid
 
-    session[:cart].each do |product_id, quantity|
+    session[(params[:current_store])].each do |product_id, quantity|
       product = Product.find(product_id)
       @order.order_items.create(product_id: product.id,
                                unit_price: product.price,

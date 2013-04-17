@@ -1,7 +1,7 @@
 <h2>Please review your order information</h2>
 
 <h4>Your current cart:</h4>
-<% if current_cart.empty? == false %>
+<%# if @cart.empty? == false %>
 <br/>
 <table class="table table-striped">
   <thead>
@@ -11,12 +11,39 @@
     <th><%= t('product.quantity') %></th>
   </thead>
   <tbody>
-    <%= render partial: 'carts/cart_item' %>
+
+    <% @cart_items.each do |cart_item| %>
+  <tr>
+    <% product = Product.find(cart_item[0].to_i) %>
+    <td><%= image_tag product.image.url(:thumbnail) %></td>
+    <td>
+      <%= link_to product.title, product_path(product) %>
+      <br>
+      <%= product.description %>
+      <br>
+      <%= link_to t('action.remove'), remove_item_store_cart_path(current_store, remove_item: { product_id: product.id }), confirm: t('confirm'), method: :put %>
+    </td>
+    <td><%= number_to_currency(product.price) %></td>
+    <td>
+      <%= simple_form_for :carts, url: store_cart_path(current_store), method: :put do |f| %>
+        <%= f.hidden_field :product_id, value: product.id %>
+        <%= f.input_field :quantity, value: cart_item[1].to_i, class: 'span1' %>
+        <%= f.button :submit, t('crud.update'), class:'btn btn-info' %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
+
+<%= simple_form_for :orders, url: customer_orders_path(current_user.id), method: :put do |f| %>
+  <%= f.hidden_field :current_store, value: current_store.path %>
+<% end %>
+
+
   </tbody>
 </table>
-<% else %>
-  Empty
-<% end %>
+<%# else %>
+  <%# Empty %>
+<%# end %>
 <br/><br/>
 
   <h4>Shipping information:</h4>
