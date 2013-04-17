@@ -1,7 +1,6 @@
+<% cache("product_show_id_#{@product.id}") do %>
+
 <div class="row">
-
-
-  <% cache("product_show_id_#{@product.id}") do %>
 
   <div class="prod_detail_img span6">
     <P><%= image_tag 'http://lorempixel.com/300/300' %></P>
@@ -27,6 +26,7 @@
       <p> Product is retired! </p>
     <% end %>
   </div>
-
-  <% end %> <!-- ends the caching block-->
 </div>
+
+<% end %> <!-- ends the caching block-->
+

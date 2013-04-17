@@ -1,8 +1,6 @@
-<div class="product-index">
-
-
 <% cache("product_index_for_store_#{current_store.path}") do %>
 
+<div class="product-index">
 
   <div class="pull-right">
     <%= button_to "Browse by category", store_categories_path(current_store),
@@ -24,7 +22,6 @@
       <% end %>
   </div>
 
-<% end %> <!-- end of caching block-->
-
 </div>
 
+<% end %> <!-- end of caching block-->

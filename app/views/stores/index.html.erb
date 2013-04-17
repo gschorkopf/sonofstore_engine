@@ -1,12 +1,14 @@
+<% cache("root_page") do %>
+
 <div class="span11">
+
   <h2>Featured Stores</h2>
-  
+
   <table class="table table-striped">
     <tr>
       <th>Name</th>
       <th>Description</th>
     </tr>
-
 
   <% @stores.each do |store| %>
     <tr>
@@ -15,4 +17,7 @@
     </tr>
   <% end %>
   </table>
+
 </div>
+
+<% end %> <!-- end of caching block -->
