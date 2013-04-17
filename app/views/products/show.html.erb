@@ -1,17 +1,24 @@
 <div class="row">
+
+
+  <% cache('product_show_#{@product.id}') do %>
+
   <div class="prod_detail_img span6">
     <P><%= image_tag 'http://lorempixel.com/300/300' %></P>
     <!-- <p><%#= image_tag @product.image.url(:large) %></p> -->
   </div>
+
   <div class="prod_detail_text span6">
     <h2><% t('product.title') %><%= @product.title %></h2>
     <p><% t('product.description') %><%= @product.description %></p>
+
     <div id="product-categories">
       <b><%= t('categories.self') %>:</b>
       <% @product.categories.each do |category| %>
           <a href='/products/?category_id=<%= category.id %>'><span class="label"><%= category.title %></span></a>
       <% end %>
     </div>
+
     <br>
       <p><%= t('product.price') %>: <%= number_to_currency(@product.price) %></p>
     <% if @product.status == 'active' %>
@@ -20,4 +27,6 @@
       <p> Product is retired! </p>
     <% end %>
   </div>
+
+  <% end %> <!-- ends the caching block-->
 </div>
