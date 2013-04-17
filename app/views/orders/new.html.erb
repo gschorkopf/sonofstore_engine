@@ -1,8 +1,9 @@
 <div id='order-new'>
-  <h2>Please review your order information</h2>
 
-<h4>Your current cart:</h4>
-<%# if @cart.empty? == false %>
+
+<% if current_cart.empty? == false %>
+<h3>Please review your order information</h3>
+<h4>Your current cart for <%= current_store %>:</h4>
 <br/>
 <table class="table table-striped">
   <thead>
@@ -18,7 +19,8 @@
     <% product = Product.find(cart_item[0].to_i) %>
     <td><%= image_tag product.image.url(:thumbnail) %></td>
     <td>
-      <%= link_to product.title, store_product_path(product.store, product) %>
+      <%= link_to product.title, store_product_path(current_store, product) %>
+
       <br>
       <%= product.description %>
       <br>
@@ -35,16 +37,12 @@
   </tr>
 <% end %>
 
-<%#= simple_form_for :orders, url: customer_orders_path(current_user.id), method: :put do |f| %>
-  <%#= f.hidden_field :current_store, value: {:current_store => current_store.path} %>
-<%# end %>
-
 
   </tbody>
 </table>
-<%# else %>
-  <%# Empty %>
-<%# end %>
+<% else %>
+  Nothing in your cart.  Go shopping!
+<% end %>
 <br/><br/>
 
     <h4>Shipping information:</h4>
@@ -73,7 +71,7 @@
 
 
 <% if current_cart.empty? %>
-  <h3>Nothing in your cart.  Go shopping!</h3>
+  <h3></h3>
 <% else %>
-  <%= button_to "Submit Order", create_order_path(current_store, @customer.id), method: :post %>
+  <%= button_to "Submit Order", store_create_order_path(current_store, @customer.id), method: :post %>
 <% end %>
