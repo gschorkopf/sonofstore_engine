@@ -3,6 +3,7 @@
       <h5><%= t('cart.isempty') %></h5>
       <%= link_to t('back.home'), root_path %>
   <% else %>
+  <h3>Cart for <%=current_store %></h3>
       <table class="table table-striped">
         <thead>
         <th></th>

@@ -1,6 +1,6 @@
 <% if current_user && current_user.customer.shipping_address && current_user.customer.billing_address && current_user.customer.credit_card %>
   <%#= button_to ("checkout"), new_customer_order_path(current_user), class: 'btn btn-custom-lighten', method: :get %>
-  <%= button_to "checkout", new_order_path(current_store, current_user), class: "btn btn-custom-lighten", method: :get %>
+  <%= button_to "checkout", store_new_order_path(current_store, current_user), class: "btn btn-custom-lighten", method: :get %>
 <% elsif current_user %>
   <%#= button_to t("checkout"), new_customer_shipping_addresses_path(current_user, :store_id => current_store), class: 'btn btn-custom-lighten', method: :get %>
   <%= button_to "Checkout", new_store_checkout_path(current_store), class: "btn btn-custom-lighten", method: :get, :message => "Please enter your shipping, billing and credit card information before you checkout" %>
