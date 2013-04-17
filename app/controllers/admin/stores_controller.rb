@@ -5,12 +5,13 @@ class Admin::StoresController < ApplicationController
 
   def index
     @pending_stores = Store.order('name ASC').where(approval_status: 'pending')
-    @approved_stores = Store.order('name ASC').where(approval_status: 'approved')
+    @approved_stores = Store.order('name ASC').
+                             where(approval_status: 'approved')
   end
 
   def show
-    @store = Store.find_by_path(params[:store_path])
-    @store_users = @store.users
+    @store ||= Store.find_by_path(params[:store_path])
+    @store_users ||= @store.users
     @user = User.new
   end
 
