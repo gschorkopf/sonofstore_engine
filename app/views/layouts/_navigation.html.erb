@@ -13,12 +13,6 @@
 
 <div class="nav-buttons">
   <ul class="nav pull-right">
-    <%if false%>
-      <% if logged_in? && current_user.platform_admin? %>
-      <li><%= link_to t('admin.self'), admin_dashboard_path %></li>
-      <% end %>
-    <%end%>
-
     <% if logged_in? %>
       <li><%= render 'layouts/admin_button' %></li>
       <li><%= render 'layouts/logout_button' %></li>

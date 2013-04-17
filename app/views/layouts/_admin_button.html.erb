@@ -1,5 +1,5 @@
 <% if current_user.platform_admin? %>
-  <%= link_to 'Admin ', admin_stores_path %>
+  <%= link_to 'Admin', admin_stores_path %>
 <% elsif current_user.user_roles.any? %>
-  <%= link_to 'Manage Stores', profile_path %>
+  <%= link_to 'Manage My Stores', profile_path %>
 <% end %>
