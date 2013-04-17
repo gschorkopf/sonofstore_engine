@@ -1,8 +1,12 @@
 <div class="admin-order-show">
-  <%#= render partial: 'shared/admin_navigation', locals: { active: false } %>
 
   <div class="span11">
+    <div class="pull-right">
+      <%= button_to "Manage My Stores", profile_path, method: :get, class: 'btn btn-custom-lighten' %>
+    </div>
+
     <h2>Platform Administration for All Stores</h2>
+    <hr>
     <h3>Pending Stores</h3>
 
     <table class="table table-striped">
@@ -15,20 +19,9 @@
 
       <tbody>
       <% @pending_stores.each do |store| %>
-        <tr>
-          <td><%= store.name %></td>
-          <td><%= store.path %></td>
-          <td><%= store.description[0...31] %>
-            <% if store.description.length >= 32 %>
-              ...
-            <% end %>
-          </td>
-          <td>
-            <%= link_to "Approve", choose_approval_status_on_admin_store_path(:id => store.id, :status => 'approved'), :class => 'btn btn-mini', :id => 'approve_store', :method => "put" %> or 
-            <%= link_to "Decline", choose_approval_status_on_admin_store_path(:id => store.id, :status => 'declined'), :class => 'btn btn-mini', :id => 'decline_store', :method => "put" %>
-          </td>
-        </tr>
+        <%= render partial: 'pending_store', locals: { store: store } %>
       <% end %>
+
       </tbody>
 
       <tfoot>
@@ -47,28 +40,12 @@
         <th>URL ID</th>
         <th>Description</th>
         <th>Active Status</th>
-        <th>Admin</th>
+        <th>Admin Page</th>
       </thead>
 
       <tbody>
       <% @approved_stores.each do |store| %>
-        <tr>
-          <td><%= store.name %></td>
-          <td><%= store.path %></td>
-          <td><%= store.description[0...31] %>
-            <% if store.description.length >= 32 %>
-              ...
-            <% end %>
-          </td>
-          <td>
-            <% if store.active? %>
-            <%= store.active_to_s %> <%= link_to "Disable", toggle_active_admin_store_path(store), method: :put, :class => 'btn btn-mini', :id => 'disable_store' %>
-            <% else %>
-            <%= link_to "Enable", toggle_active_admin_store_path(store), method: :put, :class => 'btn btn-mini', :id => 'enable_store' %> <%= store.active_to_s %>
-            <% end %>
-          </td>
-          <td><%= link_to "Admin", store_admin_path(store), :id => 'visit_store_admin_page' %></td>
-        </tr>
+        <%= render partial: 'approved_store', locals: { store: store } %>
       <% end %>
       </tbody>
 

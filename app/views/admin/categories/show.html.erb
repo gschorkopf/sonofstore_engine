@@ -1,6 +1,6 @@
 
   <% @category.products.each do |product| %>
-    <%= link_to product_path(product) do %>
+    <%= link_to store_product_path(current_store, product) do %>
     <div class="products span3">
       <p><%= image_tag product.photo_url %></p>
       <p><%= image_tag product.image.url(:thumbnail) %></p>

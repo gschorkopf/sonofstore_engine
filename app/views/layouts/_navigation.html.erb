@@ -1,9 +1,14 @@
-<div class="logo">
-  <%= link_to(image_tag('marcy_logo.png'), root_path, :class => 'brand') %>
-</div>
-<div class="logo-text">
-  <%= link_to "Pink SoSE", root_path, :class => 'brand' %>
-</div>
+<% cache('top_left_logo') do %>
+
+  <div class="logo">
+    <%= link_to(image_tag('marcy_logo.png'), root_path, :class => 'brand') %>
+  </div>
+
+  <div class="logo-text">
+    <%= link_to "Pink SoSE", root_path, :class => 'brand' %>
+  </div>
+
+<% end %> <!-- end of caching block -->
 
 <div id='welcome_user'>
   <% if logged_in? %>
@@ -22,6 +27,8 @@
         <li><%= link_to 'Sign Up', signup_path %></li>
     <% end %>
     <li>
-      <%= button_to "#{t 'navigation.cart'} #{current_cart.count}", cart_path, class: 'btn btn-custom-lighten', method: :get %>
+      <% if current_store %>
+        <%= button_to "#{t 'navigation.cart'} #{current_cart.count}", store_cart_path(current_store), class: 'btn btn-custom-lighten', method: :get %>
+      <% end %>
     </li>
 </ul>

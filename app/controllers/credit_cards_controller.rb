@@ -8,8 +8,6 @@ class CreditCardsController < ApplicationController
   def create
     @credit_card = CreditCard.new(params[:credit_card])
     if current_user
-      # @customer = Customer.find_by_id(params[:credit_card][:customer_id])
-      # @customer = Customer.find_by_id(params[:customer_id])
       @customer = current_user.customer
     else
       @customer = Customer.find_by_id(params[:customer_id])
@@ -21,7 +19,7 @@ class CreditCardsController < ApplicationController
       else
         @customer.credit_card_id = @credit_card.id
         @customer.save
-        redirect_to new_customer_order_path(@customer.id)
+        redirect_to new_store_order_path(current_store)
       end
     else
       render "new"

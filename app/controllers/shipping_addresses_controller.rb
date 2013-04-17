@@ -9,8 +9,6 @@ class ShippingAddressesController < ApplicationController
   def create
     @shipping_address = ShippingAddress.new(params[:shipping_address])
     if current_user
-      # @customer = Customer.find_by_id(params[:shipping_address][:customer_id])
-      # @customer = Customer.find_by_id(params[:customer_id])
       @customer = current_user.customer
     else
       @customer = Customer.find_by_id(params[:customer_id])
@@ -33,11 +31,6 @@ class ShippingAddressesController < ApplicationController
   def edit
     @customer = current_user.customer
     @shipping_address = ShippingAddress.find_by_customer_id(@customer.id)
-
-    # @shipping_address = current_user.create_shipping_address street_address: "something",
-    #   city: "city", state: "state", zip: "zip"
-
-    # raise @shipping_address.inspect
   end
 
   def update

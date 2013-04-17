@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
     customer = Customer.find_by_email("#{email}")
     user = User.find_by_customer_id(customer.id)
   end
+  ### WHAT IS THIS
 
   def role(store)
     user_role = self.user_roles.where(store_id: store.id)

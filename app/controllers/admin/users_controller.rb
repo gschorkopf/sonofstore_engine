@@ -9,7 +9,7 @@ class Admin::UsersController < ApplicationController
   def create
     email = params[:user][:customers][:email]
     @customer = Customer.find_by_email(email)
-    #@user = User.find_by_customer_id(@customer.id) || nil
+
     @store = current_store
 
     if @customer

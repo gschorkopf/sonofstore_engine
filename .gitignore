@@ -23,3 +23,6 @@
 # simplecov coverage folder
 /coverage
 .env
+
+# redis db
+dump.rdb

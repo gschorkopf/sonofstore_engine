@@ -1,0 +1,17 @@
+ <tr>
+    <td><%= store.name %></td>
+    <td><%= store.path %></td>
+    <td><%= store.description[0...31] %>
+      <% if store.description.length >= 32 %>
+        ...
+      <% end %>
+    </td>
+    <td>
+      <% if store.active? %>
+      <%= store.active_to_s %> <%= link_to "Disable", toggle_active_admin_store_path(store), method: :put, :class => 'btn btn-mini', :id => 'disable_store' %>
+      <% else %>
+      <%= link_to "Enable", toggle_active_admin_store_path(store), method: :put, :class => 'btn btn-mini', :id => 'enable_store' %> <%= store.active_to_s %>
+      <% end %>
+    </td>
+    <td><%= link_to "Admin", store_admin_path(store), :id => 'visit_store_admin_page' %></td>
+  </tr>

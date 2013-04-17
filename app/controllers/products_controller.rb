@@ -1,5 +1,4 @@
 class ProductsController < ApplicationController
-
   def index
     if current_store.pending?
         redirect_to root_path,
@@ -21,8 +20,8 @@ class ProductsController < ApplicationController
 
   def show
     # session[:return_to] = request.fullpath
-    @store = current_store
-    @product = @store.products.find(params[:id]) if @store
+    @store ||= current_store
+    @product ||= @store.products.find(params[:id]) if @store
     if @product
       render :show
     else

@@ -20,6 +20,8 @@ class Admin::CategoriesController < ApplicationController
     @category = Category.new(params[:category])
     @store = @category.store
     if @category.save
+      expire_fragment("categories_index_#{@store.path}")
+
       redirect_to store_admin_categories_path(@store),
       :notice => "Successfully created category."
     else
@@ -31,12 +33,16 @@ class Admin::CategoriesController < ApplicationController
     @user = current_user
     @store = current_store
     @category = Category.find(params[:id])
+
+    expire_fragment("categories_index_#{@store.path}")
   end
 
   def update
     @category = Category.find(params[:id])
     @store = @category.store
     if @category.update_attributes(params[:category])
+      expire_fragment("categories_index_#{@store.path}")
+
       redirect_to store_admin_categories_path(@store),
       :notice  => "Successfully updated category."
     else

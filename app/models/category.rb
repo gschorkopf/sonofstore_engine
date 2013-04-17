@@ -6,13 +6,16 @@ class Category < ActiveRecord::Base
   belongs_to :store
 
   validates :title, presence: true
-  validate :unique_category_title_in_store, on: :create
-  validate :unique_category_title_in_store, on: :update
-  validate :unique_category_title_in_store, on: :toggle_status
+  validate :unique_category_title_in_store
 
   def unique_category_title_in_store
-    if !store.categories.where("title ILIKE ?", "%#{title}%").empty?
+    if exists_in_store?(title, id, store_id)
       errors.add(:title,"This store can have only one category with this name")
     end
+  end
+
+  def exists_in_store?(title, id, store_id)
+    !Store.find_by_id(store_id).categories.where("title ILIKE ?", "%#{title}%").
+                      where("id <> ?", id).empty?
   end
 end

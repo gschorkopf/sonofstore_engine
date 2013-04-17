@@ -29,28 +29,30 @@
 
     <div class="store_admins">
       <h2>Store Admins</h2>
-     
+
       <hr>
       <a href='#new_Admin' role='button' data-toggle='modal'>Add a New Store Admin</a>
       OR
       <a href='#new_Stocker' role='button' data-toggle='modal'>Add a New Store Stocker</a>
       <br>
       <br>
+
       <%= render partial: 'store_admins', :locals => {users: @store_users, store: @store} %>
 
       <div id="new_Admin" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      
+
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
           <h3 id="myModalLabel">Add a New Store Admin</h3>
         </div>
         <div class="modal-body">
+
           <%= render partial: 'admin/users/new_admin' %>
         </div>
       </div>
 
       <div id="new_Stocker" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      
+
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
           <h3 id="myModalLabel">Add a New Store Stocker</h3>
