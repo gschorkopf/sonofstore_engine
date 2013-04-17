@@ -34,9 +34,9 @@
   </tr>
 <% end %>
 
-<%= simple_form_for :orders, url: customer_orders_path(current_user.id), method: :put do |f| %>
-  <%= f.hidden_field :current_store, value: current_store.path %>
-<% end %>
+<%#= simple_form_for :orders, url: customer_orders_path(current_user.id), method: :put do |f| %>
+  <%#= f.hidden_field :current_store, value: {:current_store => current_store.path} %>
+<%# end %>
 
 
   </tbody>
@@ -73,5 +73,5 @@
 <% if current_cart.empty? %>
   <h3>Nothing in your cart.  Go shopping!</h3>
 <% else %>
-  <%= button_to "Submit Order", customer_orders_path(@customer), method: :post %>
+  <%= button_to "Submit Order", store_orders_path(current_store), method: :post %>
 <% end %>

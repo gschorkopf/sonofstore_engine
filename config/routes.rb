@@ -34,7 +34,7 @@ StoreEngine::Application.routes.draw do
       end
     end
 
-    resources :orders, only: [ :new ]
+    resources :orders, only: [ :new, :create ]
 
     namespace :stock do
       resources :products, except: [:destroy] do
@@ -62,7 +62,7 @@ StoreEngine::Application.routes.draw do
   resources :users, only: [:create]
 
   resources :customers, only: [ :new, :create, :update, :show ] do
-    resources :orders, except: [ :new ]
+    resources :orders, except: [ :new, :create ]
     resource :shipping_addresses, except: [ :index ]
     resource :billing_addresses, except: [ :index ]
     resource :credit_cards, except: [ :index ]
