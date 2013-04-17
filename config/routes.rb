@@ -2,13 +2,10 @@ StoreEngine::Application.routes.draw do
   root to: 'stores#index'
   get "/stores" => redirect('/')
 
-  # get "/user" => "users#show"
   get "/code" => redirect("http://github.com/gschorkopf/sonofstore_engine")
   get "/logout" => "sessions#destroy", :as => "logout"
   get "/login" => "sessions#new", :as => "login"
   get "/signup" => "users#signup", :as => "signup"
-  post "/buy_now" => "orders#buy_now", :as => 'buy_now'
-  put "/i18n" => "i18n#update"
   get "/profile" => "users#show"
   get "/account" => redirect("/profile")
   get "/guest-checkout" => "customers#new", :as => "guest_checkout"
