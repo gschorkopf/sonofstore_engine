@@ -2,8 +2,7 @@ class CustomersController < ApplicationController
 
   def create
     @customer = Customer.find_or_create_by_email(params[:customer][:email])
-fail
-    if @customer
+    if @customer.user_id
       if current_user
         redirect_to session[:return_to] || profile_path, notice: 'Logged in!'
       else

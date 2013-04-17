@@ -9,7 +9,7 @@ class Signup
       @user = User.new
       @message = "Email already exists"
     else
-      @customer = Customer.create(params[:email])
+      @customer = Customer.create(email: params[:email])
       @customer.full_name = params[:full_name]
       @customer.save
 

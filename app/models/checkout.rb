@@ -2,7 +2,8 @@ class Checkout
   attr_reader :guest
 
   def initialize(params)
-    @guest = Customer.create(params[:guest])
+    @guest = Customer.find_by_email(params[:guest][:email])
+    @guest ||= Customer.create(params[:guest])
     @shipping = params[:shipping_address]
     @billing = params[:billing_address]
     @credit_card = params[:credit_card]
