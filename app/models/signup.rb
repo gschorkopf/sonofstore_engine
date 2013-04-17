@@ -1,7 +1,6 @@
 class Signup
   attr_reader :customer, :user, :message
-  #whats that? you think the following two methods could be broken into like 12?
-  #HA
+
 
   def initialize(params)
     if Customer.find_by_email(params[:email]) != nil
