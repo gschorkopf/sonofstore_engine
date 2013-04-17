@@ -1,14 +1,17 @@
 <div class="span3">
   <ul class="nav nav-list">
-    <li class="nav-header"><%= t('admin.self') %></li>
-    <li class="<%= active == :dashboard ? 'active' : '' %>">
-      <%= link_to t('admin.dashboard'), admin_dashboard_path %>
+    <li class="nav-header"><%= current_store %> - Management</li>
+    <li class="<%= active == :stores ? 'active' : '' %>">
+      <%= link_to 'Administration', store_admin_path(current_store) %> 
     </li>
     <li class="<%= active == :products ? 'active' : '' %>">
       <%= link_to t('product.collection'), store_admin_products_path %>
     </li>
     <li class="<%= active == :categories ? 'active' : '' %>">
       <%= link_to t('categories.self'), store_admin_categories_path %>
+    </li>
+    <li class="<%= active == :back ? 'active' : '' %>">
+      <%= link_to 'Back to Manage Stores', profile_path %>
     </li>
   </ul>
 </div>

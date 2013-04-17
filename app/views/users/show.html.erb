@@ -3,12 +3,11 @@
 
   <div class="span8 tab-content">
     <div id="manage_stores" class="tab-pane active">
-      <h1>Manage My Stores</h1>
-      <hr>
-
       <div class="pull-right">
       <%= button_to "Create a New Store", new_store_path, class: 'btn btn-custom-lighten', method: :get %>
       </div>
+      <h1>Manage My Stores</h1>
+      <hr>
 
       <%= render partial: 'user_stores' %>
     </div>
