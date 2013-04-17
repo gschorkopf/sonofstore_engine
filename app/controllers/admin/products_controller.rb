@@ -25,12 +25,18 @@ class Admin::ProductsController < ApplicationController
   def edit
     @store = current_store
     @product = Product.find(params[:id])
+    expire_fragment("product_show_id_#{@product.id}")
+    expire_fragment("product_index_for_store_#{@store.path}")
   end
 
   def update
     @store = current_store
     @product = Product.find(params[:id])
     if @product.update_attributes(params[:product])
+
+      expire_fragment("product_show_id_#{@product.id}")
+      expire_fragment("product_index_for_store_#{@store.path}")
+
       redirect_to store_admin_products_path,
         :notice  => "Successfully updated product."
     else
@@ -42,6 +48,10 @@ class Admin::ProductsController < ApplicationController
     @store = current_store
     @product = Product.find(params[:id])
     @product.destroy
+
+    expire_fragment("product_show_id_#{@product.id}")
+    expire_fragment("product_index_for_store_#{@store.path}")
+
     redirect_to store_admin_products_path,
       :notice => "Successfully destroyed product."
   end
@@ -50,6 +60,10 @@ class Admin::ProductsController < ApplicationController
     @store = current_store
     @product = Product.find(params[:id])
     if @product.toggle_status
+
+      expire_fragment("product_show_id_#{@product.id}")
+      expire_fragment("product_index_for_store_#{@store.path}")
+
       redirect_to store_admin_products_path,
         :notice  => "Product status successfully set to '#{@product.status}'."
     else

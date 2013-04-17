@@ -1,9 +1,14 @@
-<div class="logo">
-  <%= link_to(image_tag('marcy_logo.png'), root_path, :class => 'brand') %>
-</div>
-<div class="logo-text">
-  <%= link_to "Pink SoSE", root_path, :class => 'brand' %>
-</div>
+<% cache('top_left_logo') do %>
+
+  <div class="logo">
+    <%= link_to(image_tag('marcy_logo.png'), root_path, :class => 'brand') %>
+  </div>
+
+  <div class="logo-text">
+    <%= link_to "Pink SoSE", root_path, :class => 'brand' %>
+  </div>
+
+<% end %> <!-- end of caching block -->
 
 <div id='welcome_user'>
   <% if logged_in? %>

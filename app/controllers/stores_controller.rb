@@ -1,6 +1,6 @@
 class StoresController < ApplicationController
   def index
-    @stores = Store.where(active: true).order('name ASC')
+    @stores ||= Store.where(active: true).order('name ASC')
   end
 
   def new

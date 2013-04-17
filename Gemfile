@@ -16,6 +16,7 @@ gem 'resque', "~>1.24.0"
 gem 'cancan'
 gem 'faker'
 gem 'uuid'
+gem 'redis-rails'
 
 group :production do
   gem 'pg'
