@@ -90,7 +90,7 @@ class ApplicationController < ActionController::Base
     img_category = IMAGE_CATEGORIES[current_store.id.to_s[-1].to_i]
     img_size_params = "#{side_length}/#{side_length}"
     img_id = product_id.to_s[-1].to_i
-    img_id = "10" if img_id == "0"
+    img_id = 10 if img_id == 0
     "http://lorempixel.com/#{img_size_params}/#{img_category}/#{img_id}"
   end
 
