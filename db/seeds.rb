@@ -48,7 +48,7 @@ def seed_customers(count)
   names = ["White", "Blonde", "Pink", "Blue", "Brown", "Orange"]
   count.times do |i|
     puts "seeding customer #{i}"
-    Customer.create!(full_name: names.sample + rand(1000).to_s,
+    Customer.create!(full_name: names.sample + rand(100).to_s,
                      email: "user#{i}@example.com")
   end
 end
@@ -74,6 +74,8 @@ user4 = User.create(password: "password", display_name: "Norway", customer_id: c
 
 customer3.user.platform_admin = true
 customer3.save
+customer2.user.platform_admin = true
+customer2.save
 
 n = 1
 10.times do
@@ -85,18 +87,18 @@ ur4.save
 n += 1
 end
 
-stores.each { |store| seed_products(store, 10_000)}
+stores.each { |store| seed_products(store, 500)}
 
 stores.each { |store| seed_categories(store, 10) }
 
-seed_customers(500)
-seed_users(500)
+seed_customers(250)
+seed_users(250)
 
 #product_categories store1
 p_id = 1
 c_id = 1
 10.times do
-  1000.times do
+  50.times do
     ProductCategory.create(product_id: p_id, category_id: c_id)
     p_id +=1
   end
@@ -104,10 +106,10 @@ c_id = 1
 end
 
 #product_categories store2
-p_id = 10001
+p_id = 501
 c_id = 11
 10.times do
-  1000.times do
+  100.times do
     ProductCategory.create(product_id: p_id, category_id: c_id)
     p_id +=1
   end
@@ -115,10 +117,10 @@ c_id = 11
 end
 
 #product_categories store3
-p_id = 20001
+p_id = 1001
 c_id = 21
 10.times do
-  1000.times do
+  100.times do
     ProductCategory.create(product_id: p_id, category_id: c_id)
     p_id +=1
   end
@@ -126,10 +128,10 @@ c_id = 21
 end
 
 #product_categories store4
-p_id = 30001
+p_id = 1501
 c_id = 31
 10.times do
-  1000.times do
+  100.times do
     ProductCategory.create(product_id: p_id, category_id: c_id)
     p_id +=1
   end
@@ -137,10 +139,10 @@ c_id = 31
 end
 
 #product_categories store5
-p_id = 40001
+p_id = 2001
 c_id = 41
 10.times do
-  1000.times do
+  100.times do
     ProductCategory.create(product_id: p_id, category_id: c_id)
     p_id +=1
   end
@@ -148,10 +150,10 @@ c_id = 41
 end
 
 #product_categories store6
-p_id = 50001
+p_id = 2501
 c_id = 51
 10.times do
-  1000.times do
+  100.times do
     ProductCategory.create(product_id: p_id, category_id: c_id)
     p_id +=1
   end
@@ -159,10 +161,10 @@ c_id = 51
 end
 
 #product_categories store7
-p_id = 60001
+p_id = 3001
 c_id = 61
 10.times do
-  1000.times do
+  100.times do
     ProductCategory.create(product_id: p_id, category_id: c_id)
     p_id +=1
   end
@@ -170,10 +172,10 @@ c_id = 61
 end
 
 #product_categories store8
-p_id = 70001
+p_id = 3501
 c_id = 71
 10.times do
-  1000.times do
+  100.times do
     ProductCategory.create(product_id: p_id, category_id: c_id)
     p_id +=1
   end
@@ -181,10 +183,10 @@ c_id = 71
 end
 
 #product_categories store9
-p_id = 80001
+p_id = 4001
 c_id = 81
 10.times do
-  1000.times do
+  100.times do
     ProductCategory.create(product_id: p_id, category_id: c_id)
     p_id +=1
   end
@@ -192,10 +194,10 @@ c_id = 81
 end
 
 #product_categories store10
-p_id = 90001
+p_id = 4501
 c_id = 91
 10.times do
-  1000.times do
+  100.times do
     ProductCategory.create(product_id: p_id, category_id: c_id)
     p_id +=1
   end
@@ -204,12 +206,12 @@ end
 
 statuses = ['pending', 'shipped', 'cancelled', 'returned', 'paid']
 stores.each do |store|
-  20.times do |i|
+  8.times do |i|
     begin
       puts "Seeding order #{i} for store #{store.id}"
       order = Order.new
       order.status = statuses.sample
-      order.customer_id = rand(500)
+      order.customer_id = rand(250)
       order.store_id = store.id
       order.save
       product = store.products.sample
