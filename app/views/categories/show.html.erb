@@ -1,20 +1,21 @@
-<div id='categories_show'>
-<h1><%= @store %></h1>
+<div class="product-index">
 
-<hr>
+  <div class="pull-right">
+    <% if current_user && (current_user.role_for_store?('store_admin', current_store) || current_user.platform_admin?) %>
+      <%= link_to 'Store Administration', store_admin_path(current_store) %>
+      <%= link_to 'Category Management', store_admin_categories_path(current_store) %>
+    <% end %>
+  </div>
 
-<h2><%= @category.title %></h2>
+  <div class="store-information">
+    <p class="store_title_pink"><%= link_to current_store, store_home_path(current_store) %></P>
+    <span class="store_category"><%= @category.title %></span><br />
+  </div>
 
-<% @category.products.each do |product| %>
-
-  <%= link_to store_product_path(@store, product) do %>
-    <div class="products span3">
-      <p><%= image_tag generate_image_url(300, product.id) %></p>
-
-      <h5><%= product.title.titleize %></h5>
-        <p><%= t('product.price') %>: <%= number_to_currency(product.price) %></p>
-    </div>
-  <% end %>
-<% end %>
-
+  <div id="product_listing" class="row-fluid">
+    <% @category.products.each do |product| %>
+      <%= render partial: 'products/product',
+          locals: { store: current_store, product: product }  %>
+      <% end %>
+  </div>
 </div>

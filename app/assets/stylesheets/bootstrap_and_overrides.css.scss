@@ -161,10 +161,23 @@ hr {
   position: relative;
   z-index: 1;
 }
+.store_title_pink a:hover {
+  color:  #536b71;
+}
+.store_title_pink a {
+  color: #b61435;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 250%;
+}
 .store_description {
   color: black;
   position: relative;
   padding-bottom: none;
   font-size: 80%;
   text-align: right;
+}
+.store-description-cursive {
+  color: black;
+  font-family: cursive;
+  letter-spacing: 0.1em ;
 }

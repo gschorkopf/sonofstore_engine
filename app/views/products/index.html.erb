@@ -11,8 +11,8 @@
   </div>
 
   <div class="store-information">
-    <h2><%= current_store %></h2>
-    <span><%= current_store.description %></span><br />
+    <p class="store_title_pink"><%= link_to current_store, store_home_path(current_store) %></p>
+    <span class="store-description-cursive">"<%= current_store.description %>"</span><br />
   </div>
 
   <%= paginate @products %>
