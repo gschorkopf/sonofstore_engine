@@ -17,7 +17,7 @@
     <% @cart_items.each do |cart_item| %>
   <tr>
     <% product = Product.find(cart_item[0].to_i) %>
-    <td><%= image_tag product.image.url(:thumbnail) %></td>
+    <td><%= image_tag generate_image_url(100, product.id) %></td>
     <td>
       <%= link_to product.title, store_product_path(current_store, product) %>
 

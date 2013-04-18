@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :current_cart, :get_flag, :current_store
+  helper_method :current_cart, :get_flag, :current_store, :generate_image_url
   before_filter :get_locale
 
 
@@ -85,12 +85,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def generate_image_url(side_length, prod_id)
-    img_cat = IMAGE_CATEGORIES[current_store.id.to_s[-1].to_i]
+  def generate_image_url(side_length, product_id)
+    img_category = IMAGE_CATEGORIES[current_store.id.to_s[-1].to_i]
     img_size_params = "#{side_length}/#{side_length}"
-    img_id = prod_id.to_s[-1].to_i
+    img_id = product_id.to_s[-1].to_i
     img_id = "10" if img_id == "0"
-    "http://lorempixel.com/#{img_size_params}/#{img_cat}/#{img_id}"
+    "http://lorempixel.com/#{img_size_params}/#{img_category}/#{img_id}"
   end
 
   IMAGE_CATEGORIES = {
