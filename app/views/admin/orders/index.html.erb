@@ -1,6 +1,6 @@
 <div class="admin-order-index">
   <%= render partial: 'shared/admin_navigation',
-             locals: { active: current_page?(admin_dashboard_path) ? :dashboard : :search } %>
+             locals: { active: current_page?(store_admin_orders_path(current_store)) ? :dashboard : :search } %>
 
   <div class="span8">
     <h1><% if current_page?(store_admin_orders_path(current_store)) %><%= t 'admin.dashboard' %><% else %>Search<%end%></h1>

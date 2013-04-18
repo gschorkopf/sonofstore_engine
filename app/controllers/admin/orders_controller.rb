@@ -13,6 +13,7 @@ class Admin::OrdersController < ApplicationController
   end
 
   def update
+    @store = current_store
     @order = Order.find(params[:id])
     if params[:update_status]
       @order.update_status
