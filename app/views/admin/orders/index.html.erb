@@ -3,13 +3,11 @@
              locals: { active: current_page?(admin_dashboard_path) ? :dashboard : :search } %>
 
   <div class="span8">
-
+    <h1><% if current_page?(store_admin_orders_path(current_store)) %><%= t 'admin.dashboard' %><% else %>Search<%end%></h1>
     <hr>
 
     <% if @count > 0 %>
-      <%= render partial: 'admin_dashboard_nav', locals: {active_tab: @active_tab,
-                                                                count: @count,
-                                                                statuses: @statuses} %>
+      <%= render partial: 'admin_dashboard_nav', locals: {active_tab: @active_tab} %>
         <br>
         <table class="table">
           <thead>
@@ -23,7 +21,7 @@
           </tbody>
         </table>
     <% else %>
-        <%= t 'order.none' %>
+        <%= "No orders" %>
     <% end %>
   </div>
 </div>

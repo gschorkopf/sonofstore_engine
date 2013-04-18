@@ -1,4 +1,5 @@
 <tr>
+  <td><%= current_store %></td>
   <td><%= link_to order_item.product.title, store_product_path(order_item.product.store, order_item.product) %></td>
   <% if @order.status == 'pending' || @order.status == 'paid' %>
   <td>

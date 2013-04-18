@@ -8,12 +8,12 @@
     <hr>
     <p><%= t 'model.createdat' %>: <%= @order.created_at.to_s(:short) %></p>
     <p><%= t 'model.updatedat' %>: <%= @order.updated_at.to_s(:short) %></p>
-    <p><%= t 'order.purchasername' %>: <%= @order.user.full_name %></p>
-    <p><%= t 'order.purchaseremail' %>: <%= @order.user.email %></p>
+    <p><%= t 'order.purchasername' %>: <%= @order.customer.full_name %></p>
+    <p><%= t 'order.purchaseremail' %>: <%= @order.customer.email %></p>
     <h2> <%= t 'product.collection' %> </h2>
     <table class="table">
       <thead>
-      <th><%= product.store %></th>
+      <th><%= current_store %></th>
       <th><%= t 'product.title' %></th>
       <th><%= t 'product.quantity' %></th>
       <th><%= t('product.unitprice') %></th>
