@@ -12,19 +12,23 @@ describe Admin::OrdersController do
   end
 
   it "index action should return a collection of orders" do
-    pending "this test requires current_store... how do we stub?"
+    pending
     # controller.stub(:require_admin => true)
-    # user = FactoryGirl.create(:user)
-    # orders = [FactoryGirl.create(:order, user: user)]
+    # customer = FactoryGirl.create(:customer)
+    # user = FactoryGirl.create(:user, customer_id: customer.id)
+    # orders = [FactoryGirl.create(:order, customer: customer)]
+    # store = FactoryGirl.create(:store)
 
-    # get :index
+    # get :index , stub(current_store.id).and_return(store.id)
     # expect(assigns(:orders)).to match_array orders
   end
 
   it "show action should return an individual order" do
     controller.stub(:require_admin => true)
-    user = FactoryGirl.create(:user)
-    order = FactoryGirl.create(:order, user: user)
+    customer = FactoryGirl.create(:customer)
+    user = FactoryGirl.create(:user, customer_id: customer.id)
+    order = FactoryGirl.create(:order, customer: customer)
+
     get :show, id: order.id
     expect(assigns(:order)).to eq order
   end
@@ -32,8 +36,10 @@ describe Admin::OrdersController do
   describe 'update' do
     it 'works correctly' do
       controller.stub(:require_admin => true)
-      user = FactoryGirl.create(:user)
-      order = FactoryGirl.create(:order, user_id: user.id)
+      customer = FactoryGirl.create(:customer)
+      user = FactoryGirl.create(:user, customer_id: customer.id)
+      order = FactoryGirl.create(:order, customer: customer)
+
       request.env["HTTP_REFERER"] = '/'
       post :update, id: order.id, update_status: 'pending'
       expect(order.status).to eq 'pending'
