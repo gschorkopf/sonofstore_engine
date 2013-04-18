@@ -85,6 +85,27 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def generate_image_url(side_length, prod_id)
+    img_cat = IMAGE_CATEGORIES[current_store.id.to_s[-1].to_i]
+    img_size_params = "#{side_length}/#{side_length}"
+    img_id = prod_id.to_s[-1].to_i
+    img_id = "10" if img_id == "0"
+    "http://lorempixel.com/#{img_size_params}/#{img_cat}/#{img_id}"
+  end
+
+  IMAGE_CATEGORIES = {
+    1 => 'city',
+    2 => 'abstract',
+    3 => 'food',
+    4 => 'sports',
+    5 => 'cats',
+    6 => 'technics',
+    7 => 'fashion',
+    8 => 'transport',
+    9 => 'nightlife',
+    0 => 'animals'
+  }
+
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = "Access denied."
     redirect_to root_path
