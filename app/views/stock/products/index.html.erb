@@ -1,12 +1,10 @@
 <div class="admin-product-index">
-  <%= render partial: 'shared/admin_navigation', :locals => { active: :products }  %>
-
-  <div class="span8">
+  <div class="span11">
     <div class="pull-right">
-      <%= button_to "New Product", new_store_stock_product_path, method: :get, class: 'btn btn-large btn-custom-lighten' %>
+      <%= button_to "New Product", new_store_stock_product_path, method: :get, class: 'btn btn-custom-lighten' %>
     </div>
 
-    <h1><%= t 'product.collection' %></h1>
+    <h1>Product Management for <%= current_store %></h1>
     <hr>
 
     <table class="table table-striped">
