@@ -2,7 +2,10 @@
 
 
 <% if current_cart.empty? == false %>
-<h3>Please review your order information</h3>
+<h3>Please Review Your Order Information</h3>
+
+<hr>
+
 <h4>Your current cart for <%= current_store %>:</h4>
 <br/>
 <table class="table table-striped">
@@ -17,7 +20,7 @@
     <% @cart_items.each do |cart_item| %>
   <tr>
     <% product = Product.find(cart_item[0].to_i) %>
-    <td><%= image_tag product.image.url(:thumbnail) %></td>
+    <td><%= image_tag generate_image_url(100, product.id) %></td>
     <td>
       <%= link_to product.title, store_product_path(current_store, product) %>
 
@@ -37,7 +40,6 @@
   </tr>
 <% end %>
 
-
   </tbody>
 </table>
 <% else %>
@@ -45,33 +47,79 @@
 <% end %>
 <br/><br/>
 
-    <h4>Shipping information:</h4>
-  <ul>
-    <li><%= @customer.shipping_address.street_address %></li>
-    <li><%= @customer.shipping_address.city %></li>
-    <li><%= @customer.shipping_address.zip %></li>
-    <li><%= @customer.shipping_address.state %></li>
-  </ul><br/>
+<hr>
 
-  <h4>Billing information:</h4>
-  <ul>
-    <li><%= @customer.billing_address.street_address %></li>
-    <li><%= @customer.billing_address.city %></li>
-    <li><%= @customer.billing_address.zip %></li>
-    <li><%= @customer.billing_address.state %></li>
-  </ul><br/>
+<div id='order_review_details'>
+  <div id='order_review_shipping'>
+    <h3>Shipping Information:</h3>
+    <ul>
+      <li>
+        <span class="title">Street Address: </span>
+        <%= @customer.shipping_address.street_address %>
+      </li>
+      <li>
+        <span class="title">City: </span>
+        <%= @customer.shipping_address.city %>
+      </li>
+      <li>
+        <span class="title">Zipcode: </span>
+          <%= @customer.shipping_address.zip %></li>
+      <li>
+        <span class="title">State: </span>
+        <%= @customer.shipping_address.state %>
+      </li>
+    </ul>
+  </div>
 
-  <h4>Credit card information:</h4>
-  <ul>
-    <li><%= @customer.credit_card.number %></li>
-    <li><%= @customer.credit_card.expiration_month%></li>
-    <li><%= @customer.credit_card.expiration_year%></li>
-    <li><%= @customer.credit_card.security_code%></li>
-  </ul><br/>
+  <div id='order_review_billing'>
+    <h3>Billing Information:</h3>
+    <ul>
+      <li>
+        <span class="title">Street Address: </span>
+        <%= @customer.billing_address.street_address %>
+      </li>
+      <li>
+        <span class="title">City: </span>
+        <%= @customer.billing_address.city %>
+      </li>
+      <li>
+        <span class="title">Zipcode: </span>
+        <%= @customer.billing_address.zip %>
+      </li>
+      <li>
+        <span class="title">State: </span>
+        <%= @customer.billing_address.state %>
+      </li>
+    </ul>
+  </div>
+
+  <div id='order_review_cc'>
+    <h3>Credit Card Information:</h3>
+    <ul>
+      <li>
+        <span class="title">Credit Card Number: </span>
+          <%= @customer.credit_card.number %>
+      </li>
+      <li>
+        <span class="title">Expiration Month: </span>
+        <%= @customer.credit_card.expiration_month%>
+      </li>
+      <li>
+        <span class="title">Expiration Year: </span>
+        <%= @customer.credit_card.expiration_year%>
+      </li>
+      <li>
+        <span class="title">Security Code: </span>
+        <%= @customer.credit_card.security_code%>
+      </li>
+    </ul>
+  </div>
 
 
 <% if current_cart.empty? %>
   <h3></h3>
 <% else %>
-  <%= button_to "Submit Order", store_create_order_path(current_store, @customer.id), method: :post %>
+<!-- div id='order_review_submit_btn'> -->
+  <%= button_to "Submit Order", store_create_order_path(current_store, @customer.id), class: 'btn btn-large btn-custom-lighten', id:'order_review_submit_btn', method: :post %>
+</div>
 <% end %>

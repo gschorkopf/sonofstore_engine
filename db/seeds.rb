@@ -50,8 +50,7 @@ s_id = 1
         description: "#{Faker::Company.bs} " + "#{Faker::Company.bs}",
         price: "#{(1..500).to_a.sample}.0".to_f,
         status: 'active',
-        store_id: s_id,
-        photo_url: "http://lorempixel.com/300/300")
+        store_id: s_id)
         #better way to do fake photos? there's gotta be.
     end
   end

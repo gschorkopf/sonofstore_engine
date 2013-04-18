@@ -1,6 +1,6 @@
 class Product < ActiveRecord::Base
   attr_accessible :title, :description, :price,
-                  :status, :category_ids, :image, :store_id, :photo_url
+                  :status, :category_ids, :image, :store_id
 
   belongs_to :store
 

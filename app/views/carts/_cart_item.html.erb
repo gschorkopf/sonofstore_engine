@@ -1,6 +1,6 @@
 <% current_cart.items.each do |cart_item| %>
   <tr>
-    <td><%= image_tag("http://lorempixel.com/50/50/") %></td>
+    <td><%= image_tag generate_image_url(100, cart_item.product.id) %></td>
     <td>
       <%= link_to cart_item.title, store_product_path(cart_item.product.store, cart_item.product) %>
       <br>
