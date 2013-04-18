@@ -3,7 +3,7 @@
 <div class="row">
 
   <div class="prod_detail_img span6">
-    <P><%= image_tag 'http://lorempixel.com/300/300' %></P>
+    <P><%= image_tag generate_image_url(500, @product.id) %></P>
     <!-- <p><%#= image_tag @product.image.url(:large) %></p> -->
   </div>
 

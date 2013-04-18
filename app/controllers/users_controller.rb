@@ -10,14 +10,13 @@ class UsersController < ApplicationController
 
       Mailer.welcome_email(@signup.user).deliver
       # Resque.enqueue(IntroMailer, @user.id)
-
       auto_login(@signup.user)
-      #redirect_to root_url, :notice => "Welcome, #{@user.full_name}"
+
       redirect_to session[:return_to] || root_path, notice: 'Logged in!'
     elsif @signup.message
-      redirect_to signup_path, notice: "Email already exists"
+      redirect_to signup_path, alert: "Email already exists"
     else
-      redirect_to signup_path, notice: "#{formated_errors}"
+      redirect_to signup_path, alert: "#{formated_errors}"
     end
   end
 
@@ -74,9 +73,14 @@ class UsersController < ApplicationController
       @customer = @user.customer
       @orders = @user.customer.orders
       @stores = @user.stores
-      @pending_stores = @stores.order('name ASC').where(approval_status: 'pending')
-      @approved_stores = @stores.order('name ASC').where(approval_status: 'approved')
-      @disapproved_stores = @stores.order('name ASC').where(approval_status: 'disapproved')
+      @pending_stores = @stores.order('name ASC').
+                                where(approval_status: 'pending')
+
+      @approved_stores = @stores.order('name ASC').
+                                 where(approval_status: 'approved')
+
+      @disapproved_stores = @stores.order('name ASC').
+                                    where(approval_status: 'disapproved')
     else
       redirect_to login_path, alert: 'Please log in!'
     end

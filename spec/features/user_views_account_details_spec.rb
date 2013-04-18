@@ -18,9 +18,10 @@ describe 'user account detail view' do
 
     it 'cannot update their profile with incorrect information' do
       visit 'profile'
-      fill_in 'Password', with: ''
-      click_button 'Update Account'
-      expect(page).to have_content("can't be blank")
+      click_link_or_button 'Edit Account'
+      fill_in 'password', with: 't'
+      click_button 'Update'
+      expect(page).to have_content("not match")
     end
 
     context 'when they click the link to their order history page' do

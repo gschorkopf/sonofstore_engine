@@ -18,7 +18,7 @@ StoreEngine::Application.routes.draw do
 
     resources :orders, only: [ :show, :update ]
 
-    resources :order_items, only: [ :update, :destroy ]
+    #resources :order_items, only: [ :update, :destroy ]
 
     resources :stores, except: [:update, :new ] do
       member do
@@ -77,6 +77,8 @@ StoreEngine::Application.routes.draw do
       resources :users, except: [ :index, :update, :edit, :show ]
       resources :stockers
       resources :categories, except: [ :destroy ]
+      resources :orders, except: [ :destroy ]
+      resources :order_items, only: [ :update, :destroy ]
       resources :products do
         member do
           post :toggle_status

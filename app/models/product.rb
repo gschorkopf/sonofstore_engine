@@ -1,6 +1,6 @@
 class Product < ActiveRecord::Base
   attr_accessible :title, :description, :price,
-                  :status, :category_ids, :image, :store_id, :photo_url
+                  :status, :category_ids, :image, :store_id
 
   belongs_to :store
 
@@ -36,8 +36,12 @@ class Product < ActiveRecord::Base
   end
 
   def exists_in_store?(title, id, store_id)
-    !Store.find_by_id(store_id).products.where("title ILIKE ?", "%#{title}%").
+    if id
+      !Store.find_by_id(store_id).products.where("title ILIKE ?", "%#{title}%").
                       where("id <> ?", id).empty?
+    else
+      !Store.find_by_id(store_id).products.where("title ILIKE ?", "%#{title}%")
+    end
   end
 
   def toggle_status

@@ -21,7 +21,8 @@ class Admin::UsersController < ApplicationController
       redirect_to store_admin_path(@store), notice: "Admin added!"
     else
       Mailer.sign_up_as_admin(email, @store).deliver
-      redirect_to store_admin_path(@store), notice: "This person is not currently registered with Pink SoSE.  A welcome email has been sent on your behalf."
+      redirect_to store_admin_path(@store),
+      notice: "This person is not currently registered with Pink SoSE.  A welcome email has been sent on your behalf."
     end
   end
 
@@ -33,12 +34,14 @@ class Admin::UsersController < ApplicationController
       ur = UserRole.find_by_user_id_and_store_id(@user, @store)
       ur.destroy
       Mailer.remove_admin_from_store(@user, @store).deliver
-      redirect_to store_admin_path(@store), notice: "Administrator privileges for #{@user} have been revoked."
+      redirect_to store_admin_path(@store),
+      notice: "Administrator privileges for #{@user} have been revoked."
     else
       ur = UserRole.find_by_user_id_and_store_id(@user, @store)
       ur.destroy
       Mailer.remove_stocker_from_store(@user, @store).deliver
-      redirect_to store_admin_path(@store), notice: "Stocker privileges for #{@user} have been revoked."
+      redirect_to store_admin_path(@store),
+      notice: "Stocker privileges for #{@user} have been revoked."
     end
   end
 end

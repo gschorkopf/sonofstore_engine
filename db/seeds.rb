@@ -26,6 +26,48 @@ def seed_products(store, count)
     rescue
       puts "Product name taken!  Retrying."
       retry
+
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 1)
+end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 2)
+end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 3)
+end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 4)
+end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 5)
+end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 6)
+end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 7)
+end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 8)
+end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 9)
+end
+10.times do
+  Category.create(title: Faker::Lorem.words[0], store_id: 10)
+end
+
+s_id = 1
+10.times do
+  10.times do
+    10.times do
+      Product.create(title: Faker::Address.street_name.split[0],
+        description: "#{Faker::Company.bs} " + "#{Faker::Company.bs}",
+        price: "#{(1..500).to_a.sample}.0".to_f,
+        status: 'active',
+        store_id: s_id)
+        #better way to do fake photos? there's gotta be.
     end
   end
 end

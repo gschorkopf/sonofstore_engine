@@ -3,20 +3,25 @@
 <% end %>
 
 <% unless @approved_stores.empty? %>
-  <h3>Store Manager</h3>
   <table class="table table-striped">
     <tr>
       <th>Name</th>
       <th>URL ID</th>
-      <th>Description</th>
+      <th>Role</th>
       <th>Active Status</th>
     </tr>
 
     <% @approved_stores.each do |store| %>
       <tr>
-        <td><%= link_to store, store_admin_path(store) %></td>
+        <td>
+          <% if current_user.role_for_store?('store_admin', store) %>
+            <%= link_to store, store_admin_path(store) %>
+          <% else %>
+            <%= link_to store, store_stock_products_path(store) %>
+          <% end %>
+        </td>
         <td><%= store.path %></td>
-        <td><%= store.description %></td>
+        <td><%= current_user.role_to_s(store) %></td>
         <td><%= store.active_to_s %></td>
       </tr>
     <% end %>

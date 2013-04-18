@@ -33,10 +33,10 @@ class OrdersController < ApplicationController
 
   def create
     @customer_id = params[:customer_id]
+
     @order = Order.new
-    uuid = UUID.new.generate
     # @order = Order.create(status: 'pending', customer_id: @customer_id)
-    @order.uuid_hash = uuid
+    @order.uuid_hash = UUID.new.generate
     @order.customer_id = @customer_id
     @order.store_id = current_store.id
     @order.status = "pending"
@@ -52,8 +52,9 @@ class OrdersController < ApplicationController
     if @order.save
       Mailer.order_confirmation(@customer_id, @order).deliver
       # Resque.enqueue(OrderMailer, current_user.id, @order.id)
+
       session[current_store.path] = {}
-      Resque.enqueue(OrderMailer, @customer_id, @order.id)
+
       if current_user
         redirect_to customer_order_path(@customer_id, @order.id), :notice => "Successfully created order!"
       else
