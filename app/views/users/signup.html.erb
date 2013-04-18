@@ -1,3 +1,6 @@
+<% unless request.referrer == login_url %>
+  <% session[:return_to] = request.referrer %>
+<% end %>
 
 <div class="span8" id="signup">
 <h1>Create New Account</h1>
