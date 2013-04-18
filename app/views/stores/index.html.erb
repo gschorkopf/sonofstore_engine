@@ -1,23 +1,6 @@
-<% cache("root_page") do %>
-
-<div class="span11">
-
-  <h2>Featured Stores</h2>
-
-  <table class="table table-striped">
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-
-  <% @stores.each do |store| %>
-    <tr>
-      <td><%= link_to store.name, store_home_path(store) %></td>
-      <td><%= store.description %></td>
-    </tr>
-  <% end %>
-  </table>
-
-</div>
-
-<% end %> <!-- end of caching block -->
+<%# cache("root_page") do %>
+<!--   <% @stores.each do |store| %>
+    <%= link_to store.name, store_home_path(store) %></td>
+    <span><%= store.description %></span>
+  <% end %> -->
+<%# end %> <!-- end of caching block -->
