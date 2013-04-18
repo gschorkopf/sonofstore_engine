@@ -4,7 +4,7 @@
       <%= button_to "New Product", new_store_stock_product_path, method: :get, class: 'btn btn-custom-lighten' %>
     </div>
 
-    <h1>Product Management for <%= current_store %></h1>
+    <h1>Product Management for <%= link_to current_store, store_home_path(current_store) %></h1>
     <hr>
 
     <table class="table table-striped">
