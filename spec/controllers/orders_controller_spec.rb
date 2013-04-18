@@ -71,7 +71,8 @@ describe OrdersController do
           user2 = FactoryGirl.create(:user,customer_id: customer2.id)
           order = FactoryGirl.create(:order, customer: customer1)
           login_user user2
-          get :show, params = {id: order.id}
+
+          get :show, params = {customer_id: customer1.id, id: order.id}
           expect(response).to redirect_to customer_orders_path(order)
         end
       end
@@ -79,7 +80,10 @@ describe OrdersController do
 
     context 'when the user is not logged in' do
       it 'redirects the user to the login page' do
-        get :show
+        customer1 = FactoryGirl.create(:customer)
+        order = FactoryGirl.create(:order, customer: customer1)
+
+        get :show, params = {customer_id: customer1.id, id: order.id}
         expect(response).to redirect_to login_path
       end
     end

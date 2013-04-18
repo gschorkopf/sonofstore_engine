@@ -1,0 +1,35 @@
+
+.content-box, #categories-index, #categories_show, #checkout_new, #shipping_info_page, #billing_info_page, #credit_card_info_page {
+  margin: 30px;
+}
+
+.checkout_section {
+  float:left;
+  padding: 50px;
+
+}
+
+.checkout_section h3 {
+  border-bottom: 1px solid #395974;
+  text-align: center;
+}
+
+.checkout_section p{
+
+  margin-bottom: 1px;
+  margin-top: 8px;
+}
+
+#shipping, #billing {
+  border-right: 1px solid #395974;
+}
+
+#credit_card_form {
+  padding-left: 40px;
+}
+
+#ship_bill_cc_submit{
+  margin: 30px;
+  margin-right: 100px;
+  float: right;
+}

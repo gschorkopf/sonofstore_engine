@@ -1,3 +1,8 @@
+<div id='categories_show'>
+<h1><%= @store %></h1>
+
+<hr>
+
 <h2><%= @category.title %></h2>
 
 <% @category.products.each do |product| %>
@@ -11,3 +16,5 @@
     </div>
   <% end %>
 <% end %>
+
+</div>
