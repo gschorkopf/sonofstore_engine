@@ -10,9 +10,8 @@ class UsersController < ApplicationController
 
       Mailer.welcome_email(@signup.user).deliver
       # Resque.enqueue(IntroMailer, @user.id)
-
       auto_login(@signup.user)
-      #redirect_to root_url, :notice => "Welcome, #{@user.full_name}"
+
       redirect_to session[:return_to] || root_path, notice: 'Logged in!'
     elsif @signup.message
       redirect_to signup_path, alert: "Email already exists"
