@@ -31,11 +31,19 @@ class Store < ActiveRecord::Base
   end
 
   def self.exists_with_name?(name, id)
-    !Store.approved.where("name ILIKE ?", "%#{name}%").where("id <> ?", id).empty?
+    if id
+      !Store.approved.where("name ILIKE ?", "%#{name}%").where("id <> ?", id).empty?
+    else
+      !Store.approved.where("name ILIKE ?", "%#{name}%").empty?
+    end
   end
 
   def self.exists_with_path?(path, id)
-    !Store.approved.where("path ILIKE ?", "%#{path}%").where("id <> ?", id).empty?
+    if id
+      !Store.approved.where("path ILIKE ?", "%#{path}%").where("id <> ?", id).empty?
+    else
+      !Store.approved.where("path ILIKE ?", "%#{path}%").empty?
+    end
   end
 
   def self.find(path)
