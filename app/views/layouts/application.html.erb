@@ -21,6 +21,9 @@
         </div>
       </nav>
     </header>
+    <% if request.fullpath == root_path %>
+      <%= render partial: 'layouts/index', locals: { stores: @stores } %>
+    <% else %>
     <div id="main" role="main">
       <div class="container">
         <div class="content">
@@ -31,7 +34,7 @@
             </div>
           </div>
         </div> <!--! end of content-->
-
+    <% end %>
         <% cache('footer') do %>
         <div id="footer">
           <%= link_to(image_tag('github_25.png'), '/code', id: 'github') %>

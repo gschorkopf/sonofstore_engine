@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :current_cart, :get_flag, :current_store, :generate_image_url
+  helper_method :current_cart, :get_flag, :generate_span,
+    :current_store, :generate_image_url, :generate_store_image_url
   before_filter :get_locale
 
 
@@ -93,6 +94,11 @@ class ApplicationController < ActionController::Base
     "http://lorempixel.com/#{img_size_params}/#{img_category}/#{img_id}"
   end
 
+  def generate_store_image_url(store_id)
+    img_category = IMAGE_CATEGORIES[store_id.to_s[-1].to_i]
+    "http://lorempixel.com/500/500/#{img_category}/"
+  end
+
   IMAGE_CATEGORIES = {
     1 => 'city',
     2 => 'abstract',
@@ -104,6 +110,21 @@ class ApplicationController < ActionController::Base
     8 => 'transport',
     9 => 'nightlife',
     0 => 'animals'
+  }
+
+  def generate_span(integer)
+    integer = integer & 7 if integer > 7
+    SPANS[integer]
+  end
+
+  SPANS = {
+    1 => "span8",
+    2 => "span4",
+    3 => "span4",
+    4 => "span4",
+    5 => "span4",
+    6 => "span4",
+    7 => "span8"
   }
 
   rescue_from CanCan::AccessDenied do |exception|
