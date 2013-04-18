@@ -42,7 +42,7 @@ class Store < ActiveRecord::Base
     if id
       !Store.approved.where("path ILIKE ?", "%#{path}%").where("id <> ?", id).empty?
     else
-      !Store.approved.where("name ILIKE ?", "%#{name}%").empty?
+      !Store.approved.where("path ILIKE ?", "%#{path}%").empty?
     end
   end
 
