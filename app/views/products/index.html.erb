@@ -17,6 +17,8 @@
     <span><%= current_store.description %></span><br />
   </div>
 
+  <%= paginate @products %>
+
   <div id="product_listing" class="row-fluid">
     <% @products.each do |product| %>
       <%= render partial: 'product',

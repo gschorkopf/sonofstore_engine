@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
               alert: "#{current_store.name} is currently down for maintenance."
       return
     elsif current_store.approved?
-      @products = current_store.products
+      @products = current_store.products.page(params[:page]).per(40)
       @categories = current_store.categories
     else
       redirect_to root_path,

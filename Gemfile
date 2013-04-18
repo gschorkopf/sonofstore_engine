@@ -17,6 +17,7 @@ gem 'cancan'
 gem 'faker'
 gem 'uuid'
 gem 'redis-rails'
+gem 'kaminari'
 
 group :production do
   gem 'pg'
