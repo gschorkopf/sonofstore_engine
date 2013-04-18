@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
     else
       @customer = Customer.find_by_id(params[:customer_id])
     end
-    @cart = current_cart
+    @cart_items = session[(params[:store_path])]
   end
 
   def display
@@ -33,10 +33,16 @@ class OrdersController < ApplicationController
 
   def create
     @customer_id = params[:customer_id]
-    @order = Order.create(status: 'pending', customer_id: @customer_id)
-    @order.uuid_hash = UUID.new.generate
 
-    session[:cart].each do |product_id, quantity|
+    @order = Order.new
+    # @order = Order.create(status: 'pending', customer_id: @customer_id)
+    @order.uuid_hash = UUID.new.generate
+    @order.customer_id = @customer_id
+    @order.store_id = current_store.id
+    @order.status = "pending"
+    @order.save
+
+    session[current_store.path].each do |product_id, quantity|
       product = Product.find(product_id)
       @order.order_items.create(product_id: product.id,
                                unit_price: product.price,
@@ -47,16 +53,17 @@ class OrdersController < ApplicationController
       Mailer.order_confirmation(@customer_id, @order).deliver
       # Resque.enqueue(OrderMailer, current_user.id, @order.id)
 
-      session[:cart] = {}
+      session[current_store.path] = {}
+      Resque.enqueue(OrderMailer, @customer_id, @order.id)
+
       if current_user
-        redirect_to profile_path(current_user),
-        :notice => "Successfully created order!"
+        redirect_to customer_order_path(@customer_id, @order.id), :notice => "Successfully created order!"
       else
         redirect_to order_confirmation_path(@order.id),
         :notice => "Successfully created order!"
       end
     else
-      redirect_to cart_path, :notice => "Checkout failed."
+      redirect_to store_cart_path(current_store), :notice => "Checkout failed."
     end
   end
 end

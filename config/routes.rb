@@ -50,6 +50,17 @@ StoreEngine::Application.routes.draw do
     get '/' => "products#index", as: 'home'
     resources :products, only: [ :index, :show ]
     resources :categories, only: [ :index, :show ]
+    resources :checkouts, only: [ :new, :create, :show ]
+
+    resource :cart, only: [ :update, :show, :destroy ] do
+      member do
+        put :remove_item
+      end
+    end
+
+    #resources :orders, only: [ :new, :create ]
+    get "/orders/:customer_id/new" => "orders#new", :as => "new_order"
+    post "/orders/:customer_id/create" => "orders#create", :as => "create_order"
 
     namespace :stock do
       resources :products, except: [ :destroy ] do
@@ -75,5 +86,33 @@ StoreEngine::Application.routes.draw do
   end
 
   resources :users
-  # Why do we have this as a duplicate to :customers => :users ?
+
+
+  # resources :customers, only: [ :new, :create, :update, :show ] do
+  #   resources :orders, except: [ :new, :create ]
+  #   resource :shipping_addresses, except: [ :index ]
+  #   resource :billing_addresses, except: [ :index ]
+  #   resource :credit_cards, except: [ :index ]
+  #   resource :user, only: [:new, :create, :update, :show]
+  # end
+
+  # namespace :admin do
+  #   # namespace dedicated to platform admin
+
+  #   root to: redirect("/admin/dashboard")
+  #   get :dashboard, to: "orders#index", as: 'dashboard'
+
+  #   resources :categories, except: [ :index, :show ]
+
+  #   resources :orders, only: [ :show, :update ]
+
+  #   resources :order_items, only: [ :update, :destroy]
+
+  #   resources :stores, except: [:update, :new] do
+  #     member do
+  #       put :choose_approval_status, :as => "choose_approval_status_on"
+  #       put :toggle_active
+  #     end
+  #   end
+  # end
 end

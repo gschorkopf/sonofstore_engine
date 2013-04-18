@@ -19,9 +19,7 @@ class Product < ActiveRecord::Base
                               }
 
   validates :title, presence: :true
-  validate :unique_product_title_in_store, on: :create
-  validate :unique_product_title_in_store, on: :update
-  validate :unique_product_title_in_store, on: :toggle_status
+  validate :unique_product_title_in_store
   validates :description, presence: :true
   validates :store_id, presence: :true
   validates :status, presence: :true,
@@ -32,9 +30,14 @@ class Product < ActiveRecord::Base
 
 
   def unique_product_title_in_store
-    if !store.products.where("title ILIKE ?", "%#{title}%").empty?
+    if exists_in_store?(title, id, store_id)
       errors.add(:title,"This store can have only one product with this name")
     end
+  end
+
+  def exists_in_store?(title, id, store_id)
+    !Store.find_by_id(store_id).products.where("title ILIKE ?", "%#{title}%").
+                      where("id <> ?", id).empty?
   end
 
   def toggle_status

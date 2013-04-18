@@ -19,7 +19,7 @@ class CreditCardsController < ApplicationController
       else
         @customer.credit_card_id = @credit_card.id
         @customer.save
-        redirect_to new_customer_order_path(@customer.id)
+        redirect_to new_store_order_path(current_store)
       end
     else
       render "new"
