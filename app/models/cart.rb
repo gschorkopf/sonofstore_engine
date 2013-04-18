@@ -27,7 +27,7 @@ class Cart
       quantity = carts_param[:quantity]
       session[id] = quantity || (session[id].to_i + 1).to_s
     end
-    session.delete_if {|product, quantity| quantity == "0"}
+    session.delete_if {|product, quantity| quantity <= "0".to_i}
     session
   end
 
