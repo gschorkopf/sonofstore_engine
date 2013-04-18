@@ -1,33 +1,35 @@
-Thanks so much for your purchase
-<br>
-<br>
-<br>
-    <table class="table table-striped">
-      <thead>
-        <th><%= "Store" %></th>
-        <th><%= t('product.name') %></th>
-        <th><%= t('product.quantity') %></th>
-        <th><%= t('product.unitprice') %></th>
-        <th><%= t('product.subtotal') %></th>
-      </thead>
-      <tbody>
-        <%= render partial: 'order_item', collection: @order.order_items %>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td style="text-align: right;"><%= t('total') %>:</td>
-          <td><%= number_to_currency(@order.total) %></td>
-        </tr>
-      </tfoot>
-    </table>
-<br>
+<div class ="content-box">
+  Thanks so much for your purchase
+  <br>
+  <br>
+  <br>
+      <table class="table table-striped">
+        <thead>
+          <th><%= "Store" %></th>
+          <th><%= t('product.name') %></th>
+          <th><%= t('product.quantity') %></th>
+          <th><%= t('product.unitprice') %></th>
+          <th><%= t('product.subtotal') %></th>
+        </thead>
+        <tbody>
+          <%= render partial: 'order_item', collection: @order.order_items %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="text-align: right;"><%= t('total') %>:</td>
+            <td><%= number_to_currency(@order.total) %></td>
+          </tr>
+        </tfoot>
+      </table>
+  <br>
 
-<br>
-Your payment has been successfully processed!
-<br>
-<br>
-We hope you stop by again!
-<br>
+  <br>
+  Your payment has been successfully processed!
+  <br>
+  <br>
+  We hope you stop by again!
+  <br>
+</div>
