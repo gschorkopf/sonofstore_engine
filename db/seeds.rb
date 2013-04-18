@@ -26,48 +26,6 @@ def seed_products(store, count)
     rescue
       puts "Product name taken!  Retrying."
       retry
-
-10.times do
-  Category.create(title: Faker::Lorem.words[0], store_id: 1)
-end
-10.times do
-  Category.create(title: Faker::Lorem.words[0], store_id: 2)
-end
-10.times do
-  Category.create(title: Faker::Lorem.words[0], store_id: 3)
-end
-10.times do
-  Category.create(title: Faker::Lorem.words[0], store_id: 4)
-end
-10.times do
-  Category.create(title: Faker::Lorem.words[0], store_id: 5)
-end
-10.times do
-  Category.create(title: Faker::Lorem.words[0], store_id: 6)
-end
-10.times do
-  Category.create(title: Faker::Lorem.words[0], store_id: 7)
-end
-10.times do
-  Category.create(title: Faker::Lorem.words[0], store_id: 8)
-end
-10.times do
-  Category.create(title: Faker::Lorem.words[0], store_id: 9)
-end
-10.times do
-  Category.create(title: Faker::Lorem.words[0], store_id: 10)
-end
-
-s_id = 1
-10.times do
-  10.times do
-    10.times do
-      Product.create(title: Faker::Address.street_name.split[0],
-        description: "#{Faker::Company.bs} " + "#{Faker::Company.bs}",
-        price: "#{(1..500).to_a.sample}.0".to_f,
-        status: 'active',
-        store_id: s_id)
-        #better way to do fake photos? there's gotta be.
     end
   end
 end
@@ -104,10 +62,6 @@ def seed_users(count)
   end
 end
 
-stores.each { |store| seed_products(store, 1000)}
-
-stores.each { |store| seed_categories(store, 10) }
-
 customer1 = Customer.create(full_name: "Franklin Webber", email: "demoXX+franklin@jumpstartlab.com")
 customer2 = Customer.create(full_name: "Jeff", email: "demoXX+jeff@jumpstartlab.com")
 customer3 = Customer.create(full_name: "Steve Klabnik", email: "demoXX+steve@jumpstartlab.com")
@@ -118,8 +72,8 @@ user2 = User.create(password: "password", display_name: "j3", customer_id: custo
 user3 = User.create(password: "password", display_name: "SkrilleX", customer_id: customer3.id)
 user4 = User.create(password: "password", display_name: "Norway", customer_id: customer4.id)
 
-user3.platform_admin = true
-user3.save
+customer3.user.platform_admin = true
+customer3.save
 
 n = 1
 10.times do
@@ -131,8 +85,189 @@ ur4.save
 n += 1
 end
 
-seed_customers(10_000)
-seed_users(10_000)
+stores.each { |store| seed_products(store, 10_000)}
+
+stores.each { |store| seed_categories(store, 10) }
+
+seed_customers(500)
+seed_users(500)
+
+#product_categories store1
+p_id = 1
+c_id = 1
+10.times do
+  1000.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store2
+p_id = 10001
+c_id = 11
+10.times do
+  1000.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store3
+p_id = 20001
+c_id = 21
+10.times do
+  1000.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store4
+p_id = 30001
+c_id = 31
+10.times do
+  1000.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store5
+p_id = 40001
+c_id = 41
+10.times do
+  1000.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store6
+p_id = 50001
+c_id = 51
+10.times do
+  1000.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store7
+p_id = 60001
+c_id = 61
+10.times do
+  1000.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store8
+p_id = 70001
+c_id = 71
+10.times do
+  1000.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store9
+p_id = 80001
+c_id = 81
+10.times do
+  1000.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+#product_categories store10
+p_id = 90001
+c_id = 91
+10.times do
+  1000.times do
+    ProductCategory.create(product_id: p_id, category_id: c_id)
+    p_id +=1
+  end
+  c_id +=1
+end
+
+statuses = ['pending', 'shipped', 'cancelled', 'returned', 'paid']
+stores.each do |store|
+  20.times do |i|
+    begin
+      puts "Seeding order #{i} for store #{store.id}"
+      order = Order.new
+      order.status = statuses.sample
+      order.customer_id = rand(500)
+      order.store_id = store.id
+      order.save
+      product = store.products.sample
+      order.order_items.create(product_id: product.id,
+                               unit_price: product.price,
+                               quantity: rand(5))
+    rescue
+      retry
+    end
+  end
+end
+
+
+
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 1)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 2)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 3)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 4)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 5)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 6)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 7)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 8)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 9)
+# end
+# 10.times do
+#   Category.create(title: Faker::Lorem.words[0], store_id: 10)
+# end
+
+# s_id = 1
+# 10.times do
+#   10.times do
+#     10.times do
+#       Product.create(title: Faker::Address.street_name.split[0],
+#         description: "#{Faker::Company.bs} " + "#{Faker::Company.bs}",
+#         price: "#{(1..500).to_a.sample}.0".to_f,
+#         status: 'active',
+#         store_id: s_id)
+#         #better way to do fake photos? there's gotta be.
+#     end
+#   end
+# end
 
 
 #####If everything is burning, go back to this:

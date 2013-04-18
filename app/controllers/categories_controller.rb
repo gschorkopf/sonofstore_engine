@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
   def index
     @store ||= current_store
-    @categories ||= Category.find_all_by_store_id(@store.id)
+    @categories = current_store.categories.page(params[:page]).per(40)
   end
 
   def show
