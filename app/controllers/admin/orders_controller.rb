@@ -4,7 +4,7 @@ class Admin::OrdersController < ApplicationController
   def index
     @count = Order.find_all_by_store_id(current_store.id).count
     @orders = Order.find_all_by_store_id(current_store.id)
-    @statuses = Order.find_all_by_store_id(current_store.id).count(group: :status)
+    @statuses = Order.where(store_id: current_store.id).count(group: :status)
     @active_tab = params[:status] || 'all'
   end
 
