@@ -6,3 +6,38 @@
   margin: 30px;
 }
 
+#order_review_details ul{
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+
+#order_review_details li {
+  list-style-type: none;
+  list-style-position: inside;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin: px;
+}
+
+
+#order_review_shipping, #order_review_billing, #order_review_cc {
+  float: left;
+  margin: 30px;
+}
+
+#order_review_shipping h4,
+#order_review_billing h4,
+#order_review_cc h4 {
+  border-bottom: 1px solid #395974;
+}
+
+.title {
+  font-weight: bold;
+}
+#order_review_submit_btn{
+  float:right;
+  margin-top: 100px;
+  margin-right: 50px;
+}
