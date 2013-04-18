@@ -5,7 +5,7 @@ class Admin::OrdersController < ApplicationController
     @count = Order.count
     @orders = Order.find_all_by_store_id(current_store.id)
     @statuses = Order.count(group: :status)
-    @active_tab = params[:status] || 'all'
+    #@active_tab = params[:status] || 'all'
   end
 
   def show

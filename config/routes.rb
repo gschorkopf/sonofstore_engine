@@ -77,6 +77,7 @@ StoreEngine::Application.routes.draw do
       resources :users, except: [ :index, :update, :edit, :show ]
       resources :stockers
       resources :categories, except: [ :destroy ]
+      resources :orders, except: [ :destroy ]
       resources :products do
         member do
           post :toggle_status
