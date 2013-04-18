@@ -5,8 +5,11 @@
         class: 'btn btn-custom-lighten', method: :get %>
     <% if current_user && (current_user.role_for_store?('store_admin', current_store) || current_user.platform_admin?) %>
       <%= link_to 'Store Administration', store_admin_path(current_store) %>
+    <% elsif current_user && current_user.role_for_store?('stocker', current_store) %>
+      <%= link_to 'Product Management', store_stock_products_path(current_store) %>
     <% end %>
   </div>
+
 <% cache("product_index_for_store_#{current_store.path}") do %> <!-- Start cache -->
 
   <div class="store-information">

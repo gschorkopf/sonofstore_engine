@@ -1,5 +1,11 @@
  <tr>
-    <td><%= store.name %></td>
+    <td>
+      <% if store.active? %>
+        <%= link_to store.name, store_home_path(store) %>
+      <% else %>
+        <%= store.name %>
+      <% end %>
+    </td>
     <td><%= store.path %></td>
     <td><%= store.description[0...31] %>
       <% if store.description.length >= 32 %>
