@@ -1,6 +1,7 @@
 class Admin::StoresController < ApplicationController
-  before_filter :require_platform_admin, except: [:update, :show, :edit]
+  before_filter :require_admin, except: [:update, :show, :edit]
   before_filter :require_admin, only: [:edit, :show]
+
 
   def index
     @pending_stores ||= Store.order('name ASC').
