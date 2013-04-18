@@ -6,7 +6,7 @@
     <div class="row lead-background">
       <% @stores.each_with_index do |store, i| %>
         <%= link_to store_home_path(store) do %>
-          <div class="span3">
+          <div class="span4 ">
             <span class="store_title"><%= store.name %></span><br>
             <%= image_tag generate_store_image_url(store.id), class: "img-polaroid" %>
             <p class="store_description">"<%= store.description %>"</p>
