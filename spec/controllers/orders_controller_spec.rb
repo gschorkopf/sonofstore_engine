@@ -30,21 +30,20 @@ describe OrdersController do
           assigns(user).should eq @user
         end
 
-        it 'assigns order variables' do
-           user = FactoryGirl.create(:user, customer_id: @customer.id)
-          login_user user
-          orders = Order.create(customer_id: @customer.id, status:"pending")
-          get :index
-          assigns(orders).should eq @orders
-        end
+        # it 'assigns order variables' do
+        #   user = FactoryGirl.create(:user, customer_id: @customer.id)
+        #   orders = Order.create(customer_id: @customer.id, status:"pending")
+        #   login_user user
+        #   get :index
+        #   assigns(orders).should eq @orders
+        # end
       end
     end
 
     context 'when the user is NOT logged in' do
       it 'trying to go to their order history page redirects them to the log in page' do
-        pending
-        # get :index
-        # expect(response).to redirect_to login_path
+        get :index
+        expect(response).to redirect_to login_path
       end
     end
   end

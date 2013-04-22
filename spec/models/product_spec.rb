@@ -19,13 +19,14 @@ describe Product do
   end
 
   it 'is invalid without a store id' do
+    #this is failing because it cannot do a custom validation without a store id
     expect(FactoryGirl.build(:product, store_id: '').valid?).to be_false
   end
 
   it 'is invalid if title already exists in the same store' do
     FactoryGirl.create(:product, store_id: @store.id)
-    product = FactoryGirl.build(:product, store_id: @store.id)
-    expect(product.valid?).to be_false
+    product2 = FactoryGirl.build(:product, store_id: @store.id)
+    expect(product2.valid?).to be_false
   end
 
   it 'is invalid if title already exists (case insensitive) in the same store' do
