@@ -1,8 +1,8 @@
 FactoryGirl.define do
 
   factory :store do
-    name "MyString"
-    path "my-string"
+    sequence(:name) {|n| "mystore#{n}"}
+    sequence(:path) {|n| "my-store-path#{n}"}
     description "My String Store Rocks!"
     approval_status "approved"
     active true
@@ -34,7 +34,7 @@ FactoryGirl.define do
 
   factory :customer do
     full_name 'Daniel Boone'
-    email 'dboone54@yahoo.com'
+    sequence(:email) {|n| "email#{n}@example.com"}
   end
 
   factory :user do

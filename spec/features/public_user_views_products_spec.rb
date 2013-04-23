@@ -16,8 +16,8 @@ feature "Public User Views Products" do
 
   context "the product page" do
     before(:each) do
-      @store = FactoryGirl.create(:store)
-      @product = FactoryGirl.create(:product, store_id: @store.id)
+      @store = FactoryGirl.create(:store, name: 'Tinas Llamas', path: 'tinas-llamas')
+      @product = FactoryGirl.create(:product, store: @store)
       visit store_product_path(@store, @product)
     end
 
@@ -33,11 +33,11 @@ feature "Public User Views Products" do
     context 'ratings and reviews' do
       context 'when reviews exist for the product' do
         before(:each) do
-          @user = FactoryGirl.create(:user)        
+          @user = FactoryGirl.create(:user)
           @noname_user = FactoryGirl.create(:user_without_display_name)
-  
-          rating1 = FactoryGirl.create(:rating, product_id: @product.id, customer_id: @user.customer_id)
-          rating2 = FactoryGirl.create(:rating,  product_id: @product.id, customer_id: @noname_user.customer_id)
+
+          rating1 = FactoryGirl.create(:rating)
+          rating2 = FactoryGirl.create(:rating, rating: 3)
         end
 
         it 'displays the individual ratings sorted by most recent' do
