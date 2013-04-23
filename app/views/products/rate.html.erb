@@ -1,0 +1,64 @@
+<div class="row content-box">
+  <div class="prod_detail_img span6">
+    <P><%= image_tag generate_image_url(500, @product.id), class: "img-rounded" %></P>
+    <!-- <p><%#= image_tag @product.image.url(:large) %></p> -->
+  </div>
+
+  <div class="prod_detail_text span5">
+    <h2><% 'Title' %><%= @product.title %></h2>
+    <p><% 'Description' %><%= @product.description %></p>
+
+    <div id="product-categories">
+      <b><%= 'Category' %>:</b>
+      <% @product.categories.each do |category| %>
+         <span class='label'><%= link_to category.title, store_category_path(@product.store.path, category), method: :get %></span>
+
+      <% end %>
+    </div>
+
+    <br>
+      <p><%= 'Price' %>: <%= number_to_currency(@product.price) %></p>
+  </div>
+</div>
+<form class="product-rating">
+  <div class="value-rating">
+    <label for="value-rating">Value</label>
+    <input type="radio" name="value-rating" value="1" class="star">
+    <input type="radio" name="value-rating" value="2" class="star">
+    <input type="radio" name="value-rating" value="3" class="star">
+    <input type="radio" name="value-rating" value="4" class="star">
+    <input type="radio" name="value-rating" value="5" class="star">
+  </div>
+  <div class="packaging-rating">
+    <label for="packaging-rating">Packaging</label>
+    <input type="radio" name="packaging-rating" value="1" class="star">
+    <input type="radio" name="packaging-rating" value="2" class="star">
+    <input type="radio" name="packaging-rating" value="3" class="star">
+    <input type="radio" name="packaging-rating" value="4" class="star">
+    <input type="radio" name="packaging-rating" value="5" class="star">
+  </div>
+  <div class="durability-rating">
+    <label for="value">Durability</label>
+    <input type="radio" name="durability-rating" value="1" class="star">
+    <input type="radio" name="durability-rating" value="2" class="star">
+    <input type="radio" name="durability-rating" value="3" class="star">
+    <input type="radio" name="durability-rating" value="4" class="star">
+    <input type="radio" name="durability-rating" value="5" class="star">
+  </div>
+  <div class="description-accuracy-rating">
+    <label for="value">Description Accuracy</label>
+    <input type="radio" name="description-accuracy-rating" value="1" class="star">
+    <input type="radio" name="description-accuracy-rating" value="2" class="star">
+    <input type="radio" name="description-accuracy-rating" value="3" class="star">
+    <input type="radio" name="description-accuracy-rating" value="4" class="star">
+    <input type="radio" name="description-accuracy-rating" value="5" class="star">
+  </div>
+
+  <label for="comments">Comments:</label><br>
+  <textarea name="comments" class="product-comments">
+  </textarea>
+
+  <div class="form-actions">
+    <a href="product_details.html" class="btn-cancel">Cancel</a> <input type="submit">
+  </div>
+</form>
