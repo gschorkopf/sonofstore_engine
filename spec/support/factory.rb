@@ -48,9 +48,7 @@ FactoryGirl.define do
   end
 
   factory :store_admin, parent: :user do
-    #need to assign a user role for this one, not exactly sure how
-    # full_name 'Teeny Tiny'
-    # email 'teeny@tiny.com'
+    #how do I associate a user role with this automatically?
     display_name 'Teeny'
     password 'password'
     platform_admin false
@@ -62,5 +60,26 @@ FactoryGirl.define do
     display_name 'coonskin'
     password 'password'
     platform_admin true
+  end
+
+  factory :billing_address do
+    street_address '123 Main St'
+    city 'Denver'
+    zip '12345'
+    state 'CO'
+  end
+
+  factory :shipping_address do
+    street_address '123 Main St'
+    city 'Denver'
+    zip '12345'
+    state 'CO'
+  end
+
+  factory :credit_card do
+    number '4242424242424242'
+    expiration_month '12'
+    expiration_year '2015'
+    security_code '111'
   end
 end

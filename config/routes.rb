@@ -2,7 +2,7 @@ StoreEngine::Application.routes.draw do
   root to: 'stores#index'
   get "/stores" => redirect('/')
 
-  get "/code" => redirect("http://github.com/gschorkopf/sonofstore_engine")
+  get "/code" => redirect("http://github.com/kylesuss/daughterofstore_engine")
   get "/logout" => "sessions#destroy", :as => "logout"
   get "/login" => "sessions#new", :as => "login"
   get "/signup" => "users#signup", :as => "signup"

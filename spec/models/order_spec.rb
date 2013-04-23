@@ -24,7 +24,8 @@ describe Order do
   end
 
   context 'create_and_charge' do
-#     it 'creates a new order' do
+    it 'creates a new order' do
+      pending
 #       product = FactoryGirl.create(:product)
 
 #       login_user @user
@@ -34,6 +35,12 @@ describe Order do
 #       #user checks out the cart
 #       order.create_and_charge(cart)
 #       #that process creates a new order
-    # end
+    end
+  end
+
+  context 'total' do
+    it 'has a total price' do
+      pending
+    end
   end
 end
