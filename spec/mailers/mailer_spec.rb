@@ -29,8 +29,9 @@ describe Mailer do
   end
 
   it 'sends a store creation email' do
-    email = Mailer.store_creation_confirmation(@user, @store)
+    email = Mailer.store_creation_confirmation(@user, @store).deliver
     expect(ActionMailer::Base.deliveries).to_not be_empty
+
   end
 
   it 'sends a store_admin_welcome email' do

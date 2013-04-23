@@ -5,10 +5,6 @@ describe OrdersController do
     pending
   end
 
-  describe 'buy_now' do
-    pending
-  end
-
   describe 'index' do
     context 'when the user is logged in' do
 

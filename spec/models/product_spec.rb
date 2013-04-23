@@ -39,8 +39,8 @@ describe Product do
 
   it 'is valid if the title already exists in a different store' do
     @product.save
-    store2 = FactoryGirl.create(:store, name: 'KimChi Caravan')
-    product2 = FactoryGirl.create(:product, title: 'Itchy Sweater')
+    store2 = FactoryGirl.create(:store, name: 'KimChi Caravan', path: 'kimchi-caravan')
+    product2 = FactoryGirl.create(:product, title: 'Itchy Sweater', store_id: store2.id)
     expect(product2).to be_valid
   end
 
