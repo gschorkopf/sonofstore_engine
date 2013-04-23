@@ -2,12 +2,12 @@
   <%= render partial: 'shared/admin_navigation', :locals => { active: false } %>
 
   <div class="span8">
-    <h2><%= t('categories.create') %></h2>
+    <h2><%= 'Create Category' %></h2>
     <hr>
     <%= simple_form_for [@store, :admin, @category] do |f| %>
-      <%= f.input :title, input_html: { placeholder: t('placeholder.category.title') } %>
+      <%= f.input :title, input_html: { placeholder: 'Dark Matter' } %>
       <%= f.hidden_field :store_id, value: @store.id %>
-      <%= f.button :submit, t('submit'), class:'btn btn-custom-lighten' %>
+      <%= f.button :submit, 'Submit', class:'btn btn-custom-lighten' %>
     <% end %>
   </div>
 </div>
