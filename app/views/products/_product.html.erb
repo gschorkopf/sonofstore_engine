@@ -3,7 +3,7 @@
     <p><%= image_tag generate_image_url(300, product.id) %></p>
 
     <h5><%= product.title.titleize %></h5>
-      <p><%= t('product.price') %>: <%= number_to_currency(product.price) %></p>
+      <p><%= 'product.price' %>: <%= number_to_currency(product.price) %></p>
   </div>
 <% end %>
 
