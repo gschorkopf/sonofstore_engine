@@ -5,9 +5,9 @@
 
     <br/>
     <%= simple_form_for :sessions, :url => sessions_path, method: 'POST' do |f| %>
-      <%= f.input :email, input_html: { placeholder: t('placeholder.session.email') } %>
+      <%= f.input :email, input_html: { placeholder: 'placeholder.session.email' } %>
       <%= f.input :password %>
-      <%= f.button :submit, t('navigation.login'), class:"btn btn-custom-lighten" %>
+      <%= f.button :submit, 'navigation.login', class:"btn btn-custom-lighten" %>
     <% end %>
   <% end %>
 
@@ -69,7 +69,6 @@
       <%= text_field_tag("credit_card[expiration_year]") %><br/>
 
     </div>
-    
   </div>
       <%= submit_tag("Submit", class: 'btn btn-custom-lighten', id: 'ship_bill_cc_submit') %>
 

@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  # before_filter :require_login
+  before_filter :require_login
 
   def new
     if current_user
@@ -23,7 +23,7 @@ class OrdersController < ApplicationController
     if current_user.customer_id == order.customer_id
       @order = Order.find(params[:id])
     else
-      redirect_to customer_orders_path
+      redirect_to customer_orders_path(current_user.customer_id)
     end
   end
 
