@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       # Resque.enqueue(IntroMailer, @user.id)
       auto_login(@signup.user)
 
-      redirect_to session[:return_to] || root_path, notice: 'Logged in!'
+      redirect_to root_path, notice: 'Logged in!'
     elsif @signup.message
       redirect_to signup_path, alert: "Email already exists"
     else
