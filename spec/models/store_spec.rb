@@ -22,7 +22,8 @@ describe Store do
 
   context 'given a previous store with same info was declined' do
     it 'can be valid' do
-    pending
+    declined_store = FactoryGirl.create(:store, approval_status: 'declined')
+    expect(FactoryGirl.build(:store).valid?).to be_true
     end
   end
 
