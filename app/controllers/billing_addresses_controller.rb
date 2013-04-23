@@ -1,5 +1,5 @@
 class BillingAddressesController < ApplicationController
-  # before_filter :require_login
+  before_filter :require_login
 
   def new
     @billing_address = BillingAddress.new

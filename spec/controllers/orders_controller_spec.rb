@@ -29,14 +29,6 @@ describe OrdersController do
           get :index
           assigns(user).should eq @user
         end
-
-        # it 'assigns order variables' do
-        #   user = FactoryGirl.create(:user, customer_id: @customer.id)
-        #   orders = Order.create(customer_id: @customer.id, status:"pending")
-        #   login_user user
-        #   get :index
-        #   assigns(orders).should eq @orders
-        # end
       end
     end
 
@@ -72,7 +64,7 @@ describe OrdersController do
           login_user user2
 
           get :show, params = {customer_id: customer1.id, id: order.id}
-          expect(response).to redirect_to customer_orders_path(order)
+          expect(response).to redirect_to customer_orders_path(customer2)
         end
       end
     end

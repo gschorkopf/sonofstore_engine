@@ -1,9 +1,5 @@
 class CheckoutsController < ApplicationController
 
-  def new
-
-  end
-
   def create
     @checkout = Checkout.new(params)
     @customer = @checkout.guest
