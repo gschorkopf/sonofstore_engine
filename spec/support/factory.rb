@@ -40,11 +40,24 @@ FactoryGirl.define do
     sequence(:email) {|n| "email#{n}@example.com"}
   end
 
+#review belongs to customer
+#and has one user through customer... delegate display name to user so call customer.display_name
   factory :user do
-     #is there a way i can assign customer_id in here? it would be nice
+    customer {FactoryGirl.create(:customer, full_name:'Tommy Thomas', email: 'tommy@tommy.com')}
     display_name 'Booner'
     password 'password'
     platform_admin false
+  end
+
+  factory :user_without_display_name, parent: :user do
+    display_name nil
+    customer {FactoryGirl.create(:customer)}
+  end
+
+  factory :rating do
+    question_id 1
+    rating 5
+    # product_id 1
   end
 
   factory :store_admin, parent: :user do
