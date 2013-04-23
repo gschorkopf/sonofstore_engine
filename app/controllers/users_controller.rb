@@ -61,8 +61,8 @@ class UsersController < ApplicationController
       redirect_to profile_path,
         :notice => "Successfully updated account"
     else
-      redirect_to "/profile",
-        notice: @update[:password].pop
+      redirect_to "/edit",
+        notice: @update.errors
     end
   end
 
