@@ -5,9 +5,9 @@
 
     <br/>
     <%= simple_form_for :sessions, :url => sessions_path, method: 'POST' do |f| %>
-      <%= f.input :email, input_html: { placeholder: 'placeholder.session.email' } %>
+      <%= f.input :email, input_html: { placeholder: 'Email' } %>
       <%= f.input :password %>
-      <%= f.button :submit, 'navigation.login', class:"btn btn-custom-lighten" %>
+      <%= f.button :submit, 'Login', class:"btn btn-custom-lighten" %>
     <% end %>
   <% end %>
 

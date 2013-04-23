@@ -1,15 +1,15 @@
 <div class="cart-overview">
   <% if current_cart.empty? %>
-      <h5><%= 'cart.isempty' %></h5>
-      <%= link_to 'back.home', root_path %>
+      <h5><%= 'Your cart is empty. Start shopping!' %></h5>
+      <%= link_to 'Back to Home', root_path %>
   <% else %>
   <h3>Cart for <%=current_store %></h3>
       <table class="table table-striped">
         <thead>
         <th></th>
-        <th><%= 'product.self' %></th>
-        <th><%= 'product.price' %></th>
-        <th><%= 'product.quantity' %></th>
+        <th><%= 'Product' %></th>
+        <th><%= 'Price' %></th>
+        <th><%= 'Quantity' %></th>
         </thead>
         <tbody>
         <%= render partial: 'cart_item' %>

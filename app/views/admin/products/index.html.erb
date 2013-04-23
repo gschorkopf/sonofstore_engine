@@ -6,17 +6,17 @@
       <%= button_to "New Product", new_store_admin_product_path, method: :get, class: 'btn btn-custom-lighten', id: 'create_new_product' %>
     </div>
 
-    <h1><%= 'product.collection' %></h1>
+    <h1><%= 'Products' %></h1>
     <hr>
     <%= paginate @products %>
 
     <table class="table table-striped">
       <thead>
       <tr>
-        <th><%= 'product.title' %></th>
-        <th><%= 'product.price' %></th>
-        <th><%= 'categories.self' %></th>
-        <th><%= 'model.status' %></th>
+        <th><%= 'Title' %></th>
+        <th><%= 'Price' %></th>
+        <th><%= 'Categories' %></th>
+        <th><%= 'Status' %></th>
         <th></th>
       </tr>
       </thead>

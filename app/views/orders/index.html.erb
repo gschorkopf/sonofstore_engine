@@ -3,19 +3,19 @@
 
   <div class="span8">
 
-    <h1><%= 'order.history' %></h1>
+    <h1><%= 'Order History' %></h1>
     <hr>
 
 
     <table class="table table-striped">
       <thead>
       <th>#</th>
-      <th><%= 'model.status' %></th>
-      <th><%= 'order.date' %></th>
-      <th><%= 'total' %></th>
+      <th><%= 'Status' %></th>
+      <th><%= 'Order Date' %></th>
+      <th><%= 'Total' %></th>
       </thead>
       <tbody>
-      <%= render partial: 'order', collection: @orders %>
+      <%= render partial: 'Order', collection: @orders %>
       </tbody>
     </table>
   </div>

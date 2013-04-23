@@ -6,10 +6,10 @@
       <table class="table table-striped">
         <thead>
           <th><%= "Store" %></th>
-          <th><%= 'product.name' %></th>
-          <th><%= 'product.quantity' %></th>
-          <th><%= 'product.unitprice' %></th>
-          <th><%= 'product.subtotal' %></th>
+          <th><%= 'Product Name' %></th>
+          <th><%= 'Quantity' %></th>
+          <th><%= 'Unit Price' %></th>
+          <th><%= 'Subtotal' %></th>
         </thead>
         <tbody>
           <%= render partial: 'order_item', collection: @order.order_items %>
@@ -19,7 +19,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td style="text-align: right;"><%= 'total' %>:</td>
+            <td style="text-align: right;"><%= 'Total' %>:</td>
             <td><%= number_to_currency(@order.total) %></td>
           </tr>
         </tfoot>
