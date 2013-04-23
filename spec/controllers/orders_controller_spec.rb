@@ -25,6 +25,19 @@ describe OrdersController do
           get :index
           assigns(user).should eq @user
         end
+
+      context 'when the user does not have orders in their history' do
+        before(:each) do 
+          @customer = FactoryGirl.create(:customer)
+        end
+
+          it 'renders the index view with no orders' do
+            user = FactoryGirl.create(:user, customer_id: @customer.id)
+            login_user user
+            get :index
+            assigns(:orders).should be_empty
+          end
+        end
       end
     end
 

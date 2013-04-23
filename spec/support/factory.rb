@@ -37,7 +37,7 @@ FactoryGirl.define do
 
   factory :customer do
     full_name 'Daniel Boone'
-    email 'dboone54@yahoo.com'
+    sequence(:email) {|n| "email#{n}@example.com"}
   end
 
   factory :user do
