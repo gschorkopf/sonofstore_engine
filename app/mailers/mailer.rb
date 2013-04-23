@@ -18,7 +18,7 @@ class Mailer < ActionMailer::Base
     @user = user
     @store = store
     mail( to: @user.customer.email,
-          subject: "Your store #{store} has been created and pending approval")
+          subject: "Your store #{store} has been created and is pending approval")
   end
 
   def store_decision_confirmation(store)

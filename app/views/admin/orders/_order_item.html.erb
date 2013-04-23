@@ -9,7 +9,7 @@
       <%= f.input_field :quantity, value: order_item.quantity, class: 'span1' %>
       <%= button_to "update", store_admin_order_item_path(current_store, order_item.id), class: 'btn-mini', method: :put %>
     <% end %>
-    <%= button_to t('crud.delete'), store_admin_order_item_path(current_store, order_item), method: :delete, class: 'btn btn-mini btn-danger' %>
+    <%= button_to 'crud.delete', store_admin_order_item_path(current_store, order_item), method: :delete, class: 'btn btn-mini btn-danger' %>
   </td>
   <% else %>
   <td><%= order_item.quantity %></td>
