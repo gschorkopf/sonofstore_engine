@@ -46,9 +46,12 @@ StoreEngine::Application.routes.draw do
 
   scope "/:store_path", as: 'store' do
     get '/' => "products#index", as: 'home'
-    resources :products, only: [ :index, :show ]
     resources :categories, only: [ :index, :show ]
     resources :checkouts, only: [ :new, :create, :show ]
+
+    resources :products, only: [ :index, :show ] do
+      resources :reviews, :controller => "product_reviews", only: [:new, :create, :edit, :update], :as => "reviews"
+    end
 
     resource :cart, only: [ :update, :show, :destroy ] do
       member do
