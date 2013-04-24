@@ -7,12 +7,11 @@ class ProductReviewsController < ApplicationController
   def create
     #if successful redirect to product's show page
     @product_review = ProductReview.new(params[:product_review])
-
     if @product_review.save
       redirect_to store_product_path(store_path: current_store.path, id: @product_review.product_id),
       notice: 'Successfully created new product review!'
     else
-      render action: 'new'
+      render :new, notice: 'Something went wrong.'
     end
   end
 
