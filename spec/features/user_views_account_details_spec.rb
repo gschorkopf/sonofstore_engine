@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'user account detail view' do
   context 'when the user is logged in' do
     before(:each) do
-      customer = FactoryGirl.create(:customer)
+      customer = FactoryGirl.create(:customer, email: 'dboone54@yahoo.com')
       @user = FactoryGirl.create(:user, customer_id: customer.id)
       visit '/login'
       fill_in 'sessions_email', with: 'dboone54@yahoo.com'
@@ -13,7 +13,7 @@ describe 'user account detail view' do
 
     it 'display the main page of their account details' do
       visit 'profile'
-      expect(page).to have_content("Account")
+      expect(page).to have_content("Daniel Boone's Account")
     end
 
     it 'cannot update their profile with incorrect information' do

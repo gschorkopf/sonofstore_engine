@@ -96,4 +96,34 @@ describe Product do
       end
     end
   end
+
+  describe "most recent reviews" do
+    let!(:product) { create(:product, store_id: @store.id, status: 'retired') }
+
+    before(:each) do
+      ProductReview.record_timestamps = false
+    end
+
+    context "when there are product reviews" do
+      it "sorts the reviews by the updated at time" do
+        product_review1 = build(:product_review, product_id: product.id,
+                                updated_at: 1.years.ago)
+        product_review2 = build(:product_review, product_id: product.id,
+                                updated_at: 3.years.ago)
+        product_review3 = build(:product_review, product_id: product.id,
+                                updated_at: 5.years.ago)
+
+        [product_review1, product_review2, product_review3].tap do |reviews|
+          product.product_reviews << reviews
+          expect(product.most_recent_reviews).to eq reviews
+        end
+      end
+    end
+
+    context "when there are no product reviews" do
+      it "returns an empty array" do
+        expect(product.most_recent_reviews).to eq []
+      end
+    end
+  end
 end

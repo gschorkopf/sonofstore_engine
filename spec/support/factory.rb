@@ -1,21 +1,20 @@
 FactoryGirl.define do
 
   factory :store do
-    name "MyString"
-    path "my-string"
+    sequence(:name) {|n| "mystore#{n}"}
+    sequence(:path) {|n| "my-store-path#{n}"}
     description "My String Store Rocks!"
     approval_status "approved"
     active true
   end
 
   factory :category do
-    #can i assign store id in here?
     title 'Dark Matter'
   end
 
   factory :order_item do
-    product { FactoryGirl.build(:product) }
-    order { FactoryGirl.build(:order) }
+    product
+    order
     unit_price 20.00
     selling_price 10.00
     quantity 3
@@ -23,28 +22,55 @@ FactoryGirl.define do
 
   factory :order do
     status 'pending'
+    customer
   end
 
   factory :product do
-   #is there a way i can assign store_id in here? it would be nice
-    #as well as categories?
-    # categories { [FactoryGirl.build(:category)] }
+    store
     title 'Itchy Sweater'
     description 'Hurts so good'
     price 12.99
     status 'active'
+    #product_reviews { (0..5).collect{ |i| create(:product_review_2) } }
   end
 
   factory :customer do
     full_name 'Daniel Boone'
-    email 'dboone54@yahoo.com'
+    sequence(:email) {|n| "email#{n}@example.com"}
   end
 
   factory :user do
-     #is there a way i can assign customer_id in here? it would be nice
+    customer
     display_name 'Booner'
     password 'password'
     platform_admin false
+  end
+
+  factory :user_without_display_name, parent: :user do
+    display_name nil
+    customer
+  end
+
+  factory :question do
+    question 'How would you rate the awesomeness?'
+  end
+
+  factory :product_review do
+    customer
+    product
+    comment "Great product! 10/10 would buy again."
+    created_at Time.now
+  end
+
+  factory :product_review_2, class: ProductReview do
+    customer
+    comment "Great product! 10/10 would buy again."
+  end
+
+  factory :rating do
+    question
+    rating 5
+    product_review
   end
 
   factory :store_admin, parent: :user do

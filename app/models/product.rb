@@ -4,6 +4,7 @@ class Product < ActiveRecord::Base
 
   belongs_to :store
 
+  has_many :product_reviews
   has_many :product_categories
   has_many :categories, through: :product_categories
 
@@ -54,5 +55,9 @@ class Product < ActiveRecord::Base
 
   def current_price
     price
+  end
+
+  def most_recent_reviews
+    product_reviews.order("updated_at DESC")
   end
 end

@@ -6,8 +6,8 @@ describe Customer do
   end
 
   it 'is invalid with a duplicate email' do
-    FactoryGirl.create(:customer)
-    expect(FactoryGirl.build(:customer)).to_not be_valid
+    FactoryGirl.create(:customer, email: 'what@what.com')
+    expect(FactoryGirl.build(:customer, email: 'what@what.com')).to_not be_valid
   end
 
   it 'is invalid without a full name' do
