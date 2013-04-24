@@ -41,6 +41,7 @@ feature "Public User Views Products" do
         end
 
         it 'displays the individual ratings sorted by most recent' do
+          pending
           page.should have_content('product_reviews')
           #how do we test the sorted ratings?
         end
@@ -63,14 +64,17 @@ feature "Public User Views Products" do
 
       context 'when there are no reviews for the product' do
         it 'displays a message that there are no reviews' do
+          pending
           page.should have_content('No Reviews For This Product!')
         end
 
         it 'has a button to leave a review for the product' do
+          pending
           page.should have_content('Be the first to leave your review!')
         end
 
         it 'does not display any reviews or summaries' do
+          pending
           page.should_not have_content('product_reviews')
         end
       end

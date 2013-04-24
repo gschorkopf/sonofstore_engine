@@ -5,7 +5,4 @@ class ProductReview < ActiveRecord::Base
   has_one :rating
   belongs_to :customer
   belongs_to :product
-
-  validates_presence_of :product_id, :customer_id
-
 end

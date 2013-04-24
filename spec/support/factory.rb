@@ -30,6 +30,7 @@ FactoryGirl.define do
     description 'Hurts so good'
     price 12.99
     status 'active'
+    #product_reviews { (0..5).collect{ |i| create(:product_review_2) } }
   end
 
   factory :customer do
@@ -56,6 +57,12 @@ FactoryGirl.define do
   factory :product_review do
     customer
     product
+    comment "Great product! 10/10 would buy again."
+    created_at Time.now
+  end
+
+  factory :product_review_2, class: ProductReview do
+    customer
     comment "Great product! 10/10 would buy again."
   end
 
