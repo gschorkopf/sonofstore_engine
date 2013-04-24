@@ -22,6 +22,7 @@ FactoryGirl.define do
 
   factory :order do
     status 'pending'
+    customer
   end
 
   factory :product do
@@ -39,7 +40,7 @@ FactoryGirl.define do
   end
 
   factory :user do
-    customer {FactoryGirl.create(:customer, full_name:'Tommy Thomas', email: 'tommy@tommy.com')}
+    customer
     display_name 'Booner'
     password 'password'
     platform_admin false

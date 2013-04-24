@@ -106,13 +106,13 @@ describe Product do
 
     context "when there are product reviews" do
       it "sorts the reviews by the updated at time" do
-        product_review1 = build(:product_review, product_id: product.id, 
+        product_review1 = build(:product_review, product_id: product.id,
                                 updated_at: 1.years.ago)
         product_review2 = build(:product_review, product_id: product.id,
                                 updated_at: 3.years.ago)
         product_review3 = build(:product_review, product_id: product.id,
                                 updated_at: 5.years.ago)
-        
+
         [product_review1, product_review2, product_review3].tap do |reviews|
           product.product_reviews << reviews
           expect(product.most_recent_reviews).to eq reviews
