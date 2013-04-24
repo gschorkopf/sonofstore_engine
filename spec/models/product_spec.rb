@@ -100,10 +100,6 @@ describe Product do
   describe "most recent reviews" do
     let!(:product) { create(:product, store_id: @store.id, status: 'retired') }
 
-    before(:each) do
-      ProductReview.record_timestamps = false
-    end
-
     context "when there are product reviews" do
       it "sorts the reviews by the updated at time" do
         product_review1 = build(:product_review, product_id: product.id,
