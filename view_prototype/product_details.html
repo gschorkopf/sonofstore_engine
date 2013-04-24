@@ -1,0 +1,107 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="star-rating/jquery.rating.css">
+    <link rel="stylesheet" href="star-sprites/sprites.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+    <script src="star-rating/jquery.form.js"></script>
+    <script src="star-rating/jquery.rating.js"></script>
+    <script src="star-rating/jquery.MetaData.js"></script>
+    <script src="product_rating.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="product-info">
+        <img class="product-image medium" src="http://placekitten.com/500/500">
+        <div class="product-details">
+          <div class="product-title">Cute Kitten</div>
+          <div class="price">$45.34</div>
+          <div class="product-description">
+            Soft Kitty,<br>
+            Warm Kitty,<br>
+            Little ball of fur.<br>
+            Happy Kitty,<br>
+            Sleepy Kitty,<br>
+            Purr, purr, purr.
+          </div>
+          <form>
+            <label for="quantity">Qty:</label>
+            <input class="item-quantity" type="text" name="quantity" value="1" />
+            <input type="submit" value="Add to Cart" />
+          </form>
+        </div>
+      </div> <!-- product-info -->
+      <br class="clear-float">
+      <div id="product-average-rating">
+        <table class="product-rating">
+          <thead>
+            <tr>
+              <th>Criteria</th>
+              <th>Average Rating</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="criteria">Packaging</td>
+              <td>5</td>
+            </tr>
+            <tr>
+              <td class="criteria">Durability</td>
+              <td>4</td>
+            </tr>
+            <tr>
+              <td class="criteria">Value</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td class="criteria">Description Accuracy</td>
+              <td>1</td>
+            </tr>
+          </tbody>
+        </table>
+        <a class="product-add-rating" href="product_rating.html">Reivew this!</a>
+      </div> <!-- product-average-rating -->
+      <div id="product-reviews">
+        <div class="review">
+
+          <div class="reivew-meta-data">
+            Reviewed By: <span class="reviewer">Sir CatNap</span> on <span clas="review-date">January 27, 2012</span>
+          </div>
+          <div class="review-comment">
+            Everything was perfect about this Cute Kitten EXCEPT that it wasn't a kitten! It was an E-kitten! I was very disappointed. Don't think I'll buy this again!
+          </div>
+
+          <table class="product-rating">
+            <thead>
+              <tr>
+                <th>Criteria</th>
+                <th>Average Rating</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="criteria">Packaging</td>
+                <td>4</td>
+              </tr>
+              <tr>
+                <td class="criteria">Durability</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td class="criteria">Value</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td class="criteria">Description Accuracy</td>
+                <td>1</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div> <!-- product-reviews -->
+    </div> <!-- product-->
+  </div>
+</body>
+</html>

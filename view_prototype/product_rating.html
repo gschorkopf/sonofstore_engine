@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="star-rating/jquery.rating.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+    <script src="star-rating/jquery.form.js"></script>
+    <script src="star-rating/jquery.rating.js"></script>
+    <script src="star-rating/jquery.MetaData.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="product-info">
+        <img class="product-image medium" src="http://placekitten.com/500/500">
+        <div class="product-details">
+          <div class="product-title">Cute Kitten</div>
+          <div class="product-description">
+            Soft Kitty,<br>
+            Warm Kitty,<br>
+            Little ball of fur.<br>
+            Happy Kitty,<br>
+            Sleepy Kitty,<br>
+            Purr, purr, purr.
+          </div>
+        </div>
+      </div> <!-- product-info -->
+
+      <form class="product-rating">
+        <div class="value-rating">
+          <label for="value-rating">Value</label>
+          <input type="radio" name="value-rating" value="1" class="star">
+          <input type="radio" name="value-rating" value="2" class="star">
+          <input type="radio" name="value-rating" value="3" class="star">
+          <input type="radio" name="value-rating" value="4" class="star">
+          <input type="radio" name="value-rating" value="5" class="star">
+        </div>
+        <div class="packaging-rating">
+          <label for="packaging-rating">Packaging</label>
+          <input type="radio" name="packaging-rating" value="1" class="star">
+          <input type="radio" name="packaging-rating" value="2" class="star">
+          <input type="radio" name="packaging-rating" value="3" class="star">
+          <input type="radio" name="packaging-rating" value="4" class="star">
+          <input type="radio" name="packaging-rating" value="5" class="star">
+        </div>
+        <div class="durability-rating">
+          <label for="value">Durability</label>
+          <input type="radio" name="durability-rating" value="1" class="star">
+          <input type="radio" name="durability-rating" value="2" class="star">
+          <input type="radio" name="durability-rating" value="3" class="star">
+          <input type="radio" name="durability-rating" value="4" class="star">
+          <input type="radio" name="durability-rating" value="5" class="star">
+        </div>
+        <div class="description-accuracy-rating">
+          <label for="value">Description Accuracy</label>
+          <input type="radio" name="description-accuracy-rating" value="1" class="star">
+          <input type="radio" name="description-accuracy-rating" value="2" class="star">
+          <input type="radio" name="description-accuracy-rating" value="3" class="star">
+          <input type="radio" name="description-accuracy-rating" value="4" class="star">
+          <input type="radio" name="description-accuracy-rating" value="5" class="star">
+        </div>
+
+        <label for="comments">Comments:</label><br>
+        <textarea name="comments" class="product-comments">
+        </textarea>
+
+        <div class="form-actions">
+          <a href="product_details.html" class="btn-cancel">Cancel</a> <input type="submit">
+      </div>
+
+      </form>
+    </div> <!-- main -->
+  </body>
+</html>
