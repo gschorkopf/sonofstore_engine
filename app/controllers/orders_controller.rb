@@ -23,7 +23,8 @@ class OrdersController < ApplicationController
     if current_user.customer_id == order.customer_id
       @order = Order.find(params[:id])
     else
-      redirect_to customer_orders_path(current_user.customer_id)
+      redirect_to customer_orders_path(current_user.customer_id),
+      :notice => "You are not authorized to view other customers data!"
     end
   end
 

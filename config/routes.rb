@@ -11,6 +11,7 @@ StoreEngine::Application.routes.draw do
   get "/guest-checkout" => "customers#new", :as => "guest_checkout"
   get "/confirmation-page/:id" => "orders#confirm", :as => "order_confirmation"
   get "/order_details/:uuid_hash" => "orders#display", :as => "obscure_link"
+  get "/edit" => "users#edit", :as => "edit"
 
   namespace :admin do
     root to: redirect("/admin/dashboard")

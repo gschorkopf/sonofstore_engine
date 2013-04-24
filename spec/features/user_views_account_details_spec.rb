@@ -19,7 +19,7 @@ describe 'user account detail view' do
     it 'cannot update their profile with incorrect information' do
       visit 'profile'
       click_link_or_button 'Edit Account'
-      fill_in 'password', with: 't'
+      fill_in 'user[password]', with: 't'
       click_button 'Update'
       expect(page).to have_content("not match")
     end
