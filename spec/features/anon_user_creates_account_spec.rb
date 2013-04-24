@@ -71,7 +71,7 @@ describe 'new user creates and edits account' do
     fill_in "Password", with: "poet"
     click_button "Login"
     visit profile_path
-    fill_in "display_name", with: 'Maya'
+    fill_in "user[display_name]", with: 'Maya'
 
     click_button "Update"
     expect(current_path).to eq profile_path

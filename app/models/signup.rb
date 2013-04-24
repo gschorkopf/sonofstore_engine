@@ -34,20 +34,19 @@ class Signup
     @user = User.find(params[:id])
     @customer = Customer.find(@user.customer_id)
     errors = @user.errors.messages.merge(@customer.errors.messages)
-    
+
     if errors.empty?
       return true
     else
       return errors
-    end 
+    end
 
     if params[:display_name] != @user.display_name
       @user.update_attributes(display_name: params[:display_name])
       return true
     end
-    
+
     if params[:full_name] != @customer.full_name || params[:email] != @customer.email
-      @customer.update_attributes(email: params[:email])
       @customer.update_attributes(full_name: params[:full_name])
       return true
     end
