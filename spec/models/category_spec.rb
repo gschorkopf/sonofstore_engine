@@ -21,7 +21,7 @@ describe Category do
 
   it 'is invalid if title already exists (case insensitive)' do
     cat1 = FactoryGirl.create(:category, title: 'dark MATTER', store_id: @store.id)
-    expect(FactoryGirl.create(:category, store_id: @store.id)).to_not be_valid
+    expect(FactoryGirl.build(:category, title: 'dark matter', store_id: @store.id)).to_not be_valid
   end
 
   it 'is valid if another store has the same category, but not the same store' do
