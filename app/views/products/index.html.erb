@@ -16,12 +16,10 @@
   </div>
 
   <%= paginate @products %>
-<% cache("product_index_for_store_#{current_store.path}") do %> <!-- Start cache -->
   <div id="product_listing" class="row-fluid">
     <% @products.each do |product| %>
       <%= render partial: 'product',
           locals: { store: current_store, product: product }  %>
       <% end %>
   </div>
-<% end %> <!-- end of caching block-->
 </div>

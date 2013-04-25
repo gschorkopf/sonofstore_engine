@@ -87,7 +87,7 @@ class ApplicationController < ActionController::Base
   end
 
   def generate_image_url(side_length, product_id)
-    Product.find(product_id).image.url
+    Product.find(product_id).image.url(:thumbnail)
 #    img_category = IMAGE_CATEGORIES[current_store.id.to_s[-1].to_i]
 #    img_size_params = "#{side_length}/#{side_length}"
 #    img_id = product_id.to_s[-1].to_i
@@ -101,7 +101,7 @@ class ApplicationController < ActionController::Base
       img_category = IMAGE_CATEGORIES[store_id.to_s[-1].to_i]
       "http://lorempixel.com/500/500/#{img_category}/"
     else
-      products.first.image.url
+      products.first.image.url(:retail)
     end
   end
 
