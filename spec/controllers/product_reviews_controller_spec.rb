@@ -45,7 +45,6 @@ describe ProductReviewsController do
       end
     context 'when the product review is good' do
       it 'creates a new product review' do
-        
 
         expect{ post :create, store_path: @current_store.path, 
                               product_review: {product_id: @product.id, 
