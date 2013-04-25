@@ -21,6 +21,6 @@ test:
 production:
   adapter: postgresql
   encoding: utf8
-  database: db/production
+  database: production
   pool: 5
   timeout: 5000
