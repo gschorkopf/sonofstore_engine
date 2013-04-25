@@ -11,10 +11,17 @@ class ProductReviewsController < ApplicationController
   end
 
   def create
+    if params[:product_review][:ratings_attributes]
+      params[:ratings] = params[:product_review][:ratings_attributes]
+      params[:product_review].delete(:ratings_attributes)
+    end
     #params look like:
       #product_review { product_id: x , customer_id: x, comment: x }
       #ratings: multiple times of.. { product_review_id: x, question: x, rating: x }
      @product_review = ProductReview.new(params[:product_review])
+     @product_review.product = Product.find(params[:product_id])
+     @product_review.customer = current_user.customer
+
 
      # need to check to see if the ratings are valid before saving review
     if @product_review.save
@@ -30,6 +37,9 @@ class ProductReviewsController < ApplicationController
       end
 
     else
+      raise @product_review.errors.inspect
+      @product = Product.find(params[:product_id])
+
       render :new, notice: 'Something went wrong.'
     end
     # @product_review = ProductReview.new(params[:product_review])
