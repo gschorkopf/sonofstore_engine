@@ -5,6 +5,7 @@ s3 = AWS::S3.new
 def add_photo_to_product product, file_name
   object = @b.objects[file_name+".jpg"]
   product.image = object.url_for(:read)
+  puts object.url_for(:read)
 end
 
 packaging = Question.create!(question: "Packaging")
