@@ -27,7 +27,7 @@
 </div>
 <% @product.most_recent_reviews.each do |review| %>
   <%= review.comment %>
-  <% review.product_rating.each do |rating| %>
+  <% review.rating.each do |rating| %>
     <%= rating.question %>
     <%= rating.rating %>
   <% end %>

@@ -12,6 +12,5 @@ describe Question do
 
   it 'is not valid without a question' do
     expect(Question.new(question: nil)).to_not be_valid
-
   end
 end
