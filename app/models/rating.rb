@@ -9,7 +9,7 @@ class Rating < ActiveRecord::Base
 
   def self.make_new_ratings(ratings, product_review_id)
     #params is an arrah of hashes
-    new_ratings = ratings.collect do |i, rating|
+    new_ratings = ratings.collect do |rating|
       Rating.new(question_id: rating[:question_id],
                   rating: rating[:rating],
                   product_review_id: product_review_id)
