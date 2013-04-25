@@ -1,5 +1,7 @@
 class ProductReviewsController < ApplicationController
 
+  before_filter :require_login
+
   def new
     @product = Product.find(params[:product_id])
     @product_review = ProductReview.new
@@ -19,7 +21,6 @@ class ProductReviewsController < ApplicationController
       #product_review { product_id: x , customer_id: x, comment: x }
       #ratings: multiple times of.. { product_review_id: x, question: x, rating: x }
      @product_review = ProductReview.new(params[:product_review])
-     @product_review.product = Product.find(params[:product_id])
      @product_review.customer = current_user.customer
 
 
@@ -37,7 +38,6 @@ class ProductReviewsController < ApplicationController
       end
 
     else
-      raise @product_review.errors.inspect
       @product = Product.find(params[:product_id])
 
       render :new, notice: 'Something went wrong.'
