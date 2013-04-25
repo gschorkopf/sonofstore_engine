@@ -6,6 +6,7 @@ def add_photo_to_product product, file_name
   puts "finding #{file_name} and adding it to #{product.title}"
   object = @b.objects[file_name+".jpg"]
   product.image = object.url_for(:read)
+  puts "added #{product.image.url} to #{product.title}"
 end
 
 puts "creating questions"
