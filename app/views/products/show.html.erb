@@ -50,23 +50,23 @@
   <div id="product-reviews" class="span12">
     <h3>Customer Reviews</h3>
     <% @product.most_recent_reviews.each do |review| %>
-      <h4>Reviewed By: <span class="reviewer"><%= review.customer.full_name %></span> on <span clas="review-date"><%= time_tag review.created_at %></span></h4>
+      <h4>Reviewed By: <span class="reviewer"><%= review.customer.best_display_name %></span> on <span clas="review-date"><%= time_tag review.created_at %></span></h4>
       <div class="review row-fluid">
         <div class="span3">
           <% review.ratings.each do |rating| %>
             <div>
-            <%= rating.question %>
+              <%= rating.question %>
 
-            <% 5.times do |t| %>
+              <% 5.times do |t| %>
 
-              <% if rating.rating == t+1 %>
-                <%= radio_button_tag rating.question.to_s+review.id.to_s, "#{t+1}", true, :class => "star star-read"%>
-              <% else %>
-                <%= radio_button_tag rating.question.to_s+review.id.to_s, "#{t+1}", false, :class  => "star star-read" %>
+                <% if rating.rating == t+1 %>
+                  <%= radio_button_tag rating.question.to_s+review.id.to_s, "#{t+1}", true, :class => "star star-read"%>
+                <% else %>
+                  <%= radio_button_tag rating.question.to_s+review.id.to_s, "#{t+1}", false, :class  => "star star-read" %>
+                <% end %>
+
               <% end %>
-
-            <% end %>
-          </div>
+            </div>
           <% end %>
 
         </div>
