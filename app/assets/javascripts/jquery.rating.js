@@ -96,23 +96,23 @@
                     if(input.hasClass('required')) control.required = true;
 
                     // Create 'cancel' button
-                   // rater.append(
-                   //     control.cancel = $('<div class="rating-cancel"><a title="' + control.cancel + '">' + control.cancelValue + '</a></div>')
-                   //     .on('mouseover',function(){
-                   //         $(this).rating('drain');
-                   //         $(this).addClass('star-rating-hover');
-                   //         //$(this).rating('focus');
-                   //     })
-                   //     .on('mouseout',function(){
-                   //         $(this).rating('draw');
-                   //         $(this).removeClass('star-rating-hover');
-                   //         //$(this).rating('blur');
-                   //     })
-                   //     .on('click',function(){
-                   //         $(this).rating('select');
-                   //     })
-                   //     .data('rating', control)
-                   //     );
+                    rater.append(
+                        control.cancel = $('<div class="rating-cancel"><a title="' + control.cancel + '">' + control.cancelValue + '</a></div>')
+                        .on('mouseover',function(){
+                            $(this).rating('drain');
+                            $(this).addClass('star-rating-hover');
+                            //$(this).rating('focus');
+                        })
+                        .on('mouseout',function(){
+                            $(this).rating('draw');
+                            $(this).removeClass('star-rating-hover');
+                            //$(this).rating('blur');
+                        })
+                        .on('click',function(){
+                            $(this).rating('select');
+                        })
+                        .data('rating', control)
+                        );
 
                 }; // first element of group
 
@@ -256,7 +256,7 @@
             var starson = current.length ? current.prevAll().addBack().filter('.rater-'+ control.serial) : null;
             if(starson)	starson.addClass('star-rating-on');
             // Show/hide 'cancel' button
-           // control.cancel[control.readOnly || control.required?'hide':'show']();
+            control.cancel[control.readOnly || control.required?'hide':'show']();
             // Add/remove read-only classes to remove hand pointer
             this.siblings()[control.readOnly?'addClass':'removeClass']('star-rating-readonly');
         },// $.fn.rating.draw
@@ -345,14 +345,14 @@
 eg.: You can override default control like this:
 $.fn.rating.options.cancel = 'Clear';
 */
-    //$.fn.rating.options = { //$.extend($.fn.rating, { options: {
-     //   cancel: 'Cancel Rating',   // advisory title for the 'cancel' link
-      //  cancelValue: '',           // value to submit when user click the 'cancel' link
-       // split: 0,                  // split the star into how many parts?
+    $.fn.rating.options = { //$.extend($.fn.rating, { options: {
+        cancel: 'Cancel Rating',   // advisory title for the 'cancel' link
+        cancelValue: '',           // value to submit when user click the 'cancel' link
+        split: 0,                  // split the star into how many parts?
 
         // Width of star image in case the plugin can't work it out. This can happen if
         // the jQuery.dimensions plugin is not available OR the image is hidden at installation
-        //starWidth: 16//,
+        starWidth: 16//,
 
         //NB.: These don't need to be pre-defined (can be undefined/null) so let's save some code!
         //half:     false,         // just a shortcut to control.split = 2
@@ -360,7 +360,7 @@ $.fn.rating.options.cancel = 'Clear';
         //readOnly: false,         // disable rating plugin interaction/ values cannot be.one('change',		//focus:    function(){},  // executed when stars are focused
         //blur:     function(){},  // executed when stars are focused
         //callback: function(){},  // executed when a star is clicked
-  //  }; //} });
+    }; //} });
 
     /*--------------------------------------------------------*/
 

@@ -1,14 +1,7 @@
-var starClass = function() {
-	var value = $(this).text();
-	var starClass = "s-"+value+"star";
-	if(value > 1) {
-		starClass += "s";
-	}
-	return starClass;
-};
+;if(window.jQuery) (function($){
 
-$(document).ready(function() {
-	var ratings = $('table.product-rating td:nth-child(2)');
-	ratings.addClass(starClass);
-});
+    $(document).ready(function() {
+        $('.star-read').rating('readOnly', true );
+    });
 
+})(jQuery);
