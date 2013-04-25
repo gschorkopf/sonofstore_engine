@@ -15,4 +15,26 @@ describe Rating do
   it 'has a valid factory'do
     expect(FactoryGirl.build(:rating)).to be_valid
   end
+
+  describe 'making new ratings' do
+    it 'creates multiple new ratings at a time' do
+     question1 =  create(:question)
+      question2 = create(:durability_question)
+      question3 = create(:packaging_question)
+      question4 = create(:description_accuracy_question)
+
+      product = create(:product)
+      product_review = create(:product_review, product: product)
+
+      #create the ratings
+      ratings = [
+        {question_id: question1.id, rating: 5 },
+        {question_id: question2.id, rating: 3 },
+        {question_id: question3.id, rating: 2 },
+        {question_id: question4.id, rating: 1 }
+      ]
+      
+      expect{  Rating.make_new_ratings(ratings, product_review.id) }.to change(Rating, :count).by(4)
+    end
+  end
 end

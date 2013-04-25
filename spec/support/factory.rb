@@ -52,7 +52,19 @@ FactoryGirl.define do
   end
 
   factory :question do
-    question 'How would you rate the awesomeness?'
+    question 'Value'
+  end
+
+  factory :durability_question, class: Question do
+    question 'Durability'
+  end
+
+  factory :packaging_question, class: Question do
+    question 'Packaging'
+  end
+
+  factory :description_accuracy_question, class: Question do
+    question 'Description Accuracy'
   end
 
   factory :product_review do

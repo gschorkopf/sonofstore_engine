@@ -8,12 +8,15 @@ describe ProductReviewsController do
       expect(assigns(:product_review)).to be_a_new(ProductReview)
     end
 
+    # it 'assigns new product_ratings' do
+      
+    # end
+
     it 'renders the new template' do
       get :new
       response.should render_template(:new)
     end
   end
-
 
   describe "GET #edit" do
     before(:each) do
@@ -38,15 +41,26 @@ describe ProductReviewsController do
         @current_store.save
 
         @product = FactoryGirl.create(:product, store: @current_store)
+        @question = create(:question)
       end
     context 'when the product review is good' do
       it 'creates a new product review' do
-        expect{ post :create, store_path: @current_store.path, product_review: {product_id: @product.id, customer_id: 1 , comment: 'this is so fun'}
+        
+
+        expect{ post :create, store_path: @current_store.path, 
+                              product_review: {product_id: @product.id, 
+                                               customer_id: 1 , 
+                                               comment: 'this is so fun'},
+                              ratings: [{rating: 1, question_id: @question.id}]
         }.to change(ProductReview, :count).by(1)
       end
 
       it 'redirects to the product show page' do
-        post :create, store_path: @current_store.path, product_review: {product_id: @product.id, customer_id: 1 , comment: 'this is so fun'}
+        post :create, store_path: @current_store.path, 
+                      product_review: {product_id: @product.id, 
+                      customer_id: 1 , 
+                      comment: 'this is so fun'},
+                      ratings: [{rating: 1, question_id: @question.id}]
         expect(response).to redirect_to(store_product_path(store_path: @current_store.path, id: @product.id))
       end
     end
@@ -60,5 +74,16 @@ describe ProductReviewsController do
   end
 
   describe "POST #update" do
+    context 'when the update is valid' do
+      it 'successfully changes the review' do
+        pending 'next iteration'
+      end
+    end
+
+    context 'when the update is not valid' do
+      it 'doesnt go through ' do
+        pending 'next iteration!'
+      end
+    end
   end
 end
