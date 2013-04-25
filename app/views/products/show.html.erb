@@ -51,7 +51,7 @@
           </table>
         </div>
         <div class="reivew-meta-data span10">
-          Reviewed By: <span class="reviewer"><%= review.customer.full_name %></span> on <span clas="review-date"><%= review.created_at %></span>
+          Reviewed By: <span class="reviewer"><%= review.customer.best_display_name %></span> on <span clas="review-date"><%= review.created_at.to_s(:short) %></span>
           <div class="review-comment">
             <%= review.comment %>
           </div>

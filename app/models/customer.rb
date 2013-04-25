@@ -13,4 +13,25 @@ class Customer < ActiveRecord::Base
             format: { with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/ }
 
   accepts_nested_attributes_for :user
+
+
+  def best_display_name
+    #if customer has a user AND a display name, use it.
+    if user && user.display_name
+      user.display_name
+    #otherwise, generate a random display name to use from a set
+    else
+      generate_random_display_name
+    end
+  end
+
+  def generate_random_display_name
+    [
+      'A Loyal Customer',
+      'Sir Shops-A-Lot',
+      'Pink Princess 2008',
+      'PUnKGuRl440',
+      'MonsterCars2006'
+    ].sample
+  end
 end
