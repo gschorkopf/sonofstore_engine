@@ -122,4 +122,41 @@ describe Product do
       end
     end
   end
+
+  describe "average ratings" do
+
+    it "returns a hash of questions and average ratings" do
+      q1 = Question.new(question: "question 1")
+      q2 = Question.new(question: "question 2")
+
+      rating1 = Rating.new
+      rating1.question = q1
+      rating1.rating = 2
+
+      rating2 = Rating.new
+      rating2.question = q2
+      rating2.rating = 3
+
+      pr1 = ProductReview.new
+      pr1.should_receive(:ratings).and_return([rating1, rating2])
+
+      rating1 = Rating.new
+      rating1.question = q1
+      rating1.rating = 4
+
+      rating2 = Rating.new
+      rating2.question = q2
+      rating2.rating = 3
+
+      pr2 = ProductReview.new
+      pr2.should_receive(:ratings).and_return([rating1, rating2])
+      product_reviews = [pr1, pr2]
+      product = Product.new
+
+      product.should_receive(:product_reviews).at_least(:once).and_return(product_reviews)
+
+      average_ratings = {"question 1" => 3, "question 2" => 3}
+      expect(product.average_ratings).to eq average_ratings
+    end
+  end
 end

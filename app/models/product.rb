@@ -62,4 +62,24 @@ class Product < ActiveRecord::Base
   def most_recent_reviews
     product_reviews.order("updated_at DESC")
   end
+
+  def average_ratings
+
+    ratings = Hash.new(0)
+
+    if !product_reviews.empty?
+      product_reviews.each do |product_review|
+        product_review.ratings.each do |rating|
+          ratings[rating.question.question] += rating.rating
+        end
+      end
+
+      ratings.each do |question, rating|
+        ratings[question] = rating/product_reviews.count
+      end
+    end
+
+    ratings
+
+  end
 end
