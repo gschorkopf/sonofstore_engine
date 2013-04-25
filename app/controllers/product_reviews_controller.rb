@@ -33,12 +33,12 @@ class ProductReviewsController < ApplicationController
                                       ),
         notice: 'Successfully created new product review!'
       else
-        render :new, notice: 'Something went wrong.'
+        redirect_to new_store_product_review_path(store_path: current_store.path,
+                  id: @product_review.product_id), notice: 'Something went wrong.'
       end
 
     else
       @product = Product.find(params[:product_id])
-
       render :new, notice: 'Something went wrong.'
     end
     # @product_review = ProductReview.new(params[:product_review])
