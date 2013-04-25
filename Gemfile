@@ -38,7 +38,7 @@ group :development, :test do
   gem 'capybara'
   gem 'simplecov'
   gem 'newrelic_rpm'
-  # gem 'better_errors'
+  gem 'better_errors'
   gem 'binding_of_caller'
   gem 'pry'
 end

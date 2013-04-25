@@ -1,7 +1,7 @@
 /*
  * Metadata - jQuery plugin for parsing metadata from elements
  *
- * Copyright (c) 2006 John Resig, Yehuda Katz, Jörn Zaefferer, Paul McLanahan
+ * Copyright (c) 2006 John Resig, Yehuda Katz, JÃ¶rn Zaefferer, Paul McLanahan
  *
  * Licensed under http://en.wikipedia.org/wiki/MIT_License
  *
