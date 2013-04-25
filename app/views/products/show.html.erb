@@ -23,6 +23,14 @@
     <% else %>
       <p> Product is retired! </p>
     <% end %>
+    <table class="product-rating">
+      <% @product.average_ratings.each do |question, rating| %>
+        <tr>
+          <td class="criteria"><%= question %></td>
+          <td><%= rating %></td>
+        </tr>
+      <% end %>
+    </table>
 
     <%= link_to "Rate this Product", new_store_product_review_path(store_path: @product.store, product_id:@product) %>
   </div>
