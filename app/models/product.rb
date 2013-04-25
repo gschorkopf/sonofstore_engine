@@ -11,13 +11,7 @@ class Product < ActiveRecord::Base
   has_attached_file :image, styles: { retail: "500x500",
                                       large: "500x500",
                                       thumbnail: "200x200" },
-                            storage: :s3,
-                            bucket: 'c3po_store_engine',
-                            path: ":attachment/:id/:style.:extension",
-                            s3_credentials: {
-                              access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-                              secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
-                              }
+                            storage: :s3
 
   validates :title, presence: :true
   validate :unique_product_title_in_store
