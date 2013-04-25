@@ -8,6 +8,23 @@
     <h2><% 'Title' %><%= @product.title %></h2>
     <p><% 'Description' %><%= @product.description %></p>
 
+    <div class="product-rating">
+      <h3>Average Ratings</h3>
+      <% @product.average_ratings.each do |question, rating| %>
+
+        <div>
+          <%= question %>
+          <% 5.times do |t| %>
+            <% if rating == t+1 %>
+              <%= radio_button_tag question, "#{t+1}", true, :class => "star star-read"%>
+            <% else %>
+              <%= radio_button_tag question, "#{t+1}", false, :class  => "star star-read" %>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
     <div id="product-categories">
       <b><%= 'Category' %>:</b>
       <% @product.categories.each do |category| %>
@@ -23,13 +40,47 @@
     <% else %>
       <p> Product is retired! </p>
     <% end %>
+
+
+    <% unless current_user && @product.reviewed_by?(current_user.customer) %>
+      <%= link_to "Rate this Product", new_store_product_review_path(store_path: @product.store, product_id:@product) %>
+    <% end %>
   </div>
+
+  <div id="product-reviews" class="span12">
+    <h3>Customer Reviews</h3>
+    <% @product.most_recent_reviews.each do |review| %>
+      <h4>Reviewed By: <span class="reviewer"><%= review.customer.best_display_name %></span> on <span clas="review-date"><%= time_tag review.created_at %></span></h4>
+      <div class="review row-fluid">
+        <div class="span3">
+          <% review.ratings.each do |rating| %>
+            <div>
+              <%= rating.question %>
+
+              <% 5.times do |t| %>
+
+                <% if rating.rating == t+1 %>
+                  <%= radio_button_tag rating.question.to_s+review.id.to_s, "#{t+1}", true, :class => "star star-read"%>
+                <% else %>
+                  <%= radio_button_tag rating.question.to_s+review.id.to_s, "#{t+1}", false, :class  => "star star-read" %>
+                <% end %>
+
+              <% end %>
+            </div>
+          <% end %>
+
+        </div>
+        <div class="reivew-meta-data span9">
+          <div class="review-comment">
+            <% if review.comment.nil? || review.comment.empty? %>
+              <em>No comment</em>
+            <% else %>
+              <%= review.comment %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div> <!-- product-reviews -->
 </div>
-<% @product.most_recent_reviews.each do |review| %>
-  <%= review.comment %>
-  <% review.rating.each do |rating| %>
-    <%= rating.question %>
-    <%= rating.rating %>
-  <% end %>
-<% end %>
 

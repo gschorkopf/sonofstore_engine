@@ -5,6 +5,7 @@ class Rating < ActiveRecord::Base
   belongs_to :question
 
   validates_presence_of :question_id, :rating, :product_review_id
+  validates :rating, :numericality => { :greater_than_or_equal_to => 1 }
 
 
   def self.make_new_ratings(ratings, product_review_id)
