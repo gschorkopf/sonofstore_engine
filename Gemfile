@@ -18,6 +18,7 @@ gem 'faker'
 gem 'uuid'
 gem 'redis-rails'
 gem 'kaminari'
+gem 'newrelic_rpm'
 
 group :production do
   gem 'pg'
@@ -37,7 +38,6 @@ group :development, :test do
   gem 'debugger'
   gem 'capybara'
   gem 'simplecov'
-  gem 'newrelic_rpm'
   # gem 'better_errors'
   gem 'binding_of_caller'
   gem 'pry'
