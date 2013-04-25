@@ -15,24 +15,28 @@
     </div>
 
   </div>
+  <div class="span6">
+  <%= form_for @product_review, url: store_product_reviews_path(store_path:params[:store_path]) do |review_form| %>
+
+    <% @product_review.ratings.each do | rating | %>
+      <%= review_form.fields_for :ratings, rating do |rating_fields| %>
+        <div>
+          <%= rating.question %>
+          <%= rating_fields.hidden_field :question_id %>
+          <%= rating_fields.radio_button :rating, '1', class: "star" %>
+          <%= rating_fields.radio_button :rating, '2', class: "star" %>
+          <%= rating_fields.radio_button :rating, '3', class: "star" %>
+          <%= rating_fields.radio_button :rating, '4', class: "star" %>
+          <%= rating_fields.radio_button :rating, '5', class: "star" %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <%= review_form.text_area :comment %>
+
+    <%= review_form.submit "Add your review"%>
+
+  <% end %>
+</div>
 </div>
 
-<%= form_for @product_review, url: store_product_reviews_path(store_path:params[:store_path]) do |review_form| %>
-
-  <% @product_review.ratings.each do | rating | %>
-    <%= review_form.fields_for :ratings, rating do |rating_fields| %>
-      <div>
-      <%= rating.question %>
-      <%= rating_fields.hidden_field :question_id %>
-      <%= rating_fields.radio_button :rating, '1', class: "star" %>
-      <%= rating_fields.radio_button :rating, '2', class: "star" %>
-      <%= rating_fields.radio_button :rating, '3', class: "star" %>
-      <%= rating_fields.radio_button :rating, '4', class: "star" %>
-      <%= rating_fields.radio_button :rating, '5', class: "star" %>
-    </div>
-    <% end %>
-  <% end %>
-
-  <%= review_form.submit "Add your review"%>
-
-<% end %>

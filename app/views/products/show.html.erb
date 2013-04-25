@@ -26,22 +26,27 @@
 
     <%= link_to "Rate this Product", new_store_product_review_path(store_path: @product.store, product_id:@product) %>
   </div>
-</div>
-
-<% @product.most_recent_reviews.each do |review| %>
-  <%= review.comment %>
-  <% review.ratings.each do |rating| %>
-    <%= rating.question %>
-    <%= rating.rating %>
+<div id="product-reviews" class="span12">
+  <% @product.most_recent_reviews.each do |review| %>
+    <div class="review row-fluid">
+      <div class="reivew-meta-data span8">
+        Reviewed By: <span class="reviewer"><%= review.customer.full_name %></span> on <span clas="review-date"><%= review.created_at %></span>
+        <div class="review-comment">
+          <%= review.comment %>
+        </div>
+      </div>
+      <div class="span4">
+        <table class="product-rating">
+          <% review.ratings.each do |rating| %>
+            <tr>
+              <td class="criteria"><%= rating.question %></td>
+              <td><%= rating.rating %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
   <% end %>
-<% end %>
-
-<div class="row content-box">
-  <div id="product-average-rating" class="span4">
-    Average Ratings
-    <%= render partial: "rating_table" %>
-    <a class="product-add-rating" href="product_rating.html">Reivew this!</a>
-  </div> <!-- product-average-rating -->
-
-  <%= render partial: "customer_review" %>
+</div> <!-- product-reviews -->
 </div>
+
