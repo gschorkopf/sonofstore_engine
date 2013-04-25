@@ -5,10 +5,6 @@ describe OrdersController do
     pending
   end
 
-  describe 'buy_now' do
-    pending
-  end
-
   describe 'index' do
     context 'when the user is logged in' do
 
@@ -30,21 +26,25 @@ describe OrdersController do
           assigns(user).should eq @user
         end
 
-        it 'assigns order variables' do
-           user = FactoryGirl.create(:user, customer_id: @customer.id)
-          login_user user
-          orders = Order.create(customer_id: @customer.id, status:"pending")
-          get :index
-          assigns(orders).should eq @orders
+      context 'when the user does not have orders in their history' do
+        before(:each) do 
+          @customer = FactoryGirl.create(:customer)
+        end
+
+          it 'renders the index view with no orders' do
+            user = FactoryGirl.create(:user, customer_id: @customer.id)
+            login_user user
+            get :index
+            assigns(:orders).should be_empty
+          end
         end
       end
     end
 
     context 'when the user is NOT logged in' do
       it 'trying to go to their order history page redirects them to the log in page' do
-        pending
-        # get :index
-        # expect(response).to redirect_to login_path
+        get :index
+        expect(response).to redirect_to login_path
       end
     end
   end
@@ -73,7 +73,7 @@ describe OrdersController do
           login_user user2
 
           get :show, params = {customer_id: customer1.id, id: order.id}
-          expect(response).to redirect_to customer_orders_path(order)
+          expect(response).to redirect_to customer_orders_path(customer2)
         end
       end
     end

@@ -20,9 +20,8 @@ describe Category do
   end
 
   it 'is invalid if title already exists (case insensitive)' do
-    pending "check this again after updating validations to include case sensitivity"
-    # cat1 = FactoryGirl.create(:category, title: 'dark MATTER', store_id: @store.id)
-    # expect(FactoryGirl.create(:category, store_id: @store.id)).to_not be_valid
+    cat1 = FactoryGirl.create(:category, title: 'dark MATTER', store_id: @store.id)
+    expect(FactoryGirl.build(:category, title: 'dark matter', store_id: @store.id)).to_not be_valid
   end
 
   it 'is valid if another store has the same category, but not the same store' do

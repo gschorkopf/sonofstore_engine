@@ -43,9 +43,6 @@ GEM
       nokogiri (>= 1.4.4)
       uuidtools (~> 2.1)
     bcrypt-ruby (3.0.1)
-    better_errors (0.8.0)
-      coderay (>= 1.0.0)
-      erubis (>= 2.6.6)
     binding_of_caller (0.7.1)
       debug_inspector (>= 0.0.1)
     bootstrap-sass (2.3.1.0)
@@ -298,7 +295,6 @@ PLATFORMS
 
 DEPENDENCIES
   aws-sdk
-  better_errors
   binding_of_caller
   bootstrap-sass
   cancan
@@ -315,6 +311,7 @@ DEPENDENCIES
   newrelic_rpm
   paperclip
   pg
+  pry
   rails (= 3.2.13)
   rake
   redis-rails

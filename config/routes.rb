@@ -2,7 +2,7 @@ StoreEngine::Application.routes.draw do
   root to: 'stores#index'
   get "/stores" => redirect('/')
 
-  get "/code" => redirect("http://github.com/gschorkopf/sonofstore_engine")
+  get "/code" => redirect("http://github.com/kylesuss/daughterofstore_engine")
   get "/logout" => "sessions#destroy", :as => "logout"
   get "/login" => "sessions#new", :as => "login"
   get "/signup" => "users#signup", :as => "signup"
@@ -11,6 +11,7 @@ StoreEngine::Application.routes.draw do
   get "/guest-checkout" => "customers#new", :as => "guest_checkout"
   get "/confirmation-page/:id" => "orders#confirm", :as => "order_confirmation"
   get "/order_details/:uuid_hash" => "orders#display", :as => "obscure_link"
+  get "/edit" => "users#edit", :as => "edit"
 
   namespace :admin do
     root to: redirect("/admin/dashboard")
@@ -46,9 +47,12 @@ StoreEngine::Application.routes.draw do
 
   scope "/:store_path", as: 'store' do
     get '/' => "products#index", as: 'home'
-    resources :products, only: [ :index, :show ]
     resources :categories, only: [ :index, :show ]
     resources :checkouts, only: [ :new, :create, :show ]
+
+    resources :products, only: [ :index, :show ] do
+      resources :reviews, :controller => "product_reviews", only: [:new, :create, :edit, :update], :as => "reviews"
+    end
 
     resource :cart, only: [ :update, :show, :destroy ] do
       member do

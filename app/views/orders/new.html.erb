@@ -11,9 +11,9 @@
 <table class="table table-striped">
   <thead>
     <th></th>
-    <th><%= t('product.self') %></th>
-    <th><%= t('product.price') %></th>
-    <th><%= t('product.quantity') %></th>
+    <th><%= 'Product' %></th>
+    <th><%= 'Price' %></th>
+    <th><%= 'Quantity' %></th>
   </thead>
   <tbody>
 
@@ -27,14 +27,14 @@
       <br>
       <%= product.description %>
       <br>
-      <%= link_to t('action.remove'), remove_item_store_cart_path(current_store, remove_item: { product_id: product.id }), confirm: t('confirm'), method: :put %>
+      <%= link_to 'Remove', remove_item_store_cart_path(current_store, remove_item: { product_id: product.id }), confirm: 'Confirm', method: :put %>
     </td>
     <td><%= number_to_currency(product.price) %></td>
     <td>
       <%= simple_form_for :carts, url: store_cart_path(current_store), method: :put do |f| %>
         <%= f.hidden_field :product_id, value: product.id %>
         <%= f.input_field :quantity, value: cart_item[1].to_i, class: 'span1' %>
-        <%= f.button :submit, t('crud.update'), class:'btn btn-info' %>
+        <%= f.button :submit, 'Update', class:'btn btn-info' %>
       <% end %>
     </td>
   </tr>

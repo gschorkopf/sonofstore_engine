@@ -46,7 +46,6 @@ describe 'the admin products view', type: :feature do
 
   context 'editing, destroying, and retiring/activating products' do
     before(:each) do
-      @store = FactoryGirl.create(:store)
       @product = FactoryGirl.create(:product, store_id: @store.id)
     end
 

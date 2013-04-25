@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       # Resque.enqueue(IntroMailer, @user.id)
       auto_login(@signup.user)
 
-      redirect_to session[:return_to] || root_path, notice: 'Logged in!'
+      redirect_to root_path, notice: 'Logged in!'
     elsif @signup.message
       redirect_to signup_path, alert: "Email already exists"
     else
@@ -55,21 +55,46 @@ class UsersController < ApplicationController
   end
 
   def update
-    @update = Signup.update(params)
+    if current_user.present?
+      @user = User.find(current_user.id)
+      @customer = @user.customer
+      @orders = @user.customer.orders
+      @stores = @user.stores
+      @pending_stores = @stores.order('name ASC').
+                                where(approval_status: 'pending')
 
-    if @update == true
-      redirect_to profile_path,
-        :notice => "Successfully updated account"
+      @approved_stores = @stores.order('name ASC').
+                                 where(approval_status: 'approved')
+
+      @disapproved_stores = @stores.order('name ASC').
+                                    where(approval_status: 'disapproved')
+    end
+    @user = User.find(params[:id])
+    @customer = Customer.find(@user.customer_id)
+
+
+    if @customer.update_attributes(params[:customer])
+      if @user.update_attributes(params[:user])
+        redirect_to profile_path(active_navigation: "personal_info"),
+          :notice => "Successfully updated account"
+      else
+        flash.now[:notice] = "Failed to update customer: #{@user.errors.to_a.join(",")}"
+        @active_user_navigation = :personal_info
+        render action: "show"
+      end
+
     else
-      redirect_to "/profile",
-        notice: @update[:password].pop
+      flash.now[:notice] = "Failed to update customer: #{@customer.errors.to_a.join(",")}"
+      @active_user_navigation = :personal_info
+      render action: "show"
     end
   end
 
   def show
     if current_user.present?
-      @user = User.find(current_user.id)
+      @active_user_navigation = user_active_navigation
 
+      @user = User.find(current_user.id)
       @customer = @user.customer
       @orders = @user.customer.orders
       @stores = @user.stores
@@ -83,6 +108,14 @@ class UsersController < ApplicationController
                                     where(approval_status: 'disapproved')
     else
       redirect_to login_path, alert: 'Please log in!'
+    end
+  end
+
+  def user_active_navigation
+    if params[:active_navigation]
+      params[:active_navigation].to_sym
+    else
+      :stores
     end
   end
 end

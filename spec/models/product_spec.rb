@@ -3,48 +3,55 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe Product do
   before(:each) do
     @store = FactoryGirl.create(:store)
+    @product = FactoryGirl.create(:product, store_id: @store.id)
   end
 
   it 'has a valid factory' do
-    product = FactoryGirl.build(:product, store_id: @store.id)
-    expect(product).to be_valid
+    expect(@product).to be_valid
   end
 
   it 'is invalid without a title' do
-    expect(FactoryGirl.build(:product, store_id: @store.id, title: '')).to_not be_valid
+    @product.title = ''
+    expect(@product).to_not be_valid
   end
 
   it 'is invalid without a description' do
-    expect(FactoryGirl.build(:product, store_id: @store.id, description: '')).to_not be_valid
+    @product.description = ''
+    expect(@product).to_not be_valid
   end
 
   it 'is invalid without a store id' do
-    expect(FactoryGirl.build(:product, store_id: '').valid?).to be_false
+    #this is failing because it cannot do a custom validation without a store id
+    @product.store_id = ''
+    expect(@product.valid?).to be_false
   end
 
   it 'is invalid if title already exists in the same store' do
-    FactoryGirl.create(:product, store_id: @store.id)
-    product = FactoryGirl.build(:product, store_id: @store.id)
-    expect(product.valid?).to be_false
+    product2 = FactoryGirl.create(:product, store_id: @store.id)
+    expect(product2.valid?).to be_false
   end
 
   it 'is invalid if title already exists (case insensitive) in the same store' do
-    #fix test when case insensitivy is updated
     FactoryGirl.create(:product, title: 'ITCHY Sweater', store_id: @store.id)
-    product = FactoryGirl.build(:product, store_id: @store.id)
+    product = FactoryGirl.create(:product, store_id: @store.id)
     expect(product.valid?).to be_false
   end
 
   it 'is valid if the title already exists in a different store' do
-    pending
+    @product.save
+    store2 = FactoryGirl.create(:store, name: 'KimChi Caravan', path: 'kimchi-caravan')
+    product2 = FactoryGirl.create(:product, title: 'Itchy Sweater', store_id: store2.id)
+    expect(product2).to be_valid
   end
 
   it 'is invalid without a price' do
-    expect(FactoryGirl.build(:product, store_id: @store.id, price: nil)).to_not be_valid
+    @product.price = nil
+    expect(@product).to_not be_valid
   end
 
   it 'is invalid without a price greater than 0' do
-    expect(FactoryGirl.build(:product, store_id: @store.id, price: 0)).to_not be_valid
+    @product.price = 0
+    expect(@product).to_not be_valid
   end
 
   it 'is only valid with two or less decimal points' do
@@ -55,7 +62,8 @@ describe Product do
   end
 
   it 'is invalid without a status' do
-    expect(FactoryGirl.build(:product, store_id: @store.id, status: nil)).to_not be_valid
+    @product.status = nil
+    expect(@product).to_not be_valid
   end
 
   it 'is invalid with a status other than active or retired' do
@@ -69,12 +77,6 @@ describe Product do
     superheroes = FactoryGirl.create(:category, title: 'superheroes', store_id: @store.id)
     product = FactoryGirl.create(:product, store_id: @store.id, categories: [nicknacks, superheroes])
     expect(product.categories.count).to eq 2
-  end
-
-  it "includes Paperclip correctly" do
-    pending "fix when we do paperclip, or write a different test"
-    example = Product.new :image => File.new(Rails.root + 'spec/fixtures/images/rails.png')
-    expect(example.image_file_name).to eq 'rails.png'
   end
 
   describe '.toggle_status' do
@@ -92,6 +94,107 @@ describe Product do
         product.toggle_status
         expect(product.status).to eq 'active'
       end
+    end
+  end
+
+  describe "most recent reviews" do
+    let!(:product) { create(:product, store_id: @store.id, status: 'retired') }
+
+    context "when there are product reviews" do
+      it "sorts the reviews by the updated at time" do
+        product_review1 = build(:product_review, product_id: product.id,
+                                updated_at: 1.years.ago)
+        product_review2 = build(:product_review, product_id: product.id,
+                                updated_at: 3.years.ago)
+        product_review3 = build(:product_review, product_id: product.id,
+                                updated_at: 5.years.ago)
+
+        [product_review1, product_review2, product_review3].tap do |reviews|
+          product.product_reviews << reviews
+          expect(product.most_recent_reviews).to eq reviews
+        end
+      end
+    end
+
+    context "when there are no product reviews" do
+      it "returns an empty array" do
+        expect(product.most_recent_reviews).to eq []
+      end
+    end
+  end
+
+  describe "average ratings" do
+
+    it "returns a hash of questions and average ratings" do
+      q1 = Question.new(question: "question 1")
+      q2 = Question.new(question: "question 2")
+
+      rating1 = Rating.new
+      rating1.question = q1
+      rating1.rating = 2
+
+      rating2 = Rating.new
+      rating2.question = q2
+      rating2.rating = 3
+
+      pr1 = ProductReview.new
+      pr1.should_receive(:ratings).and_return([rating1, rating2])
+
+      rating1 = Rating.new
+      rating1.question = q1
+      rating1.rating = 4
+
+      rating2 = Rating.new
+      rating2.question = q2
+      rating2.rating = 3
+
+      pr2 = ProductReview.new
+      pr2.should_receive(:ratings).and_return([rating1, rating2])
+      product_reviews = [pr1, pr2]
+      product = Product.new
+
+      product.should_receive(:product_reviews).at_least(:once).and_return(product_reviews)
+
+      average_ratings = {"question 1" => 3, "question 2" => 3}
+      expect(product.average_ratings).to eq average_ratings
+    end
+  end
+
+  describe "reviewers" do
+    it "returns a collection of customers who have reviewed the product" do
+      c1 = Customer.create!(email:"a@a.a", full_name:"a")
+      c2 = Customer.create!(email:"b@b.b", full_name:"b")
+
+      product = FactoryGirl.create(:product)
+
+      pr = ProductReview.new
+      pr.customer = c1
+      pr.product = product
+      pr.save!
+
+      expect(product.reviewers).to eq [c1]
+    end
+  end
+
+  describe "reviewed_by?" do
+    let(:c1) {Customer.create!(email:"a@a.a", full_name:"a")}
+    let(:c2) {Customer.create!(email:"b@b.b", full_name:"b")}
+    let(:product) {FactoryGirl.create(:product)}
+
+    before do
+      pr = ProductReview.new
+      pr.customer = c1
+      pr.product = product
+      pr.save!
+
+    end
+
+    it "returns true if a customer reviewed the product" do
+      expect(product).to be_reviewed_by(c1)
+    end
+
+    it "returns false if a customer didn't review the product" do
+      expect(product).to_not be_reviewed_by(c2)
     end
   end
 end

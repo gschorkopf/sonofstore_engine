@@ -1,33 +1,63 @@
-<% cache("product_show_id_#{@product.id}") do %>
-
 <div class="row content-box">
-
   <div class="prod_detail_img span6">
     <P><%= image_tag generate_image_url(500, @product.id), class: "img-rounded" %></P>
     <!-- <p><%#= image_tag @product.image.url(:large) %></p> -->
   </div>
 
   <div class="prod_detail_text span5">
-    <h2><% t('product.title') %><%= @product.title %></h2>
-    <p><% t('product.description') %><%= @product.description %></p>
+    <h2><% 'Title' %><%= @product.title %></h2>
+    <p><% 'Description' %><%= @product.description %></p>
 
     <div id="product-categories">
-      <b><%= t('categories.self') %>:</b>
+      <b><%= 'Category' %>:</b>
       <% @product.categories.each do |category| %>
-         <span class='label'><%= link_to category.title, store_category_path(@product.store.path, category), method: :get %></span>
+        <span class='label'><%= link_to category.title, store_category_path(@product.store.path, category), method: :get %></span>
 
       <% end %>
     </div>
 
     <br>
-      <p><%= t('product.price') %>: <%= number_to_currency(@product.price) %></p>
+    <p><%= 'Price' %>: <%= number_to_currency(@product.price) %></p>
     <% if @product.status == 'active' %>
       <%= render partial: 'add_to_cart_button', locals: {product: @product} %>
     <% else %>
       <p> Product is retired! </p>
     <% end %>
-  </div>
-</div>
+    <table class="product-rating">
+      <% @product.average_ratings.each do |question, rating| %>
+        <tr>
+          <td class="criteria"><%= question %></td>
+          <td><%= rating %></td>
+        </tr>
+      <% end %>
+    </table>
 
-<% end %> <!-- ends the caching block-->
+    <% unless current_user && @product.reviewed_by?(current_user.customer) %>
+      <%= link_to "Rate this Product", new_store_product_review_path(store_path: @product.store, product_id:@product) %>
+    <% end %>
+  </div>
+
+  <div id="product-reviews" class="span12">
+    <% @product.most_recent_reviews.each do |review| %>
+      <div class="review row-fluid">
+        <div class="span2">
+          <table class="product-rating">
+            <% review.ratings.each do |rating| %>
+              <tr>
+                <td class="criteria"><%= rating.question %></td>
+                <td><%= rating.rating %></td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+        <div class="reivew-meta-data span10">
+          Reviewed By: <span class="reviewer"><%= review.customer.full_name %></span> on <span clas="review-date"><%= review.created_at %></span>
+          <div class="review-comment">
+            <%= review.comment %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div> <!-- product-reviews -->
+</div>
 
