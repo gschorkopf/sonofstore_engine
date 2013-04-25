@@ -159,4 +159,42 @@ describe Product do
       expect(product.average_ratings).to eq average_ratings
     end
   end
+
+  describe "reviewers" do
+    it "returns a collection of customers who have reviewed the product" do
+      c1 = Customer.create!(email:"a@a.a", full_name:"a")
+      c2 = Customer.create!(email:"b@b.b", full_name:"b")
+
+      product = FactoryGirl.create(:product)
+
+      pr = ProductReview.new
+      pr.customer = c1
+      pr.product = product
+      pr.save!
+
+      expect(product.reviewers).to eq [c1]
+    end
+  end
+
+  describe "reviewed_by?" do
+    let(:c1) {Customer.create!(email:"a@a.a", full_name:"a")}
+    let(:c2) {Customer.create!(email:"b@b.b", full_name:"b")}
+    let(:product) {FactoryGirl.create(:product)}
+
+    before do
+      pr = ProductReview.new
+      pr.customer = c1
+      pr.product = product
+      pr.save!
+
+    end
+
+    it "returns true if a customer reviewed the product" do
+      expect(product).to be_reviewed_by(c1)
+    end
+
+    it "returns false if a customer didn't review the product" do
+      expect(product).to_not be_reviewed_by(c2)
+    end
+  end
 end

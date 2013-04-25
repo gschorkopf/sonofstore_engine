@@ -6,6 +6,7 @@ class Customer < ActiveRecord::Base
   has_one :shipping_address
   has_one :credit_card
   has_many :orders
+  has_many :product_reviews
 
   validates :full_name, presence: :true
   validates :email, presence: :true, uniqueness: { case_sensitive: false },
