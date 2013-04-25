@@ -4,4 +4,8 @@ class Question < ActiveRecord::Base
   has_many :rating
 
   validates_presence_of :question
+
+  def to_s
+    question
+  end
 end

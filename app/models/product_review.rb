@@ -9,4 +9,6 @@ class ProductReview < ActiveRecord::Base
   validates :customer_id, presence: true
   #validate uniqueness of customer to the product (not store)
   validates :product_id, presence: true
+
+  accepts_nested_attributes_for :ratings
 end

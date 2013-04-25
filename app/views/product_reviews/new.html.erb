@@ -1,1 +1,28 @@
-put new product review form here!
+<div class="row content-box">
+  <div class="prod_detail_img span6">
+    <P><%= image_tag generate_image_url(500, @product.id), class: "img-rounded" %></P>
+  </div>
+
+  <div class="prod_detail_text span5">
+    <h2>Review for: <%= @product.title %></h2>
+    <p><%= @product.description %></p>
+
+    <div id="product-categories">
+      <b><%= 'Category' %>:</b>
+      <% @product.categories.each do |category| %>
+        <span class='label'><%= link_to category.title, store_category_path(@product.store.path, category), method: :get %></span>
+      <% end %>
+    </div>
+
+  </div>
+</div>
+
+<%= form_for @product_review, url: store_product_reviews_path(store_path:params[:store_path]) do |review_form| %>
+
+  <%= review_form.fields_for :ratings do |rating_field| %>
+
+    <%= rating_field.label :question %>
+    <%= rating_field.text_field :rating %>
+  <% end %>
+
+<% end %>

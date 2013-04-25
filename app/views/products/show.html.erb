@@ -23,11 +23,14 @@
     <% else %>
       <p> Product is retired! </p>
     <% end %>
+
+    <%= link_to "Rate this Product", new_store_product_review_path(store_path: @product.store, product_id:@product) %>
   </div>
 </div>
+
 <% @product.most_recent_reviews.each do |review| %>
   <%= review.comment %>
-  <% review.rating.each do |rating| %>
+  <% review.ratings.each do |rating| %>
     <%= rating.question %>
     <%= rating.rating %>
   <% end %>
@@ -36,7 +39,7 @@
 <div class="row content-box">
   <div id="product-average-rating" class="span4">
     Average Ratings
-  <%= render partial: "rating_table" %>
+    <%= render partial: "rating_table" %>
     <a class="product-add-rating" href="product_rating.html">Reivew this!</a>
   </div> <!-- product-average-rating -->
 

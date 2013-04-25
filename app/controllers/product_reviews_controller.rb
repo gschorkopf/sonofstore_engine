@@ -1,7 +1,13 @@
 class ProductReviewsController < ApplicationController
 
   def new
+    @product = Product.find(params[:product_id])
     @product_review = ProductReview.new
+    questions = Question.all
+    questions.each do |q|
+      rating = @product_review.ratings.build
+      rating.question = q
+    end
   end
 
   def create
