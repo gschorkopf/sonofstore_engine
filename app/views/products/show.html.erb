@@ -32,7 +32,7 @@
       <% end %>
     </table>
 
-    <% unless !current_user.nil? && @product.reviewed_by?(current_user.customer) %>
+    <% unless current_user && @product.reviewed_by?(current_user.customer) %>
       <%= link_to "Rate this Product", new_store_product_review_path(store_path: @product.store, product_id:@product) %>
     <% end %>
   </div>
