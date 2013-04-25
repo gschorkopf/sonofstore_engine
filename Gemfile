@@ -40,6 +40,7 @@ group :development, :test do
   gem 'newrelic_rpm'
   # gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'pry'
 end
 
 group :test do

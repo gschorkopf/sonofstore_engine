@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe Product do
   before(:each) do
     @store = FactoryGirl.create(:store)
-    @product = FactoryGirl.build(:product, store_id: @store.id)
+    @product = FactoryGirl.create(:product, store_id: @store.id)
   end
 
   it 'has a valid factory' do
@@ -27,13 +27,13 @@ describe Product do
   end
 
   it 'is invalid if title already exists in the same store' do
-    product2 = FactoryGirl.build(:product, store_id: @store.id)
+    product2 = FactoryGirl.create(:product, store_id: @store.id)
     expect(product2.valid?).to be_false
   end
 
   it 'is invalid if title already exists (case insensitive) in the same store' do
     FactoryGirl.create(:product, title: 'ITCHY Sweater', store_id: @store.id)
-    product = FactoryGirl.build(:product, store_id: @store.id)
+    product = FactoryGirl.create(:product, store_id: @store.id)
     expect(product.valid?).to be_false
   end
 

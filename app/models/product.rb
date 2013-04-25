@@ -37,11 +37,13 @@ class Product < ActiveRecord::Base
   end
 
   def exists_in_store?(title, id, store_id)
-    if id
+    if id && store_id
       !Store.find_by_id(store_id).products.where("title ILIKE ?", "%#{title}%").
                       where("id <> ?", id).empty?
-    else
+    elsif store_id
       !Store.find_by_id(store_id).products.where("title ILIKE ?", "%#{title}%")
+    else
+      errors.add(:base, "Not valid without a store id")
     end
   end
 
