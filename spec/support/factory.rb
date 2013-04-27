@@ -79,6 +79,13 @@ FactoryGirl.define do
     comment "Great product! 10/10 would buy again."
   end
 
+  factory :featured_product_review, class: ProductReview do
+    customer
+    product
+    comment "this is nice!"
+    featured true
+  end
+
   factory :rating do
     question
     rating 5

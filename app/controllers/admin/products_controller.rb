@@ -22,6 +22,13 @@ class Admin::ProductsController < ApplicationController
     end
   end
 
+  def show
+    @store = current_store
+    @product = Product.find(params[:id])
+    @featured_comments = @product.featured_comments
+    @nonfeatured_comments = @product.nonfeatured_comments
+  end
+
   def edit
     @store = current_store
     @product = Product.find(params[:id])

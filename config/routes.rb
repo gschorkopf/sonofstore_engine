@@ -85,6 +85,7 @@ StoreEngine::Application.routes.draw do
           post :toggle_status
         end
       end
+      resources :product_reviews, only: [:index, :update]
     end
   end
 
