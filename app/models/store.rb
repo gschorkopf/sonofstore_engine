@@ -85,4 +85,12 @@ class Store < ActiveRecord::Base
       update_attributes(active: true)
     end
   end
+
+  def filter_products_by_category(category_id)
+    categories.find(category_id).products
+  end
+
+  def top_products
+    products[0..3]
+  end
 end
