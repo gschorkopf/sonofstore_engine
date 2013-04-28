@@ -57,28 +57,27 @@ describe ProductReviewsController do
       it 'creates a new product review' do
 
 
-        expect{ post :create, store_path: @current_store.path,
+        expect{ post :create, store_path: @current_store.path, product_id: @product.id,
           product_review: {product_id: @product.id,
             customer_id: 1 ,
             comment: 'this is so fun'},
-            ratings: [{rating: 1, question_id: @question.id}]
+            ratings: {rating: 1, question_id: @question.id}
         }.to change(ProductReview, :count).by(1)
       end
 
       it 'redirects to the product show page' do
-        post :create, store_path: @current_store.path,
+        post :create, store_path: @current_store.path,product_id: @product.id,
           product_review: {product_id: @product.id,
             customer_id: 1 ,
             comment: 'this is so fun'},
-            ratings: [{rating: 1, question_id: @question.id}]
+            ratings: {rating: 1, question_id: @question.id}
         expect(response).to redirect_to(store_product_path(store_path: @current_store.path, id: @product.id))
       end
     end
 
     context 'when there is something wrong with the product review' do
       it 'redirects to the new page' do
-        Rating.should_receive(:make_new_ratings).and_return(false)
-        post :create, store_path: @current_store.path, product_review: {product_id: @product.id, customer_id: '' , comment: 'this is so fun'}
+        post :create, store_path: @current_store.path, product_id: @product.id, product_review: {product_id: @product.id, customer_id: '' , comment: 'this is so fun'}
         response.should render_template(:new)
       end
     end

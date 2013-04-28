@@ -22,9 +22,9 @@ class ProductReviewsController < ApplicationController
       #ratings: multiple times of.. { product_review_id: x, question: x, rating: x }
      @product_review = ProductReview.new(params[:product_review])
      @product_review.customer = current_user.customer
-     @product_review.product_id = params[:product_id]
+     #@product_review.product_id = params[:product_id]
      # need to check to see if the ratings are valid before saving review
-    if @product_review.save
+    if @product_review.save! && !(params[:ratings].nil? || params[:ratings].empty?)
       @product_ratings = Rating.make_new_ratings( params[:ratings].values,
                                                 @product_review.id)
       if @product_ratings

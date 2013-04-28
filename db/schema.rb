@@ -99,8 +99,9 @@ ActiveRecord::Schema.define(:version => 20130428030953) do
     t.integer  "product_id"
     t.integer  "customer_id"
     t.string   "comment",     :limit => 500
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
+    t.boolean  "featured",                   :default => false, :null => false
   end
 
   add_index "product_reviews", ["product_id"], :name => "index_product_reviews_on_product_id"
