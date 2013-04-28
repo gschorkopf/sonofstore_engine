@@ -17,9 +17,6 @@ class ProductReviewsController < ApplicationController
       params[:ratings] = params[:product_review][:ratings_attributes]
       params[:product_review].delete(:ratings_attributes)
     end
-    #params look like:
-      #product_review { product_id: x , customer_id: x, comment: x }
-      #ratings: multiple times of.. { product_review_id: x, question: x, rating: x }
      @product_review = ProductReview.new(params[:product_review])
      @product_review.customer = current_user.customer
      #@product_review.product_id = params[:product_id]
@@ -44,9 +41,11 @@ class ProductReviewsController < ApplicationController
   end
 
   def update
+    # we'll use this for letting a customer update their own review
   end
 
   def edit
+    # we'll use this for letting a customer update their own review
     @product_review = ProductReview.find(params[:id])
   end
 end

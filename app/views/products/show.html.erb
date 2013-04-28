@@ -8,22 +8,30 @@
     <h2><% 'Title' %><%= @product.title %></h2>
     <p><% 'Description' %><%= @product.description %></p>
 
-    <div class="product-rating">
-      <h3>Average Ratings</h3>
-      <% @product.average_ratings.each do |question, rating| %>
+    <% if @product.product_reviews.any? %>
+      <div class="product-rating">
+        <h3>Average Ratings</h3>
+        <% @product.average_ratings.each do |question, rating| %>
 
-        <div>
-          <%= question %>
-          <% 5.times do |t| %>
-            <% if rating == t+1 %>
-              <%= radio_button_tag question, "#{t+1}", true, :class => "star star-read"%>
-            <% else %>
-              <%= radio_button_tag question, "#{t+1}", false, :class  => "star star-read" %>
+          <div>
+            <%= question %>
+            <% 5.times do |t| %>
+              <% if rating == t+1 %>
+                <%= radio_button_tag question, "#{t+1}", true, :class => "star star-read"%>
+              <% else %>
+                <%= radio_button_tag question, "#{t+1}", false, :class  => "star star-read" %>
+              <% end %>
             <% end %>
-          <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <% if @product.featured_comment %>
+        <div id='favorited_comment'>
+          <%= @product.featured_comment %>
         </div>
       <% end %>
-    </div>
+    <% end %>
 
     <div id="product-categories">
       <b><%= 'Category' %>:</b>

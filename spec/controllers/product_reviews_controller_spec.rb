@@ -10,14 +10,9 @@ describe ProductReviewsController do
   describe 'GET #new' do
 
     it 'assigns a new product review' do
-      #product_review = ProductReview.new
       get :new
       expect(assigns(:product_review)).to be_a_new(ProductReview)
     end
-
-    # it 'assigns new product_ratings' do
-
-    # end
 
     it 'renders the new template' do
       get :new

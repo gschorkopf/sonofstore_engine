@@ -12,13 +12,15 @@ describe Admin::ProductsController do
     controller.stub(:current_user).and_return(current_user)
   end
 
-  it "index action should render index template" do
-    get :index, store_path: @store
-    response.should render_template(:index)
-  end
+  describe 'GET index' do
+    it "index action should render index template" do
+      get :index, store_path: @store
+      response.should render_template(:index)
+    end
 
-  it "new action should render new template" do
-    get :new, store_path: @store
-    response.should render_template(:new)
+    it "new action should render new template" do
+      get :new, store_path: @store
+      response.should render_template(:new)
+    end
   end
 end

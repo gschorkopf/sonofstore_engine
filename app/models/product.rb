@@ -8,16 +8,17 @@ class Product < ActiveRecord::Base
   has_many :product_categories
   has_many :categories, through: :product_categories
 
-  has_attached_file :image, styles: { retail: "500x500",
-                                      large: "500x500",
-                                      thumbnail: "200x200" },
+  has_attached_file :image, styles: { 
+                            retail: "500x500",
+                            large: "500x500",
+                            thumbnail: "200x200" },
                             storage: :s3,
                             bucket: 'c3po_store_engine',
                             path: ":attachment/:id/:style.:extension",
                             s3_credentials: {
                               access_key_id: ENV['AWS_ACCESS_KEY_ID'],
                               secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
-                              }
+                            }
 
   validates :title, presence: :true
   validate :unique_product_title_in_store
@@ -79,6 +80,18 @@ class Product < ActiveRecord::Base
     end
 
     ratings
+  end
+
+  def featured_comment
+    featured_comments.sample.comment
+  end
+
+  def featured_comments
+    product_reviews.where(featured: true)
+  end
+
+  def nonfeatured_comments
+    product_reviews.where(featured: false)
   end
 
   def reviewers

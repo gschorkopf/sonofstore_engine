@@ -2,6 +2,7 @@ class Store < ActiveRecord::Base
   attr_accessible :description, :name, :path, :active
   has_many :categories
   has_many :products
+  #has_many :product_reviews, through: :products
 
   has_many :user_roles
   has_many :users, through: :user_roles
