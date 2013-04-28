@@ -41,15 +41,6 @@ class ProductReviewsController < ApplicationController
       @product = Product.find(params[:product_id])
       render :new, notice: 'Something went wrong.'
     end
-    # @product_review = ProductReview.new(params[:product_review])
-    # if @product_review.save
-    #   redirect_to store_product_path( store_path: current_store.path,
-    #                                   id: @product_review.product_id
-    #                                 ),
-    #   notice: 'Successfully created new product review!'
-    # else
-    #   render :new, notice: 'Something went wrong.'
-    # end
   end
 
   def update
