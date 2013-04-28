@@ -170,6 +170,15 @@ c_id = 91
   c_id +=1
 end
 
+
+#Create Questions for Ratings
+question1 = Question.create(question: 'Durability')
+question2 = Question.create(question: 'Value')
+question3 = Question.create(question: 'Packaging')
+question4 = Question.create(question: 'Description Accuracy')
+
+
+
 customer1 = Customer.create(full_name: "Franklin Webber", email: "demoXX+franklin@jumpstartlab.com")
 customer2 = Customer.create(full_name: "Jeff", email: "demoXX+jeff@jumpstartlab.com")
 customer3 = Customer.create(full_name: "Steve Klabnik", email: "demoXX+steve@jumpstartlab.com")

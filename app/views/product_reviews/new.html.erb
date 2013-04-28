@@ -18,7 +18,8 @@
     <h3>
     Please rate the following criteria:
     </h3>
-    <%= form_for @product_review, url: store_product_reviews_path(store_path:params[:store_path]) do |review_form| %>
+    <%= form_for @product_review,
+        url: store_product_reviews_path(store_path:params[:store_path]) do |review_form| %>
 
 
       <% @product_review.ratings.each do | rating | %>
