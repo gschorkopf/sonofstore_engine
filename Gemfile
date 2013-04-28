@@ -9,7 +9,6 @@ gem 'simple_form'
 gem 'jquery-rails'
 gem 'sorcery'
 gem 'paperclip'
-gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'pg'
 gem 'aws-sdk'
 gem 'resque', "~>1.24.0"

@@ -77,15 +77,6 @@ class ApplicationController < ActionController::Base
     I18n.locale = session[:i18n] || I18n.default_locale || :en
   end
 
-  def get_flag
-    case session[:i18n]
-    when 'fr' then 'fr'
-    when 'cs' then 'cs'
-    when 'ca' then 'ca'
-    else 'us'
-    end
-  end
-
   def generate_image_url(side_length, product_id)
     img_category = IMAGE_CATEGORIES[current_store.id.to_s[-1].to_i]
     img_size_params = "#{side_length}/#{side_length}"
