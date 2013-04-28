@@ -49,4 +49,31 @@ describe Store do
 
   end
 
+  describe "#top_products" do
+
+    it "sorts the top rated products based on average rating for a given store" do
+      store = create(:store)
+
+      product1 = create(:product, store: store)
+      product2 = create(:product, store: store)
+      product3 = create(:product, store: store)
+      product4 = create(:product, store: store)
+      product5 = create(:product, store: store)
+
+      prod_review1 = create(:product_review, product_id: product1.id)
+      prod_review2 = create(:product_review, product_id: product2.id)
+      prod_review3 = create(:product_review, product_id: product3.id)
+      prod_review4 = create(:product_review, product_id: product4.id)
+      prod_review5 = create(:product_review, product_id: product5.id)
+
+      rating1 = create(:rating, product_review: prod_review1, rating: 5)
+      rating2 = create(:rating, product_review: prod_review2, rating: 4)
+      rating3 = create(:rating, product_review: prod_review3, rating: 3)
+      rating4 = create(:rating, product_review: prod_review4, rating: 2)
+      rating5 = create(:rating, product_review: prod_review5, rating: 1)
+
+      expect(store.top_products).to eq [product1, product2, product3, product4]
+    end
+  end
+
 end
