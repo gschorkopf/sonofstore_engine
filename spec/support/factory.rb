@@ -27,7 +27,7 @@ FactoryGirl.define do
 
   factory :product do
     store
-    title 'Itchy Sweater'
+    sequence(:title) {|n| "Itche Sweater#{n}"}
     description 'Hurts so good'
     price 12.99
     status 'active'
