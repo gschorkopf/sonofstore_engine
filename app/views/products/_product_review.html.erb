@@ -1,0 +1,16 @@
+<% fail %>
+<div id="product-reviews" class="span7">
+  <div class="review row">
+    <div class="reivew-meta-data span12">
+      Reviewed By: <span class="reviewer">review.customer</span> on <span clas="review-date">review.updated_at</span>
+    </div>
+    <div class="review-comment span7">
+      review.comment
+    </div>
+    <table class="product-rating">
+      <% review.product_rating.each do |rating| %>
+        <%= render partial: "rating", locals: {rating: rating} %>
+      <% end %>
+    </table>
+  </div>
+</div> <!-- product-reviews -->

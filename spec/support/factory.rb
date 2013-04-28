@@ -27,7 +27,7 @@ FactoryGirl.define do
 
   factory :product do
     store
-    title 'Itchy Sweater'
+    sequence(:title) {|n| "Itche Sweater#{n}"}
     description 'Hurts so good'
     price 12.99
     status 'active'
@@ -53,18 +53,22 @@ FactoryGirl.define do
 
   factory :question do
     question 'Value'
+    long_form 'How would you rate the value of this product?'
   end
 
   factory :durability_question, class: Question do
     question 'Durability'
+    long_form 'How would you rate the durability of this product?'
   end
 
   factory :packaging_question, class: Question do
     question 'Packaging'
+    long_form 'How would you rate the packaging of this product?'
   end
 
   factory :description_accuracy_question, class: Question do
     question 'Description Accuracy'
+    long_form 'How would you rate the description accuracy of this product?'
   end
 
   factory :product_review do
@@ -77,6 +81,13 @@ FactoryGirl.define do
   factory :product_review_2, class: ProductReview do
     customer
     comment "Great product! 10/10 would buy again."
+  end
+
+  factory :featured_product_review, class: ProductReview do
+    customer
+    product
+    comment "this is nice!"
+    featured true
   end
 
   factory :rating do

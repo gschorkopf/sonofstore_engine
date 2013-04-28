@@ -57,7 +57,7 @@ class OrdersController < ApplicationController
       session[current_store.path] = {}
 
       if current_user
-        redirect_to customer_order_path(@customer_id, @order.id), :notice => "Successfully created order!"
+        redirect_to order_confirmation_path(@order.id), :notice => "Successfully created order!"
       else
         redirect_to order_confirmation_path(@order.id),
         :notice => "Successfully created order!"

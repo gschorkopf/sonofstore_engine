@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Rating do
   before(:each) do
-    @question = Question.create(question: "Do you like this product?")
+    @question = create(:question)
     @customer = Customer.create(email: "thisisfake@gmail.com", full_name: "John Smith")
     @product_review = ProductReview.create(product_id: 1, customer_id: @customer.id, comment: "hi")
   end
@@ -18,7 +18,7 @@ describe Rating do
 
   describe 'making new ratings' do
     it 'creates multiple new ratings at a time' do
-     question1 =  create(:question)
+      question1 =  create(:question)
       question2 = create(:durability_question)
       question3 = create(:packaging_question)
       question4 = create(:description_accuracy_question)
@@ -33,7 +33,7 @@ describe Rating do
         {question_id: question3.id, rating: 2 },
         {question_id: question4.id, rating: 1 }
       ]
-      
+
       expect{  Rating.make_new_ratings(ratings, product_review.id) }.to change(Rating, :count).by(4)
     end
   end

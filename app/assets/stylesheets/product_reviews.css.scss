@@ -1,3 +1,31 @@
 // Place all the styles related to the ProductReviews controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.review-comment{
+  margin: auto;
+  width: 90%;
+  height: 250px;
+}
+
+p.review-comment {
+  margin: 0;
+  padding: 0;
+}
+
+.star-ratings{
+  margin: 25px 0;
+}
+
+.star-ratings-group{
+  margin: 15px 0;
+}
+
+.star-rating-control > .star-rating.star:last{
+  margin: 0 15px;
+}
+
+.purchase-status {
+  font-style: italic;
+  font-size: .75em;
+}

@@ -1,8 +1,6 @@
 <div class="product-index">
 
   <div class="pull-right">
-    <%= button_to "Browse by category", store_categories_path(current_store),
-        class: 'btn btn-custom-lighten', method: :get %>
     <% if current_user && (current_user.role_for_store?('store_admin', current_store) || current_user.platform_admin?) %>
       <%= link_to 'Store Administration', store_admin_path(current_store) %>
     <% elsif current_user && current_user.role_for_store?('stocker', current_store) %>
@@ -11,15 +9,30 @@
   </div>
 
   <div class="store-information">
-    <p class="store_title_pink"><%= link_to current_store, store_home_path(current_store) %></p>
-    <span class="store-description-cursive">"<%= current_store.description %>"</span><br />
+    <h2 class="store_title_pink"><%= link_to current_store, store_home_path(current_store) %></h2>
+    <span class="store-description-cursive">"<%= current_store.description %>"</span>
   </div>
 
+  <div class="row-fluid">
+    <div id="categories" class="span3">
+    <%= render :template => 'categories/index' %>
+    </div>
+  <!%# cache("product_index_for_store_#{current_store.path}") do %> <!-- Start cache -->
+    <div id="product_listing" class="span9 row-fluid">
+      <div id="top-rated-products" class="span12">
+        <h4>Top Rated Products</h4>
+        <% @top_products.each do |product| %>
+          <%= render partial: 'product', locals: { store: current_store, product: product }  %>
+        <% end %>
+      </div>
   <%= paginate @products %>
   <div id="product_listing" class="row-fluid">
     <% @products.each do |product| %>
       <%= render partial: 'product',
           locals: { store: current_store, product: product }  %>
       <% end %>
+    </div>
   </div>
+</div>
+    <!% end %> <!-- end of caching block-->
 </div>

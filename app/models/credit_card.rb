@@ -22,8 +22,9 @@ class CreditCard < ActiveRecord::Base
                                :less_than_or_equal_to => 12
                              }
 
-  validates :expiration_year, :length => { :minimum => 4, :maximum => 4,
-             message: "Please submit in four digit format - example: 2013" },
+  validates :expiration_year,
+            :length => { :minimum => 2, :maximum => 4,
+message: "Please submit in four digit format - example: 2013 or two-digit 13" },
             :numericality => true
 
   belongs_to :customer
