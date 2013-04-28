@@ -91,6 +91,6 @@ class Store < ActiveRecord::Base
   end
 
   def top_products
-    products[0..3]
+    products.sort_by { |product| -product.ratings.average(:rating).to_f }
   end
 end

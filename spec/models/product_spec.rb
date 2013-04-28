@@ -27,13 +27,14 @@ describe Product do
   end
 
   it 'is invalid if title already exists in the same store' do
-    product2 = FactoryGirl.create(:product, store_id: @store.id)
+    FactoryGirl.create(:product, title: 'store', store_id: @store.id)
+    product2 = FactoryGirl.create(:product, title: 'store', store_id: @store.id)
     expect(product2.valid?).to be_false
   end
 
   it 'is invalid if title already exists (case insensitive) in the same store' do
     FactoryGirl.create(:product, title: 'ITCHY Sweater', store_id: @store.id)
-    product = FactoryGirl.create(:product, store_id: @store.id)
+    product = FactoryGirl.create(:product, title: 'itchy sweater', store_id: @store.id)
     expect(product.valid?).to be_false
   end
 
