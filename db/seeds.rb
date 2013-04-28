@@ -1,11 +1,11 @@
 stores = [
-  Store.create(name: 'Best Sunglasses', path: 'best-sunglasses', description: 'Buy our Sunglasses'),
+  Store.create(name: 'Best Sunglasses', path: 'best-sunglasses', description: 'Buy our Sunglasses', approval_status: 'approved', active: true ),
   Store.create(name: 'Cool Sunglasses', path: 'cool-sunglasses', description: 'Buy our COOL Sunglasses'),
   Store.create(name: "Speedy Bikes", path: "speedy-bikes", description: "Put the fun between your legs!"),
   Store.create(name: "Cool Runnings", path: "cool-runnings", description: "You'll come back tomorrow and the next day and the next day and the next day."),
-  Store.create(name: "Banana Stand", path: "banana-stand", description: "There's always money in the banana stand."),
+  Store.create(name: "Banana Stand", path: "banana-stand", description: "There's always money in the banana stand.", approval_status: 'approved', active: true),
   Store.create(name: "Florist-Gump", path: "florist-gump", description: "Life's not like a box of chocolates here.  What you see is what you get!"),
-  Store.create(name: "World of Woolcraft", path: "world-of-woolcraft", description: "Knitting's no joke"),
+  Store.create(name: "World of Woolcraft", path: "world-of-woolcraft", description: "Knitting's no joke", approval_status: 'approved', active: true),
   Store.create(name: "Frank's Monsterporium", path: "monsterporium", description: "Monster?  Maybe.  Cuddly?  Definitely."),
   Store.create(name: "Katrina's Refactorium", path: "refactorium", description: "Crazy code?  Yeah, we can work with it."),
   Store.create(name: "Jeff's Developer Warehouse", path: "developer-warehouse", description: "Tons of crazy kids... who work for free!")
@@ -171,14 +171,6 @@ c_id = 91
 end
 
 
-#Create Questions for Ratings
-question1 = Question.create(question: 'Durability')
-question2 = Question.create(question: 'Value')
-question3 = Question.create(question: 'Packaging')
-question4 = Question.create(question: 'Description Accuracy')
-
-
-
 customer1 = Customer.create(full_name: "Franklin Webber", email: "demoXX+franklin@jumpstartlab.com")
 customer2 = Customer.create(full_name: "Jeff", email: "demoXX+jeff@jumpstartlab.com")
 customer3 = Customer.create(full_name: "Steve Klabnik", email: "demoXX+steve@jumpstartlab.com")
@@ -205,6 +197,23 @@ ur4.store_id = n
 ur4.save
 n += 1
 end
+
+#Create Questions for Ratings
+question1 = Question.create(question: 'Durability')
+question2 = Question.create(question: 'Value')
+question3 = Question.create(question: 'Packaging')
+question4 = Question.create(question: 'Description Accuracy')
+
+#Create A Few Example Product Reviews
+product_review1 = ProductReview.create( customer_id: customer3.id,
+                                        product_id: product1.id,
+                                        comment: 'This is sooo :metal:! :heart: :heart: :+1: ')
+rating1 = Rating.create(question_id: question1.id, rating: 5, product_review_id: product_review1.id)
+rating2 = Rating.create(question_id: question2.id, rating: 3, product_review_id: product_review1.id)
+rating3 = Rating.create(question_id: question3.id, rating: 2, product_review_id: product_review1.id)
+rating4 = Rating.create(question_id: question4.id, rating: 1, product_review_id: product_review1.id)
+
+
 
 
 # stores = [

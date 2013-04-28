@@ -75,7 +75,7 @@
             <% if review.comment.nil? || review.comment.empty? %>
               <em>No comment</em>
             <% else %>
-              <%= review.comment %>
+              <%= emojify(review.comment) %>
             <% end %>
           </div>
         </div>

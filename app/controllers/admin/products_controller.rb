@@ -3,7 +3,9 @@ class Admin::ProductsController < ApplicationController
 
   def index
     @store = current_store
-    @products = @store.products.includes(:store).includes(:categories).order('title ASC').page(params[:page]).per(40)
+    @products = @store.products.
+                       includes(:store).includes(:categories).
+                       order('title ASC').page(params[:page]).per(40)
   end
 
   def new

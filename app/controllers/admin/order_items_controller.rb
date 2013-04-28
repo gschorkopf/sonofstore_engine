@@ -3,7 +3,10 @@ class Admin::OrderItemsController < ApplicationController
 
   def update
     @store = current_store
-    @order_item = OrderItem.find(params[:store_admin_order_item][:order_item_id])
+    @order_item = OrderItem.find(
+                    params[:store_admin_order_item][:order_item_id]
+                    )
+
     @order_item.quantity = params[:store_admin_order_item][:quantity]
     if @order_item.save
       redirect_to :back, :notice => "Successfully updated order item."

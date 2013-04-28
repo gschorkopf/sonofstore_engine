@@ -12,10 +12,6 @@ class ApplicationController < ActionController::Base
   ##########
   before_filter :get_referrer, :except => [:create, :update, :destroy, :signup]
 
-
-#should be set_return_to or save_referrer.....
-
-
   def get_referrer
     session[:return_to] = request.referrer
   end
