@@ -8,6 +8,11 @@
   height: 250px;
 }
 
+p.review-comment {
+  margin: 0;
+  padding: 0;
+}
+
 .star-ratings{
   margin: 25px 0;
 }
@@ -18,4 +23,9 @@
 
 .star-rating-control > .star-rating.star:last{
   margin: 0 15px;
+}
+
+.purchase-status {
+  font-style: italic;
+  font-size: .75em;
 }

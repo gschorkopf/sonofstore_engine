@@ -34,4 +34,8 @@ class Customer < ActiveRecord::Base
 
     initials.join('.') + '.'
   end
+
+  def has_purchased_product? product_id
+    orders.joins(:order_items).where("order_items.product_id = ?", product_id).count > 0
+  end
 end
