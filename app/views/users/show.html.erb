@@ -28,7 +28,7 @@
         <p>* Password Confirmation</p>
         <%= password_field_tag("user[password_confirmation]") %><br/>
       <div>
-        <%= button_to "Update", submit_tag, class: 'btn btn-custom-lighten', method: :get%>
+        <%= submit_tag "Update", class: 'btn btn-custom-lighten' %>
       </div>
       <% end %>
 
@@ -44,11 +44,11 @@
           <%= text_field_tag(:zip, current_user.customer.shipping_address.zip) %><br/>
           <p>State</p>
           <%= text_field_tag(:state, current_user.customer.shipping_address.state) %><br/>
-          <%= button_to "Update", submit_tag, class: 'btn btn-custom-lighten'%>
+          <%= submit_tag "Update", class: 'btn btn-custom-lighten' %>
         <% end %>
       <% else %>
         No address currently on file.<br/><br/>
-        <%= button_to "Add Shipping Address", new_customer_shipping_addresses_path(current_user), method: :get %>
+        <%= button_to "Add Shipping Address", new_customer_shipping_addresses_path(current_user), class: 'btn btn-custom-lighten', method: :get %>
       <% end %>
 
       <h3>Billing Address:</h3>
@@ -62,12 +62,12 @@
           <%= text_field_tag(:zip, current_user.customer.billing_address.zip) %><br/>
           <p>State</p>
           <%= text_field_tag(:state, current_user.customer.billing_address.state) %><br/>
-          <%= button_to "Update", submit_tag, class: 'btn btn-custom-lighten'%>
+          <%= submit_tag "Update", class: 'btn btn-custom-lighten' %>
 
         <% end %>
       <% else %>
         No address currently on file.<br/><br/>
-        <%= button_to "Add Billing Address", new_customer_billing_addresses_path(current_user), method: :get %>
+        <%= button_to "Add Billing Address", new_customer_billing_addresses_path(current_user), class: 'btn btn-custom-lighten',  method: :get %>
       <% end %>
 
       <h3>Credit Card Information:</h3>
@@ -81,11 +81,11 @@
           <%= text_field_tag(:expiration_month, current_user.customer.credit_card.expiration_month) %><br/>
           <p>Expiration Year</p>
           <%= text_field_tag(:expiration_year, current_user.customer.credit_card.expiration_year) %><br/>
-          <%= button_to "Update", submit_tag, class: 'btn btn-custom-lighten'%>
+          <%= submit_tag "Update", class: 'btn btn-custom-lighten' %>
         <% end %>
       <% else %>
         No credit card currently on file.<br/><br/>
-        <%= button_to "Add Credit Card", new_customer_credit_cards_path(current_user), method: :get %>
+        <%= button_to "Add Credit Card", new_customer_credit_cards_path(current_user), class: 'btn btn-custom-lighten', method: :get %>
       <% end %>
     </div>
 
