@@ -53,18 +53,22 @@ FactoryGirl.define do
 
   factory :question do
     question 'Value'
+    long_form 'How would you rate the value of this product?'
   end
 
   factory :durability_question, class: Question do
     question 'Durability'
+    long_form 'How would you rate the durability of this product?'
   end
 
   factory :packaging_question, class: Question do
     question 'Packaging'
+    long_form 'How would you rate the packaging of this product?'
   end
 
   factory :description_accuracy_question, class: Question do
     question 'Description Accuracy'
+    long_form 'How would you rate the description accuracy of this product?'
   end
 
   factory :product_review do

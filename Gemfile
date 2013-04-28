@@ -18,6 +18,7 @@ gem 'uuid'
 gem 'redis-rails'
 gem 'kaminari'
 gem 'newrelic_rpm'
+gem 'gemoji'
 
 group :production do
   gem 'pg'

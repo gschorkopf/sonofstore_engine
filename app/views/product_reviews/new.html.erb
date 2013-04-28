@@ -18,13 +18,14 @@
     <h3>
     Please rate the following criteria:
     </h3>
-    <%= form_for @product_review, url: store_product_reviews_path(store_path:params[:store_path]) do |review_form| %>
+    <%= form_for @product_review,
+        url: store_product_reviews_path(store_path:params[:store_path]) do |review_form| %>
 
 
       <% @product_review.ratings.each do | rating | %>
         <%= review_form.fields_for :ratings, rating do |rating_fields| %>
           <div class="star-ratings-group">
-            <%= rating.question %>
+            <%= rating.question.long_form %>
             <%= rating_fields.hidden_field :question_id %>
             <%= rating_fields.radio_button :rating, '1', class: "star" %>
             <%= rating_fields.radio_button :rating, '2', class: "star" %>
