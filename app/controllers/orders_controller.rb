@@ -1,5 +1,4 @@
 class OrdersController < ApplicationController
-  before_filter :require_login
 
   def new
     if current_user
