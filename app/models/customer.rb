@@ -21,17 +21,17 @@ class Customer < ActiveRecord::Base
       user.display_name
     #otherwise, generate a random display name to use from a set
     else
-      generate_random_display_name
+      use_customer_initials
     end
   end
 
-  def generate_random_display_name
-    [
-      'A Loyal Customer',
-      'Sir Shops-A-Lot',
-      'Pink Princess 2008',
-      'PUnKGuRl440',
-      'MonsterCars2006'
-    ].sample
+  def use_customer_initials
+    initials = []
+
+    full_name.split.each do |w|
+      initials << w[0]
+    end
+
+    initials.join('.') + '.'
   end
 end

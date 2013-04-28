@@ -24,19 +24,24 @@ describe Customer do
     end
 
     context 'when a customer has a user but no display name' do
-      it 'generates a random display name' do
-        customer = create(:customer)
+      it 'uses their initials' do
+        customer = create(:customer, full_name: 'Danny DeVito')
         user = create(:user, customer: customer, display_name: nil)
-        expect(customer.best_display_name).to_not eq customer.user.display_name
+        expect(customer.best_display_name).to eq 'D.D.'
       end
     end
 
       context 'when a customer does not have a user' do
-        it 'generates a random display name' do
-          pending 'whats a better way to test randomness?'
-           # customer1 = create(:customer)
-           # customer2 = create(:customer, email: 'hoo@hee.com')
-           # expect(customer1.best_display_name).to_not eq customer2.best_display_name
+        it 'uses their initials' do
+           customer = create(:customer, full_name: 'Danny DeVito')
+           expect(customer.best_display_name).to eq 'D.D.'
+        end
+      end
+
+      context 'when a customer only gives one name as their full name' do
+        it 'uses their only initial' do
+          customer = create(:customer, full_name: 'Danny')
+          expect(customer.best_display_name).to eq 'D.'
         end
       end
   end
