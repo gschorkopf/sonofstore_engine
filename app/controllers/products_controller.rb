@@ -13,7 +13,9 @@ class ProductsController < ApplicationController
       begin
         @products = current_store.filter_products_by_category(params[:category_id]).page(params[:page]).per(40)
       rescue
-        flash.alert = "The category doesn't exist"
+        if params[:category_id]
+          flash.alert = "The category doesn't exist"
+        end
         @products = current_store.products.page(params[:page]).per(40)
       end
       @categories = current_store.categories
