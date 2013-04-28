@@ -40,4 +40,26 @@ describe Customer do
         end
       end
   end
+
+  describe 'purchased_product?' do
+    context "when a user purchased the product" do
+      it "returns true when given the product id" do
+        order_item1 = FactoryGirl.create(:order_item)
+        customer = order_item1.order.customer
+        product = order_item1.product
+        expect(customer).to have_purchased_product(product.id)
+      end
+
+    end
+
+    context "when the user has not purchased the product" do
+
+      it "returns false when given a product id" do
+        order_item1 = FactoryGirl.create(:order_item)
+        customer = order_item1.order.customer
+        product = FactoryGirl.create(:product)
+        expect(customer).to_not have_purchased_product(product.id)
+      end
+    end
+  end
 end
