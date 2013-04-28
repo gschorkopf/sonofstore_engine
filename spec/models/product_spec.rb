@@ -33,8 +33,8 @@ describe Product do
 
   it 'is invalid if title already exists (case insensitive) in the same store' do
     product2 = FactoryGirl.create(:product, title: 'ITCHY Sweater',
-                       store_id: @store.id,
-                       title:@product.title.upcase)
+                                  store_id: @store.id,
+                                  title:@product.title.upcase)
     expect(product2.valid?).to be_false
   end
 
@@ -196,6 +196,77 @@ describe Product do
 
     it "returns false if a customer didn't review the product" do
       expect(product).to_not be_reviewed_by(c2)
+    end
+  end
+
+  describe "featured_comments" do
+    it "returns an array of product reviews that are featured" do
+      c1 = Customer.create!(email:"a@a.a", full_name:"a")
+      c2 = Customer.create!(email:"b@b.b", full_name:"a")
+      product = FactoryGirl.create(:product)
+
+      pr1 = ProductReview.new
+      pr1.customer = c1
+      pr1.product = product
+      pr1.featured = true
+      pr1.save!
+
+      pr2 = ProductReview.new
+      pr2.customer = c2
+      pr2.product = product
+      pr1.featured = false
+      pr2.save!
+
+      expect(product.featured_comments).to eq [pr1]
+    end
+  end
+
+  describe "featured_comment" do
+    context "a featured comment exists" do
+      it "returns a featured comment" do
+        c1 = Customer.create!(email:"a@a.a", full_name:"a")
+        c2 = Customer.create!(email:"b@b.b", full_name:"a")
+        product = FactoryGirl.create(:product)
+
+        pr1 = ProductReview.new
+        pr1.customer = c1
+        pr1.product = product
+        pr1.comment = "a comment"
+        pr1.featured = true
+        pr1.save!
+
+        pr2 = ProductReview.new
+        pr2.customer = c2
+        pr2.product = product
+        pr2.comment = "blahblahblah"
+        pr1.featured = false
+        pr2.save!
+
+        expect(product.featured_comment).to eq "a comment"
+      end
+    end
+    context "a featured comment does not exist" do
+      it "returns a featured comment" do
+        c1 = Customer.create!(email:"a@a.a", full_name:"a")
+        c2 = Customer.create!(email:"b@b.b", full_name:"a")
+        product = FactoryGirl.create(:product)
+
+        pr1 = ProductReview.new
+        pr1.customer = c1
+        pr1.product = product
+        pr1.comment = "a comment"
+        pr1.featured = false
+        pr1.save!
+
+        pr2 = ProductReview.new
+        pr2.customer = c2
+        pr2.product = product
+        pr2.comment = "blahblahblah"
+        pr1.featured = false
+        pr2.save!
+
+        expect(product.featured_comment).to eq nil
+      end
     end
   end
 end

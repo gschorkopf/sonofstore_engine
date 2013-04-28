@@ -8,7 +8,7 @@ class Product < ActiveRecord::Base
   has_many :product_categories
   has_many :categories, through: :product_categories
 
-  has_attached_file :image, styles: { 
+  has_attached_file :image, styles: {
                             retail: "500x500",
                             large: "500x500",
                             thumbnail: "200x200" },
@@ -83,7 +83,8 @@ class Product < ActiveRecord::Base
   end
 
   def featured_comment
-    featured_comments.sample.comment
+
+    featured_comments.sample && featured_comments.sample.comment
   end
 
   def featured_comments
