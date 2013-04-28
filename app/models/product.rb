@@ -82,6 +82,10 @@ class Product < ActiveRecord::Base
     ratings
   end
 
+  def featured_comment
+    featured_comments.sample.comment
+  end
+
   def featured_comments
     product_reviews.where(featured: true)
   end
