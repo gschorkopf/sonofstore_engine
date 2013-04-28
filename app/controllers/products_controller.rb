@@ -9,11 +9,17 @@ class ProductsController < ApplicationController
               alert: "#{current_store.name} is currently down for maintenance."
       return
     elsif current_store.approved?
-      @products = current_store.products.page(params[:page]).per(40)
+      @top_products = current_store.top_products
+      begin
+        @products = current_store.filter_products_by_category(params[:category_id]).page(params[:page]).per(40)
+      rescue
+        flash.alert = "The category doesn't exist"
+        @products = current_store.products.page(params[:page]).per(40)
+      end
       @categories = current_store.categories
     else
       redirect_to root_path,
-                      alert: "The store you are looking for does not exist."
+        alert: "The store you are looking for does not exist."
       return
     end
   end

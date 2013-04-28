@@ -7,7 +7,7 @@
   color: #395974;
   padding: 5px;
   margin: 5px;
-  height: 300px;
+  height: 100%; //somewhere the height is set to 300px, overriding that silly business
 }
 
 .content {
@@ -61,6 +61,11 @@
 
 .product-rating {
   margin-bottom: 25px;
+}
+
+#top-rated-products {
+  background-color: #FFF;
+  padding: 10px 20px;
 }
 
 #onsale{color:#b61435; display: inline;}

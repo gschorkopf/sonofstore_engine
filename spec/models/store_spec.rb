@@ -27,4 +27,26 @@ describe Store do
     end
   end
 
+  describe '#filter_products_by_category' do
+    context 'a category exists' do
+      it "should return an array of products that have that category" do
+      store = FactoryGirl.build(:store, name:"store", path:"storepath")
+      category1 = store.categories.build(title: "category 1")
+      category2 = store.categories.build(title: "category 2")
+      store.save!
+
+      product1 = FactoryGirl.create(:product, title: "p1", store_id: store.id)
+      product1.categories << category1
+
+      product2 = FactoryGirl.create(:product, title: "p2", store_id: store.id)
+      product2.categories << category1
+      product2.categories << category2
+
+      categories = store.filter_products_by_category(category2.id)
+      expect(categories).to eq [product2]
+      end
+    end
+
+  end
+
 end
