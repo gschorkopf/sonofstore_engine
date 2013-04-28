@@ -25,7 +25,7 @@
       <% @product_review.ratings.each do | rating | %>
         <%= review_form.fields_for :ratings, rating do |rating_fields| %>
           <div class="star-ratings-group">
-            <%= rating.question %>
+            <%= rating.question.long_form %>
             <%= rating_fields.hidden_field :question_id %>
             <%= rating_fields.radio_button :rating, '1', class: "star" %>
             <%= rating_fields.radio_button :rating, '2', class: "star" %>

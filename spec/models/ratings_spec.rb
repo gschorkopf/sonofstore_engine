@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Rating do
   before(:each) do
-    @question = Question.create(question: "Do you like this product?")
+    @question = create(:question)
     @customer = Customer.create(email: "thisisfake@gmail.com", full_name: "John Smith")
     @product_review = ProductReview.create(product_id: 1, customer_id: @customer.id, comment: "hi")
   end
