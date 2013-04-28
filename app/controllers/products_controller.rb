@@ -27,11 +27,15 @@ class ProductsController < ApplicationController
   def show
     # session[:return_to] = request.fullpath
     @store ||= current_store
+    begin
     @product ||= @store.products.find(params[:id]) if @store
+  rescue
+    @product = nil
+  end
     if @product
       render :show
     else
-      redirect_to root_path,
+      redirect_to store_home_path(@store),
       alert: "The product you are looking for does not exist."
     end
   end

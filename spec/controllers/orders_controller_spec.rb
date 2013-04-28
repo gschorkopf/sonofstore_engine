@@ -40,13 +40,6 @@ describe OrdersController do
         end
       end
     end
-
-    context 'when the user is NOT logged in' do
-      it 'trying to go to their order history page redirects them to the log in page' do
-        get :index
-        expect(response).to redirect_to login_path
-      end
-    end
   end
 
   describe 'show' do
@@ -75,16 +68,6 @@ describe OrdersController do
           get :show, params = {customer_id: customer1.id, id: order.id}
           expect(response).to redirect_to customer_orders_path(customer2)
         end
-      end
-    end
-
-    context 'when the user is not logged in' do
-      it 'redirects the user to the login page' do
-        customer1 = FactoryGirl.create(:customer)
-        order = FactoryGirl.create(:order, customer: customer1)
-
-        get :show, params = {customer_id: customer1.id, id: order.id}
-        expect(response).to redirect_to login_path
       end
     end
   end
