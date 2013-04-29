@@ -1,64 +1,69 @@
 <div class="admin-order-show">
 
-  <div class="span11">
-    <div class="pull-right">
-      <%= button_to "Manage My Stores", profile_path, method: :get, class: 'btn btn-custom-lighten' %>
+  <div class="row row-fluid">
+    <div class="span3">
+      <ul class="nav nav-list">
+        <li class="nav-header">Dashboard Navigation</li>
+        <li><%= link_to "Manage Flagged Comments", admin_product_reviews_path, method: :get %></li>
+        <li><%= link_to "Manage My profile", profile_path %></li>
+      </ul>
+    </div>
+    <div class="span9">
 
-      <%= button_to "Manage Flagged Comments", admin_product_reviews_path, method: :get, class: 'btn btn-custom-lighten' %>
+      <h2>Platform Administration for All Stores</h2>
+      <hr>
+      <div class="tabbable">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#2" data-toggle="tab">Approved Stores</a></li>
+          <li><a href="#1" data-toggle="tab">Pending Stores</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane" id="1">
+            <% if %>
+              There are no pending stores!
+            <% else %>
+            <table class="table table-striped">
+              <thead>
+                <th>Name</th>
+                <th>URL ID</th>
+                <th>Description</th>
+                <th>Approval Status</th>
+              </thead>
+
+              <tbody>
+                <% @pending_stores.each do |store| %>
+                  <%= render partial: 'pending_store', locals: { store: store } %>
+                <% end %>
+
+              </tbody>
+
+            </table>
+          <% end %>
+
+          </div>
+          <div class="tab-pane active" id="2">
+            <% if @approved_stores.empty? %>
+              There are no approved stores!
+            <% else %>
+              <table class="table table-striped">
+                <thead>
+                  <th>Name</th>
+                  <th>URL ID</th>
+                  <th>Description</th>
+                  <th>Active Status</th>
+                  <th>Admin Page</th>
+                </thead>
+                <tbody>
+                  <% @approved_stores.each do |store| %>
+                    <%= render partial: 'approved_store', locals: { store: store } %>
+                  <% end %>
+                </tbody>
+              </table>
+          <% end %>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <h2>Platform Administration for All Stores</h2>
-    <hr>
-    <h3>Pending Stores</h3>
-
-    <table class="table table-striped">
-      <thead>
-        <th>Name</th>
-        <th>URL ID</th>
-        <th>Description</th>
-        <th>Approval Status</th>
-      </thead>
-
-      <tbody>
-      <% @pending_stores.each do |store| %>
-        <%= render partial: 'pending_store', locals: { store: store } %>
-      <% end %>
-
-      </tbody>
-
-      <tfoot>
-      </tfoot>
-
-    </table>
-
   </div>
-
-  <div class="span11">
-    <h3>Approved Stores</h3>
-
-    <table class="table table-striped">
-      <thead>
-        <th>Name</th>
-        <th>URL ID</th>
-        <th>Description</th>
-        <th>Active Status</th>
-        <th>Admin Page</th>
-      </thead>
-
-      <tbody>
-      <% @approved_stores.each do |store| %>
-        <%= render partial: 'approved_store', locals: { store: store } %>
-      <% end %>
-      </tbody>
-
-      <tfoot>
-      </tfoot>
-
-    </table>
-
-  </div>
-
-
-
-
 </div>
