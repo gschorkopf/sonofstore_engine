@@ -44,7 +44,7 @@ class ProductReviewsController < ApplicationController
     #params look like { product_id: x , product_review_id: x, status: 'flagged'}
     if params[:status] == 'flagged'
       product_review = ProductReview.find(params[:review_id])
-      product_review.update_attributes(status: 'flagged')
+      product_review.update_attribute(:status, 'flagged')
       redirect_to store_product_path( store_path: current_store.path,
                                       id: params[:product_id]
                                     ),
