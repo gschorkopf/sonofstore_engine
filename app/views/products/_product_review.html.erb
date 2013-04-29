@@ -1,19 +1,10 @@
 <div id="product-reviews" class="span12">
     <h3>Customer Reviews</h3>
+    <% if @product.most_recent_reviews.empty? %>
+      No one has reviewed this product yet!
+    <% else %>
     <% @product.most_recent_reviews.each do |review| %>
       <h4>Reviewed By: <span class="reviewer"><%= review.customer.best_display_name %></span> on <span clas="review-date"><%= time_tag review.created_at %></span></h4>
-
-<br>
-      <%= link_to "Flag As Inappropriate",
-          store_product_review_flag_path( store_path: current_store.path,
-                                          product_id: @product.id,
-                                          review_id:  review.id,
-                                          status: 'flagged'
-                                        ),
-          method: :post
-          %>
-<br>
-<br>
 
       <div class="review row-fluid">
         <div class="span3">
@@ -49,7 +40,18 @@
               <%= emojify(review.comment) %>
             <% end %>
           </p>
+          <div class="flag">
+            <%= link_to "Flag As Inappropriate",
+              store_product_review_flag_path( store_path: current_store.path,
+                                           product_id: @product.id,
+                                           review_id:  review.id,
+                                           status: 'flagged'
+                                          ),
+                                            method: :post
+                                          %>
+          </div>
         </div>
       </div>
     <% end %>
-  </div> <!-- product-reviews -->
+  <% end %>
+</div> <!-- product-reviews -->
