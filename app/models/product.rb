@@ -6,7 +6,7 @@ class Product < ActiveRecord::Base
 
   has_many :product_reviews
   has_many :ratings, through: :product_reviews
-  
+
   has_many :product_categories
   has_many :categories, through: :product_categories
 
@@ -94,7 +94,7 @@ class Product < ActiveRecord::Base
   end
 
   def featured_comments
-    product_reviews.where(featured: true)
+    result = product_reviews.where(featured: true)
   end
 
   def nonfeatured_comments
