@@ -39,7 +39,7 @@
           <% if review.customer.has_purchased_product?(@product.id) %>
             <%= review.customer.best_display_name %> purchased this product from here!
           <% else %>
-            <%= review.customer.best_display_name %> has not purchased this product frome here!
+            <%= review.customer.best_display_name %> has not purchased this product from here!
           <% end %>
           </p>
           <p class="review-comment">

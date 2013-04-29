@@ -15,10 +15,14 @@ p.review-comment {
 
 .star-ratings{
   margin: 25px 0;
+  label {
+    float:left;
+  }
 }
 
 .star-ratings-group{
   margin: 15px 0;
+  float:left;
 }
 
 .star-rating-control > .star-rating.star:last{

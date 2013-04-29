@@ -17,11 +17,15 @@ class ProductReviewsController < ApplicationController
       params[:ratings] = params[:product_review][:ratings_attributes]
       params[:product_review].delete(:ratings_attributes)
     end
-     @product_review = ProductReview.new(params[:product_review])
-     @product_review.customer = current_user.customer
-     @product_review.product_id = params[:product_id]
-     # need to check to see if the ratings are valid before saving review
-    if @product_review.save! && !(params[:ratings].nil? || params[:ratings].empty?)
+     @product_review = ProductReview.make_new_product_review(
+                                                        params[:product_review],
+                                                        params[:product_id],
+                                                        current_user.customer.id
+                                                        )
+
+     # if ratings are nil or ratings are empty?
+     # if the ratings are not nil or the ratings are not empty
+    if @product_review.save && !(params[:ratings].nil? || params[:ratings].empty?)
       @product_ratings = Rating.make_new_ratings( params[:ratings].values,
                                                 @product_review.id)
       if @product_ratings

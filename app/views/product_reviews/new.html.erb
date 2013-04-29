@@ -25,13 +25,13 @@
       <% @product_review.ratings.each do | rating | %>
         <%= review_form.fields_for :ratings, rating do |rating_fields| %>
           <div class="star-ratings-group">
-            <%= rating.question.long_form %>
+            <p><%= rating.question.long_form %></p>
             <%= rating_fields.hidden_field :question_id %>
-            <%= rating_fields.radio_button :rating, '1', class: "star" %>
-            <%= rating_fields.radio_button :rating, '2', class: "star" %>
-            <%= rating_fields.radio_button :rating, '3', class: "star", checked: "checked" %>
-            <%= rating_fields.radio_button :rating, '4', class: "star" %>
-            <%= rating_fields.radio_button :rating, '5', class: "star" %>
+            <%= rating_fields.radio_button :rating, '1', class: "star required" %>
+            <%= rating_fields.radio_button :rating, '2', class: "star required" %>
+            <%= rating_fields.radio_button :rating, '3', class: "star required", checked: "checked" %>
+            <%= rating_fields.radio_button :rating, '4', class: "star required" %>
+            <%= rating_fields.radio_button :rating, '5', class: "star required" %>
           </div>
         <% end %>
       <% end %>
