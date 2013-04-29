@@ -3,15 +3,14 @@ require 'spec_helper'
 describe OrdersController do
   describe 'create' do
     it 'creates an order' do
-      store = create(:store)
-      product = create(:product, store: store)
+      current_store = create(:store)
+      product = create(:product, store: current_store)
       customer = create(:customer)
-      controller.stub(:current_store).and_return(store)
-      # binding.pry
-      # controller.stub(session[store.path]).and_return( {'1' => '2'} )
+      controller.stub(:current_store).and_return(current_store)
+      session[current_store.path] = {"#{product.id}"=> '2'}
 
-      post :create, { customer_id: customer.id }
-      expect(Order.all.count).to change_by(1)
+      expect{ post :create, { customer_id: customer.id }
+      }.to change(Order, :count).by(1)
     end
   end
 

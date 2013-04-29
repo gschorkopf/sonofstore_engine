@@ -33,36 +33,16 @@ class OrdersController < ApplicationController
 
   def create
     @customer_id = params[:customer_id]
-
-    # @order = Order.generate_new_order(current_store.id, @customer_id)
-    
-    @order = Order.new
-
-    @order.uuid_hash = UUID.new.generate
-    @order.customer_id = @customer_id
-    @order.store_id = current_store.id
-    @order.status = "pending"
-    @order.save
-
-    session[current_store.path].each do |product_id, quantity|
-      product = Product.find(product_id)
-      @order.order_items.create(product_id: product.id,
-                               unit_price: product.price,
-                               quantity: quantity)
-    end
-
+    @order = Order.generate_new_order( current_store.id,
+                                       @customer_id,
+                                       session[current_store.path] )
     if @order.save
       Mailer.order_confirmation(@customer_id, @order).deliver
-      # Resque.enqueue(OrderMailer, current_user.id, @order.id)
 
       session[current_store.path] = {}
 
-      if current_user
-        redirect_to order_confirmation_path(@order.id), :notice => "Successfully created order!"
-      else
-        redirect_to order_confirmation_path(@order.id),
-        :notice => "Successfully created order!"
-      end
+      redirect_to order_confirmation_path(@order.id),
+      :notice => "Successfully created order!"
     else
       redirect_to store_cart_path(current_store), :notice => "Checkout failed."
     end
