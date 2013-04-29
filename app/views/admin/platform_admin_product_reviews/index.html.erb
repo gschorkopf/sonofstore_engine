@@ -1,0 +1,39 @@
+<h1>Flagged Comments</h1>
+
+<% if @product_reviews.any? %>
+<table class='table table-striped'>
+
+  <thead>
+    <th>Comment</th>
+    <th>Customer ID</th>
+    <th>Created At</th>
+    <th>Set Status</th>
+  </thead>
+
+  <tbody>
+    <% @product_reviews.each do |product_review| %>
+  <tr>
+    <td><%= product_review.comment %></td>
+    <td><%=product_review.customer_id %></td>
+    <td><%=product_review.updated_at %></td>
+    <td>
+      <%= button_to 'Active',
+          admin_product_review_path(id: product_review.id, status: 'active'),
+          class: 'btn',
+          method: :put %>
+
+      <%= button_to 'Inactive',
+          admin_product_review_path(id: product_review.id, status: 'inactive'),
+          class: 'btn',
+          method: :put %>
+
+    </td>
+  </tr>
+  <% end %>
+
+  </tbody>
+</table>
+
+<% else %>
+  <p> There are currently no flagged comments! </p>
+<% end %>

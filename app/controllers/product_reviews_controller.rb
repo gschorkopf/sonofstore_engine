@@ -40,6 +40,23 @@ class ProductReviewsController < ApplicationController
     end
   end
 
+  def flag
+    #params look like { product_id: x , product_review_id: x, status: 'flagged'}
+    if params[:status] == 'flagged'
+      product_review = ProductReview.find(params[:review_id])
+      product_review.update_attribute(:status, 'flagged')
+      redirect_to store_product_path( store_path: current_store.path,
+                                      id: params[:product_id]
+                                    ),
+      notice: 'Thank you for reporting this inappropriate review.'
+    else
+      redirect_to store_product_path( store_path: current_store.path,
+                                      id: params[:product_id]
+                                    ),
+      notice: 'Failed to flag this review.'
+    end
+  end
+
   def update
     # we'll use this for letting a customer update their own review
   end

@@ -1,16 +1,55 @@
-<% fail %>
-<div id="product-reviews" class="span7">
-  <div class="review row">
-    <div class="reivew-meta-data span12">
-      Reviewed By: <span class="reviewer">review.customer</span> on <span clas="review-date">review.updated_at</span>
-    </div>
-    <div class="review-comment span7">
-      review.comment
-    </div>
-    <table class="product-rating">
-      <% review.product_rating.each do |rating| %>
-        <%= render partial: "rating", locals: {rating: rating} %>
-      <% end %>
-    </table>
-  </div>
-</div> <!-- product-reviews -->
+<div id="product-reviews" class="span12">
+    <h3>Customer Reviews</h3>
+    <% @product.most_recent_reviews.each do |review| %>
+      <h4>Reviewed By: <span class="reviewer"><%= review.customer.best_display_name %></span> on <span clas="review-date"><%= time_tag review.created_at %></span></h4>
+
+<br>
+      <%= link_to "Flag As Inappropriate",
+          store_product_review_flag_path( store_path: current_store.path,
+                                          product_id: @product.id,
+                                          review_id:  review.id,
+                                          status: 'flagged'
+                                        ),
+          method: :post
+          %>
+<br>
+<br>
+
+      <div class="review row-fluid">
+        <div class="span3">
+          <% review.ratings.each do |rating| %>
+            <div>
+              <%= rating.question %>
+
+              <% 5.times do |t| %>
+
+                <% if rating.rating == t+1 %>
+                  <%= radio_button_tag rating.question.to_s+review.id.to_s, "#{t+1}", true, :class => "star star-read"%>
+                <% else %>
+                  <%= radio_button_tag rating.question.to_s+review.id.to_s, "#{t+1}", false, :class  => "star star-read" %>
+                <% end %>
+
+              <% end %>
+            </div>
+          <% end %>
+
+        </div>
+        <div class="reivew-meta-data span9">
+          <p class="purchase-status">
+          <% if review.customer.has_purchased_product?(@product.id) %>
+            <%= review.customer.best_display_name %> purchased this product from here!
+          <% else %>
+            <%= review.customer.best_display_name %> has not purchased this product frome here!
+          <% end %>
+          </p>
+          <p class="review-comment">
+            <% if review.comment.nil? || review.comment.empty? %>
+              <em>No comment</em>
+            <% else %>
+              <%= emojify(review.comment) %>
+            <% end %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  </div> <!-- product-reviews -->
