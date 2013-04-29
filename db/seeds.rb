@@ -219,6 +219,8 @@ rating2 = Rating.create(question_id: question2.id, rating: 3, product_review_id:
 rating3 = Rating.create(question_id: question3.id, rating: 2, product_review_id: product_review1.id)
 rating4 = Rating.create(question_id: question4.id, rating: 1, product_review_id: product_review1.id)
 
+product_review2 = ProductReview.create( customer_id: customer1.id, product_id: 2, comment: 'THIS SUXXX', status: 'flagged' )
+product_review3 = ProductReview.create( customer_id: customer2.id, product_id: 3, comment: 'I HATE IT, BOO', status: 'flagged' )
 
 
 

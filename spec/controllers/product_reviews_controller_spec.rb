@@ -78,16 +78,25 @@ describe ProductReviewsController do
     end
   end
 
-  describe "POST #update" do
-    context 'when the update is valid' do
-      it 'successfully changes the review' do
-        pending 'next iteration'
-      end
+  describe "POST flag" do
+    #/:store_path/products/:product_id/reviews/:review_id/flag
+    before(:each) do
+      @product = FactoryGirl.create(:product, store: @store)
     end
 
-    context 'when the update is not valid' do
-      it 'doesnt go through ' do
-        pending 'next iteration!'
+    context "when given valid parameters" do
+      it "sets the status of the review to flagged" do
+        product_review = create(:product_review, product: @product)
+
+        ProductReview.any_instance.should_receive(:update_attributes).with({status: 'flagged'})
+          post :flag, {
+            product_id:         @product.id,
+            review_id:  product_review.id,
+            status:             'flagged'
+          }
+        response.should redirect_to store_product_path(
+                                        store_path: @store.path,
+                                        id: @product.id)
       end
     end
   end

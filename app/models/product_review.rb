@@ -1,6 +1,6 @@
 class ProductReview < ActiveRecord::Base
 
-  attr_accessible :product_id, :customer_id, :comment, :featured
+  attr_accessible :product_id, :customer_id, :comment, :featured, :status
 
   has_many :ratings, dependent: :destroy
   belongs_to :customer
