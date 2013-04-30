@@ -260,7 +260,7 @@ describe Product do
         pr1.featured = false
         pr2.save!
 
-        expect(product.featured_comment).to eq "a comment"
+        expect(product.featured_comment.comment).to eq "a comment"
       end
     end
     context "a featured comment does not exist" do

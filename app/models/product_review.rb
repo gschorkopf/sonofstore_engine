@@ -18,4 +18,8 @@ class ProductReview < ActiveRecord::Base
     product_review.product_id = product_id
     product_review
   end
+
+  def display_name
+    Customer.find(self.customer_id).best_display_name
+  end
 end

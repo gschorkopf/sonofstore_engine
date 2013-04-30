@@ -89,8 +89,7 @@ class Product < ActiveRecord::Base
   end
 
   def featured_comment
-
-    featured_comments.sample && featured_comments.sample.comment
+    featured_comments.sample
   end
 
   def featured_comments
