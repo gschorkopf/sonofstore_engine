@@ -147,4 +147,27 @@ describe Store do
     end
   end
 
+  describe "inactive" do
+    context "if the store is pending" do
+      it "is now inactive" do
+        store = FactoryGirl.create(:store, approval_status: "pending", active: true)
+        expect(store).to_not be_inactive
+      end
+    end
+    context "if the store is not pending and is active" do
+      it "is not inactive" do
+        store = FactoryGirl.create(:store, approval_status: "approved", active: true)
+        expect(store).to_not be_inactive
+      end
+    end
+
+    context "if the store is not active" do
+      it "is inactive" do
+        store = FactoryGirl.create(:store, approval_status: "approved", active: false)
+        expect(store).to be_inactive
+      end
+    end
+
+  end
+
 end

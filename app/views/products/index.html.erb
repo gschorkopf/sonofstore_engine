@@ -21,7 +21,7 @@
     <div id="product_listing" class="span9 row-fluid">
       <div id="top-rated-products" class="span12">
         <h4>Top Rated Products</h4>
-        <% @top_products.each do |product| %>
+        <% current_store.top_products.each do |product| %>
           <%= render partial: 'product', locals: { store: current_store, product: product }  %>
         <% end %>
       </div>

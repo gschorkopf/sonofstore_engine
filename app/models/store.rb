@@ -55,6 +55,10 @@ class Store < ActiveRecord::Base
     active == true
   end
 
+  def inactive?
+    !active? && approved?
+  end
+
   def self.approved
     where(:approval_status => 'approved')
   end
