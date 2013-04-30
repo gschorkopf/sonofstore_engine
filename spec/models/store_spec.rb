@@ -75,14 +75,25 @@ describe Store do
       expect(store.top_products).to eq [product1, product2, product3, product4]
     end
   end
-  describe "search" do
-    context "a sorted_by value exists" do
-      it "returns the products sorted by the value" do
-        p1 = FactoryGirl.create(:search_product)
-        p2 = FactoryGirl.create(:search_product)
-        p3 = FactoryGirl.create(:search_product)
 
-        products = Product.search(sorted_by: "ratings")
+  describe "search" do
+
+    context "a sorted_by value exists" do
+      it "returns the products sorted by the rating from highest to lowest" do
+        p1 = FactoryGirl.create(:search_product)
+        p2 = FactoryGirl.create(:search_product, store: p1.store)
+        p3 = FactoryGirl.create(:search_product, store: p1.store)
+
+        products = p1.store.search(sorted_by: "ratings")
+        expect(products).to eq [p1, p2, p3].sort_by { |p| -p.average_rating }
+      end
+
+      it "returns the products sorted by the rating from highest to lowest" do
+        p1 = FactoryGirl.create(:search_product)
+        p2 = FactoryGirl.create(:search_product, store: p1.store)
+        p3 = FactoryGirl.create(:search_product, store: p1.store)
+
+        products = p1.store.search(sorted_by: "ratings")
         expect(products).to eq [p1, p2, p3].sort_by { |p| -p.average_rating }
       end
     end

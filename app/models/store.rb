@@ -95,7 +95,17 @@ class Store < ActiveRecord::Base
     products.sort_by { |product| -product.ratings.average(:rating).to_f }[0..3]
   end
 
-  def search
-    products.joins(:product_reviews).joins(:ratings).average(:rating)
+  def search params={category_id: nil, sorted_by: nil}
+#    products.select("#{select_string}, avg(rating) as rating").joins(:ratings).group(select_string).order("rating DESC")
+
+    result = products
+
+    if params[:sorted_by]
+      result = products.order_by_rating
+    end
+
+    result
+
   end
+
 end

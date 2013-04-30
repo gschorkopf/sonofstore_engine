@@ -311,4 +311,14 @@ describe Product do
     end
   end
 
+  describe "order_by_rating" do
+    it "returns the products sorted by the rating from highest to lowest" do
+      p1 = FactoryGirl.create(:search_product)
+      p2 = FactoryGirl.create(:search_product)
+      p3 = FactoryGirl.create(:search_product)
+
+      products = Product.order_by_rating
+      expect(products).to eq [p1, p2, p3].sort_by { |p| -p.average_rating }
+    end
+  end
 end
