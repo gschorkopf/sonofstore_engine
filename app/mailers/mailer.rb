@@ -4,7 +4,7 @@ class Mailer < ActionMailer::Base
   def welcome_email(user)
     @user = user
     mail( to: @user.customer.email,
-          subject: "Welcome to Ballmer's Daughter of Store Engine!")
+          subject: "Welcome to Ballmerino's, a marketplace for toys!")
   end
 
   def order_confirmation(customer_id, order)
