@@ -5,8 +5,8 @@ s3 = AWS::S3.new
 def add_photo_to_product product, file_name
   puts "finding #{file_name} and adding it to #{product.title}"
   object = @b.objects[file_name+".jpg"]
+	puts object.url_for(:read)
   product.image = object.url_for(:read)
-  puts "added #{product.image.url} to #{product.title}"
 end
 
 # Heros and Villain Store
