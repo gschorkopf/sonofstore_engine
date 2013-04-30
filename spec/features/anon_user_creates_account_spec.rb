@@ -18,7 +18,7 @@ describe 'new user creates and edits account' do
 
     context 'when they provide unique login info' do
       it 'creates a new user account' do
-        expect(page).to have_content "Logged in!"
+        expect(page).to have_content "Welcome"
         expect(current_path).to eq root_path
       end
     end
@@ -32,8 +32,8 @@ describe 'new user creates and edits account' do
         fill_in "password", with: 'poet'
         fill_in "password_confirmation", with: 'poet'
         click_button "Sign Up"
-        expect(page).to have_content "has already been taken"
-        expect(current_path).to eq '/users'
+        expect(page).to have_content "Email already exists"
+        expect(current_path).to eq signup_path
       end
     end
 
@@ -49,10 +49,9 @@ describe 'new user creates and edits account' do
       fill_in "Email", with: 'poetry@poetry.com'
       fill_in "Password", with: "poet"
       click_button "Login"
-      expect(current_path).to eq root_path
+      expect(current_path).to eq profile_path
       click_link_or_button "Logout"
       expect(current_path).to eq root_path
-      expect(page).to have_content "Logged out!"
     end
 
     it 'rejects incorrect login info on signin' do
@@ -72,7 +71,7 @@ describe 'new user creates and edits account' do
     fill_in "Password", with: "poet"
     click_button "Login"
     visit profile_path
-    fill_in "display_name", with: 'Maya'
+    fill_in "user[display_name]", with: 'Maya'
 
     click_button "Update"
     expect(current_path).to eq profile_path

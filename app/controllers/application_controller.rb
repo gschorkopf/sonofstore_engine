@@ -12,10 +12,6 @@ class ApplicationController < ActionController::Base
   ##########
   before_filter :get_referrer, :except => [:create, :update, :destroy, :signup]
 
-
-#should be set_return_to or save_referrer.....
-
-
   def get_referrer
     session[:return_to] = request.referrer
   end
@@ -77,16 +73,8 @@ class ApplicationController < ActionController::Base
     I18n.locale = session[:i18n] || I18n.default_locale || :en
   end
 
-  def get_flag
-    case session[:i18n]
-    when 'fr' then 'fr'
-    when 'cs' then 'cs'
-    when 'ca' then 'ca'
-    else 'us'
-    end
-  end
-
   def generate_image_url(side_length, product_id)
+#    Product.find(product_id).image.url(:thumbnail)
     img_category = IMAGE_CATEGORIES[current_store.id.to_s[-1].to_i]
     img_size_params = "#{side_length}/#{side_length}"
     img_id = product_id.to_s[-1].to_i
@@ -95,8 +83,18 @@ class ApplicationController < ActionController::Base
   end
 
   def generate_store_image_url(store_id)
+    products = Store.find_by_id(store_id).products
+    if products.empty?
+      img_category = IMAGE_CATEGORIES[store_id.to_s[-1].to_i]
+      "http://lorempixel.com/500/500/#{img_category}/"
+    else
+   #   products.first.image.url(:retail)
     img_category = IMAGE_CATEGORIES[store_id.to_s[-1].to_i]
-    "http://lorempixel.com/500/500/#{img_category}/"
+    img_size_params = "#{300}/#{300}"
+    img_id = products.first.id.to_s[-1].to_i
+    img_id = 10 if img_id == 0
+    "http://lorempixel.com/#{img_size_params}/#{img_category}/#{img_id}"
+    end
   end
 
   IMAGE_CATEGORIES = {

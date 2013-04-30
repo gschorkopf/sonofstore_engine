@@ -9,11 +9,19 @@ class ProductsController < ApplicationController
               alert: "#{current_store.name} is currently down for maintenance."
       return
     elsif current_store.approved?
-      @products = current_store.products.page(params[:page]).per(40)
+      @top_products = current_store.top_products
+      begin
+        @products = current_store.filter_products_by_category(params[:category_id]).page(params[:page]).per(40)
+      rescue
+        if params[:category_id]
+          flash.alert = "The category doesn't exist"
+        end
+        @products = current_store.products.page(params[:page]).per(40)
+      end
       @categories = current_store.categories
     else
       redirect_to root_path,
-                      alert: "The store you are looking for does not exist."
+        alert: "The store you are looking for does not exist."
       return
     end
   end
@@ -21,11 +29,16 @@ class ProductsController < ApplicationController
   def show
     # session[:return_to] = request.fullpath
     @store ||= current_store
+    begin
     @product ||= @store.products.find(params[:id]) if @store
+  rescue
+    @product = nil
+  end
     if @product
+      @featured_comment = @product.featured_comment if @product.featured_comments.any?
       render :show
     else
-      redirect_to root_path,
+      redirect_to store_home_path(@store),
       alert: "The product you are looking for does not exist."
     end
   end

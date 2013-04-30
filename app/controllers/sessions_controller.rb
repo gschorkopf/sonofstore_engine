@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
                    session_params[:remember_me]
                    )
       if user
-        redirect_to session[:return_to] || profile_path, notice: 'Logged in!'
+        redirect_to profile_path, notice: 'Logged in!'
       else
         flash.alert = 'Username or password was invalid'
         redirect_to login_path
@@ -25,6 +25,6 @@ class SessionsController < ApplicationController
 
   def destroy
     logout
-    redirect_to root_url, notice: 'Logged out!'
+    redirect_to root_url, notice: "Logged out!"
   end
 end

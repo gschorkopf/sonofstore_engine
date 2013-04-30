@@ -21,7 +21,7 @@ class Admin::StockersController < ApplicationController
     else
       Mailer.sign_up_as_stocker(email, @store).deliver
       redirect_to store_admin_path(@store),
-      notice: "This person is not currently registered with Pink SoSE.  A welcome email has been sent on your behalf."
+      notice: "This person is not currently registered with Ballmerino's.  A welcome email has been sent on your behalf."
     end
   end
 end

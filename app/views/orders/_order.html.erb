@@ -1,5 +1,5 @@
 <tr>
-  <td><%= link_to "#{t('order.self')} ##{order.id}", customer_order_path(current_user, order) %></td>
+  <td><%= link_to "Order ##{order.id}", customer_order_path(current_user, order) %></td>
   <td><%= order.status %></td>
   <td><%= order.created_at.to_s(:short) %></td>
   <td><%= number_to_currency(order.total) %></td>

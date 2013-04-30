@@ -1,32 +1,5 @@
 class ShippingAddressesController < ApplicationController
-  # before_filter :require_login
-
-  def new
-    @shipping_address = ShippingAddress.new
-    @customer = Customer.find_by_id(params[:customer_id])
-  end
-
-  def create
-    @shipping_address = ShippingAddress.new(params[:shipping_address])
-    if current_user
-      @customer = current_user.customer
-    else
-      @customer = Customer.find_by_id(params[:customer_id])
-    end
-    @shipping_address.customer_id = @customer.id
-
-    if @shipping_address.save
-      if session[:return_to] == profile_url
-        redirect_to profile_path
-      else
-        @customer.shipping_address_id = @shipping_address.id
-        @customer.save
-        redirect_to new_customer_billing_addresses_path(@customer)
-      end
-    else
-      render "new"
-    end
-  end
+  before_filter :require_login
 
   def edit
     @customer = current_user.customer

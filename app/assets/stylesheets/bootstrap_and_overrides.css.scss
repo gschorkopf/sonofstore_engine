@@ -82,9 +82,7 @@ padding-top: 32px;
 }
 
 #welcome_user p{
-  font-family: cursive;
   font-weight: bold;
-  letter-spacing: 0.4em ;
 }
 
 // This makes the scrolly hr rule as seen on homepage
@@ -112,8 +110,7 @@ hr {
   background-image: -o-linear-gradient(top, #b61435, #e41942);
   background-image: linear-gradient(to bottom, #b61435, #e41942);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffb61435', endColorstr='#ffe41942', GradientType=0);
-  border-color: #e41942 #e41942 #9f112e;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffb61435', endColorstr='#ffe41942', GradientType=0); border-color: #e41942 #e41942 #9f112e;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   *background-color: #e41942;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
@@ -194,7 +191,8 @@ hr {
 .store_title_pink a {
   color: #b61435;
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 250%;
+  font-size: 110%;
+  font-weight: normal;
 }
 .store_description {
   color: black;
@@ -205,6 +203,4 @@ hr {
 }
 .store-description-cursive {
   color: black;
-  font-family: cursive;
-  letter-spacing: 0.1em ;
 }

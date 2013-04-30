@@ -1,0 +1,42 @@
+<h2>Flagged Comments</h1>
+
+<% if @product_reviews.any? %>
+<table class='table table-bordered table-striped'>
+  <colgroup>
+    <col class="span10">
+    <col class="span1">
+    <col class="span1">
+  </colgroup>
+  <thead>
+    <tr>
+    <th>Comment</th>
+    <th>Commenter ID</th>
+    <th>Set Status</th>
+  </tr>
+  </thead>
+
+  <tbody>
+    <% @product_reviews.each do |product_review| %>
+  <tr>
+    <td><%= product_review.comment %></td>
+    <td><%= product_review.customer.best_display_name %></td>
+    <td>
+      <%= button_to 'Unflag',
+          admin_product_review_path(id: product_review.id, status: 'active'),
+          class: 'btn btn-success btn-small',
+          method: :put %>
+      <%= button_to 'Delete',
+          admin_product_review_path(id: product_review.id, status: 'inactive'),
+          class: 'btn btn-danger btn-small',
+          method: :put %>
+
+    </td>
+  </tr>
+  <% end %>
+
+  </tbody>
+</table>
+
+<% else %>
+  <p> There are currently no flagged comments! </p>
+<% end %>

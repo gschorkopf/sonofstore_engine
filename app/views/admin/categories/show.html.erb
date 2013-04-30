@@ -5,7 +5,7 @@
       <p><%= image_tag product.photo_url %></p>
       <p><%= image_tag product.image.url(:thumbnail) %></p>
       <h5><%= product.title.titleize %></h5>
-      <p><%= t('product.price') %>: <%= number_to_currency(product.price) %></p>
+      <p><%= 'Price' %>: <%= number_to_currency(product.price) %></p>
     </div>
     <% end %>
   <% end %>

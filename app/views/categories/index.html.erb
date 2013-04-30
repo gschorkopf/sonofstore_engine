@@ -1,22 +1,17 @@
-<% cache("categories_index_#{@store.path}") do %>
+<!% cache("categories_index_#{@current_store.path}") do %>
 
-  <div id='categories-index'>
-    <h2> Categories for <%= @current_store %></h2>
+    <h3> Categories</h3>
 
-    <%= paginate @categories %>
+    <!%= paginate @current_store.categories %>
 
-    <table class="table table-striped">
-        <tr>
-          <td><strong>name</strong></td>
-        </tr>
-      <% @categories.each do |category| %>
-        <tr>
-          <td><%= link_to category.title, store_category_path(current_store, category) %></td>
-        </tr>
+    <ul class="table table-striped">
+      <% @current_store.categories.each do |category| %>
+        <li>
+        <%= link_to category.title, store_home_path(current_store, category_id: category.id) %>
+        </li>
       <% end %>
-    </table>
+    </ul>
 
-  </div>
 
-<% end %>
+<!% end %>
 

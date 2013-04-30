@@ -2,6 +2,7 @@ class Store < ActiveRecord::Base
   attr_accessible :description, :name, :path, :active
   has_many :categories
   has_many :products
+  #has_many :product_reviews, through: :products
 
   has_many :user_roles
   has_many :users, through: :user_roles
@@ -32,17 +33,17 @@ class Store < ActiveRecord::Base
 
   def self.exists_with_name?(name, id)
     if id
-      !Store.approved.where("name ILIKE ?", "%#{name}%").where("id <> ?", id).empty?
+      !Store.where("name ILIKE ?", "%#{name}%").where("id <> ?", id).empty?
     else
-      !Store.approved.where("name ILIKE ?", "%#{name}%").empty?
+      !Store.where("name ILIKE ?", "%#{name}%").empty?
     end
   end
 
   def self.exists_with_path?(path, id)
     if id
-      !Store.approved.where("path ILIKE ?", "%#{path}%").where("id <> ?", id).empty?
+      !Store.where("path ILIKE ?", "%#{path}%").where("id <> ?", id).empty?
     else
-      !Store.approved.where("path ILIKE ?", "%#{path}%").empty?
+      !Store.where("path ILIKE ?", "%#{path}%").empty?
     end
   end
 
@@ -84,5 +85,13 @@ class Store < ActiveRecord::Base
     else
       update_attributes(active: true)
     end
+  end
+
+  def filter_products_by_category(category_id)
+    categories.find(category_id).products
+  end
+
+  def top_products
+    products.sort_by { |product| -product.ratings.average(:rating).to_f }[0..3]
   end
 end

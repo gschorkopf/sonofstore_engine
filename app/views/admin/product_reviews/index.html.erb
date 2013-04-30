@@ -1,0 +1,66 @@
+<div class="admin-order-show">
+  <%= render partial: 'shared/admin_navigation', locals: { active: false } %>
+
+  <div class="span8">
+    <h2>Comments for <%= @product.title %></h1>
+    <div class="tabbable">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#1" data-toggle="tab">Featured Comments</a></li>
+        <li ><a href="#2" data-toggle="tab">NonFeatured Comments</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="1">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Comment Body</th>
+          <th>Change Featured Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @product.featured_comments.each do | product_review |%>
+          <tr>
+            <td><%= time_tag product_review.updated_at %></td>
+            <td><%= product_review.comment %></td>
+            <td><%= button_to "Unfeature this comment",
+              store_admin_product_review_path(store_path: current_store.path,
+                                              product_id: @product.id,
+                                              id: product_review.id,
+                                              featured: false),
+                                              method: :put,
+                                              class: "btn"%></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+        </div>
+        <div class="tab-pane" id="2">
+    <table class="table">
+      <thead>
+      <th>Date</th>
+      <th>Comment Body</th>
+      <th>Change Featured Status</th>
+      </thead>
+      <tbody>
+        <% @product.nonfeatured_comments.each do | product_review |%>
+          <tr><td><%= time_tag product_review.updated_at %></td>
+          <td><%= product_review.comment %></td>
+          <td><%= button_to "Feature this comment",
+            store_admin_product_review_path(store_path: current_store.path,
+                                            product_id: @product.id,
+                                            id: product_review.id,
+                                            featured: true),
+                                            method: :put,
+                                            class: "btn"
+          %></td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
