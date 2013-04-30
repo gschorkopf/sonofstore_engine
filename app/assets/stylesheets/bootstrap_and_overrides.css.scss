@@ -195,12 +195,19 @@ hr {
   font-weight: normal;
 }
 .store_description {
-  color: black;
+  color: #536b71;
   position: relative;
-  padding-bottom: none;
-  font-size: 80%;
-  text-align: right;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 120%;
+  font-weight: bold;
+  background-color: white;
+  text-align: center;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+  border-radius: 7px;
+  width: 310px;
+
 }
-.store-description-cursive {
-  color: black;
-}
+

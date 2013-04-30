@@ -8,9 +8,12 @@
       <% @stores.each_with_index do |store, i| %>
         <%= link_to store_home_path(store) do %>
           <div class="span4 ">
-            <span class="store_title"><%= store.name %></span><br>
-            <%= image_tag generate_store_image_url(store.id), class: "img-polaroid" %>
-            <p class="store_description">"<%= store.description %>"</p>
+            <span class="store_title"><%= store.name %></span>
+            <p></p>
+              <%= image_tag generate_store_image_url(store.id), class: "img-polaroid" %>
+              <br>
+              <p></p>
+              <p class="store_description"><%= store.description %></p>
           </div>
         <% end %>
       <% end %>
