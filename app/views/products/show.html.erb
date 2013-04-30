@@ -1,3 +1,11 @@
+<br>
+<div style= "text-indent:30px">
+  <h3><%= "#{@store.name}" %></h3>
+</div>
+<div style= "text-indent:40px">
+  <i><%= link_to "⬅ continue browsing 'Products'", :back %></i>
+</div>
+
 <div class="row content-box">
   <div class="prod_detail_img span6">
     <P><%= image_tag generate_image_url(500, @product.id), class: "img-rounded" %></P>
