@@ -37,6 +37,18 @@ describe ProductsController do
           end
         end
       end
+
+      context "want products sorted by highest average rating" do
+        it "returns sorted products" do
+          current_store = Store.new
+          current_store.active = true
+          current_store.stub(:approved?).and_return(true)
+          current_store.stub(:pending?).and_return(false)
+          controller.stub(:current_store).and_return(current_store)
+          Product.should_receive(:search).with(sorted_by: "rating")
+          get :index, {sorted_by: "rating"}
+        end
+      end
     end
 
     context 'given a store that is pending' do

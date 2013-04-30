@@ -70,6 +70,10 @@ class Product < ActiveRecord::Base
     product_reviews.where(status: 'active').order("updated_at DESC")
   end
 
+  def average_rating
+    product_reviews.joins(:ratings).average(:rating) || 0
+  end
+
   def average_ratings
     ratings = Hash.new(0)
 

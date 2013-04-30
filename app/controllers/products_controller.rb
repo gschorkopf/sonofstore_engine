@@ -3,14 +3,13 @@ class ProductsController < ApplicationController
     if current_store.pending?
         redirect_to root_path,
                         alert: "The store you are looking for does not exist."
-        return
     elsif current_store.active == false && current_store.approved?
       redirect_to root_path,
               alert: "#{current_store.name} is currently down for maintenance."
-      return
     elsif current_store.approved?
       @top_products = current_store.top_products
       begin
+        current_store.search(category: params[:category_id], sorted_by: params[:sorted_by])
         @products = current_store.filter_products_by_category(params[:category_id]).page(params[:page]).per(40)
       rescue
         if params[:category_id]
@@ -22,7 +21,6 @@ class ProductsController < ApplicationController
     else
       redirect_to root_path,
         alert: "The store you are looking for does not exist."
-      return
     end
   end
 

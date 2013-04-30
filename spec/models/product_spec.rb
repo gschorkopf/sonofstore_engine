@@ -287,4 +287,28 @@ describe Product do
       end
     end
   end
+
+  describe "average_rating" do
+    context "it has ratings" do
+      it "returns the average rating" do
+        FactoryGirl.create(:rating, rating: 1)
+
+        product_review = FactoryGirl.create(:product_review)
+        FactoryGirl.create(:rating, rating: 1, product_review: product_review)
+        FactoryGirl.create(:rating, rating: 2, product_review: product_review)
+        FactoryGirl.create(:rating, rating: 3, product_review: product_review)
+
+        product = product_review.product
+
+        expect(product.average_rating).to eq 2
+      end
+    end
+
+    context "it has no ratings" do
+      it "returns 0" do
+        expect(FactoryGirl.create(:product).average_rating).to eq 0
+      end
+    end
+  end
+
 end

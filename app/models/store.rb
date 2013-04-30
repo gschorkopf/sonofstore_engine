@@ -94,4 +94,8 @@ class Store < ActiveRecord::Base
   def top_products
     products.sort_by { |product| -product.ratings.average(:rating).to_f }[0..3]
   end
+
+  def search
+    products.joins(:product_reviews).joins(:ratings).average(:rating)
+  end
 end
