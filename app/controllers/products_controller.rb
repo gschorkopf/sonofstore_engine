@@ -1,9 +1,9 @@
 class ProductsController < ApplicationController
+
+  before_filter :store_does_not_exist
+
   def index
-    if !current_store || current_store.pending?
-        redirect_to root_path, status: 404,
-                        alert: "The store you are looking for does not exist."
-    elsif current_store.inactive?
+    if current_store.inactive?
       redirect_to root_path,
               alert: "#{current_store.name} is currently down for maintenance."
     else
@@ -20,21 +20,26 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @store ||= current_store
-    begin
-      @product ||= @store.products.find(params[:id]) if @store
-    rescue
-      @product = nil
-    end
+
+    @product ||= current_store.products.find_by_id(params[:id])
+
     if @product
       render :show
     else
-      redirect_to store_home_path(@store),
+      redirect_to store_home_path(current_store),
         alert: "The product you are looking for does not exist."
     end
   end
 
   private
+
+  def store_does_not_exist
+    if !current_store || current_store.pending?
+      redirect_to root_path, status: 404,
+        alert: "The store you are looking for does not exist."
+
+    end
+  end
 
   def paginate records
     records.page(params[:page]).per(40)
