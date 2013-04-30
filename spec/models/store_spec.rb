@@ -111,6 +111,39 @@ describe Store do
         products = product1.store.search(sorted_by: question.id)
         expect(products).to eq [product1, product2]
       end
+
+      it "returns filtered products sorted by the rating of a question from highest to lowest" do
+
+        store = FactoryGirl.create(:store)
+
+        category = FactoryGirl.create(:category, store: store)
+
+        product1 = FactoryGirl.create(:search_product, store: store)
+        product1.categories << category
+        product1.save!
+        product1_rating = product1.ratings.first
+        product1_rating.rating = 5
+        product1_rating.save!
+
+        question = Question.first
+
+        product2 = FactoryGirl.create(:search_product, store: store)
+        product2.categories << category
+        product2.save!
+        product2_rating = product2.ratings.first
+        product2_rating.question = question
+        product2_rating.rating = 1
+        product2_rating.save!
+
+        product3 = FactoryGirl.create(:search_product, store: store)
+        product3_rating = product1.ratings.first
+        product3_rating.question = question
+        product3_rating.rating = 3
+        product3_rating.save!
+
+        products = store.search(category_id: category.id, sorted_by: question.id)
+        expect(products).to eq [product1, product2]
+      end
     end
   end
 
