@@ -35,13 +35,19 @@ class Product < ActiveRecord::Base
   scope :filter_by_category, lambda{ |category_id|
     joins(:categories).where("categories.id = ?", category_id) unless category_id.nil? }
 
-  scope :order_by_rating, (
+  scope :order_by_average_rating, (
     product_columns = columns.map { |c| "products.#{c.name}" }
     select_string = product_columns.join(", ")
 
     select("#{select_string}, avg(rating) as rating").joins(:ratings).group(select_string).order("rating DESC")
   )
 
+  scope :order_by_rating, lambda{|question_id|
+    product_columns = columns.map { |c| "products.#{c.name}" }
+    select_string = product_columns.join(", ")
+
+    select("#{select_string}, avg(rating) as rating").joins(:ratings).where("ratings.question_id = ?", question_id).group(select_string).order("rating DESC")
+  }
 
   def unique_product_title_in_store
     if exists_in_store?(title, id, store_id)

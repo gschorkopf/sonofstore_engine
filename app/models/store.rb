@@ -101,7 +101,7 @@ class Store < ActiveRecord::Base
     result = products
 
     if params[:sorted_by]
-      result = products.order_by_rating
+      result = products.order_by_average_rating
     end
 
     result
