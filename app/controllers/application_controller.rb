@@ -56,7 +56,8 @@ class ApplicationController < ActionController::Base
 
   def current_cart
     if current_store
-      @cart ||= Cart.new(session[current_store.path]) || Cart.new(session[:cart])
+      @cart ||= Cart.new(session[current_store.path]) ||
+                Cart.new(session[:cart])
     end
   end
 

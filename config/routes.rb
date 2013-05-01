@@ -52,7 +52,7 @@ StoreEngine::Application.routes.draw do
     resources :checkouts, only: [ :new, :create, :show ]
 
     resources :products, only: [ :index, :show ] do
-       resources :reviews, :controller => "product_reviews", only: [:new, :create, :edit, :update], :as => "reviews" do
+       resources :reviews, :controller => "product_reviews", only: [:new, :create], :as => "reviews" do
         post '/flag' => "product_reviews#flag", :as => 'flag'
       end
     end

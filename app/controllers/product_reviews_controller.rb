@@ -18,13 +18,10 @@ class ProductReviewsController < ApplicationController
       params[:product_review].delete(:ratings_attributes)
     end
      @product_review = ProductReview.make_new_product_review(
-                                                        params[:product_review],
-                                                        params[:product_id],
-                                                        current_user.customer.id
-                                                        )
-
-     # if ratings are nil or ratings are empty?
-     # if the ratings are not nil or the ratings are not empty
+                                                      params[:product_review],
+                                                      params[:product_id],
+                                                      current_user.customer.id
+                                                      )
     if @product_review.save && !(params[:ratings].nil? || params[:ratings].empty?)
       @product_ratings = Rating.make_new_ratings( params[:ratings].values,
                                                 @product_review.id)
@@ -34,8 +31,11 @@ class ProductReviewsController < ApplicationController
                                       ),
         notice: 'Successfully created new product review!'
       else
-        redirect_to new_store_product_review_path(store_path: current_store.path,
-                  id: @product_review.product_id), notice: 'Something went wrong.'
+        redirect_to new_store_product_review_path(
+                                      store_path: current_store.path,
+                                      id: @product_review.product_id
+                                      ),
+        notice: 'Something went wrong.'
       end
 
     else
@@ -45,7 +45,7 @@ class ProductReviewsController < ApplicationController
   end
 
   def flag
-    #params look like { product_id: x , product_review_id: x, status: 'flagged'}
+    #params look like { product_id: x, product_review_id: x, status: 'flagged'}
     if params[:status] == 'flagged'
       product_review = ProductReview.find(params[:review_id])
       product_review.update_attribute(:status, 'flagged')
@@ -59,14 +59,5 @@ class ProductReviewsController < ApplicationController
                                     ),
       notice: 'Failed to flag this review.'
     end
-  end
-
-  def update
-    # we'll use this for letting a customer update their own review
-  end
-
-  def edit
-    # we'll use this for letting a customer update their own review
-    @product_review = ProductReview.find(params[:id])
   end
 end

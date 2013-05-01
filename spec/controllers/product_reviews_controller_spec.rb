@@ -19,21 +19,6 @@ describe ProductReviewsController do
     end
   end
 
-  describe "GET #edit" do
-    before(:each) do
-      @product_review = ProductReview.create(product_id: 1 , customer_id: 1 , comment: 'this is so fun')
-      get :edit , :id => @product_review.id
-    end
-
-    it 'assigns the specific product review' do
-      expect(assigns(:product_review)).to eq @product_review
-    end
-
-    it 'renders the edit template' do
-      response.should render_template(:edit)
-    end
-  end
-
   describe "POST #create" do
     before(:each) do
       @current_store = Store.create(name: 'HoneyBooBoo', path: 'honey-boo-boo', description: "some store")
