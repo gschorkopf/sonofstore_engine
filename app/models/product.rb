@@ -115,7 +115,7 @@ class Product < ActiveRecord::Base
   end
 
   def featured_comments
-    result = product_reviews.where(featured: true)
+    product_reviews.where(featured: true)
   end
 
   def nonfeatured_comments

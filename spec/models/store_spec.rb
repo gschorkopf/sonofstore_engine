@@ -91,7 +91,7 @@ describe Store do
       it "returns the products sorted by the rating of a question from highest to lowest" do
         product1 = FactoryGirl.create(:search_product)
         product1_rating = product1.ratings.first
-        product1_rating.rating = 5
+        product1_rating.rating = 1
         product1_rating.save!
 
         question = Question.first
@@ -99,7 +99,7 @@ describe Store do
         product2 = FactoryGirl.create(:search_product, store: product1.store)
         product2_rating = product2.ratings.first
         product2_rating.question = question
-        product2_rating.rating = 1
+        product2_rating.rating = 5
         product2_rating.save!
 
         product3 = FactoryGirl.create(:search_product)
@@ -109,7 +109,7 @@ describe Store do
         product3_rating.save!
 
         products = product1.store.search(sorted_by: question.id)
-        expect(products).to eq [product1, product2]
+        expect(products).to eq [product2, product1]
       end
 
       it "returns filtered products sorted by the rating of a question from highest to lowest" do

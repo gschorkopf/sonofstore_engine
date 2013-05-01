@@ -114,8 +114,8 @@ class Store < ActiveRecord::Base
   end
 
   def questions
-    question_columns = Question.columns.map { |c| "questions.#{c.name}" }
-    select_string = question_columns.join(", ")
+#    question_columns = Question.columns.map { |c| "questions.#{c.name}" }
+#    select_string = question_columns.join(", ")
 
     Question.joins(:products)
     .where("products.store_id = ?", id).order("questions.question")
