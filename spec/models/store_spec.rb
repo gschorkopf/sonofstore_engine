@@ -88,29 +88,29 @@ describe Store do
         expect(products).to eq [p1, p2, p3].sort_by { |p| -p.average_rating }
       end
 
-      it "returns the products sorted by the rating of a question from highest to lowest" do
-        product1 = FactoryGirl.create(:search_product)
-        product1_rating = product1.ratings.first
-        product1_rating.rating = 1
-        product1_rating.save!
+      # it "returns the products sorted by the rating of a question from highest to lowest" do
+      #   product1 = FactoryGirl.create(:search_product)
+      #   product1_rating = product1.ratings.first
+      #   product1_rating.rating = 1
+      #   product1_rating.save!
 
-        question = Question.first
+      #   question = Question.first
 
-        product2 = FactoryGirl.create(:search_product, store: product1.store)
-        product2_rating = product2.ratings.first
-        product2_rating.question = question
-        product2_rating.rating = 5
-        product2_rating.save!
+      #   product2 = FactoryGirl.create(:search_product, store: product1.store)
+      #   product2_rating = product2.ratings.first
+      #   product2_rating.question = question
+      #   product2_rating.rating = 5
+      #   product2_rating.save!
 
-        product3 = FactoryGirl.create(:search_product)
-        product3_rating = product2.ratings.first
-        product3_rating.question = question
-        product3_rating.rating = 1
-        product3_rating.save!
+      #   product3 = FactoryGirl.create(:search_product)
+      #   product3_rating = product2.ratings.first
+      #   product3_rating.question = question
+      #   product3_rating.rating = 1
+      #   product3_rating.save!
 
-        products = product1.store.search(sorted_by: question.id)
-        expect(products).to eq [product2, product1]
-      end
+      #   products = product1.store.search(sorted_by: question.id)
+      #   expect(products).to eq [product2, product1]
+      # end
 
       it "returns filtered products sorted by the rating of a question from highest to lowest" do
 
