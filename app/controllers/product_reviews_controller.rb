@@ -45,7 +45,7 @@ class ProductReviewsController < ApplicationController
   end
 
   def flag
-    #params look like { product_id: x, product_review_id: x, status: 'flagged'}
+    #params look like { product_id: x , product_review_id: x, status: 'flagged'}
     if params[:status] == 'flagged'
       product_review = ProductReview.find(params[:review_id])
       product_review.update_attribute(:status, 'flagged')
