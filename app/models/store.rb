@@ -54,6 +54,10 @@ class Store < ActiveRecord::Base
     active == true
   end
 
+  def inactive?
+    !active? && approved?
+  end
+
   def self.approved
     where(:approval_status => 'approved')
   end
@@ -93,4 +97,30 @@ class Store < ActiveRecord::Base
   def top_products
     products.sort_by { |product| -product.ratings.average(:rating).to_f }[0..3]
   end
+
+  def search params={category_id: nil, sorted_by: nil}
+
+    result = params[:category_id] ? filter_products_by_category(params[:category_id]) : products
+
+    if params[:sorted_by] == "average_rating"
+      result = result.order_by_average_rating
+    elsif params[:sorted_by]
+      result = result.order_by_rating(params[:sorted_by])
+    end
+
+    result
+
+  end
+
+  def questions
+#    question_columns = Question.columns.map { |c| "questions.#{c.name}" }
+#    select_string = question_columns.join(", ")
+
+    Question.joins(:products)
+    .where("products.store_id = ?", id).order("questions.question")
+
+    #products.joins(:questions).select(select_string).group(select_string)
+
+  end
+
 end

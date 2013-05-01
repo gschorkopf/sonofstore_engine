@@ -78,11 +78,12 @@ body {
 
 #welcome_user{
 float: left;
-padding-top: 32px;
+padding-top: 37px;
 }
 
 #welcome_user p{
-  font-weight: bold;
+  font-weight: normal;
+  font-family: 'Tahoma', sans-serif;
 }
 
 // This makes the scrolly hr rule as seen on homepage
@@ -165,10 +166,6 @@ hr {
   max-width: 50%;
 }
 
-#love {
-  color: #777;
-}
-
 .lead-background {
   background-image: none;
   background-color: none;
@@ -194,13 +191,19 @@ hr {
   font-size: 110%;
   font-weight: normal;
 }
-.store_description {
-  color: black;
+.store_descript {
+  color: #536b71;
   position: relative;
-  padding-bottom: none;
-  font-size: 80%;
-  text-align: right;
-}
-.store-description-cursive {
-  color: black;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 120%;
+  font-weight: bold;
+  background-color: white;
+  text-align: center;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+  border-radius: 7px;
+  width: 310px;
+
 }

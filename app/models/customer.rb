@@ -14,25 +14,17 @@ class Customer < ActiveRecord::Base
 
   accepts_nested_attributes_for :user
 
-
   def best_display_name
     #if customer has a user AND a display name, use it.
     if user && user.display_name
       user.display_name
-    #otherwise, generate a random display name to use from a set
-    else
+    else #otherwise, generate a random display name to use from a set
       use_customer_initials
     end
   end
 
   def use_customer_initials
-    initials = []
-
-    full_name.split.each do |w|
-      initials << w[0]
-    end
-
-    initials.join('.') + '.'
+    full_name.split.collect {|w| w[0]}.join('.') + '.'
   end
 
   def has_purchased_product? product_id

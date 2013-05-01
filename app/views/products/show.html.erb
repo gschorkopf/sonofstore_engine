@@ -1,10 +1,9 @@
 <br>
 <div style= "text-indent:30px">
-  <h3><%= "#{@store.name}" %></h3>
+  <h3><%= "#{current_store.name}" %></h3>
 </div>
 <div style= "text-indent:40px">
-  <i><%= link_to "⬅ continue browsing Products", :back %></i>
-  <!%= link_to "⬅ continue browsing 'Products'", store_home_path(current_store) %>
+  <i><%= link_to "⬅ continue browsing 'Products'", store_home_path(current_store) %></i>
 </div>
 
 <div class="row content-box">

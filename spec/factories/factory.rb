@@ -31,7 +31,20 @@ FactoryGirl.define do
     description 'Hurts so good'
     price 12.99
     status 'active'
-    #product_reviews { (0..5).collect{ |i| create(:product_review_2) } }
+  end
+
+  factory :search_product, class: Product do
+    store
+    sequence(:title) {|n| "Itche Sweater#{n}"}
+    description 'Hurts so good'
+    price 12.99
+    status 'active'
+
+    after(:create) do |product|
+      product.product_reviews << (0..4).map do |i|
+        create(:product_review_2, product_id: product.id)
+      end
+    end
   end
 
   factory :customer do
@@ -79,8 +92,15 @@ FactoryGirl.define do
   end
 
   factory :product_review_2, class: ProductReview do
+    product
     customer
     comment "Great product! 10/10 would buy again."
+
+    after(:create) do |review|
+      review.ratings << (0..4).map do |i|
+        build(:product_search_rating, product_review: review)
+      end
+    end
   end
 
   factory :featured_product_review, class: ProductReview do
@@ -94,6 +114,11 @@ FactoryGirl.define do
     question
     rating 5
     product_review
+  end
+
+  factory :product_search_rating, class: Rating do
+    question
+    rating { rand(1..5) }
   end
 
   factory :store_admin, parent: :user do
