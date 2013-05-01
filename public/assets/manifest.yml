@@ -17,6 +17,8 @@ github_25.png: github_25-cbaa5dd3493d83eb5b3fc68f1fc8e08d.png
 github_25/index.png: github_25-cbaa5dd3493d83eb5b3fc68f1fc8e08d.png
 granite_bg.png: granite_bg-a35bdad768b977e5b8d21916c7cf8e8e.png
 granite_bg/index.png: granite_bg-a35bdad768b977e5b8d21916c7cf8e8e.png
+loading.gif: loading-10ac7e97f13ea72587541a8f80616083.gif
+loading/index.gif: loading-10ac7e97f13ea72587541a8f80616083.gif
 marcy_logo.png: marcy_logo-2a538f9671f7e859ab25fa6ec5d94f07.png
 marcy_logo/index.png: marcy_logo-2a538f9671f7e859ab25fa6ec5d94f07.png
 marcy_stripe.png: marcy_stripe-9fa3f0aed4d24d32968cb5ddab5b3bc5.png
@@ -37,10 +39,10 @@ toylogo2.png: toylogo2-f80ad1434dc99350d365929430f1d0ec.png
 toylogo2/index.png: toylogo2-f80ad1434dc99350d365929430f1d0ec.png
 twitter-icon.png: twitter-icon-7b4783fb6986b0eaaa50b28155c3410a.png
 twitter-icon/index.png: twitter-icon-7b4783fb6986b0eaaa50b28155c3410a.png
-application.js: application-0007181ba7a796904f302755ee3b5c2c.js
-application/index.js: application-0007181ba7a796904f302755ee3b5c2c.js
-application.css: application-521dd82884dc0707837131e8a18aeeef.css
-application/index.css: application-521dd82884dc0707837131e8a18aeeef.css
+application.js: application-acc96eadc5f5bd1597e19f3b10d8ebe8.js
+application/index.js: application-acc96eadc5f5bd1597e19f3b10d8ebe8.js
+application.css: application-db77cbab7256da49e84fead8bf539b50.css
+application/index.css: application-db77cbab7256da49e84fead8bf539b50.css
 glyphicons-halflings-white.png: glyphicons-halflings-white-6cccd17a7aed91dbc0157d343c68c0d9.png
 glyphicons-halflings-white/index.png: glyphicons-halflings-white-6cccd17a7aed91dbc0157d343c68c0d9.png
 glyphicons-halflings.png: glyphicons-halflings-2851b489e8c39f8fad44fc10efb99c3e.png
