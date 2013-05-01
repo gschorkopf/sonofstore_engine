@@ -78,13 +78,15 @@ class UsersController < ApplicationController
         redirect_to profile_path(active_navigation: "personal_info"),
           :notice => "Successfully updated account"
       else
-        flash.now[:notice] = "Failed to update customer: #{@user.errors.to_a.join(",")}"
+        flash.now[:notice] = "Customer Update Failed:" +
+                            " #{@user.errors.to_a.join(",")}"
         @active_user_navigation = :personal_info
         render action: "show"
       end
 
     else
-      flash.now[:notice] = "Failed to update customer: #{@customer.errors.to_a.join(",")}"
+      flash.now[:notice] = "Failed to update customer: " +
+                           "#{@customer.errors.to_a.join(",")}"
       @active_user_navigation = :personal_info
       render action: "show"
     end

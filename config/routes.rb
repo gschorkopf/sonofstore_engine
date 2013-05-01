@@ -66,20 +66,11 @@ StoreEngine::Application.routes.draw do
     get "/orders/:customer_id/new" => "orders#new", :as => "new_order"
     post "/orders/:customer_id/create" => "orders#create", :as => "create_order"
 
-    namespace :stock do
-      resources :products, except: [ :destroy ] do
-        member do
-          post :toggle_status
-        end
-      end
-    end
-
     namespace :admin do
       get '/' => "stores#show"
       get '/edit' => "stores#edit"
       put '/' => "stores#update"
       resources :users, except: [ :index, :update, :edit, :show ]
-      resources :stockers
       resources :categories, except: [ :destroy ]
       resources :orders, except: [ :destroy ]
       resources :order_items, only: [ :update, :destroy ]

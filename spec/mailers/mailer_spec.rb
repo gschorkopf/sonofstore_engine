@@ -45,24 +45,8 @@ describe Mailer do
     expect(ActionMailer::Base.deliveries).to_not be_empty
   end
 
-  it 'sends a store stocker welcome email' do
-    Mailer.store_stocker_welcome_email(@user, @store).deliver
-    expect(ActionMailer::Base.deliveries).to_not be_empty
-  end
-
-  it 'sends a sign up as stocker email' do
-    email = 'tiny@teeny.com'
-    Mailer.sign_up_as_stocker(email, @store).deliver
-    expect(ActionMailer::Base.deliveries).to_not be_empty
-  end
-
   it 'sends a remove admin from store email' do
     Mailer.remove_admin_from_store(@user, @store).deliver
-    expect(ActionMailer::Base.deliveries).to_not be_empty
-  end
-
-  it 'sends a remove stocker from store email' do
-    Mailer.remove_stocker_from_store(@user, @store).deliver
     expect(ActionMailer::Base.deliveries).to_not be_empty
   end
 end

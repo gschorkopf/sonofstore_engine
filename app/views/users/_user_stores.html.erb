@@ -16,8 +16,6 @@
         <td>
           <% if current_user.role_for_store?('store_admin', store) %>
             <%= link_to store, store_admin_path(store) %>
-          <% else %>
-            <%= link_to store, store_stock_products_path(store) %>
           <% end %>
         </td>
         <td><%= store.path %></td>
