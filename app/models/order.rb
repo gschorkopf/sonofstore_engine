@@ -22,10 +22,9 @@ class Order < ActiveRecord::Base
 
   DEFAULT_STATUS = 'pending'
 
-  def self.generate_new_order(current_store_id, customer_id, current_session_cart)
+  def self.generate_new_order(store_id, customer_id, current_session_cart)
     order = Order.new(customer_id: customer_id, status: DEFAULT_STATUS)
-    order.store_id = current_store_id
-    order.uuid_hash = UUID.new.generate
+    order.store_id, order.uuid_hash = store_id, UUID.new.generate
     order.save
     order.create_order_items(current_session_cart)
     order
@@ -38,19 +37,6 @@ class Order < ActiveRecord::Base
                                 unit_price: product.price,
                                 quantity: quantity  )
     end
-  end
-
-  def self.create_and_charge(params)
-    order = create(status: 'pending', user_id: params[:user].id)
-
-    params[:cart].items.each do |cart_item|
-      order.order_items.create(product_id: cart_item.product.id,
-                               unit_price: cart_item.unit_price,
-                               selling_price: cart_item.selling_price,
-                               quantity: cart_item.quantity)
-    end
-
-    order
   end
 
   def update_status

@@ -20,7 +20,9 @@ class ApplicationController < ActionController::Base
   def require_admin
     if current_user == false
       not_authenticated
-    elsif current_user.platform_admin? || current_user.role_for_store?('store_admin', current_store)
+    elsif current_user.platform_admin? || current_user.
+                                                  role_for_store?('store_admin',
+                                                                 current_store)
       true
     else
       redirect_to login_path,
@@ -43,12 +45,18 @@ class ApplicationController < ActionController::Base
   def require_stocker
     if current_user == false
       not_authenticated
-    elsif current_user.role_for_store?('stocker', current_store) || current_user.platform_admin? || current_user.role_for_store?('store_admin', current_store)
+    elsif stocker_or_platform_admin_or_store_admin
       true
     else
       redirect_to login_path,
         :alert => "Only store administrators may access this page"
     end
+  end
+
+  def stocker_or_platform_admin_or_store_admin
+    current_user.role_for_store?('stocker', current_store) ||
+    current_user.platform_admin? ||
+    current_user.role_for_store?('store_admin', current_store)
   end
 
   def not_authenticated

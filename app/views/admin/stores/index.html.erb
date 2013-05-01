@@ -5,7 +5,7 @@
       <ul class="nav nav-list">
         <li class="nav-header">Dashboard Navigation</li>
         <li><%= link_to "Manage Flagged Comments", admin_product_reviews_path, method: :get %></li>
-        <li><%= link_to "Manage My profile", profile_path %></li>
+        <li><%= link_to "Manage My Profile", profile_path %></li>
       </ul>
     </div>
     <div class="span9">
@@ -19,25 +19,23 @@
         </ul>
         <div class="tab-content">
           <div class="tab-pane" id="1">
-            <% if %>
-              There are no pending stores!
-            <% else %>
-            <table class="table table-striped">
+            <% if @pending_stores.any? %>
+              <table class="table table-striped">
               <thead>
                 <th>Name</th>
                 <th>URL ID</th>
                 <th>Description</th>
                 <th>Approval Status</th>
               </thead>
-
               <tbody>
                 <% @pending_stores.each do |store| %>
                   <%= render partial: 'pending_store', locals: { store: store } %>
                 <% end %>
-
               </tbody>
-
             </table>
+
+          <% else %>
+              <p>There are no pending stores!</p>
           <% end %>
 
           </div>

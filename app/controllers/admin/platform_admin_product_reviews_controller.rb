@@ -2,7 +2,8 @@ class Admin::PlatformAdminProductReviewsController < ApplicationController
   before_filter :require_platform_admin
 
   def index
-    @product_reviews ||= ProductReview.where(status: 'flagged').includes(:customer, :product)
+    @product_reviews ||= ProductReview.where(status: 'flagged').
+                                       includes(:customer, :product)
   end
 
   def update

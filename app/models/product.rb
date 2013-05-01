@@ -105,6 +105,11 @@ class Product < ActiveRecord::Base
   end
 
   def reviewed_by? customer
-    !Customer.joins(:product_reviews).where("product_reviews.product_id = ? AND product_reviews.customer_id = ?", id, customer.id).empty?
+    !Customer.joins(:product_reviews).
+    where(
+      "product_reviews.product_id = ? AND product_reviews.customer_id = ?",
+       id,
+       customer.id
+       ).empty?
   end
 end

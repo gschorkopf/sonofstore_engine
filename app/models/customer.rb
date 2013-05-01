@@ -36,6 +36,7 @@ class Customer < ActiveRecord::Base
   end
 
   def has_purchased_product? product_id
-    orders.joins(:order_items).where("order_items.product_id = ?", product_id).count > 0
+    orders.joins(:order_items).
+           where("order_items.product_id = ?", product_id).count > 0
   end
 end
