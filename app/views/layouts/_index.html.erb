@@ -10,7 +10,7 @@
           <div class="span3">
             <span class="store_title"><%= store.name %></span><br>
             <%= image_tag generate_store_image_url(store.id), class: "img-polaroid" %>
-            <p class="store_description">"<%= store.description[0..38] %>..."</p>
+            <p id="store-descript">"<%= store.description[0..38] %>..."</p>
           </div>
         <% end %>
       <% end %>
