@@ -12,8 +12,7 @@ class Product < ActiveRecord::Base
 
   has_attached_file :image, styles: { retail: "500x500",
                                       large: "500x500",
-                                      thumbnail: "200x200" },
-                            storage: :s3
+                                      thumbnail: "200x200" }
 
   validates :title, presence: :true
   validate :unique_product_title_in_store
