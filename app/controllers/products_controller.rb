@@ -43,7 +43,7 @@ class ProductsController < ApplicationController
   end
 
   def paginate records
-    records.page(params[:page]).per(40)
+    records.page(params[:page]).per(12)
   end
 
 end

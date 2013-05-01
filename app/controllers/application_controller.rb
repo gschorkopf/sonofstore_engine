@@ -86,7 +86,7 @@ class ApplicationController < ActionController::Base
     products = Store.find_by_id(store_id).products
     if products.empty?
       img_category = IMAGE_CATEGORIES[store_id.to_s[-1].to_i]
-      "http://lorempixel.com/500/500/#{img_category}/"
+      "http://lorempixel.com/310/310/#{img_category}/"
     else
       url = products.first.image.url(:retail)
       if url.include?("missing")
