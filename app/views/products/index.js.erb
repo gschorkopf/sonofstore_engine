@@ -1,5 +1,5 @@
-$('#products').append('<%= j render(@products) %>');
-<% if @products.next %>
+$('#all_products').append('<%= j render(@products) %>');
+<% if (@products.current_page < @products.num_pages) %>
   $('.pagination').replaceWith('<%= j paginate(@products) %>');
 <% else %>
   $('.pagination').remove();

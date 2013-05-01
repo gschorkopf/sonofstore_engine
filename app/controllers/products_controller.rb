@@ -11,12 +11,12 @@ class ProductsController < ApplicationController
     elsif current_store.approved?
       @top_products = current_store.top_products
       begin
-        @products = current_store.filter_products_by_category(params[:category_id]).page(params[:page]).per(40)
-      rescue
+        @products = current_store.filter_products_by_category(params[:category_id]).page(params[:page]).per(8)
+      rescue ::ActiveRecord::RecordNotFound
         if params[:category_id]
           flash.alert = "The category doesn't exist"
         end
-        @products = current_store.products.page(params[:page]).per(40)
+        @products = current_store.products.page(params[:page]).per(12)
       end
       @categories = current_store.categories
     else

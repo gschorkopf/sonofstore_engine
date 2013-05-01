@@ -1,4 +1,4 @@
-<%= link_to store_product_path(store, product) do %>
+<%= link_to store_product_path(current_store, product) do %>
   <div class="products span3">
     <%= image_tag generate_image_url(300, product.id) %>
 
