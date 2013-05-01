@@ -170,4 +170,16 @@ describe Store do
 
   end
 
+  describe "questions" do
+    it "returns a list of questions associated with any products of the store" do
+        store = FactoryGirl.create(:store)
+        product1 = FactoryGirl.create(:search_product, store: store)
+        questions = product1.ratings.collect(&:question)
+
+        FactoryGirl.create(:question)
+
+        expect(store.questions).to match_array(questions)
+    end
+  end
+
 end

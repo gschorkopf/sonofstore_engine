@@ -11,13 +11,16 @@ describe ProductsController do
 
     context 'given a store that is active' do
 
+      let(:products) {[Product.new]}
+
       before do
         current_store.stub(:inactive?).and_return(false)
         current_store.stub(:pending?).and_return(false)
+        products.stub(:page)
+        .and_return(stub(:page, per: "blah"))
       end
 
       it "index action should render index template" do
-        pending 'need to figure out how to create a current_store'
         get :index
         response.should render_template(:index)
       end
@@ -29,13 +32,10 @@ describe ProductsController do
         context "the category exists" do
 
           it "filters products by category" do
-            products = [Product.new]
-            products.stub(:page)
-              .and_return(stub(:page, per: "blah"))
 
             current_store.should_receive(:search)
-              .with(expected_params)
-              .and_return(products)
+            .with(expected_params)
+            .and_return(products)
 
             get :index, {category_id: "category"}
           end
@@ -44,12 +44,12 @@ describe ProductsController do
         context "the category doesn't exist" do
           it "returns all the products" do
             current_store.should_receive(:search)
-              .with(expected_params)
-              .and_raise(::ActiveRecord::RecordNotFound)
+            .with(expected_params)
+            .and_raise(::ActiveRecord::RecordNotFound)
 
             current_store.should_receive(:search)
-              .with(sorted_by: nil)
-              .and_call_original
+            .with(sorted_by: nil)
+            .and_call_original
 
             get :index, {category_id: "category"}
           end
@@ -58,12 +58,9 @@ describe ProductsController do
 
       context "want products sorted by highest average rating" do
         it "returns sorted products" do
-            products = [Product.new]
-            products.stub(:page).and_return(stub(:page, per: "blah"))
-
-            current_store.should_receive(:search)
-              .with(category_id: nil, sorted_by: "average_rating")
-              .and_return(products)
+          current_store.should_receive(:search)
+          .with(category_id: nil, sorted_by: "average_rating")
+          .and_return(products)
 
           get :index, {sorted_by: "average_rating"}
         end
