@@ -1,0 +1,18 @@
+THIS ISN'T WORKING WHY?
+<tr>
+  <td><%= product_review.comment %></td>
+  <td><%=product_review.customer_id %></td>
+  <td><%=product_review.updated_at %></td>
+  <td>
+    <%= button_to 'Active',
+        admin_product_review_path(id: product_review.id, status: 'active'),
+        class: 'btn',
+        method: :put %>
+
+    <%= button_to 'Inactive',
+        admin_product_review_path(id: product_review.id, status: 'inactive'),
+        class: 'btn',
+        method: :put %>
+
+  </td>
+</tr>

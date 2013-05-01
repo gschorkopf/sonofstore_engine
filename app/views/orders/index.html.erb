@@ -3,20 +3,30 @@
 
   <div class="span8">
 
-    <h1><%= t('order.history') %></h1>
+    <h1><%= 'Order History' %></h1>
     <hr>
 
-
-    <table class="table table-striped">
-      <thead>
-      <th>#</th>
-      <th><%= t('model.status') %></th>
-      <th><%= t('order.date') %></th>
-      <th><%= t('total') %></th>
-      </thead>
-      <tbody>
-      <%= render partial: 'order', collection: @orders %>
-      </tbody>
-    </table>
+   <% if current_user.user_roles.any? == false && current_user.id != params[:customer_id] %>
+        <p>You are not authorized to view another customer's orders.</p>
+        <br>
+      <% elsif params[:customer_id] == nil && current_user.user_roles.any? == true %>
+        <p>This user does not exist.</p>
+        <br>
+      <% elsif @orders.empty? %>
+        <p>This user does not currently have any orders.</p>
+        <br>
+      <% else %>
+      <table class="table table-striped">
+        <thead>
+        <th>#</th>
+        <th><%= 'Status' %></th>
+        <th><%= 'Order Date' %></th>
+        <th><%= 'Total' %></th>
+        </thead>
+        <tbody>
+        <%= render partial: 'order', collection: @orders %>
+        </tbody>
+      </table>
+    <% end %>
   </div>
 </div>

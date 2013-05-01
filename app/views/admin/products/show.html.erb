@@ -1,0 +1,40 @@
+
+
+<div class="admin-order-show">
+  <%= render partial: 'shared/admin_navigation', locals: { active: false } %>
+
+  <div class="span8">
+    <h1>Comments for <% @product.title %></h1>
+
+    <h3>Currently Favorited Comments</h3>
+<!-- table w/ featured comments for the product -->
+<!-- column with button to change status -->
+
+    <table class="table">
+      <thead>
+      <th>Date</th>
+      <th>Comment Body</th>
+      <th>Change Featured Status</th>
+      </thead>
+      <tbody>
+        <tr><!-- stuff goes here! --></tr>
+      </tbody>
+    </table>
+
+    <hr>
+<!-- table w/ nonfeatured comments for the product -->
+<!-- column with button to change status -->
+    <h3>Other Comments</h3>
+    <table class="table">
+      <thead>
+      <th>Date</th>
+      <th>Comment Body</th>
+      <th>Change Featured Status</th>
+      </thead>
+      <tbody>
+         <tr><!-- stuff goes here! --></tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

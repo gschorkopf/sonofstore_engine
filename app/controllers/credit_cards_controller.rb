@@ -1,5 +1,5 @@
 class CreditCardsController < ApplicationController
-  # before_filter :require_login
+  before_filter :require_login
 
   def new
     @credit_card = CreditCard.new

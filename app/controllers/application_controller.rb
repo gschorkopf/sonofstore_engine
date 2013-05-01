@@ -12,10 +12,6 @@ class ApplicationController < ActionController::Base
   ##########
   before_filter :get_referrer, :except => [:create, :update, :destroy, :signup]
 
-
-#should be set_return_to or save_referrer.....
-
-
   def get_referrer
     session[:return_to] = request.referrer
   end
@@ -24,7 +20,9 @@ class ApplicationController < ActionController::Base
   def require_admin
     if current_user == false
       not_authenticated
-    elsif current_user.platform_admin? || current_user.role_for_store?('store_admin', current_store)
+    elsif current_user.platform_admin? || current_user.
+                                                  role_for_store?('store_admin',
+                                                                 current_store)
       true
     else
       redirect_to login_path,
@@ -44,17 +42,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def require_stocker
-    if current_user == false
-      not_authenticated
-    elsif current_user.role_for_store?('stocker', current_store) || current_user.platform_admin? || current_user.role_for_store?('store_admin', current_store)
-      true
-    else
-      redirect_to login_path,
-        :alert => "Only store administrators may access this page"
-    end
-  end
-
   def not_authenticated
     redirect_to login_path, :alert => "First login to access this page."
   end
@@ -69,7 +56,8 @@ class ApplicationController < ActionController::Base
 
   def current_cart
     if current_store
-      @cart ||= Cart.new(session[current_store.path]) || Cart.new(session[:cart])
+      @cart ||= Cart.new(session[current_store.path]) ||
+                Cart.new(session[:cart])
     end
   end
 
@@ -77,26 +65,37 @@ class ApplicationController < ActionController::Base
     I18n.locale = session[:i18n] || I18n.default_locale || :en
   end
 
-  def get_flag
-    case session[:i18n]
-    when 'fr' then 'fr'
-    when 'cs' then 'cs'
-    when 'ca' then 'ca'
-    else 'us'
-    end
-  end
-
   def generate_image_url(side_length, product_id)
+    url = Product.find(product_id).image.url(:thumbnail)
+
+    if url.include?("missing")
     img_category = IMAGE_CATEGORIES[current_store.id.to_s[-1].to_i]
     img_size_params = "#{side_length}/#{side_length}"
     img_id = product_id.to_s[-1].to_i
     img_id = 10 if img_id == 0
-    "http://lorempixel.com/#{img_size_params}/#{img_category}/#{img_id}"
+    url = "http://lorempixel.com/#{img_size_params}/#{img_category}/#{img_id}"
+    end
+
+    url
+
   end
 
   def generate_store_image_url(store_id)
-    img_category = IMAGE_CATEGORIES[store_id.to_s[-1].to_i]
-    "http://lorempixel.com/500/500/#{img_category}/"
+    products = Store.find_by_id(store_id).products
+    if products.empty?
+      img_category = IMAGE_CATEGORIES[store_id.to_s[-1].to_i]
+      "http://lorempixel.com/310/310/#{img_category}/"
+    else
+      url = products.first.image.url(:retail)
+      if url.include?("missing")
+        img_category = IMAGE_CATEGORIES[store_id.to_s[-1].to_i]
+        img_size_params = "#{300}/#{300}"
+        img_id = products.first.id.to_s[-1].to_i
+        img_id = 10 if img_id == 0
+        url = "http://lorempixel.com/#{img_size_params}/#{img_category}/#{img_id}"
+      end
+      url
+    end
   end
 
   IMAGE_CATEGORIES = {
@@ -132,3 +131,4 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 end
+

@@ -8,27 +8,6 @@ describe UsersController do
     end
   end
 
-  describe "create" do
-    it 'saves a new user with valid params' do
-      pending
-      post :create
-    end
-
-    it 'rejects a new user with invalid params' do
-      pending
-    end
-  end
-
-  describe 'update' do
-    it 'updates a users params if theyre valid' do
-      pending
-    end
-
-    it 'rejects invalid user update params' do
-      pending
-    end
-  end
-
   describe "GET#show" do
     context 'when a user is logged in' do
 

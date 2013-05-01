@@ -1,10 +1,10 @@
 class Mailer < ActionMailer::Base
-  default from: 'mrpink.sose@gmail.com'
+  default from: 'Ballmerinos@gmail.com'
 
   def welcome_email(user)
     @user = user
     mail( to: @user.customer.email,
-          subject: "Welcome to Mr. Pink's Son of Store Engine!")
+          subject: "Welcome to Ballmerino's, a marketplace for toys!")
   end
 
   def order_confirmation(customer_id, order)
@@ -18,7 +18,7 @@ class Mailer < ActionMailer::Base
     @user = user
     @store = store
     mail( to: @user.customer.email,
-          subject: "Your store #{store} has been created and pending approval")
+      subject: "Your store #{store} has been created and is pending approval")
   end
 
   def store_decision_confirmation(store)
@@ -42,31 +42,10 @@ class Mailer < ActionMailer::Base
           subject: "You have been invited to become admin of #{@store}")
   end
 
-  def store_stocker_welcome_email(user, store)
-    @user = user
-    @store = store
-    mail( to: @user.customer.email,
-          subject: "You have been confirmed as a stocker for #{@store}")
-  end
-
-  def sign_up_as_stocker(email, store)
-    @email = email
-    @store = store
-    mail( to: @email,
-          subject: "You have been invited to become a stocker for #{@store}")
-  end
-
   def remove_admin_from_store(user, store)
     @user = user
     @store = store
     mail( to: @user.customer.email,
           subject: "You have been removed as an admin of #{@store}")
-  end
-
-  def remove_stocker_from_store(user, store)
-    @user = user
-    @store = store
-    mail( to: @user.customer.email,
-          subject: "You have been removed as a stocker of #{@store}")
   end
 end

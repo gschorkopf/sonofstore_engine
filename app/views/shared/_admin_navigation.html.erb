@@ -5,10 +5,10 @@
       <%= link_to 'Administration', store_admin_path(current_store) %> 
     </li>
     <li class="<%= active == :products ? 'active' : '' %>">
-      <%= link_to t('product.collection'), store_admin_products_path %>
+      <%= link_to 'Products', store_admin_products_path %>
     </li>
     <li class="<%= active == :categories ? 'active' : '' %>">
-      <%= link_to t('categories.self'), store_admin_categories_path %>
+      <%= link_to 'Categories', store_admin_categories_path %>
     </li>
     <li class="<%= active == :back ? 'active' : '' %>">
       <%= link_to 'Back to Manage My Stores', profile_path %>

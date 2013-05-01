@@ -3,7 +3,7 @@
              locals: { active: current_page?(store_admin_orders_path(current_store)) ? :dashboard : :search } %>
 
   <div class="span8">
-    <h1><% if current_page?(store_admin_orders_path(current_store)) %><%= t 'admin.dashboard' %><% else %>Search<%end%></h1>
+    <h1><% if current_page?(store_admin_orders_path(current_store)) %><%= 'admin.dashboard' %><% else %>Search<%end%></h1>
     <hr>
 
     <% if @count > 0 %>
@@ -12,9 +12,9 @@
         <table class="table">
           <thead>
           <th>#</th>
-          <th><%= t 'model.createdat' %></th>
-          <th><%= t 'model.status' %></th>
-          <th><%= t 'model.modify' %></th>
+          <th><%= 'Created At' %></th>
+          <th><%= 'Status' %></th>
+          <th><%= 'Modify' %></th>
           </thead>
           <tbody>
           <%= render @orders %>

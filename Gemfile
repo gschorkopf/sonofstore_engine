@@ -9,7 +9,6 @@ gem 'simple_form'
 gem 'jquery-rails'
 gem 'sorcery'
 gem 'paperclip'
-gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'pg'
 gem 'aws-sdk'
 gem 'resque', "~>1.24.0"
@@ -18,6 +17,8 @@ gem 'faker'
 gem 'uuid'
 gem 'redis-rails'
 gem 'kaminari'
+gem 'newrelic_rpm'
+gem 'gemoji'
 
 group :production do
   gem 'pg'
@@ -37,9 +38,10 @@ group :development, :test do
   gem 'debugger'
   gem 'capybara'
   gem 'simplecov'
-  gem 'newrelic_rpm'
-  gem 'better_errors'
+  # gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'pry'
+  gem 'bullet'
 end
 
 group :test do

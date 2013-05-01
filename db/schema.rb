@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130416154101) do
+ActiveRecord::Schema.define(:version => 20130429051239) do
 
   create_table "billing_addresses", :force => true do |t|
     t.string   "street_address"
@@ -95,6 +95,18 @@ ActiveRecord::Schema.define(:version => 20130416154101) do
   add_index "product_categories", ["category_id"], :name => "index_product_categories_on_category_id"
   add_index "product_categories", ["product_id"], :name => "index_product_categories_on_product_id"
 
+  create_table "product_reviews", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "customer_id"
+    t.string   "comment",     :limit => 500
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
+    t.boolean  "featured",                   :default => false,    :null => false
+    t.string   "status",                     :default => "active"
+  end
+
+  add_index "product_reviews", ["product_id"], :name => "index_product_reviews_on_product_id"
+
   create_table "products", :force => true do |t|
     t.string   "title"
     t.text     "description"
@@ -111,6 +123,24 @@ ActiveRecord::Schema.define(:version => 20130416154101) do
   end
 
   add_index "products", ["store_id"], :name => "index_products_on_store_id"
+
+  create_table "questions", :force => true do |t|
+    t.string   "question"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "long_form",  :limit => 100
+  end
+
+  create_table "ratings", :force => true do |t|
+    t.integer  "question_id"
+    t.integer  "rating"
+    t.integer  "product_review_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ratings", ["product_review_id"], :name => "index_ratings_on_product_review_id"
+  add_index "ratings", ["question_id"], :name => "index_ratings_on_question_id"
 
   create_table "shipping_addresses", :force => true do |t|
     t.string   "street_address"

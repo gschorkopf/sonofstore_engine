@@ -1,9 +1,9 @@
 <div class="user-index">
-  <%= render partial: 'user_navigation', :locals => { active: :stores } %>
+  <%= render partial: 'user_navigation', :locals => { active: @active_user_navigation } %>
 
   <div class="span8 tab-content">
 
-    <div id="manage_stores" class="tab-pane active">
+    <div id="manage_stores" class="tab-pane <%= @active_user_navigation == :stores ? 'active' : '' %>">
       <div class="pull-right">
         <%= button_to "Create a New Store", new_store_path, class: 'btn btn-custom-lighten', method: :get %>
       </div>
@@ -13,21 +13,23 @@
       <%= render partial: 'user_stores' %>
     </div>
 
-    <div id="edit_account" class="tab-pane">
+    <div id="edit_account" class="tab-pane <%= @active_user_navigation == :personal_info ? 'active' : '' %>">
       <h1>Edit Account</h1>
       <hr>
       <%= form_tag(user_path(current_user), method: :put) do %>
         <p>* Full Name</p>
-        <%= text_field_tag(:full_name, current_user.customer.full_name) %><br/>
+        <%= text_field_tag("customer[full_name]", current_user.customer.full_name) %><br/>
         <p>* Email</p>
-        <%= text_field_tag(:email, current_user.customer.email) %><br/>
+        <%= text_field_tag("customer[email]", current_user.customer.email) %><br/>
         <p>Display Name</p>
-        <%= text_field_tag(:display_name, current_user.display_name) %><br/>
+        <%= text_field_tag("user[display_name]", current_user.display_name) %><br/>
         <p>* Password</p>
-        <%= password_field_tag(:password, current_user.password) %><br/>
+        <%= password_field_tag("user[password]", current_user.password) %><br/>
         <p>* Password Confirmation</p>
-        <%= password_field_tag(:password_confirmation) %><br/>
-        <%= submit_tag("Update") %>
+        <%= password_field_tag("user[password_confirmation]") %><br/>
+      <div>
+        <%= submit_tag "Update", class: 'btn btn-custom-lighten' %>
+      </div>
       <% end %>
 
       <h3>Shipping Address:</h3>
@@ -42,11 +44,11 @@
           <%= text_field_tag(:zip, current_user.customer.shipping_address.zip) %><br/>
           <p>State</p>
           <%= text_field_tag(:state, current_user.customer.shipping_address.state) %><br/>
-          <%= submit_tag("Update") %>
+          <%= submit_tag "Update", class: 'btn btn-custom-lighten' %>
         <% end %>
       <% else %>
         No address currently on file.<br/><br/>
-        <%= button_to "Add Shipping Address", new_customer_shipping_addresses_path(current_user), method: :get %>
+        <%= button_to "Add Shipping Address", new_customer_shipping_addresses_path(current_user), class: 'btn btn-custom-lighten', method: :get %>
       <% end %>
 
       <h3>Billing Address:</h3>
@@ -60,11 +62,12 @@
           <%= text_field_tag(:zip, current_user.customer.billing_address.zip) %><br/>
           <p>State</p>
           <%= text_field_tag(:state, current_user.customer.billing_address.state) %><br/>
-          <%= submit_tag("Update") %>
+          <%= submit_tag "Update", class: 'btn btn-custom-lighten' %>
+
         <% end %>
       <% else %>
         No address currently on file.<br/><br/>
-        <%= button_to "Add Billing Address", new_customer_billing_addresses_path(current_user), method: :get %>
+        <%= button_to "Add Billing Address", new_customer_billing_addresses_path(current_user), class: 'btn btn-custom-lighten',  method: :get %>
       <% end %>
 
       <h3>Credit Card Information:</h3>
@@ -78,27 +81,26 @@
           <%= text_field_tag(:expiration_month, current_user.customer.credit_card.expiration_month) %><br/>
           <p>Expiration Year</p>
           <%= text_field_tag(:expiration_year, current_user.customer.credit_card.expiration_year) %><br/>
-          <%= submit_tag("Update") %>
+          <%= submit_tag "Update", class: 'btn btn-custom-lighten' %>
         <% end %>
       <% else %>
         No credit card currently on file.<br/><br/>
-        <%= button_to "Add Credit Card", new_customer_credit_cards_path(current_user), method: :get %>
+        <%= button_to "Add Credit Card", new_customer_credit_cards_path(current_user), class: 'btn btn-custom-lighten', method: :get %>
       <% end %>
     </div>
 
-    <div id="order_history" class="tab-pane">
+    <div id="order_history" class="tab-pane <%= @active_user_navigation == :orders ? 'active' : '' %>">
       <h1>Order History</h1>
       <hr>
-
       <% if @orders.empty? %>
         <p>You currently don't have any orders. Start Shopping!</p>
       <% else %>
         <table class="table table-striped">
           <thead>
           <th>#</th>
-          <th><%= t('model.status') %></th>
-          <th><%= t('order.date') %></th>
-          <th><%= t('total') %></th>
+          <th><%= 'Status' %></th>
+          <th><%= 'Order Date' %></th>
+          <th><%= 'Total' %></th>
           </thead>
           <tbody>
             <%= render partial: 'order', collection: @orders %>

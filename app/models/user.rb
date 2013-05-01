@@ -26,7 +26,6 @@ class User < ActiveRecord::Base
     customer = Customer.find_by_email("#{email}")
     user = User.find_by_customer_id(customer.id)
   end
-  ### WHAT IS THIS
 
   def role(store)
     user_role = self.user_roles.where(store_id: store.id)
@@ -37,8 +36,6 @@ class User < ActiveRecord::Base
     user_role = role(store)
     if user_role == 'store_admin'
       "Admin"
-    else  # user_role =='stocker'
-      "Stocker"
     end
   end
 

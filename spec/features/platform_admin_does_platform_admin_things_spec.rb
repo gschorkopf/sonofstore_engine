@@ -6,6 +6,8 @@ describe 'the platform admin does platform admin things', type: :feature do
     @store1 = FactoryGirl.create(:store, approval_status: 'pending')
     customer = FactoryGirl.create(:customer, email: 'crockett@hotmail.com')
     @platform_admin = FactoryGirl.create(:platform_admin, customer_id: customer.id)
+    @user = FactoryGirl.create(:user)
+    UserRole.create(store_id: @store1.id , user_id: @user.id)
 
     #Log in Platform Admin
     visit '/login'
@@ -18,25 +20,6 @@ describe 'the platform admin does platform admin things', type: :feature do
     visit admin_stores_path
     expect(page).to have_content("Pending")
     expect(Store.where(approval_status: 'pending').count).to eq 1
-  end
-
-
-  context 'given there is a pending store' do
-    it 'can accept a pending store' do
-      visit admin_stores_path
-      click_link_or_button "approve_store"
-
-      # create customer, test elsewhere?
-      expect(Store.where(approval_status: 'pending').count).to eq 0
-      expect(Store.where(approval_status: 'approved').count).to eq 1
-    end
-
-    it 'can decline a pending store' do
-      visit admin_stores_path
-      click_link_or_button "decline_store"
-      expect(Store.where(approval_status: 'pending').count).to eq 0
-      expect(Store.where(approval_status: 'declined').count).to eq 1
-    end
   end
 
   context 'working with an approved store' do
