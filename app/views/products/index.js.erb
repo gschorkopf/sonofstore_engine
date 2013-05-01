@@ -1,0 +1,9 @@
+$('#products').append('<%= j render(@products) %>');
+<% if @products.next %>
+  $('.pagination').replaceWith('<%= j paginate(@products) %>');
+<% else %>
+  $('.pagination').remove();
+<% end %>
+<% sleep 1 %>
+
+  
