@@ -33,10 +33,12 @@
             </div>
           <% end %>
         <% end %>
-        <% if @product.featured_comment %>
+
+        <% if @featured_comment %>
           <h3>Featured Comment</h4>
           <blockquote id='favorited_comment'>
-            <%= @product.featured_comment %>
+            <p> <%= emojify(@featured_comment.comment) %> </p>
+             <em><small><%= @featured_comment.display_name %></small></em>
             </blockquotediv>
           <% end %>
 

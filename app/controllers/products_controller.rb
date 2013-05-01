@@ -35,6 +35,7 @@ class ProductsController < ApplicationController
     @product = nil
   end
     if @product
+      @featured_comment = @product.featured_comment if @product.featured_comments.any?
       render :show
     else
       redirect_to store_home_path(@store),
