@@ -36,7 +36,6 @@ describe 'new user creates and edits account' do
         expect(current_path).to eq signup_path
       end
     end
-
   end
 
   describe 'signing in and out of account' do

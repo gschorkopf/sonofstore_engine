@@ -21,7 +21,6 @@ describe Product do
   end
 
   it 'is invalid without a store id' do
-    #this is failing because it cannot do a custom validation without a store id
     @product.store_id = ''
     expect(@product.valid?).to be_false
   end

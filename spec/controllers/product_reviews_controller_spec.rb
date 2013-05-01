@@ -3,7 +3,6 @@ require 'spec_helper'
 describe ProductReviewsController do
   before do
     Product.stub(:find).and_return(Product.new)
-    #controller.stub(:require_login).and_return(true)
     user = FactoryGirl.create(:user)
     login_user(user)
   end
@@ -79,7 +78,6 @@ describe ProductReviewsController do
   end
 
   describe "POST flag" do
-    #/:store_path/products/:product_id/reviews/:review_id/flag
     before(:each) do
       @store = Store.create(name: 'HoneyBooBoo', path: 'honey-boo-boo', description: "some store")
       @product = FactoryGirl.create(:product, store: @store)

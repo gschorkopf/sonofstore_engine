@@ -3,8 +3,8 @@ require 'spec_helper'
 describe 'user account detail view' do
   context 'when the user is logged in' do
     before(:each) do
-      customer = FactoryGirl.create(:customer, email: 'dboone54@yahoo.com')
-      @user = FactoryGirl.create(:user, customer_id: customer.id)
+      customer = create(:customer, email: 'dboone54@yahoo.com')
+      @user = create(:user, customer_id: customer.id)
       visit '/login'
       fill_in 'sessions_email', with: 'dboone54@yahoo.com'
       fill_in 'sessions_password', with: 'password'
@@ -29,18 +29,6 @@ describe 'user account detail view' do
         visit 'profile'
         click_link "Order History"
         expect(page).to have_content("Order History")
-      end
-    end
-
-    context 'when they click on a specific order link' do
-      it 'takes them to a view of their specific order' do
-        pending
-        # order = FactoryGirl.create(:order, user: @user)
-        # visit 'profile'
-        # click_link "Order History"
-        # save_and_open_page
-        # click_link "Order ##{order.id}"
-        # expect(page).to have_content("Quantity")
       end
     end
   end

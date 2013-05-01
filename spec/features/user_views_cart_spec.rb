@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'the user cart view' do
   context 'when there are no items in the cart' do
     it 'displays a message that the cart is empty' do
-      @store = FactoryGirl.create(:store)
+      @store = create(:store)
       visit store_cart_path(@store)
       expect(page).to have_content('empty')
     end
@@ -11,8 +11,8 @@ describe 'the user cart view' do
 
   context 'when there are items in the cart' do
     before(:each) do
-      @store = FactoryGirl.create(:store)
-      @product = FactoryGirl.create(:product, store_id: @store.id)
+      @store = create(:store)
+      @product = create(:product, store_id: @store.id)
       visit store_product_path(store_path: @store, id: @product.id)
       click_link_or_button 'Add to Cart'
       visit store_cart_path(@store)
@@ -42,7 +42,7 @@ describe 'the user cart view' do
 
     context 'the user wants to remove one item from the cart' do
       it 'removes one item' do
-        product2 = FactoryGirl.create(:product, store_id: @store.id, title: 'coolthings')
+        product2 = create(:product, store_id: @store.id, title: 'coolthings')
         visit store_product_path(store_path: @store, id: product2.id)
         click_button "Add to Cart"
         visit store_cart_path(@store)

@@ -13,8 +13,8 @@ describe 'user_checks_out', type: :feature do
   end
 
   before(:each) do
-    @store = FactoryGirl.create(:store)
-    @product = FactoryGirl.create(:product, store_id: @store.id)
+    @store = create(:store)
+    @product = create(:product, store_id: @store.id)
 
     signup_user
 
@@ -49,19 +49,6 @@ describe 'user_checks_out', type: :feature do
         click_link_or_button 'ship_bill_cc_submit'
         expect(page).to have_content('Please Review Your Order Information')
       end
-
     end
-
-    context 'when they have shipping/billing/credit card info already saved' do
-      it 'allows them to checkout without re-entering the info' do
-        pending
-      end
-    end
-  end
-
-  context 'when they are not signed in' do
-    pending
-    #a) sign up for a new account during checkout
-    #b) checkout as a guest
   end
 end

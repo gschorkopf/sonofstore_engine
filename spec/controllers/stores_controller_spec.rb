@@ -5,16 +5,10 @@ describe StoresController do
     ApplicationController.stub!(:require_admin).and_return(true)
   end
 
-  # This should return the minimal set of attributes required to create a valid
-  # Store. As you add validations to Store, be sure to
-  # update the return value of this method accordingly.
   def valid_attributes
     { name: "MyString", path: 'my-string', description: 'stringy for sure' }
   end
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # StoresController. Be sure to keep this updated too.
   def valid_session
     {path: 'my-string'}
   end
@@ -40,38 +34,23 @@ describe StoresController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Store" do
-        pending 'i dont know how to fix this test'
-        customer = FactoryGirl.create(:customer)
-        user = FactoryGirl.create(:user, customer_id: customer.id)
+        customer = create(:customer)
+        user = create(:user, customer_id: customer.id)
+        controller.stub(:current_user).and_return(user)
         expect {
-          post :create, {:store => valid_attributes}, user
+          post :create, {:store => valid_attributes}
         }.to change(Store, :count).by(1)
-      end
-
-      it "assigns a newly created store as @store" do
-        pending "this isn't working because of current_user needs"
-        # post :create, {:store => valid_attributes}, valid_session
-        # assigns(:store).should be_a(Store)
-        # assigns(:store).should be_persisted
-      end
-
-      it "redirects to the created store" do
-        pending "this isn't working because of current_user needs"
-        # post :create, {:store => valid_attributes}, valid_session
-        # response.should redirect_to(Store.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved store as @store" do
-        # Trigger the behavior that occurs when invalid params are submitted
         Store.any_instance.stub(:save).and_return(false)
         post :create, {:store => { "name" => "invalid value" }}, valid_session
         assigns(:store).should be_a_new(Store)
       end
 
       it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
         Store.any_instance.stub(:save).and_return(false)
         post :create, {:store => { "name" => "invalid value" }}, valid_session
         response.should render_template("new")

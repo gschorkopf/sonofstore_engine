@@ -15,10 +15,6 @@ describe Category do
     expect(FactoryGirl.build(:category, store_id: @store.id, title: '')).to_not be_valid
   end
 
-  it 'is invalid without a store id' do
-    pending "talk to Frank about"
-  end
-
   it 'is invalid if title already exists (case insensitive)' do
     cat1 = FactoryGirl.create(:category, title: 'dark MATTER', store_id: @store.id)
     expect(FactoryGirl.build(:category, title: 'dark matter', store_id: @store.id)).to_not be_valid

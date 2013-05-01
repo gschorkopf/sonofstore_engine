@@ -4,7 +4,7 @@ describe Admin::ProductReviewsController do
 
   describe "GET index" do
     before(:each) do
-      @store = FactoryGirl.create(:store)
+      @store = create(:store)
       controller.stub(:require_admin => true)
       controller.stub(:current_store).and_return(@store)
       @product = create(:product, store: @store)
@@ -30,7 +30,7 @@ describe Admin::ProductReviewsController do
 
   describe "POST update" do
     before(:each) do
-      @store = FactoryGirl.create(:store)
+      @store = create(:store)
       controller.stub(:require_admin => true)
       controller.stub(:current_store).and_return(@store)
       @product = create(:product, store: @store)

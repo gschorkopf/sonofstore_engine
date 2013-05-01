@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Admin::OrdersController do
   it "index action should render index template" do
-    # pending "this test requires current_store... how do we stub?"
     controller.stub(:require_admin => true)
     store = FactoryGirl.create(:store)
     controller.stub(:current_store).and_return(store)

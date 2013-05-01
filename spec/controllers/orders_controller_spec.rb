@@ -36,7 +36,7 @@ describe OrdersController do
         end
 
       context 'when the user does not have orders in their history' do
-        before(:each) do 
+        before(:each) do
           @customer = FactoryGirl.create(:customer)
         end
 
