@@ -80,8 +80,6 @@ class ApplicationController < ActionController::Base
 
   end
 
-
-
   def generate_store_image_url(store_id)
     products = Store.find_by_id(store_id).products
     if products.empty?
@@ -133,3 +131,4 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 end
+
