@@ -2,7 +2,16 @@ require 'spec_helper'
 
 describe OrdersController do
   describe 'create' do
-    pending
+    it 'creates an order' do
+      current_store = create(:store)
+      product = create(:product, store: current_store)
+      customer = create(:customer)
+      controller.stub(:current_store).and_return(current_store)
+      session[current_store.path] = {"#{product.id}"=> '2'}
+
+      expect{ post :create, { customer_id: customer.id }
+      }.to change(Order, :count).by(1)
+    end
   end
 
   describe 'index' do

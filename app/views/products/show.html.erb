@@ -1,36 +1,49 @@
+<br>
+<div style= "text-indent:30px">
+  <h3><%= "#{@store.name}" %></h3>
+</div>
+<div style= "text-indent:40px">
+  <i><%= link_to "⬅ continue browsing 'Products'", store_home_path(current_store) %></i>
+</div>
+
 <div class="row content-box">
   <div class="prod_detail_img span6">
-    <P><%= image_tag @product.image.url(:retail), class: "img-rounded" %></P>
-    <!-- <p><%#= image_tag @product.image.url(:large) %></p> -->
+    <!-- <P><%= image_tag @product.image.url(:retail), class: "img-rounded" %></P> -->
+    <%= image_tag generate_image_url(500, @product.id), class: "img-rounded" %>
   </div>
 
   <div class="prod_detail_text span5">
     <h2><% 'Title' %><%= @product.title %></h2>
     <p><% 'Description' %><%= @product.description %></p>
-
     <% if @product.product_reviews.any? %>
       <div class="product-rating">
-        <h3>Average Ratings</h3>
-        <% @product.average_ratings.each do |question, rating| %>
+        <% if !@product.average_ratings.empty?%>
+          <h3>Average Ratings</h3>
+          <% @product.average_ratings.each do |question, rating| %>
 
-          <div>
-            <%= question %>
-            <% 5.times do |t| %>
-              <% if rating == t+1 %>
-                <%= radio_button_tag question, "#{t+1}", true, :class => "star star-read"%>
-              <% else %>
-                <%= radio_button_tag question, "#{t+1}", false, :class  => "star star-read" %>
+            <div>
+              <%= question %>
+              <% 5.times do |t| %>
+                <% if rating == t+1 %>
+                  <%= radio_button_tag question, "#{t+1}", true, :class => "star star-read"%>
+                <% else %>
+                  <%= radio_button_tag question, "#{t+1}", false, :class  => "star star-read" %>
+                <% end %>
               <% end %>
-            <% end %>
-          </div>
+            </div>
+          <% end %>
         <% end %>
-      </div>
 
-      <% if @product.featured_comment %>
-        <div id='favorited_comment'>
-          <%= @product.featured_comment %>
+        <% if @featured_comment %>
+          <h3>Featured Comment</h4>
+          <blockquote id='favorited_comment'>
+            <p> <%= emojify(@featured_comment.comment) %> </p>
+             <em><small><%= @featured_comment.display_name %></small></em>
+            </blockquotediv>
+          <% end %>
+
         </div>
-      <% end %>
+
     <% end %>
 
     <div id="product-categories">
@@ -49,54 +62,11 @@
       <p> Product is retired! </p>
     <% end %>
 
-
     <% unless current_user && @product.reviewed_by?(current_user.customer) %>
       <%= link_to "Rate this Product", new_store_product_review_path(store_path: @product.store, product_id:@product) %>
     <% end %>
   </div>
 
-  <div id="product-reviews" class="span12">
-    <h3>Customer Reviews</h3>
-    <% @product.most_recent_reviews.each do |review| %>
-      <h4>Reviewed By: <span class="reviewer"><%= review.customer.best_display_name %></span> on <span clas="review-date"><%= time_tag review.created_at %></span></h4>
-
-      <div class="review row-fluid">
-        <div class="span3">
-          <% review.ratings.each do |rating| %>
-            <div>
-              <%= rating.question %>
-
-              <% 5.times do |t| %>
-
-                <% if rating.rating == t+1 %>
-                  <%= radio_button_tag rating.question.to_s+review.id.to_s, "#{t+1}", true, :class => "star star-read"%>
-                <% else %>
-                  <%= radio_button_tag rating.question.to_s+review.id.to_s, "#{t+1}", false, :class  => "star star-read" %>
-                <% end %>
-
-              <% end %>
-            </div>
-          <% end %>
-
-        </div>
-        <div class="reivew-meta-data span9">
-          <p class="purchase-status">
-          <% if review.customer.has_purchased_product?(@product.id) %>
-            <%= review.customer.best_display_name %> purchased this product from here!
-          <% else %>
-            <%= review.customer.best_display_name %> has not purchased this product frome here!
-          <% end %>
-          </p>
-          <p class="review-comment">
-            <% if review.comment.nil? || review.comment.empty? %>
-              <em>No comment</em>
-            <% else %>
-              <%= emojify(review.comment) %>
-            <% end %>
-          </p>
-        </div>
-      </div>
-    <% end %>
-  </div> <!-- product-reviews -->
+  <%= render partial: 'product_review' %>
 </div>
 

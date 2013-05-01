@@ -6,7 +6,7 @@ class Product < ActiveRecord::Base
 
   has_many :product_reviews
   has_many :ratings, through: :product_reviews
-  
+
   has_many :product_categories
   has_many :categories, through: :product_categories
 
@@ -51,26 +51,30 @@ class Product < ActiveRecord::Base
     end
   end
 
+  def active_product_reviews
+    product_reviews.select {|product_review| product_review.status == 'active'}
+  end
+
   def current_price
     price
   end
 
   def most_recent_reviews
-    product_reviews.order("updated_at DESC")
+    product_reviews.where(status: 'active').order("updated_at DESC")
   end
 
   def average_ratings
     ratings = Hash.new(0)
 
-    if !product_reviews.empty?
-      product_reviews.each do |product_review|
+    if !active_product_reviews.empty?
+      active_product_reviews.each do |product_review|
         product_review.ratings.each do |rating|
           ratings[rating.question.question] += rating.rating
         end
       end
 
       ratings.each do |question, rating|
-        ratings[question] = rating/product_reviews.count
+        ratings[question] = rating/active_product_reviews.count
       end
     end
 
@@ -78,12 +82,11 @@ class Product < ActiveRecord::Base
   end
 
   def featured_comment
-
-    featured_comments.sample && featured_comments.sample.comment
+    featured_comments.sample
   end
 
   def featured_comments
-    product_reviews.where(featured: true)
+    result = product_reviews.where(featured: true)
   end
 
   def nonfeatured_comments

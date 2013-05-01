@@ -1,11 +1,11 @@
 <% cache('top_left_logo') do %>
 
   <div class="logo">
-    <%= link_to(image_tag('marcy_logo.png'), root_path, :class => 'brand') %>
+    <%= link_to(image_tag('toylogo2.png'), root_path, :class => 'brand') %>
   </div>
 
   <div class="logo-text">
-    <%= link_to "Ballmer DoSE", root_path, :class => 'brand' %>
+    <%= link_to "Ballmerino's", root_path, :class => 'brand' %>
   </div>
 
 <% end %> <!-- end of caching block -->
@@ -14,7 +14,7 @@
   <% if logged_in? %>
     <p id="signature">Welcome, <%= current_user %></p>
   <% elsif request.fullpath == root_path %>
-    <p id="signature">Tons of toys!</p>
+    <p id="signature">The Marketplace for Toys!</p>
   <% end %>
 </div>
 

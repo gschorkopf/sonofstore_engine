@@ -159,6 +159,24 @@ describe Product do
       average_ratings = {"question 1" => 3, "question 2" => 3}
       expect(product.average_ratings).to eq average_ratings
     end
+
+    it 'only uses product reviews with status active to calculate avg' do
+      product = create(:product)
+      pr1 = create(:product_review, product: product)
+      pr2 = create(:product_review_2, product: product, status: 'flagged')
+      customer = create(:customer, email: 'spammer@spammy.com')
+      pr3 = create(:product_review, product: product, customer: customer, status: 'inactive')
+
+      question1 = create(:question)
+      question2 = create(:durability_question)
+
+      create(:rating, product_review: pr1, question: question1, rating: 4)
+      create(:rating, product_review: pr2, question: question1, rating: 3)
+      create(:rating, product_review: pr3, question: question2, rating: 1)
+
+      average_ratings = {"Value" => 4}
+      expect(product.average_ratings).to eq average_ratings
+    end
   end
 
   describe "reviewers" do
@@ -242,7 +260,7 @@ describe Product do
         pr1.featured = false
         pr2.save!
 
-        expect(product.featured_comment).to eq "a comment"
+        expect(product.featured_comment.comment).to eq "a comment"
       end
     end
     context "a featured comment does not exist" do

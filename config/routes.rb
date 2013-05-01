@@ -17,6 +17,7 @@ StoreEngine::Application.routes.draw do
     root to: redirect("/admin/dashboard")
     get :dashboard, to: "orders#index", as: 'dashboard'
 
+    resources :product_reviews, :controller => 'platform_admin_product_reviews', only: [:index, :update]
     resources :orders, only: [ :show, :update ]
 
     resources :stores, except: [:update, :new ] do
@@ -51,7 +52,9 @@ StoreEngine::Application.routes.draw do
     resources :checkouts, only: [ :new, :create, :show ]
 
     resources :products, only: [ :index, :show ] do
-      resources :reviews, :controller => "product_reviews", only: [:new, :create, :edit, :update], :as => "reviews"
+       resources :reviews, :controller => "product_reviews", only: [:new, :create, :edit, :update], :as => "reviews" do
+        post '/flag' => "product_reviews#flag", :as => 'flag'
+      end
     end
 
     resource :cart, only: [ :update, :show, :destroy ] do
