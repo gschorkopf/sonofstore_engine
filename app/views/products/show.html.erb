@@ -1,33 +1,72 @@
-<% cache("product_show_id_#{@product.id}") do %>
+<br>
+<div style= "text-indent:30px">
+  <h3><%= "#{current_store.name}" %></h3>
+</div>
+<div style= "text-indent:40px">
+  <i><%= link_to "⬅ continue browsing 'Products'", store_home_path(current_store) %></i>
+</div>
 
 <div class="row content-box">
-
   <div class="prod_detail_img span6">
-    <P><%= image_tag generate_image_url(500, @product.id), class: "img-rounded" %></P>
-    <!-- <p><%#= image_tag @product.image.url(:large) %></p> -->
+    <!-- <P><%= image_tag @product.image.url(:retail), class: "img-rounded" %></P> -->
+    <%= image_tag generate_image_url(500, @product.id), class: "img-rounded" %>
   </div>
 
   <div class="prod_detail_text span5">
-    <h2><% t('product.title') %><%= @product.title %></h2>
-    <p><% t('product.description') %><%= @product.description %></p>
+    <h2><% 'Title' %><%= @product.title %></h2>
+    <p><% 'Description' %><%= @product.description %></p>
+    <% if @product.product_reviews.any? %>
+      <div class="product-rating">
+        <% if !@product.average_ratings.empty?%>
+          <h3>Average Ratings</h3>
+          <% @product.average_ratings.each do |question, rating| %>
+
+            <div>
+              <%= question %>
+              <% 5.times do |t| %>
+                <% if rating == t+1 %>
+                  <%= radio_button_tag question, "#{t+1}", true, :class => "star star-read"%>
+                <% else %>
+                  <%= radio_button_tag question, "#{t+1}", false, :class  => "star star-read" %>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+
+        <% if @featured_comment %>
+          <h3>Featured Comment</h4>
+          <blockquote id='favorited_comment'>
+            <p> <%= emojify(@featured_comment.comment) %> </p>
+             <em><small><%= @featured_comment.display_name %></small></em>
+            </blockquotediv>
+          <% end %>
+
+        </div>
+
+    <% end %>
 
     <div id="product-categories">
-      <b><%= t('categories.self') %>:</b>
+      <b><%= 'Category' %>:</b>
       <% @product.categories.each do |category| %>
-         <span class='label'><%= link_to category.title, store_category_path(@product.store.path, category), method: :get %></span>
+        <span class='label'><%= link_to category.title, store_category_path(@product.store.path, category), method: :get %></span>
 
       <% end %>
     </div>
 
     <br>
-      <p><%= t('product.price') %>: <%= number_to_currency(@product.price) %></p>
+    <p><%= 'Price' %>: <%= number_to_currency(@product.price) %></p>
     <% if @product.status == 'active' %>
       <%= render partial: 'add_to_cart_button', locals: {product: @product} %>
     <% else %>
       <p> Product is retired! </p>
     <% end %>
-  </div>
-</div>
 
-<% end %> <!-- ends the caching block-->
+    <% unless current_user && @product.reviewed_by?(current_user.customer) %>
+      <%= link_to "Rate this Product", new_store_product_review_path(store_path: @product.store, product_id:@product) %>
+    <% end %>
+  </div>
+
+  <%= render partial: 'product_review' %>
+</div>
 

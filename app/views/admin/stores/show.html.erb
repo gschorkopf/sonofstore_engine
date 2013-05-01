@@ -32,8 +32,6 @@
 
       <hr>
       <a href='#new_Admin' role='button' data-toggle='modal'>Add a New Store Admin</a>
-      OR
-      <a href='#new_Stocker' role='button' data-toggle='modal'>Add a New Store Stocker</a>
       <br>
       <br>
 
@@ -50,18 +48,6 @@
           <%= render partial: 'admin/users/new_admin' %>
         </div>
       </div>
-
-      <div id="new_Stocker" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 id="myModalLabel">Add a New Store Stocker</h3>
-        </div>
-        <div class="modal-body">
-          <%= render partial: 'admin/stockers/new_stocker' %>
-        </div>
-      </div>
-
     </div>
 
   </div>

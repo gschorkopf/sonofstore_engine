@@ -8,5 +8,4 @@ class BillingAddress < ActiveRecord::Base
             :numericality => true
 
   belongs_to :customer
-  # attr_accessible :title, :body
 end

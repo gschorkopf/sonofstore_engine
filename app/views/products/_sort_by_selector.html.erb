@@ -1,0 +1,19 @@
+<div class="btn-group" id="product-actions">
+  <button class="btn">Sort Products</button>
+  <button class="btn dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+  </button>
+
+  <ul class="dropdown-menu">
+
+    <li><%= link_to "Average Rating", store_home_path(current_store, {category_id: params[:category_id], sorted_by:"average_rating"}) %></li>
+    <% current_store.questions.each do |question| %>
+      <li>
+      <%= link_to question.question,
+        store_home_path(current_store, {categroy_id: params[:category_id],
+                        sorted_by: question.id}) %>
+                        </li>
+    <% end %>
+  </ul>
+</div>
+

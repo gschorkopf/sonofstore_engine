@@ -1,5 +1,5 @@
 class ShippingAddressesController < ApplicationController
-  # before_filter :require_login
+  before_filter :require_login
 
   def new
     @shipping_address = ShippingAddress.new
@@ -36,13 +36,13 @@ class ShippingAddressesController < ApplicationController
   def update
     @customer = current_user.customer
     @shipping_address = ShippingAddress.find_by_customer_id(@customer.id)
-    params.delete("utf8")
-    params.delete("_method")
-    params.delete("authenticity_token")
-    params.delete("controller")
-    params.delete("commit")
-    params.delete("action")
-    if @shipping_address.update_attributes(params)
+
+    if @shipping_address.update_attributes(
+                                      street_address: params[:street_address],
+                                      city: params[:city],
+                                      zip: params[:zip],
+                                      state: params[:state]
+                                      )
       redirect_to profile_path,
         :notice  => "Successfully updated shipping address."
     else

@@ -1,19 +1,11 @@
-# Mr. Pinks' Son of StoreEngine
-_a gSchool project by Erin Drummond, Daniel Mee, Laura Steadman, and Geoffrey Schorkopf_
-
-## Welcome to Mr. Pink's Son of StoreEngine, a multi-tenancy online store
-
-The background requirements for this project can be found at: http://tutorials.jumpstartlab.com/projects/son_of_store_engine.html
-
-#####Extensions Completed for This Project:
-
-
+# Team Ballmer's Daughter of StoreEngine
+_a gSchool project by Kyle Suss, Aimee Maher, Elaine Tai, and Laura Steadman_
 
 ### View the Live Site:
 
-http://pink-sose.herokuapp.com/
+http://ballmer-dose.herokuapp.com
 
-### Installing Mr. Pink's SOSE on your computer:
+### Installing Team Ballmer's Daughter of Store Engine on your computer:
 
 Once you've git cloned this repo, make sure to run
 
@@ -28,8 +20,4 @@ Once you've git cloned this repo, make sure to run
 Then, to view the site from your computer, you can then run ```unicorn``` to view it at http://localhost:8080.
 
 ##### To Run Rspec Tests on the Code
-Make sure to run:
-
-``` rake db:test:prepare```
-
-to setup your test database.
+Make sure to run ``` rake db:test:prepare``` to setup your test database.

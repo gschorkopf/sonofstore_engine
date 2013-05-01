@@ -1,54 +1,49 @@
 require 'spec_helper'
 
 describe 'the admin categories view', type: :feature do
-  # before(:each) do
-  #   customer = FactoryGirl.create(:customer, email: 'teeny@tiny.com')
-  #   FactoryGirl.create(:store_admin, customer_id: customer.id)
-  #   visit login_path
-  #   fill_in 'sessions_email', with: 'teeny@tiny.com'
-  #   fill_in 'sessions_password', with: 'password'
-  #   click_button 'Login'
-  #   visit admin_categories_path
-  # end
+  before(:each) do
+    @store = create(:store)
+    customer = create(:customer, email: 'teeny@tiny.com')
+    store_admin = create(:store_admin, customer_id: customer.id)
+    role = UserRole.new(user_id: store_admin.id, store_id: @store.id)
+    role.role = 'store_admin'
+    role.save
 
-  it 'should have a title' do
-    pending
-    # save_and_open_page
-    # expect(page).to have_selector('h1', text: 'Categories')
+    visit login_path
+    fill_in 'sessions_email', with: 'teeny@tiny.com'
+    fill_in 'sessions_password', with: 'password'
+    click_button 'Login'
+    visit store_admin_categories_path(@store)
   end
 
-  it 'should have a create category button' do
-    pending
-    # expect(page).to have_button('Create Category')
+  it 'should have a title and New Category Button' do
+    expect(page).to have_selector('h1', text: 'Categories')
+    expect(page).to have_button('New Category')
   end
 
   context 'when a category exists' do
-    pending
-    # before(:each) do
-    #   click_button "Create Category"
-    #   fill_in 'Title', with: 'mah things'
-    #   click_button "Submit"
-    # end
+    before(:each) do
+      click_button "New Category"
+      fill_in 'Title', with: 'mah things'
+      click_button "Submit"
+    end
 
     it 'creates a new category with valid input' do
-      pending
-      # expect(current_path).to eq admin_categories_path
+      expect(current_path).to eq store_admin_categories_path(@store)
     end
 
     it 'rejects invalid category input' do
-      pending
-      # click_button "Create Category"
-      # fill_in 'Title', with: 'mah things'
-      # click_button "Submit"
-      # expect(page).to have_content "has already been taken"
+      click_button "New Category"
+      fill_in 'Title', with: 'mah things'
+      click_button "Submit"
+      expect(page).to have_content "has already been taken"
     end
 
     it 'edits a category with valid input' do
-      pending
-      # click_link "Edit"
-      # fill_in "Title", with: 'gooey'
-      # click_button "Submit"
-      # expect(current_path).to eq admin_categories_path
+      click_link "edit"
+      fill_in "Title", with: 'gooey'
+      click_button "Submit"
+      expect(current_path).to eq store_admin_categories_path(@store)
     end
   end
 end

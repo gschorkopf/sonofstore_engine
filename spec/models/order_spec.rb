@@ -23,17 +23,14 @@ describe Order do
     expect(FactoryGirl.build(:order, customer: @customer, status: 'abracadabra')).to_not be_valid
   end
 
-  context 'create_and_charge' do
-#     it 'creates a new order' do
-#       product = FactoryGirl.create(:product)
-
-#       login_user @user
-#       #create a cart for the user
-#       session[:cart] = {product.id => '2'}
-#       cart = Cart.new(session[:cart])
-#       #user checks out the cart
-#       order.create_and_charge(cart)
-#       #that process creates a new order
-    # end
+  describe '.generate new order' do
+    it 'creates a new order when given valid params' do
+      store = create(:store)
+      product = create(:product, store: store)
+      customer = create(:customer)
+      current_session_cart = {"#{product.id}" => '2'}
+      order = Order.generate_new_order(store.id, customer.id, current_session_cart)
+      expect(order).to be_valid
+    end
   end
 end

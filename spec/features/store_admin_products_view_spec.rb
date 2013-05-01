@@ -2,10 +2,9 @@ require 'spec_helper'
 
 describe 'the admin products view', type: :feature do
   before(:each) do
-    # @store = FactoryGirl.create(:store, approval_status: 'approved', active: true)
-    @store = FactoryGirl.create(:store)
-    customer = FactoryGirl.create(:customer, email: 'teeny@tiny.com')
-    store_admin = FactoryGirl.create(:store_admin, customer_id: customer.id)
+    @store = create(:store)
+    customer = create(:customer, email: 'teeny@tiny.com')
+    store_admin = create(:store_admin, customer_id: customer.id)
     user_role = UserRole.new(user_id: store_admin.id, store_id: @store.id)
     user_role.role = 'store_admin'
     user_role.save
@@ -46,7 +45,6 @@ describe 'the admin products view', type: :feature do
 
   context 'editing, destroying, and retiring/activating products' do
     before(:each) do
-      @store = FactoryGirl.create(:store)
       @product = FactoryGirl.create(:product, store_id: @store.id)
     end
 

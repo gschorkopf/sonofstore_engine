@@ -1,6 +1,6 @@
-<%# cache("root_page") do %>
-<!--   <% @stores.each do |store| %>
+  <% @stores.each do |store| %>
     <%= link_to store.name, store_home_path(store) %></td>
-    <span><%= store.description %></span>
-  <% end %> -->
-<%# end %> <!-- end of caching block -->
+    <%= store.description %>
+  <% end %>
+
+

@@ -32,17 +32,17 @@ class Store < ActiveRecord::Base
 
   def self.exists_with_name?(name, id)
     if id
-      !Store.approved.where("name ILIKE ?", "%#{name}%").where("id <> ?", id).empty?
+      !Store.where("name ILIKE ?", "%#{name}%").where("id <> ?", id).empty?
     else
-      !Store.approved.where("name ILIKE ?", "%#{name}%").empty?
+      !Store.where("name ILIKE ?", "%#{name}%").empty?
     end
   end
 
   def self.exists_with_path?(path, id)
     if id
-      !Store.approved.where("path ILIKE ?", "%#{path}%").where("id <> ?", id).empty?
+      !Store.where("path ILIKE ?", "%#{path}%").where("id <> ?", id).empty?
     else
-      !Store.approved.where("path ILIKE ?", "%#{path}%").empty?
+      !Store.where("path ILIKE ?", "%#{path}%").empty?
     end
   end
 
@@ -52,6 +52,10 @@ class Store < ActiveRecord::Base
 
   def active?
     active == true
+  end
+
+  def inactive?
+    !active? && approved?
   end
 
   def self.approved
@@ -85,4 +89,38 @@ class Store < ActiveRecord::Base
       update_attributes(active: true)
     end
   end
+
+  def filter_products_by_category(category_id)
+    categories.find(category_id).products
+  end
+
+  def top_products
+    products.sort_by { |product| -product.ratings.average(:rating).to_f }[0..3]
+  end
+
+  def search params={category_id: nil, sorted_by: nil}
+
+    result = params[:category_id] ? filter_products_by_category(params[:category_id]) : products
+
+    if params[:sorted_by] == "average_rating"
+      result = result.order_by_average_rating
+    elsif params[:sorted_by]
+      result = result.order_by_rating(params[:sorted_by])
+    end
+
+    result
+
+  end
+
+  def questions
+#    question_columns = Question.columns.map { |c| "questions.#{c.name}" }
+#    select_string = question_columns.join(", ")
+
+    Question.joins(:products)
+    .where("products.store_id = ?", id).order("questions.question")
+
+    #products.joins(:questions).select(select_string).group(select_string)
+
+  end
+
 end

@@ -4,9 +4,6 @@
     <%= f.input :city, input_html: { placeholder: 'Denver' } %>
     <%= f.input :zip, input_html: { placeholder: '80203' } %>
     <%= f.input :state, input_html: { placeholder: 'Colorado' } %>
-    <%#= f.hidden_field :customer_id, value: @customer_id %>
-    <%#= f.collection_select :state, STATE_ABBREVIATIONS %>
-
     <%= f.button :submit, 'Submit', class:'btn btn-custom-lighten' %>
   <% end %>
 <% else %>
@@ -15,10 +12,8 @@
     <%= f.input :city, input_html: { placeholder: 'Denver' } %>
     <%= f.input :zip, input_html: { placeholder: '80203' } %>
     <%= f.input :state, input_html: { placeholder: 'Colorado' } %>
-    <%#= f.hidden_field :customer_id, value: @customer_id %>
-    <%#= f.collection_select :state, STATE_ABBREVIATIONS %>
 
-    <%= f.button :submit, t('submit'), class:'btn btn-custom-lighten' %>
+    <%= f.button :submit, 'submit', class:'btn btn-custom-lighten' %>
     <% end %>
 <% end %>
 
