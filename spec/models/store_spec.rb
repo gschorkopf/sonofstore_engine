@@ -76,4 +76,110 @@ describe Store do
     end
   end
 
+  describe "search" do
+
+    context "a sorted_by value exists" do
+      it "returns the products sorted by the average rating from highest to lowest" do
+        p1 = FactoryGirl.create(:search_product)
+        p2 = FactoryGirl.create(:search_product, store: p1.store)
+        p3 = FactoryGirl.create(:search_product, store: p1.store)
+
+        products = p1.store.search(sorted_by: "average_rating")
+        expect(products).to eq [p1, p2, p3].sort_by { |p| -p.average_rating }
+      end
+
+      # it "returns the products sorted by the rating of a question from highest to lowest" do
+      #   product1 = FactoryGirl.create(:search_product)
+      #   product1_rating = product1.ratings.first
+      #   product1_rating.rating = 1
+      #   product1_rating.save!
+
+      #   question = Question.first
+
+      #   product2 = FactoryGirl.create(:search_product, store: product1.store)
+      #   product2_rating = product2.ratings.first
+      #   product2_rating.question = question
+      #   product2_rating.rating = 5
+      #   product2_rating.save!
+
+      #   product3 = FactoryGirl.create(:search_product)
+      #   product3_rating = product2.ratings.first
+      #   product3_rating.question = question
+      #   product3_rating.rating = 1
+      #   product3_rating.save!
+
+      #   products = product1.store.search(sorted_by: question.id)
+      #   expect(products).to eq [product2, product1]
+      # end
+
+      it "returns filtered products sorted by the rating of a question from highest to lowest" do
+
+        store = FactoryGirl.create(:store)
+
+        category = FactoryGirl.create(:category, store: store)
+
+        product1 = FactoryGirl.create(:search_product, store: store)
+        product1.categories << category
+        product1.save!
+        product1_rating = product1.ratings.first
+        product1_rating.rating = 5
+        product1_rating.save!
+
+        question = Question.first
+
+        product2 = FactoryGirl.create(:search_product, store: store)
+        product2.categories << category
+        product2.save!
+        product2_rating = product2.ratings.first
+        product2_rating.question = question
+        product2_rating.rating = 1
+        product2_rating.save!
+
+        product3 = FactoryGirl.create(:search_product, store: store)
+        product3_rating = product1.ratings.first
+        product3_rating.question = question
+        product3_rating.rating = 3
+        product3_rating.save!
+
+        products = store.search(category_id: category.id, sorted_by: question.id)
+        expect(products).to eq [product1, product2]
+      end
+    end
+  end
+
+  describe "inactive" do
+    context "if the store is pending" do
+      it "is now inactive" do
+        store = FactoryGirl.create(:store, approval_status: "pending", active: true)
+        expect(store).to_not be_inactive
+      end
+    end
+    context "if the store is not pending and is active" do
+      it "is not inactive" do
+        store = FactoryGirl.create(:store, approval_status: "approved", active: true)
+        expect(store).to_not be_inactive
+      end
+    end
+
+    context "if the store is not active" do
+      it "is inactive" do
+        store = FactoryGirl.create(:store, approval_status: "approved", active: false)
+        expect(store).to be_inactive
+      end
+    end
+
+  end
+
+  describe "questions" do
+    it "returns a list of questions associated with any products of the store" do
+        store = FactoryGirl.create(:store)
+        product1 = FactoryGirl.create(:search_product, store: store)
+        questions = product1.ratings.collect(&:question)
+
+        FactoryGirl.create(:question)
+
+        expect(store.questions).to match_array(questions)
+    end
+  end
+
 end
