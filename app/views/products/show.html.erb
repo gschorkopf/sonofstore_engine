@@ -9,8 +9,8 @@
 
 <div class="row content-box">
   <div class="prod_detail_img span6">
-    <P><%= image_tag generate_image_url(500, @product.id), class: "img-rounded" %></P>
-    <!-- <p><%#= image_tag @product.image.url(:large) %></p> -->
+    <!-- <P><%= image_tag @product.image.url(:retail), class: "img-rounded" %></P> -->
+    <%= image_tag generate_image_url(500, @product.id), class: "img-rounded" %>
   </div>
 
   <div class="prod_detail_text span5">

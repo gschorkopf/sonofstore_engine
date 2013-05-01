@@ -1,19 +1,17 @@
-<% cache("root_page") do %>
-  <div class="container">
-    <div class="row header_spacing">
-    </div>
-
-    <div class="row lead-background">
-
-      <% @stores.each_with_index do |store, i| %>
-        <%= link_to store_home_path(store) do %>
-          <div class="span3">
-            <span class="store_title"><%= store.name %></span><br>
-            <%= image_tag generate_store_image_url(store.id), class: "img-polaroid" %>
-            <p class="store_description">"<%= store.description[0..38] %>..."</p>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
+<div class="container">
+  <div class="row header_spacing">
   </div>
-<% end %> <!-- end of caching block -->
+
+  <div class="row lead-background">
+
+    <% @stores.each_with_index do |store, i| %>
+      <%= link_to store_home_path(store) do %>
+        <div class="span3">
+          <span class="store_title"><%= store.name %></span><br>
+          <%= image_tag generate_store_image_url(store.id), class: "img-polaroid" %>
+          <p class="store_description">"<%= store.description[0..38] %>..."</p>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

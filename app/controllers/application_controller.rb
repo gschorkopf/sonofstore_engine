@@ -66,13 +66,21 @@ class ApplicationController < ActionController::Base
   end
 
   def generate_image_url(side_length, product_id)
-#    Product.find(product_id).image.url(:thumbnail)
+    url = Product.find(product_id).image.url(:thumbnail)
+
+    if url.include?("missing")
     img_category = IMAGE_CATEGORIES[current_store.id.to_s[-1].to_i]
     img_size_params = "#{side_length}/#{side_length}"
     img_id = product_id.to_s[-1].to_i
     img_id = 10 if img_id == 0
-    "http://lorempixel.com/#{img_size_params}/#{img_category}/#{img_id}"
+    url = "http://lorempixel.com/#{img_size_params}/#{img_category}/#{img_id}"
+    end
+
+    url
+
   end
+
+
 
   def generate_store_image_url(store_id)
     products = Store.find_by_id(store_id).products
@@ -80,12 +88,15 @@ class ApplicationController < ActionController::Base
       img_category = IMAGE_CATEGORIES[store_id.to_s[-1].to_i]
       "http://lorempixel.com/500/500/#{img_category}/"
     else
-   #   products.first.image.url(:retail)
-    img_category = IMAGE_CATEGORIES[store_id.to_s[-1].to_i]
-    img_size_params = "#{300}/#{300}"
-    img_id = products.first.id.to_s[-1].to_i
-    img_id = 10 if img_id == 0
-    "http://lorempixel.com/#{img_size_params}/#{img_category}/#{img_id}"
+      url = products.first.image.url(:retail)
+      if url.include?("missing")
+        img_category = IMAGE_CATEGORIES[store_id.to_s[-1].to_i]
+        img_size_params = "#{300}/#{300}"
+        img_id = products.first.id.to_s[-1].to_i
+        img_id = 10 if img_id == 0
+        url = "http://lorempixel.com/#{img_size_params}/#{img_category}/#{img_id}"
+      end
+      url
     end
   end
 

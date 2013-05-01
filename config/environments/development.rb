@@ -1,3 +1,7 @@
+ENV['AWS_BUCKET'] = "ballmer_dose"
+ENV['AWS_ACCESS_KEY_ID'] = 'AKIAIME5UWYQEFD3CZQQ'
+ENV['AWS_SECRET_ACCESS_KEY'] = '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'
+
 StoreEngine::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
